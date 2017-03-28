@@ -1,0 +1,12 @@
+[
+    "libs/moment.js",
+    "libs/sprintf.js",
+    "libs/uuid.js",
+    "base/boot.js",
+    "base/events.js",
+    "base/serialize.js",
+    "base/entity.js",
+    "consts/code.js",
+    "consts/game.js",
+    "entities/player.js"
+]

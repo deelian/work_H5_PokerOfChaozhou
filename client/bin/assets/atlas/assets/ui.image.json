@@ -1,0 +1,33 @@
+{
+    "frames": {
+        "mc.png": {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 10,
+                "h": 10,
+                "idx": 0
+            },
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 10,
+                "h": 10
+            },
+            "sourceSize": {
+                "w": 10,
+                "h": 10
+            },
+            "rotated": false,
+            "trimed": false
+        }
+    },
+    "meta": {
+        "app": "http:\/\/www.layabox.com",
+        "version": "0.1.0 alpha",
+        "format": "json",
+        "scale": 1,
+        "image": "ui.image.png",
+        "prefix": "assets\/ui.image\/"
+    }
+}

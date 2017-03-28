@@ -1,0 +1,54 @@
+{
+    "frames": {
+        "progress$bar.png": {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 243,
+                "h": 21,
+                "idx": 0
+            },
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 243,
+                "h": 21
+            },
+            "sourceSize": {
+                "w": 243,
+                "h": 21
+            },
+            "rotated": false,
+            "trimed": false
+        },
+        "progress.png": {
+            "frame": {
+                "x": 0,
+                "y": 23,
+                "w": 243,
+                "h": 21,
+                "idx": 0
+            },
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 243,
+                "h": 21
+            },
+            "sourceSize": {
+                "w": 243,
+                "h": 21
+            },
+            "rotated": false,
+            "trimed": false
+        }
+    },
+    "meta": {
+        "app": "http:\/\/www.layabox.com",
+        "version": "0.1.0 alpha",
+        "format": "json",
+        "scale": 1,
+        "image": "ui.loader.png",
+        "prefix": "assets\/ui.loader\/"
+    }
+}
