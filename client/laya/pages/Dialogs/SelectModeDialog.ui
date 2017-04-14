@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"Dialog",
-    "selectedBox":22,
-    "selecteID":56,
+    "selectedBox":1,
+    "selecteID":22,
     "props":{"width":1000,"sceneColor":"#000000","mouseThrough":false,"mouseEnabled":true,"height":720},
     "nodeParent":-1,
     "label":"Dialog",
@@ -42,7 +42,7 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"y":4,"x":913,"stateNum":"2","skin":"assets/ui.button/btn_008.png","name":"close"},
+            "props":{"y":4.000000000000007,"x":913,"stateNum":"2","skin":"assets/ui.button/btn_008.png","name":"close"},
             "nodeParent":1,
             "label":"Button(close)",
             "isDirectory":false,
@@ -62,9 +62,9 @@
         {
             "x":15,
             "type":"Box",
-            "props":{"y":163,"x":79,"width":132,"height":446},
+            "props":{"y":163,"x":79,"width":132,"var":"modeBtnBox","height":446},
             "nodeParent":1,
-            "label":"Box",
+            "label":"Box(modeBtnBox)",
             "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
@@ -80,9 +80,9 @@
             "child":[
                 {
                     "type":"Button",
-                    "props":{"y":0,"x":9,"stateNum":"2","skin":"assets/ui.button/btn_003.png"},
+                    "props":{"y":0,"x":9,"var":"classicalBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png"},
                     "nodeParent":4,
-                    "label":"Button",
+                    "label":"Button(classicalBtn)",
                     "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
@@ -114,13 +114,14 @@
                             "compId":11,
                             "child":[
                                 ]
-                        }]
+                        }],
+                    "$HIDDEN":false
                 },
                 {
                     "type":"Button",
-                    "props":{"y":125,"x":9,"stateNum":"2","skin":"assets/ui.button/btn_003.png"},
+                    "props":{"y":125,"x":9,"var":"staticBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png"},
                     "nodeParent":4,
-                    "label":"Button",
+                    "label":"Button(staticBtn)",
                     "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
@@ -156,9 +157,9 @@
                 },
                 {
                     "type":"Button",
-                    "props":{"y":251,"x":9,"stateNum":"2","skin":"assets/ui.button/btn_003.png"},
+                    "props":{"y":251,"x":9,"var":"chaosBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png"},
                     "nodeParent":4,
-                    "label":"Button",
+                    "label":"Button(chaosBtn)",
                     "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
@@ -194,9 +195,9 @@
                 },
                 {
                     "type":"Button",
-                    "props":{"y":376,"x":9,"stateNum":"2","skin":"assets/ui.button/btn_003.png"},
+                    "props":{"y":376,"x":9,"var":"customizedBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png"},
                     "nodeParent":4,
-                    "label":"Button",
+                    "label":"Button(customizedBtn)",
                     "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
@@ -272,10 +273,50 @@
         },
         {
             "x":15,
+            "type":"Button",
+            "props":{"y":626,"x":102.00000000000006,"var":"autoSettingBtn","stateNum":"2","skin":"assets/ui.button/btn_001.png"},
+            "nodeParent":1,
+            "label":"Button(autoSettingBtn)",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"skin":"assets/ui.button/btn_001.png","label":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":105,
+            "child":[
+                {
+                    "type":"Label",
+                    "props":{"y":21,"x":12,"text":"恢复默认","fontSize":30,"color":"#ffffff"},
+                    "nodeParent":105,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"label"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":106,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
             "type":"Image",
             "props":{"y":54,"x":219,"width":245,"skin":"assets/ui.image/mc.png","height":538},
             "nodeParent":1,
             "label":"Image",
+            "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -296,6 +337,7 @@
             "props":{"y":52,"x":492,"width":429,"skin":"assets/ui.image/mc.png","height":635},
             "nodeParent":1,
             "label":"Image",
+            "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -316,7 +358,7 @@
             "props":{"y":63,"x":505,"width":404,"var":"roomSetBox","height":614},
             "nodeParent":1,
             "label":"Box(roomSetBox)",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
@@ -330,9 +372,123 @@
             "compId":22,
             "child":[
                 {
-                    "x":30,
                     "type":"Box",
-                    "props":{"y":4,"x":1,"width":407,"var":"roundNumSetBox","height":34},
+                    "props":{"y":19,"x":9,"width":357,"visible":false,"var":"conditionBox","height":35},
+                    "nodeParent":22,
+                    "label":"Box(conditionBox)",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":98,
+                    "child":[
+                        {
+                            "type":"Text",
+                            "props":{"y":8,"x":-3,"text":"上庄条件：","fontSize":"20","color":"#ffffff"},
+                            "nodeParent":98,
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"text":"text"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":99,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"CheckBox",
+                            "props":{"y":14,"x":104,"var":"bigThenGodCheck","skin":"assets/comp/checkbox.png"},
+                            "nodeParent":98,
+                            "label":"CheckBox(bigThenGodCheck)",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":100,
+                            "child":[
+                                {
+                                    "type":"Text",
+                                    "props":{"y":-1,"x":19,"text":"天公以上","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":100,
+                                    "label":"Text",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "frames":[
+                                        {
+                                            "type":1,
+                                            "props":{"text":"text"},
+                                            "frame":0,
+                                            "__InPool":false
+                                        }],
+                                    "compId":102,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "type":"CheckBox",
+                            "props":{"y":16,"x":200,"var":"bigThenStraightCheck","skin":"assets/comp/checkbox.png"},
+                            "nodeParent":98,
+                            "label":"CheckBox(bigThenStraightCheck)",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":103,
+                            "child":[
+                                {
+                                    "type":"Text",
+                                    "props":{"y":-1,"x":19,"text":"顺子以上","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":103,
+                                    "label":"Text",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "frames":[
+                                        {
+                                            "type":1,
+                                            "props":{"text":"text"},
+                                            "frame":0,
+                                            "__InPool":false
+                                        }],
+                                    "compId":104,
+                                    "child":[
+                                        ]
+                                }]
+                        }],
+                    "$HIDDEN":false
+                },
+                {
+                    "type":"Box",
+                    "props":{"y":23,"x":-3,"width":407,"var":"roundNumSetBox","height":34},
                     "nodeParent":22,
                     "label":"Box(roundNumSetBox)",
                     "isOpen":false,
@@ -349,10 +505,29 @@
                     "compId":23,
                     "child":[
                         {
-                            "type":"Radio",
-                            "props":{"y":9,"x":125,"skin":"assets/comp/radio.png"},
+                            "type":"Text",
+                            "props":{"y":5,"x":17,"text":"局数：","fontSize":"20","color":"#ffffff"},
                             "nodeParent":23,
-                            "label":"Radio",
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"text":"text"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":28,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"CheckBox",
+                            "props":{"y":11,"x":125,"var":"tenRoundCheck","skin":"assets/comp/checkbox.png"},
+                            "nodeParent":23,
+                            "label":"CheckBox(tenRoundCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -360,16 +535,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":24,
+                            "compId":76,
                             "child":[
                                 {
                                     "type":"Text",
-                                    "props":{"y":-2.9999999999999787,"x":22,"text":"10局","fontSize":"20","color":"#ffffff"},
-                                    "nodeParent":24,
+                                    "props":{"y":-4,"x":23,"text":"10局","fontSize":"20","color":"#ffffff"},
+                                    "nodeParent":76,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -388,10 +563,10 @@
                                 }]
                         },
                         {
-                            "type":"Radio",
-                            "props":{"y":9,"x":249,"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"y":11,"x":225,"var":"twentyRoundCheck","skin":"assets/comp/checkbox.png"},
                             "nodeParent":23,
-                            "label":"Radio",
+                            "label":"CheckBox(twentyRoundCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -399,16 +574,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":25,
+                            "compId":77,
                             "child":[
                                 {
                                     "type":"Text",
-                                    "props":{"y":-2.9999999999999787,"x":29,"text":"20局","fontSize":"20","color":"#ffffff"},
-                                    "nodeParent":25,
+                                    "props":{"y":-4,"x":25,"text":"20局","fontSize":"20","color":"#ffffff"},
+                                    "nodeParent":77,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -424,31 +599,12 @@
                                     "child":[
                                         ],
                                     "$HIDDEN":false
-                                }],
-                            "$HIDDEN":false
-                        },
-                        {
-                            "type":"Text",
-                            "props":{"y":5,"x":17,"text":"局数：","fontSize":"20","font":"Arial","color":"#ffffff"},
-                            "nodeParent":23,
-                            "label":"Text",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"text"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
-                            "compId":28,
-                            "child":[
-                                ]
-                        }]
+                                }]
+                        }],
+                    "$LOCKED":false,
+                    "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":55,"x":16,"width":381,"var":"turnJokersBox","height":64},
                     "nodeParent":22,
@@ -486,10 +642,10 @@
                                 ]
                         },
                         {
-                            "type":"Radio",
-                            "props":{"y":32,"x":5,"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"y":32,"x":5,"var":"noMoreJokerCheck","skin":"assets/comp/checkbox.png"},
                             "nodeParent":29,
-                            "label":"Radio",
+                            "label":"CheckBox(noMoreJokerCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -497,16 +653,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":33,
+                            "compId":78,
                             "child":[
                                 {
                                     "type":"Text",
-                                    "props":{"y":-1,"x":25,"text":"不翻鬼牌","fontSize":"15","color":"#ffffff"},
-                                    "nodeParent":33,
+                                    "props":{"y":-1.0000000000000284,"x":24.999999999999886,"text":"不翻鬼牌","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":78,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -524,10 +680,10 @@
                                 }]
                         },
                         {
-                            "type":"Radio",
-                            "props":{"y":32,"x":108,"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"y":32,"x":108,"var":"oneMoreCheck","skin":"assets/comp/checkbox.png"},
                             "nodeParent":29,
-                            "label":"Radio",
+                            "label":"CheckBox(oneMoreCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -535,16 +691,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":34,
+                            "compId":79,
                             "child":[
                                 {
                                     "type":"Text",
-                                    "props":{"y":0,"x":26,"text":"翻1张鬼牌","fontSize":"15","color":"#ffffff"},
-                                    "nodeParent":34,
+                                    "props":{"y":0,"x":25.999999999999773,"text":"翻1张鬼牌","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":79,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -562,10 +718,10 @@
                                 }]
                         },
                         {
-                            "type":"Radio",
-                            "props":{"y":35,"x":233,"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"y":35,"x":233,"var":"twoMoreCheck","skin":"assets/comp/checkbox.png"},
                             "nodeParent":29,
-                            "label":"Radio",
+                            "label":"CheckBox(twoMoreCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -573,16 +729,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":35,
+                            "compId":80,
                             "child":[
                                 {
                                     "type":"Text",
-                                    "props":{"y":1,"x":26,"text":"翻2张鬼牌","fontSize":"15","color":"#ffffff"},
-                                    "nodeParent":35,
+                                    "props":{"y":-1.0000000000000284,"x":25.999999999999773,"text":"翻2张鬼牌","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":80,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -601,7 +757,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":124,"x":19,"width":383,"var":"jokerEffectBox","height":59},
                     "nodeParent":22,
@@ -639,10 +794,10 @@
                                 ]
                         },
                         {
-                            "type":"Radio",
-                            "props":{"y":35,"x":5,"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"y":35,"x":5,"var":"jokerAnyCheck","skin":"assets/comp/checkbox.png"},
                             "nodeParent":39,
-                            "label":"Radio",
+                            "label":"CheckBox(jokerAnyCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -650,16 +805,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":41,
+                            "compId":81,
                             "child":[
                                 {
                                     "type":"Text",
-                                    "props":{"y":-1,"x":22,"text":"鬼牌万能","fontSize":"15","color":"#ffffff"},
-                                    "nodeParent":41,
+                                    "props":{"y":-1.0000000000000568,"x":22,"text":"鬼牌万能","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":81,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -677,10 +832,10 @@
                                 }]
                         },
                         {
-                            "type":"Radio",
-                            "props":{"y":35,"x":106,"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"y":35,"x":106,"var":"jokerFormationCheak","skin":"assets/comp/checkbox.png"},
                             "nodeParent":39,
-                            "label":"Radio",
+                            "label":"CheckBox(jokerFormationCheak)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -688,16 +843,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":43,
+                            "compId":82,
                             "child":[
                                 {
                                     "type":"Text",
-                                    "props":{"y":0,"x":23,"text":"鬼牌成型","fontSize":"15","color":"#ffffff"},
-                                    "nodeParent":43,
+                                    "props":{"y":-2.842170943040401e-14,"x":23,"text":"鬼牌成型","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":82,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -713,12 +868,12 @@
                                     "child":[
                                         ]
                                 }]
-                        }]
+                        }],
+                    "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
-                    "props":{"y":196,"x":124,"width":203,"var":"skyGrandpaBox","height":25},
+                    "props":{"y":196,"x":126,"width":203,"visible":false,"var":"skyGrandpaBox","height":25},
                     "nodeParent":22,
                     "label":"Box(skyGrandpaBox)",
                     "isOpen":false,
@@ -735,10 +890,10 @@
                     "compId":45,
                     "child":[
                         {
-                            "type":"Radio",
-                            "props":{"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"var":"nineGhostCheck","skin":"assets/comp/checkbox.png"},
                             "nodeParent":45,
-                            "label":"Radio",
+                            "label":"CheckBox(nineGhostCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -746,16 +901,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":46,
+                            "compId":83,
                             "child":[
                                 {
                                     "type":"Text",
-                                    "props":{"y":-1,"x":22,"text":"鬼9天公","fontSize":"15","color":"#ffffff"},
-                                    "nodeParent":46,
+                                    "props":{"y":-1,"x":21.999999999999773,"text":"鬼9天公","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":83,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -773,10 +928,10 @@
                                 }]
                         },
                         {
-                            "type":"Radio",
-                            "props":{"y":1,"x":121,"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"x":121,"var":"eightGhostCheck","skin":"assets/comp/checkbox.png"},
                             "nodeParent":45,
-                            "label":"Radio",
+                            "label":"CheckBox(eightGhostCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -784,16 +939,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":48,
+                            "compId":84,
                             "child":[
                                 {
                                     "type":"Text",
-                                    "props":{"y":-1,"x":22,"text":"鬼8天公","fontSize":"15","color":"#ffffff"},
-                                    "nodeParent":48,
+                                    "props":{"y":0,"x":21.999999999999773,"text":"鬼8天公","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":84,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -809,12 +964,12 @@
                                     "child":[
                                         ]
                                 }]
-                        }]
+                        }],
+                    "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
-                    "props":{"y":229,"x":16,"width":377,"var":"betBox","height":96},
+                    "props":{"y":196,"x":16,"width":377,"var":"betBox","height":96},
                     "nodeParent":22,
                     "label":"Box(betBox)",
                     "isOpen":false,
@@ -850,10 +1005,10 @@
                                 ]
                         },
                         {
-                            "type":"Radio",
-                            "props":{"y":35,"x":10,"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"y":35,"x":10,"var":"anyBetCheck","skin":"assets/comp/checkbox.png"},
                             "nodeParent":50,
-                            "label":"Radio",
+                            "label":"CheckBox(anyBetCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -861,16 +1016,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":52,
+                            "compId":85,
                             "child":[
                                 {
                                     "type":"Text",
                                     "props":{"y":0,"x":23,"text":"任意下注，玩家可随意选择所有下注选项","fontSize":"15","color":"#ffffff"},
-                                    "nodeParent":52,
+                                    "nodeParent":85,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -888,10 +1043,10 @@
                                 }]
                         },
                         {
-                            "type":"Radio",
-                            "props":{"y":62,"x":11,"skin":"assets/comp/radio.png"},
+                            "type":"CheckBox",
+                            "props":{"y":62,"x":11,"var":"moreBetCheck","skin":"assets/comp/checkbox.png"},
                             "nodeParent":50,
-                            "label":"Radio",
+                            "label":"CheckBox(moreBetCheck)",
                             "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
@@ -899,16 +1054,16 @@
                             "frames":[
                                 {
                                     "type":1,
-                                    "props":{"skin":"assets/comp/radio.png","label":"label"},
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
                                     "frame":0,
                                     "__InPool":false
                                 }],
-                            "compId":54,
+                            "compId":86,
                             "child":[
                                 {
                                     "type":"Text",
                                     "props":{"y":-2,"x":23,"wordWrap":true,"width":280,"text":"一杠到底，在同一个庄下，玩家下局下注不能比上一局下注小","height":39,"fontSize":"15","color":"#ffffff"},
-                                    "nodeParent":54,
+                                    "nodeParent":86,
                                     "label":"Text",
                                     "isDirectory":false,
                                     "isAniNode":true,
@@ -927,12 +1082,11 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Box",
-                    "props":{"y":335,"x":19,"width":355,"height":152},
+                    "props":{"y":302,"x":19,"width":355,"var":"multipeBox","height":152},
                     "nodeParent":22,
-                    "label":"Box",
-                    "isOpen":true,
+                    "label":"Box(multipeBox)",
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
@@ -946,7 +1100,6 @@
                     "compId":56,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"text":"牌型倍数：","fontSize":"20","color":"#ffffff"},
                             "nodeParent":56,
@@ -966,9 +1119,8 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
-                            "props":{"y":31,"x":1,"text":"同花顺：","fontSize":"20","color":"#ffffff"},
+                            "props":{"y":31,"x":1,"text":"同花顺：","fontSize":"15","color":"#ffffff"},
                             "nodeParent":56,
                             "label":"Text",
                             "isDirectory":false,
@@ -986,9 +1138,8 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
-                            "props":{"y":62,"x":1,"text":"三    条：","fontSize":"20","color":"#ffffff"},
+                            "props":{"y":62,"x":1,"text":"三    条：","fontSize":"15","color":"#ffffff"},
                             "nodeParent":56,
                             "label":"Text",
                             "isDirectory":false,
@@ -1006,9 +1157,8 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
-                            "props":{"y":92,"x":1,"text":"顺    子：","fontSize":"20","color":"#ffffff"},
+                            "props":{"y":92,"x":1,"text":"顺    子：","fontSize":"15","color":"#ffffff"},
                             "nodeParent":56,
                             "label":"Text",
                             "isDirectory":false,
@@ -1026,9 +1176,8 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
-                            "props":{"y":123,"x":1,"text":"双    鬼：","fontSize":"20","color":"#ffffff"},
+                            "props":{"y":123,"x":1,"text":"双    鬼：","fontSize":"15","color":"#ffffff"},
                             "nodeParent":56,
                             "label":"Text",
                             "isDirectory":false,
@@ -1044,8 +1193,901 @@
                             "compId":61,
                             "child":[
                                 ]
+                        },
+                        {
+                            "type":"ComboBox",
+                            "props":{"y":28,"x":63,"width":46,"var":"straightFlush","skin":"assets/comp/combobox.png","selectedIndex":0,"scrollBarSkin":"assets/comp/vscroll.png","height":23},
+                            "nodeParent":56,
+                            "label":"ComboBox(straightFlush)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"y":406,"x":611,"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":92,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"ComboBox",
+                            "props":{"y":62,"x":62,"width":46,"var":"threeOfAKind","skin":"assets/comp/combobox.png","selectedIndex":0,"scrollBarSkin":"assets/comp/vscroll.png","labels":"4,5,6,7,8,9,10","height":23},
+                            "nodeParent":56,
+                            "label":"ComboBox(threeOfAKind)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"y":406,"x":611,"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":94,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"ComboBox",
+                            "props":{"y":94,"x":63,"width":46,"var":"straight","skin":"assets/comp/combobox.png","selectedIndex":0,"scrollBarSkin":"assets/comp/vscroll.png","labels":"4,5,6,7,8,9,10","height":23},
+                            "nodeParent":56,
+                            "label":"ComboBox(straight)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"y":406,"x":611,"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":95,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"ComboBox",
+                            "props":{"y":125,"x":64,"width":46,"visibleNum":5,"var":"doubleJoker","skin":"assets/comp/combobox.png","selectedIndex":0,"scrollBarSkin":"assets/comp/vscroll.png","labels":"10,11,12,13,14,15,16,17,18,19,20","height":23},
+                            "nodeParent":56,
+                            "label":"ComboBox(doubleJoker)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"y":406,"x":611,"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":96,
+                            "child":[
+                                ]
                         }]
-                }]
+                },
+                {
+                    "type":"Box",
+                    "props":{"y":467,"x":1,"width":374,"var":"zeroSetBox","height":27},
+                    "nodeParent":22,
+                    "label":"Box(zeroSetBox)",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":66,
+                    "child":[
+                        {
+                            "type":"CheckBox",
+                            "props":{"y":1,"x":21,"var":"threeZeroCheck","skin":"assets/comp/checkbox.png"},
+                            "nodeParent":66,
+                            "label":"CheckBox(threeZeroCheck)",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":89,
+                            "child":[
+                                {
+                                    "type":"Text",
+                                    "props":{"y":0,"x":24,"text":"3张牌0点赢双鬼","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":89,
+                                    "label":"Text",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "frames":[
+                                        {
+                                            "type":1,
+                                            "props":{"text":"text"},
+                                            "frame":0,
+                                            "__InPool":false
+                                        }],
+                                    "compId":69,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "type":"CheckBox",
+                            "props":{"y":1,"x":167,"var":"twoZeroCheck","skin":"assets/comp/checkbox.png"},
+                            "nodeParent":66,
+                            "label":"CheckBox(twoZeroCheck)",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":90,
+                            "child":[
+                                {
+                                    "type":"Text",
+                                    "props":{"y":1,"x":24,"text":"2张牌0点赢双鬼","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":90,
+                                    "label":"Text",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "frames":[
+                                        {
+                                            "type":1,
+                                            "props":{"text":"text"},
+                                            "frame":0,
+                                            "__InPool":false
+                                        }],
+                                    "compId":71,
+                                    "child":[
+                                        ]
+                                }]
+                        }],
+                    "$HIDDEN":false
+                },
+                {
+                    "type":"Box",
+                    "props":{"y":498,"x":22,"width":353,"var":"doubleDealBox","height":50},
+                    "nodeParent":22,
+                    "label":"Box(doubleDealBox)",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":72,
+                    "child":[
+                        {
+                            "type":"CheckBox",
+                            "props":{"var":"doubleCheck","skin":"assets/comp/checkbox.png"},
+                            "nodeParent":72,
+                            "label":"CheckBox(doubleCheck)",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "frames":[
+                                {
+                                    "type":1,
+                                    "props":{"skin":"assets/comp/checkbox.png","label":"label"},
+                                    "frame":0,
+                                    "__InPool":false
+                                }],
+                            "compId":91,
+                            "child":[
+                                {
+                                    "type":"Text",
+                                    "props":{"y":0,"x":23,"text":"翻倍牌","fontSize":"15","color":"#ffffff"},
+                                    "nodeParent":91,
+                                    "label":"Text",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "frames":[
+                                        {
+                                            "type":1,
+                                            "props":{"text":"text"},
+                                            "frame":0,
+                                            "__InPool":false
+                                        }],
+                                    "compId":75,
+                                    "child":[
+                                        ]
+                                }]
+                        }],
+                    "$LOCKED":true
+                }],
+            "$LOCKED":true,
+            "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "props":{"y":73,"x":505,"width":413,"visible":"false","var":"customizedBox","height":596},
+            "nodeParent":1,
+            "label":"Box(customizedBox)",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":107,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"text":"局数选择：","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":108,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":76,"x":-1,"text":"牌型倍数：","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":109,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":255,"x":4,"text":"点数牌：","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":110,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":0,"x":104,"var":"gameRoundCustomized","skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png"},
+                    "nodeParent":107,
+                    "label":"ComboBox(gameRoundCustomized)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":111,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":77,"x":175,"var":"straightFlushCustomized","skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(straightFlushCustomized)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":112,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":121,"x":175,"var":"straightCustomized","skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(straightCustomized)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":113,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":164,"x":175,"var":"threeOfAKindCustomized","skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(threeOfAKindCustomized)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":114,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":208,"x":175,"var":"doubleJokerCustomized","skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(doubleJokerCustomized)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":115,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":78,"x":102,"text":"同花顺","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":116,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":123,"x":103,"text":"顺子","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":117,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":168,"x":108,"text":"三条","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":118,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":210,"x":109,"text":"双鬼","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":119,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":307,"x":84,"text":"0点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":120,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":352,"x":84,"text":"2点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":121,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":397,"x":84,"text":"4点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":122,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":441,"x":84,"text":"6点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":123,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":486,"x":84,"text":"8点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":124,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":310,"x":221,"text":"1点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":125,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":355,"x":221,"text":"3点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":126,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":400,"x":221,"text":"5点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":127,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":444,"x":221,"text":"7点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":128,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":489,"x":221,"text":"9点","fontSize":"20","color":"#ffffff"},
+                    "nodeParent":107,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":129,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":309,"x":121,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_0","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_0)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":130,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":310,"x":259,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_1","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_1)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":131,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":354,"x":121,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_2","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_2)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":132,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":355,"x":259,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_3","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_3)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":133,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":399,"x":121,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_4","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_4)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":134,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":400,"x":259,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_5","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_5)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":135,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":443,"x":121,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_6","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_6)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":136,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":444,"x":259,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_7","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_7)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":137,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":488,"x":121,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_8","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_8)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":138,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"ComboBox",
+                    "props":{"y":489,"x":259,"skin":"assets/comp/combobox.png","scrollBarSkin":"assets/comp/vscroll.png","name":"point_9","labels":"label1,label2"},
+                    "nodeParent":107,
+                    "label":"ComboBox(point_9)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/comp/combobox.png","labels":"label1,label2"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":139,
+                    "child":[
+                        ]
+                }],
+            "$HIDDEN":true
         }],
     "animations":[
         {

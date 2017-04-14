@@ -1,46 +1,75 @@
 (function(root) {
+    root.wrapMsg = function(err, data) {
+        var msg = {};
+
+        if (err != null) {
+            msg.code = root.Code.FAILED;
+            msg.err  = err;
+            msg.msg  = "";
+        } else {
+            msg.code = root.Code.OK;
+            msg.data = data;
+        }
+
+        return msg;
+    };
+
+    root.ROUTE = {
+        ROOM: {
+            ENTER:              "room.enter",
+            STATE:              "room.state",
+            ACTION:             "room.action",
+            COMMAND:            "room.command"
+        }
+
+    };
+
     root.Code = {
         OK: 200,
         FAILED: 500,
         TIMEOUT: 1000,
 
-        MySQL: {
-            DB_ERROR: 1001,
-            RECORD_ERROR: 1002,
-            PROCEDURE_ERROR: 1003
+        SYSTEM: {
+            MySQL_ERROR:        1001,
+            REDIS_ERROR:        1002,
+            HTTP_ERROR:         1003,
+            CHANNEL_ERROR:      1004,
+            RPC_ERROR:          1005,
+            SESSION_ERROR:      1006
         },
 
-        REDIS: {
-            REDIS_ERROR: 1101
+        ROUTE: {
+            UNAUTHORIZED:       1101,
+            INVALID_PARAMS:     1102,
+            INVALID_SESSION:    1103
         },
 
-        HTTP: {
-            REQUEST_ERROR: 1201,
-            STATUS_ERROR: 1202,
-            BODY_ERROR: 1203
+        // 1200~1299
+        GATE: {
+            NOT_EXIST_ENTRY:    1201
         },
 
-        GAME_ERR: {
-            NOT_ENOUGH_GOLD:            10001,      //金币不足
-
-            NO_ERR:                     null        //没有错误 一般不用
-        },
-
+        // 1300~1399
         AUTH: {
 
         },
 
-        REQUEST: {
-            INVALID_PARAMS: 1500,
-            INVALID_SIGNATURE: 1501,
-            UNZIP_ERROR: 1502,
-            JSON_ERROR: 1503,
-            TOKEN_ERROR: 1504,
-            SDK_ERROR: 1505,
-            DATA_ERROR: 1506,
-            INVALID_PLATFORM: 1507,
-            INVALID_SERVER: 1508,
-            INTERNAL_ERROR: 1509
+        // 1400~1499
+        CONNECTOR: {
+
+        },
+
+        // 1500~1599
+        LOBBY: {
+
+        },
+
+        // 1600~1699
+        ROOM: {
+            NOT_EXIST:          1601,
+            NOT_IN_ROOM:        1602,
+            ALREADY_HAVE_ROOM:  1603
+
         }
     };
-}(dejuPoker));
+}(DejuPoker));

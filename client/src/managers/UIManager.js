@@ -1,4 +1,4 @@
-var UILAYERORDER = 50;          //UI层       
+var UI_LAYER_ORDER = 50;          //UI层
 var UIManager = (function(_super) {
     function UIManager() {
         this.gameRoomView = null;
@@ -12,13 +12,13 @@ var UIManager = (function(_super) {
         callback && callback();
     };
 
-    UIManager.prototype.runGameRoomView = function () {
+    UIManager.prototype.runGameRoomView = function (data) {
         //*创建和显示游戏房间界面
         if (this.gameRoomView) {
             this.gameRoomView.visible = true;
         }
         else {
-            this.gameRoomView = new GameRoomView();
+            this.gameRoomView = new GameRoomView(data);
             App.sceneLayer.addChild(this.gameRoomView);
         }
     };
@@ -104,41 +104,24 @@ var UIManager = (function(_super) {
     };
 
     UIManager.prototype.addUiLayer = function(layer,addShieldObj){
-        layer.zOrder = UILAYERORDER;
+        layer.zOrder = UI_LAYER_ORDER;
         this._uiLayers.push(layer);
 
         var alpha = 0;
         var isDispose = false;
-
+        addShieldObj = addShieldObj || {isAddShield:true,alpha:0,isDispose:true};
         if(layer.show){
             //Dialog
             layer.show();
             Laya.stage.addChild(layer);
 
-            if(addShieldObj){
-                if(addShieldObj.isAddShield !== undefined){
-                    alpha = addShieldObj.alpha;
-                    isDispose = addShieldObj.isDispose;
-                    this.addShieldLayerDialog(layer,alpha,isDispose);
-                }
-                else{
-                    this.addShieldLayerDialog(layer);
-                }
+            if(addShieldObj.isAddShield !== undefined){
+                alpha = addShieldObj.alpha || 0;
+                isDispose = addShieldObj.isDispose;
+                this.addShieldLayerDialog(layer,alpha,isDispose);
             }
-        }
-        else{
-            //View
-            Laya.stage.addChild(layer);
-
-            if(addShieldObj){
-                if(addShieldObj.isAddShield !== undefined){
-                    alpha = addShieldObj.alpha;
-                    isDispose = addShieldObj.isDispose;
-                    this.addShieldLayerView(layer,alpha,isDispose)
-                }
-                else{
-                    this.addShieldLayerView(layer)
-                }
+            else{
+                this.addShieldLayerDialog(layer);
             }
         }
     };

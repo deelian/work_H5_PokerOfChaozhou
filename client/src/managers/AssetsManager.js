@@ -9,7 +9,12 @@ var AssetsManager = (function(_super) {
         {
             url: "assets/ui.loader/progress$bar.png",
             type: Laya.Loader.IMAGE
-        }
+        },
+
+        {
+            url: "assets/atlas/assets/ui.button.json",
+            type: Laya.Loader.ATLAS
+        },
     ];
 
     var unpackRes = [
@@ -19,6 +24,26 @@ var AssetsManager = (function(_super) {
     var preload = [
         {
             url: "assets/atlas/assets/ui.button.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/comp.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/pokers.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.image.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.main.json",
             type: Laya.Loader.ATLAS
         }
     ];

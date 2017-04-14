@@ -94,5 +94,22 @@
         }
         
         return newStr;
-    }
-}(dejuPoker));
+    };
+
+    //随机生成一个N位数字
+    Utils.gen_room_id = function(n) {
+        var id = "";
+        for (var i = 0; i < n; i++) {
+            id += Utils.random_number(10);
+        }
+        
+        return id;
+    };
+
+    Utils.object_clone = function(obj) {
+        if (obj == null || typeof obj != "object") {
+            return obj;
+        }
+        return JSON.parse(JSON.stringify(obj));
+    };
+}(DejuPoker));

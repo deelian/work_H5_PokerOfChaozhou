@@ -1,0 +1,32 @@
+{
+  "name": "muk",
+  "description": "Mock object methods and dependencies.",
+  "keywords": [
+    "test",
+    "mock",
+    "dependency"
+  ],
+  "version": "0.5.3",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fent/node-muk.git"
+  },
+  "author": "Roly Fentanes (https://github.com/fent)",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "istanbul cover node_modules/.bin/_mocha -- -R spec test/*-test.js"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "istanbul": "0"
+  },
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "_from": "muk@0.5.3",
+  "_resolved": "http://registry.npm.taobao.org/muk/download/muk-0.5.3.tgz"
+}

@@ -11,6 +11,14 @@ var InputRoomNumberDialog = (function(_super) {
 
     Laya.class(InputRoomNumberDialog, "InputRoomNumberDialog", _super);
 
+    InputRoomNumberDialog.prototype.enterRoom = function () {
+        var self = this;
+        var roomID = this._roomNumber;
+        App.enterRoom(roomID, function() {
+            self.close();
+        });
+    };
+
     InputRoomNumberDialog.prototype.setRoomNumberLab = function (str) {
         if (typeof (str) == "number") {
             this._roomNumber += str;
@@ -20,6 +28,10 @@ var InputRoomNumberDialog = (function(_super) {
         }
 
         this.roomNumLab.text = this._roomNumber;
+
+        if (this._roomNumber.length >= 6) {
+            this.enterRoom();
+        }
     };
 
     InputRoomNumberDialog.prototype.inputRoomNumber = function (num) {

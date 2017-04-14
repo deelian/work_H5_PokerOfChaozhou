@@ -17,4 +17,4 @@ files.forEach(function(file) {
 /*
  * Export our namespace to users
  */
-module.exports = global.dejuPoker;
+module.exports = global.DejuPoker;

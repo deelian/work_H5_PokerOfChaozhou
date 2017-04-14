@@ -1,19 +1,26 @@
 (function(root) {
-    var _super = root.Entity;
+    var _super = root.Serialize;
     var Player = root.Player = function(opts) {
         opts = opts || {};
         
         this.id             = opts.id || 0;
-        this.name           = opts.name || "Guest";
-        this.balance        = opts.balance || 10000;
-        this.language       = opts.language || "zh-CN";
-
-        console.log(this);
+        this.name           = opts.name || "";
+        this.avatar         = opts.avatar || "";
+        this.tokens         = opts.tokens || 0;
+        this.gender         = opts.gender || 0;
     };
 
     root.inherits(Player, _super);
 
     root.extend(Player.prototype, {
+        setId: function(id) {
+            this.id = id;
+        },
+        
+        getId: function() {
+            return this.id;
+        },
+        
         update: function(opts) {
             var obj = this;
             opts = opts || {};
@@ -24,14 +31,6 @@
                     obj[key] = opts[key];
                 }
             }
-        },
-
-        setBalance: function(amount) {
-            this.balance = amount;
-        },
-
-        getBalance: function() {
-            return this.balance;
         }
     });
-} (dejuPoker));
+} (DejuPoker));
