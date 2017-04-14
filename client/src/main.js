@@ -2,8 +2,8 @@ var window = window || global;
 
 (function () {
     // 设计宽度和高度
-    var designW = 1280;
-    var designH = 720;
+    var designW = 1136;
+    var designH = 640;
 
     // 初始化Laya
     Laya.init(designW, designH, Laya.WebGL);

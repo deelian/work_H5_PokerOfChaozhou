@@ -1,6 +1,6 @@
 {
     "frames": {
-        "club_ace.png": {
+        "club_1.png": {
             "frame": {
                 "x": 0,
                 "y": 0,
@@ -21,7 +21,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_eight.png": {
+        "club_10.png": {
             "frame": {
                 "x": 0,
                 "y": 326,
@@ -42,7 +42,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_five.png": {
+        "club_11.png": {
             "frame": {
                 "x": 0,
                 "y": 652,
@@ -63,7 +63,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_four.png": {
+        "club_12.png": {
             "frame": {
                 "x": 0,
                 "y": 978,
@@ -84,7 +84,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_jack.png": {
+        "club_13.png": {
             "frame": {
                 "x": 0,
                 "y": 1304,
@@ -105,7 +105,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_king.png": {
+        "club_2.png": {
             "frame": {
                 "x": 0,
                 "y": 1630,
@@ -126,7 +126,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_nine.png": {
+        "club_3.png": {
             "frame": {
                 "x": 250,
                 "y": 0,
@@ -147,7 +147,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_queen.png": {
+        "club_4.png": {
             "frame": {
                 "x": 250,
                 "y": 326,
@@ -168,7 +168,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_seven.png": {
+        "club_5.png": {
             "frame": {
                 "x": 250,
                 "y": 652,
@@ -189,7 +189,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_six.png": {
+        "club_6.png": {
             "frame": {
                 "x": 250,
                 "y": 978,
@@ -210,7 +210,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_ten.png": {
+        "club_7.png": {
             "frame": {
                 "x": 250,
                 "y": 1304,
@@ -231,7 +231,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_three.png": {
+        "club_8.png": {
             "frame": {
                 "x": 250,
                 "y": 1630,
@@ -252,7 +252,7 @@
             "rotated": false,
             "trimed": false
         },
-        "club_two.png": {
+        "club_9.png": {
             "frame": {
                 "x": 500,
                 "y": 0,
@@ -273,7 +273,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_ace.png": {
+        "diamond_1.png": {
             "frame": {
                 "x": 750,
                 "y": 0,
@@ -294,7 +294,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_eight.png": {
+        "diamond_10.png": {
             "frame": {
                 "x": 1000,
                 "y": 0,
@@ -315,7 +315,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_five.png": {
+        "diamond_11.png": {
             "frame": {
                 "x": 1250,
                 "y": 0,
@@ -336,7 +336,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_four.png": {
+        "diamond_12.png": {
             "frame": {
                 "x": 1500,
                 "y": 0,
@@ -357,7 +357,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_jack.png": {
+        "diamond_13.png": {
             "frame": {
                 "x": 1750,
                 "y": 0,
@@ -378,7 +378,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_king.png": {
+        "diamond_2.png": {
             "frame": {
                 "x": 500,
                 "y": 326,
@@ -399,7 +399,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_nine.png": {
+        "diamond_3.png": {
             "frame": {
                 "x": 500,
                 "y": 652,
@@ -420,7 +420,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_queen.png": {
+        "diamond_4.png": {
             "frame": {
                 "x": 500,
                 "y": 978,
@@ -441,7 +441,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_seven.png": {
+        "diamond_5.png": {
             "frame": {
                 "x": 500,
                 "y": 1304,
@@ -462,7 +462,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_six.png": {
+        "diamond_6.png": {
             "frame": {
                 "x": 500,
                 "y": 1630,
@@ -483,7 +483,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_ten.png": {
+        "diamond_7.png": {
             "frame": {
                 "x": 750,
                 "y": 326,
@@ -504,7 +504,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_three.png": {
+        "diamond_8.png": {
             "frame": {
                 "x": 1000,
                 "y": 326,
@@ -525,7 +525,7 @@
             "rotated": false,
             "trimed": false
         },
-        "diamond_two.png": {
+        "diamond_9.png": {
             "frame": {
                 "x": 1250,
                 "y": 326,
@@ -546,7 +546,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_ace.png": {
+        "heart_1.png": {
             "frame": {
                 "x": 1500,
                 "y": 326,
@@ -567,7 +567,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_eight.png": {
+        "heart_10.png": {
             "frame": {
                 "x": 1750,
                 "y": 326,
@@ -588,7 +588,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_five.png": {
+        "heart_11.png": {
             "frame": {
                 "x": 750,
                 "y": 652,
@@ -609,7 +609,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_four.png": {
+        "heart_12.png": {
             "frame": {
                 "x": 750,
                 "y": 978,
@@ -630,7 +630,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_jack.png": {
+        "heart_13.png": {
             "frame": {
                 "x": 750,
                 "y": 1304,
@@ -651,7 +651,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_king.png": {
+        "heart_2.png": {
             "frame": {
                 "x": 750,
                 "y": 1630,
@@ -672,7 +672,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_nine.png": {
+        "heart_3.png": {
             "frame": {
                 "x": 1000,
                 "y": 652,
@@ -693,7 +693,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_queen.png": {
+        "heart_4.png": {
             "frame": {
                 "x": 1250,
                 "y": 652,
@@ -714,7 +714,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_seven.png": {
+        "heart_5.png": {
             "frame": {
                 "x": 1500,
                 "y": 652,
@@ -735,7 +735,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_six.png": {
+        "heart_6.png": {
             "frame": {
                 "x": 1750,
                 "y": 652,
@@ -756,7 +756,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_ten.png": {
+        "heart_7.png": {
             "frame": {
                 "x": 1000,
                 "y": 978,
@@ -777,7 +777,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_three.png": {
+        "heart_8.png": {
             "frame": {
                 "x": 1000,
                 "y": 1304,
@@ -798,7 +798,7 @@
             "rotated": false,
             "trimed": false
         },
-        "heart_two.png": {
+        "heart_9.png": {
             "frame": {
                 "x": 1000,
                 "y": 1630,
@@ -819,7 +819,7 @@
             "rotated": false,
             "trimed": false
         },
-        "joker_big.png": {
+        "joker_14.png": {
             "frame": {
                 "x": 1250,
                 "y": 978,
@@ -840,9 +840,30 @@
             "rotated": false,
             "trimed": false
         },
-        "joker_small.png": {
+        "joker_15.png": {
             "frame": {
                 "x": 1500,
+                "y": 978,
+                "w": 248,
+                "h": 324,
+                "idx": 0
+            },
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 248,
+                "h": 324
+            },
+            "sourceSize": {
+                "w": 248,
+                "h": 324
+            },
+            "rotated": false,
+            "trimed": false
+        },
+        "joker_16.png": {
+            "frame": {
+                "x": 1750,
                 "y": 978,
                 "w": 248,
                 "h": 324,
@@ -863,27 +884,6 @@
         },
         "poker_back.png": {
             "frame": {
-                "x": 1750,
-                "y": 978,
-                "w": 248,
-                "h": 324,
-                "idx": 0
-            },
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 248,
-                "h": 324
-            },
-            "sourceSize": {
-                "w": 248,
-                "h": 324
-            },
-            "rotated": false,
-            "trimed": false
-        },
-        "spade_ace.png": {
-            "frame": {
                 "x": 1250,
                 "y": 1304,
                 "w": 248,
@@ -903,7 +903,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_double.png": {
+        "spade_1.png": {
             "frame": {
                 "x": 1250,
                 "y": 1630,
@@ -924,7 +924,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_eight.png": {
+        "spade_10.png": {
             "frame": {
                 "x": 1500,
                 "y": 1304,
@@ -945,7 +945,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_five.png": {
+        "spade_11.png": {
             "frame": {
                 "x": 1750,
                 "y": 1304,
@@ -966,7 +966,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_four.png": {
+        "spade_12.png": {
             "frame": {
                 "x": 1500,
                 "y": 1630,
@@ -987,7 +987,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_jack.png": {
+        "spade_13.png": {
             "frame": {
                 "x": 1750,
                 "y": 1630,
@@ -1008,7 +1008,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_king.png": {
+        "spade_2.png": {
             "frame": {
                 "x": 0,
                 "y": 0,
@@ -1029,7 +1029,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_nine.png": {
+        "spade_3.png": {
             "frame": {
                 "x": 0,
                 "y": 326,
@@ -1050,7 +1050,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_queen.png": {
+        "spade_4.png": {
             "frame": {
                 "x": 0,
                 "y": 652,
@@ -1071,7 +1071,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_seven.png": {
+        "spade_5.png": {
             "frame": {
                 "x": 250,
                 "y": 0,
@@ -1092,7 +1092,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_six.png": {
+        "spade_6.png": {
             "frame": {
                 "x": 500,
                 "y": 0,
@@ -1113,7 +1113,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_ten.png": {
+        "spade_7.png": {
             "frame": {
                 "x": 250,
                 "y": 326,
@@ -1134,7 +1134,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_three.png": {
+        "spade_8.png": {
             "frame": {
                 "x": 250,
                 "y": 652,
@@ -1155,7 +1155,7 @@
             "rotated": false,
             "trimed": false
         },
-        "spade_two.png": {
+        "spade_9.png": {
             "frame": {
                 "x": 500,
                 "y": 326,

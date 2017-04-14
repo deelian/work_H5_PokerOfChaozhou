@@ -216,22 +216,19 @@ var NetManager = (function(_super) {
         var route   = msg.route;
         var info    = msg.body;
         switch (route) {
-            case Game.ROUTE.ROOM.ENTER: {
+            case Game.ROUTE.ROOM.ENTER:
+            {
                 App.uiManager.gameRoomView.joinPlayer(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.STATE: {
-                break;
-            }
-
-            case Game.ROUTE.ROOM.ACTION: {
                 break;
             }
 
             case Game.ROUTE.ROOM.COMMAND: {
                 App.tableManager.commandHandler(info);
-                console.log("netManager:" + JSON.stringify(info));
+                break;
+            }
+
+            case Game.ROUTE.ROOM.DEAL: {
+                App.tableManager.dealPoker(info);
                 break;
             }
         }

@@ -13,6 +13,26 @@ var RoomPlayerBox = (function(_super) {
 
     Laya.class(RoomPlayerBox, "RoomPlayerBox", _super);
 
+    RoomPlayerBox.prototype.readyAction = function (isReady) {
+        var readyIconVisible = false;
+        if (isReady) {
+            readyIconVisible = true;
+        }
+        this.readyIcon.visible = readyIconVisible;
+
+        //*执行完成就返回说完成了，进行下一条
+        App.tableManager.commandNext();
+    };
+
+    //*执行命令动作
+    RoomPlayerBox.prototype.commandAction = function (command) {
+        var userId = command.userID;
+        var ready = command.ready;
+        if (typeof(ready) == "boolean") {
+            this.readyAction(ready);
+        }
+    };
+
     RoomPlayerBox.prototype.updateDisplay = function () {
         this.nameLab.text = "屌毛" + this._userId + "号";
         this.balanceLab.text = "0";

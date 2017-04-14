@@ -1,6 +1,8 @@
 
 (function(root) {
     var _super = root.Serialize;
+    var Poker = root.Poker;
+    
     var Deck = root.Deck = function(opts) {
         opts = opts || {};
 

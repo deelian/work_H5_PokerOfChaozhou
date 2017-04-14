@@ -4,8 +4,9 @@
     var Poker = root.Poker = function(opts) {
         opts = opts || {};
 
-        this.value     = opts.value || 0;
-        this.type      = opts.type  || 0;
+        this.value      = opts.value || 0;
+        this.type       = opts.type  || 0;
+        this.showTarget = opts.showTarget || 0;
     };
 
     root.inherits(Poker, _super);

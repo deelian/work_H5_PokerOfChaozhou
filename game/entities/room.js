@@ -19,7 +19,7 @@
         // public members
         this.id                 = opts.id;
         this.type               = opts.type;
-        this.settings           = opts.settings || {};
+        this.settings           = {};
         this.state              = opts.state || Room.STATE_READY;
 
         this.host               = opts.host;                        //房主
@@ -41,16 +41,41 @@
 
     root.inherits(Room, _super);
 
-    Room.STATE_READY       = 0;             //准备
-    Room.STATE_START       = 1;             //开始
-    Room.STATE_DEALED      = 3;             //发了牌
-    Room.STATE_BID         = 4;             //下注
-    Room.STATE_DRAW        = 5;             //要牌
-    Room.STATE_END         = 6;             //结束
-    Room.STATE_CLOSED      = 7;             //完成
-    Room.STATE_DISMISS     = 8;             //解散
+    Room.STATE_READY       = 0;             //等待准备状态
+    Room.STATE_START       = 1;             //准备好后发牌和返鬼牌
+    Room.STATE_BID         = 2;             //等待下注状态
+    Room.STATE_DRAW        = 3;             //下注完闲家要牌
+    Room.STATE_BANKER      = 4;             //闲家要完牌庄家处理阶段 这里包括了结算
+    Room.STATE_END         = 5;             //牌局结束 请求下一局
+    Room.STATE_CLOSED      = 6;             //所有牌局完成房间解散
+    Room.STATE_DISMISS     = 7;             //
 
     root.extend(Room.prototype, {
+        settingInit: function(settings) {
+            settings = settings || {};
+            this.settings.condition      = settings.condition || 0;                                           //经典模式上庄条件
+            this.settings.times          = settings.times || 10;                                              //局数
+            this.settings.ghostCount     = settings.ghostCount || 0;                                          //鬼牌数
+            this.settings.betType        = settings.betType || Game.BET_TYPE.ARBITRARILY;                     //下注类型
+            this.settings.universalGhost = settings.universalGhost || true;                                   //鬼牌万能
+            this.settings.formationGhost = settings.formationGhost || {"god_nine":true, "god_eight":true};    //鬼牌成型
+            this.settings.isDouble       = settings.isDouble || false;                                        //翻倍
+            this.settings.zeroPoint      = settings.zeroPoint || {"three_zero":false, "two_zero":false};      //0点赢鬼牌
+
+            this.settings.pokerModels    = {};
+            var pokerModels = settings.pokerModels || {};
+            for (var i in Game.POKER_MODELS.POKER_MODELS) {
+                var modelKey = Game.POKER_MODELS.POKER_MODELS[i];
+                this.settings.pokerModels[modelKey] = pokerModels[modelKey] || 4;
+            }
+
+            this.settings.pokerPoint     = [];
+            var pokerPoint = settings.pokerPoint || [];
+            for (var index = 0; index < pokerPoint.length; index++) {
+                this.settings.pokerPoint[index] = pokerPoint[index] || 1;
+            }
+        },
+
         init: function(opts) {
             var self = this;
 
@@ -61,6 +86,8 @@
             else if (opts.table) {
                 this.table = new Table(opts.table);
             }
+
+            this.settingInit(opts.settings);
 
             // start timer 一段时间检查一下房间游戏进程
             this._timerID = setInterval(function() {
@@ -214,6 +241,8 @@
             //更新前完成积压的所有工作
             this.process();
 
+            var i;
+
             switch (this.state) {
                 case Room.STATE_READY:
                     if (this.table.getClientReady()) {
@@ -224,18 +253,22 @@
                     var msg = {};
 
                     // 开始-洗牌-发牌
-                    this.table.start();
+                    this.table.start(this.type);
                     this.table.shuffle();
-                    this.table.deal();
+                    // 暂时按座位顺序发牌 这里要做个规则传入发牌顺序的userID数组
+                    var sitUsers = [];
+                    for (i = 0; i < this.maxChairs; i++) {
+                        if (this.chairs[i]) {
+                            sitUsers.push(this.chairs[i]);
+                        }
+                    }
+                    this.table.deal(sitUsers);
+                    // 翻鬼牌 暂时直接2张
+                    this.table.ghost(2);
 
                     this.state++;
                     
-                    this.broadcast(ROUTE.ROOM.STATE, msg);
-                    break;
-                case Room.STATE_DEALED:
-                    if (this.table.getClientStarted()) {
-                        this.state++;
-                    }
+                    this.broadcast(ROUTE.ROOM.DEAL, this.clone());
                     break;
                 case Room.STATE_BID:
                     if (this.table.getClientBid()) {
@@ -243,6 +276,11 @@
                     }
                     break;
                 case Room.STATE_DRAW:
+                    break;
+                case Room.STATE_BANKER:
+                    if (this.table.getClientStarted()) {
+                        this.state++;
+                    }
                     break;
                 case Room.STATE_END:
                     if (this.table.getClientEnd()) {

@@ -4,7 +4,7 @@
 var GameRoomView = (function(_super) {
     function GameRoomView(roomData) {
         GameRoomView.super(this);
-        console.log(JSON.stringify(roomData.table));
+        //console.log(JSON.stringify(roomData.table));
         this._roomId                = roomData.id;
         this._roomType              = roomData.type;
         this._roomTable             = roomData.table;
@@ -12,6 +12,8 @@ var GameRoomView = (function(_super) {
 
         this._playersShowSprites    = []; //*玩家信息显示的位置
         this._roomPlayers           = []; //*房间中的玩家
+
+        this._isReady               = false; //*是否准备了，用于准备按钮的切换
 
         this.init();
     }
@@ -39,8 +41,8 @@ var GameRoomView = (function(_super) {
 
     //*有玩家加入
     GameRoomView.prototype.joinPlayer = function (playerInfo) {
-        var pos = playerInfo.pos; //*位置
-
+        var pos     = playerInfo.pos; //*位置
+        var userId  = playerInfo.userID;
         if (pos < 0) {
             //*站起的状态
             return;
@@ -56,6 +58,17 @@ var GameRoomView = (function(_super) {
         var playerSelfIcon = new RoomPlayerBox(playerInfo);
         playerSelfIcon.y -= 80;
         this._playersShowSprites[posDiff].addChild(playerSelfIcon);
+
+        App.tableManager.addPlayerBox(userId, playerSelfIcon);
+    };
+
+    //*设置准备按钮的状态
+    GameRoomView.prototype.setReadyBtnState = function () {
+        var readyText = "准备";
+        if (this._isReady) {
+            readyText = "取消准备";
+        }
+        this.readyLab.text = readyText;
     };
 
     GameRoomView.prototype.touchReadyBtn = function () {
@@ -64,13 +77,20 @@ var GameRoomView = (function(_super) {
             if (err) {
 
             }
+            else {
+                self._isReady = !self._isReady;
+                self.setReadyBtnState();
+            }
         };
+
+        var ready = !this._isReady;
+
         //*点击准备
         App.netManager.send(
             "room.handler.command",
             {
                 fn: "ready",
-                data: true
+                data: ready
             },
             Laya.Handler.create(null, complete)
         );
@@ -113,6 +133,8 @@ var GameRoomView = (function(_super) {
                 var playerSelfIcon = new RoomPlayerBox(info);
                 playerSelfIcon.y -= 80;
                 this._playersShowSprites[index].addChild(playerSelfIcon);
+
+                App.tableManager.addPlayerBox(userID, playerSelfIcon);
             }
         }
     };
@@ -145,7 +167,7 @@ var GameRoomView = (function(_super) {
         //    console.log(data);
             App.uiManager.removeGameRoomView();
         //};
-        ////*点击准备
+        //*退出房间
         //App.netManager.send(
         //    "room.handler.command",
         //    {

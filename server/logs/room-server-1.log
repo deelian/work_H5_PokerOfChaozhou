@@ -1445,3 +1445,159 @@ TypeError: Cannot read property 'id' of undefined
 
 [36m[2017-04-12 17:09:28.826] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.state", msg: {}, groups: {"connector-server-2":[2,5,2,5,5,5,2],"connector-server-3":[2,5,2],"connector-server-1":[2,2,2,2,5,2,5,6,6]}, opts: undefined
 
+[32m[2017-04-13 09:38:31.450] [room-server-1] [INFO] pomelo -[39m application inited: "room-server-1"
+
+[32m[2017-04-13 09:38:34.694] [room-server-1] [INFO] application -[39m room 39521 loaded...
+
+[32m[2017-04-13 09:38:34.710] [room-server-1] [INFO] pomelo-admin -[39m try to connect master: "room", "127.0.0.1", 6000
+
+[32m[2017-04-13 09:38:34.694] [room-server-1] [INFO] application -[39m room 788217 loaded...
+
+[32m[2017-04-13 09:38:34.741] [room-server-1] [INFO] pomelo -[39m "room-server-1" enter after start...
+
+[32m[2017-04-13 09:38:34.741] [room-server-1] [INFO] pomelo -[39m "room-server-1" finish start
+
+[32m[2017-04-13 09:38:34.741] [room-server-1] [INFO] pomelo -[39m "room-server-1" startup in 3260 ms
+
+[36m[2017-04-13 12:17:58.572] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.enter", msg: {"userID":2,"pos":0}, groups: {}, opts: undefined
+
+[36m[2017-04-13 12:18:23.009] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2],"connector-server-1":[2]}, opts: undefined
+
+[36m[2017-04-13 12:19:07.515] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2],"connector-server-1":[2,2]}, opts: undefined
+
+[36m[2017-04-13 12:19:47.027] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2],"connector-server-1":[2,2]}, opts: undefined
+
+[36m[2017-04-13 12:21:20.563] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2],"connector-server-1":[2,2]}, opts: undefined
+
+[36m[2017-04-13 12:21:50.236] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.enter", msg: {"userID":5,"pos":1}, groups: {"connector-server-3":[2,2,2],"connector-server-1":[2,2],"connector-server-2":[2]}, opts: undefined
+
+[36m[2017-04-13 12:21:58.666] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2],"connector-server-1":[2,2,5],"connector-server-2":[2]}, opts: undefined
+
+[36m[2017-04-13 14:20:30.889] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2],"connector-server-1":[2,2,5,5],"connector-server-2":[2,2]}, opts: undefined
+
+[36m[2017-04-13 14:20:38.090] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":false}], groups: {"connector-server-3":[2,2,2],"connector-server-1":[2,2,5,5],"connector-server-2":[2,2]}, opts: undefined
+
+[36m[2017-04-13 14:22:16.641] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2,5],"connector-server-1":[2,2,5,5],"connector-server-2":[2,2,2]}, opts: undefined
+
+[36m[2017-04-13 14:22:30.243] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":false}], groups: {"connector-server-3":[2,2,2,5],"connector-server-1":[2,2,5,5],"connector-server-2":[2,2,2]}, opts: undefined
+
+[36m[2017-04-13 14:26:53.850] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2,5,5],"connector-server-1":[2,2,5,5,2],"connector-server-2":[2,2,2]}, opts: undefined
+
+[36m[2017-04-13 14:27:00.851] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":false}], groups: {"connector-server-3":[2,2,2,5,5],"connector-server-1":[2,2,5,5,2],"connector-server-2":[2,2,2]}, opts: undefined
+
+[36m[2017-04-13 14:28:15.957] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":5,"ready":true}], groups: {"connector-server-3":[2,2,2,5,5,2],"connector-server-1":[2,2,5,5,2],"connector-server-2":[2,2,2,5]}, opts: undefined
+
+[36m[2017-04-13 14:28:24.459] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":5,"ready":false}], groups: {"connector-server-3":[2,2,2,5,5,2],"connector-server-1":[2,2,5,5,2],"connector-server-2":[2,2,2,5]}, opts: undefined
+
+[36m[2017-04-13 14:30:34.289] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5],"connector-server-1":[2,2,5,5,2],"connector-server-2":[2,2,2,5]}, opts: undefined
+
+[36m[2017-04-13 14:31:35.123] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5],"connector-server-1":[2,2,5,5,2,2,5],"connector-server-2":[2,2,2,5]}, opts: undefined
+
+[36m[2017-04-13 14:33:54.656] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5,5],"connector-server-1":[2,2,5,5,2,2,5],"connector-server-2":[2,2,2,5,2]}, opts: undefined
+
+[36m[2017-04-13 14:34:17.458] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":false}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5,5],"connector-server-1":[2,2,5,5,2,2,5],"connector-server-2":[2,2,2,5,2]}, opts: undefined
+
+[36m[2017-04-13 14:35:27.883] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5,5,2,5],"connector-server-1":[2,2,5,5,2,2,5],"connector-server-2":[2,2,2,5,2]}, opts: undefined
+
+[36m[2017-04-13 14:35:38.884] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":false}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5,5,2,5],"connector-server-1":[2,2,5,5,2,2,5],"connector-server-2":[2,2,2,5,2]}, opts: undefined
+
+[36m[2017-04-13 14:38:18.585] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5,5,2,5,5],"connector-server-1":[2,2,5,5,2,2,5],"connector-server-2":[2,2,2,5,2,2]}, opts: undefined
+
+[36m[2017-04-13 14:38:21.587] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":false}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5,5,2,5,5],"connector-server-1":[2,2,5,5,2,2,5],"connector-server-2":[2,2,2,5,2,2]}, opts: undefined
+
+[36m[2017-04-13 14:38:25.686] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5,5,2,5,5],"connector-server-1":[2,2,5,5,2,2,5],"connector-server-2":[2,2,2,5,2,2]}, opts: undefined
+
+[36m[2017-04-13 14:38:27.987] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":false}], groups: {"connector-server-3":[2,2,2,5,5,2,2,5,5,2,5,5],"connector-server-1":[2,2,5,5,2,2,5],"connector-server-2":[2,2,2,5,2,2]}, opts: undefined
+
+[32m[2017-04-13 16:00:06.709] [room-server-1] [INFO] pomelo -[39m application inited: "room-server-1"
+
+[32m[2017-04-13 16:00:07.035] [room-server-1] [INFO] pomelo-admin -[39m try to connect master: "room", "127.0.0.1", 6000
+
+[32m[2017-04-13 16:00:07.066] [room-server-1] [INFO] pomelo -[39m "room-server-1" enter after start...
+
+[32m[2017-04-13 16:00:07.067] [room-server-1] [INFO] pomelo -[39m "room-server-1" finish start
+
+[32m[2017-04-13 16:00:07.067] [room-server-1] [INFO] pomelo -[39m "room-server-1" startup in 335 ms
+
+[32m[2017-04-13 16:00:13.677] [room-server-1] [INFO] pomelo -[39m application inited: "room-server-1"
+
+[32m[2017-04-13 16:00:14.172] [room-server-1] [INFO] pomelo-admin -[39m try to connect master: "room", "127.0.0.1", 6000
+
+[32m[2017-04-13 16:00:14.240] [room-server-1] [INFO] pomelo -[39m "room-server-1" enter after start...
+
+[32m[2017-04-13 16:00:14.241] [room-server-1] [INFO] pomelo -[39m "room-server-1" finish start
+
+[32m[2017-04-13 16:00:14.241] [room-server-1] [INFO] pomelo -[39m "room-server-1" startup in 559 ms
+
+[36m[2017-04-13 16:00:14.242] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7824}}
+
+[36m[2017-04-13 16:00:14.302] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8272}}
+
+[36m[2017-04-13 16:00:14.489] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":8668}}
+
+[31m[2017-04-13 16:00:30.572] [room-server-1] [ERROR] application -[39m create room error:  [TypeError: Cannot read property 'id' of undefined]
+TypeError: Cannot read property 'id' of undefined
+    at G:\diuojiuPoker\DejuPoker\server\app\services\RoomService.js:123:31
+    at Object.async.until (G:\diuojiuPoker\DejuPoker\server\node_modules\.0.2.10@async\lib\async.js:655:13)
+    at G:\diuojiuPoker\DejuPoker\server\node_modules\.0.2.10@async\lib\async.js:651:23
+    at null.<anonymous> (G:\diuojiuPoker\DejuPoker\server\app\services\RoomService.js:114:17)
+    at tryCatcher (G:\diuojiuPoker\DejuPoker\server\node_modules\.3.5.0@bluebird\js\release\util.js:16:23)
+    at Promise._settlePromiseFromHandler (G:\diuojiuPoker\DejuPoker\server\node_modules\.3.5.0@bluebird\js\release\promise.js:512:31)
+    at Promise._settlePromise (G:\diuojiuPoker\DejuPoker\server\node_modules\.3.5.0@bluebird\js\release\promise.js:569:18)
+    at Promise._settlePromise0 (G:\diuojiuPoker\DejuPoker\server\node_modules\.3.5.0@bluebird\js\release\promise.js:614:10)
+    at Promise._settlePromises (G:\diuojiuPoker\DejuPoker\server\node_modules\.3.5.0@bluebird\js\release\promise.js:693:18)
+    at Async._drainQueue (G:\diuojiuPoker\DejuPoker\server\node_modules\.3.5.0@bluebird\js\release\async.js:133:16)
+    at Async._drainQueues (G:\diuojiuPoker\DejuPoker\server\node_modules\.3.5.0@bluebird\js\release\async.js:143:10)
+    at Immediate.Async.drainQueues [as _onImmediate] (G:\diuojiuPoker\DejuPoker\server\node_modules\.3.5.0@bluebird\js\release\async.js:17:14)
+    at processImmediate [as _immediateCallback] (timers.js:383:17)
+
+[36m[2017-04-13 16:00:35.433] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.enter", msg: {"userID":2,"pos":0}, groups: {}, opts: undefined
+
+[36m[2017-04-13 16:00:56.222] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.enter", msg: {"userID":5,"pos":1}, groups: {"connector-server-1":[2]}, opts: undefined
+
+[36m[2017-04-13 16:00:59.229] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":5,"ready":true}], groups: {"connector-server-1":[2,5]}, opts: undefined
+
+[36m[2017-04-13 16:01:09.331] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.command", msg: [{"userID":2,"ready":true}], groups: {"connector-server-1":[2,5]}, opts: undefined
+
+[36m[2017-04-13 16:01:09.433] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.deal", msg: {"uuid":"b2dd1ad4-1e6b-4b30-b466-5287d798dc9c","createTime":1492070430515,"id":"386838","type":0,"settings":{"condition":0,"times":10,"ghostCount":0,"betType":0,"universalGhost":true,"formationGhost":{"god_nine":true,"god_eight":true},"isDouble":false,"zeroPoint":{"three_zero":false,"two_zero":false},"pokerModels":{},"pokerPoint":[]},"state":2,"host":2,"members":[2,5],"bids":{},"banker":0,"table":{"uuid":"f165c6fb-7219-41d1-972c-99e88396057a","createTime":1492070430516,"deck":[{"value":9,"type":1,"showTarget":0},{"value":11,"type":4,"showTarget":0},{"value":12,"type":3,"showTarget":0},{"value":10,"type":3,"showTarget":0},{"value":9,"type":3,"showTarget":0},{"value":13,"type":3,"showTarget":0},{"value":4,"type":2,"showTarget":0},{"value":2,"type":2,"showTarget":0},{"value":12,"type":4,"showTarget":0},{"value":9,"type":4,"showTarget":0},{"value":4,"type":3,"showTarget":0},{"value":1,"type":2,"showTarget":0},{"value":4,"type":1,"showTarget":0},{"value":2,"type":3,"showTarget":0},{"value":8,"type":2,"showTarget":0},{"value":3,"type":4,"showTarget":0},{"value":13,"type":4,"showTarget":0},{"value":14,"type":5,"showTarget":0},{"value":10,"type":1,"showTarget":0},{"value":7,"type":4,"showTarget":0},{"value":7,"type":2,"showTarget":0},{"value":10,"type":2,"showTarget":0},{"value":12,"type":1,"showTarget":0},{"value":9,"type":2,"showTarget":0},{"value":5,"type":4,"showTarget":0},{"value":5,"type":1,"showTarget":0},{"value":5,"type":3,"showTarget":0},{"value":11,"type":2,"showTarget":0},{"value":6,"type":1,"showTarget":0},{"value":13,"type":1,"showTarget":0},{"value":1,"type":4,"showTarget":0},{"value":2,"type":4,"showTarget":0},{"value":8,"type":3,"showTarget":0},{"value":11,"type":1,"showTarget":0},{"value":13,"type":2,"showTarget":0},{"value":7,"type":3,"showTarget":0},{"value":6,"type":3,"showTarget":0},{"value":15,"type":5,"showTarget":0},{"value":3,"type":1,"showTarget":0},{"value":10,"type":4,"showTarget":0},{"value":6,"type":4,"showTarget":0},{"value":4,"type":4,"showTarget":0},{"value":12,"type":2,"showTarget":0},{"value":1,"type":3,"showTarget":0},{"value":6,"type":2,"showTarget":0},{"value":11,"type":3,"showTarget":0},{"value":5,"type":2,"showTarget":0},{"value":7,"type":1,"showTarget":0},{"value":16,"type":5,"showTarget":0}],"ghostPokers":[{"value":3,"type":3,"showTarget":0},{"value":2,"type":1,"showTarget":0}],"indicator":0,"clients":{"2":{"_events":null,"_properties":{},"uuid":"aa88347d-c273-461f-8f6a-8c0056ea22e8","createTime":1492070435432,"userID":0,"ready":true,"started":false,"bid":false,"action":false,"end":false,"handPokers":[{"value":3,"type":2,"showTarget":0},{"value":8,"type":4,"showTarget":0}]},"5":{"_events":null,"_properties":{},"uuid":"6976c30b-8ee2-45b8-bf53-5b6cc4614f2e","createTime":1492070456222,"userID":0,"ready":true,"started":false,"bid":false,"action":false,"end":false,"handPokers":[{"value":8,"type":1,"showTarget":0},{"value":1,"type":1,"showTarget":0}]}}},"chairs":[2,5],"maxChairs":10,"round":0,"maxRound":10}, groups: {"connector-server-1":[2,5]}, opts: undefined
+
+[32m[2017-04-13 17:40:59.295] [room-server-1] [INFO] pomelo -[39m application inited: "room-server-1"
+
+[32m[2017-04-13 17:40:59.668] [room-server-1] [INFO] application -[39m room 386838 loaded...
+
+[32m[2017-04-13 17:40:59.681] [room-server-1] [INFO] pomelo-admin -[39m try to connect master: "room", "127.0.0.1", 6000
+
+[32m[2017-04-13 17:40:59.716] [room-server-1] [INFO] pomelo -[39m "room-server-1" enter after start...
+
+[32m[2017-04-13 17:40:59.718] [room-server-1] [INFO] pomelo -[39m "room-server-1" finish start
+
+[32m[2017-04-13 17:40:59.718] [room-server-1] [INFO] pomelo -[39m "room-server-1" startup in 417 ms
+
+[36m[2017-04-13 17:40:59.932] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7704}}
+
+[36m[2017-04-13 17:40:59.951] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":7816}}
+
+[36m[2017-04-13 17:41:00.027] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":7480}}
+
+[36m[2017-04-13 17:41:00.425] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7876}}
+
+[36m[2017-04-13 17:41:00.445] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":4868}}
+
+[36m[2017-04-13 18:10:24.329] [room-server-1] [DEBUG] pomelo -[39m channelService sendMessageByGroup route: "room.enter", msg: {"userID":2,"pos":0}, groups: {}, opts: undefined
+
+[32m[2017-04-13 18:12:21.804] [room-server-1] [INFO] pomelo -[39m application inited: "room-server-1"
+
+[32m[2017-04-13 18:12:22.105] [room-server-1] [INFO] application -[39m room 386838 loaded...
+
+[32m[2017-04-13 18:12:22.117] [room-server-1] [INFO] pomelo-admin -[39m try to connect master: "room", "127.0.0.1", 6000
+
+[32m[2017-04-13 18:12:22.156] [room-server-1] [INFO] pomelo -[39m "room-server-1" enter after start...
+
+[32m[2017-04-13 18:12:22.156] [room-server-1] [INFO] pomelo -[39m "room-server-1" finish start
+
+[32m[2017-04-13 18:12:22.157] [room-server-1] [INFO] pomelo -[39m "room-server-1" startup in 347 ms
+
+[36m[2017-04-13 18:12:22.387] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8280}}
+
+[36m[2017-04-13 18:12:22.570] [room-server-1] [DEBUG] pomelo -[39m [room-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":2648}}
+

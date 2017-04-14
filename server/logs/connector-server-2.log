@@ -4548,3 +4548,559 @@
 
 [36m[2017-04-12 18:27:14.868] [connector-server-2] [DEBUG] pomelo -[39m connector-server-2 receive removeServer signal: {"action":"removeServer","id":"connector-server-3"}
 
+[32m[2017-04-13 09:38:31.060] [connector-server-2] [INFO] pomelo -[39m application inited: "connector-server-2"
+
+[32m[2017-04-13 09:38:32.885] [connector-server-2] [INFO] pomelo-admin -[39m try to connect master: "connector", "127.0.0.1", 6000
+
+[32m[2017-04-13 09:38:32.948] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" enter after start...
+
+[32m[2017-04-13 09:38:36.395] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" finish start
+
+[32m[2017-04-13 09:38:36.395] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" startup in 5304 ms
+
+[36m[2017-04-13 09:38:36.395] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":5296}}
+
+[36m[2017-04-13 12:21:37.205] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 1
+
+[36m[2017-04-13 12:21:37.218] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":3,"route":"connector.handler.entry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492057297208}}
+
+[36m[2017-04-13 12:21:37.219] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 12:21:37.222] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 3, route: connector.handler.entry, msg: {"code":200}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 12:21:37.798] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":4,"route":"auth.handler.verify","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492057297797}}
+
+[36m[2017-04-13 12:21:37.798] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 12:21:37.813] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 2
+
+[36m[2017-04-13 12:21:37.815] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: auth.handler.verify, msg: {"code":200,"data":{"id":2,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 12:21:37.864] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":5,"route":"lobby.handler.enter","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492057297864}}
+
+[36m[2017-04-13 12:21:37.865] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 12:21:37.873] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":2,"name":"","avatar":"","gender":0},"roomID":"039521"}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 12:21:38.947] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":6,"route":"room.handler.enter","body":{"roomID":"039521","udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492057298946}}
+
+[36m[2017-04-13 12:21:38.947] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.enter","serverType":"room","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 12:21:38.951] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: room.handler.enter, msg: {"code":200,"data":{"uuid":"162ae1cd-627d-4aaa-99de-7a416e0a08cc","createTime":1491963141705,"id":"039521","type":0,"settings":{"times":10,"ghostCount":0,"betType":0},"state":0,"host":2,"members":[2],"bids":{},"banker":0,"table":{"uuid":"5429f5e8-fe92-4a07-9791-d3d2de9bb542","createTime":1492047514694,"deck":{},"ghostPokers":[],"indicator":0,"clients":{"2":{"_events":null,"_properties":{},"uuid":"ec99efab-123b-47fc-9e09-0bcb03b06dd5","createTime":1492057078571,"userID":0,"ready":true,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]}}},"chairs":[2],"maxChairs":10,"round":0,"maxRound":10}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 12:21:50.240] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2], msg: {"userID":5,"pos":1}, sids: [1]
+
+[36m[2017-04-13 12:21:50.240] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.enter, msg: {"userID":5,"pos":1}, receivers: [1], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 12:21:58.581] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":7,"route":"room.handler.command","body":{"fn":"ready","data":true,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492057318579}}
+
+[36m[2017-04-13 12:21:58.582] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 12:21:58.585] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 7, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 12:21:58.668] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2], msg: [{"userID":2,"ready":true}], sids: [1]
+
+[36m[2017-04-13 12:21:58.668] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [1], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 12:22:10.327] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 1
+
+[36m[2017-04-13 14:20:14.911] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 2
+
+[36m[2017-04-13 14:20:14.916] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 2, msg: {"id":3,"route":"connector.handler.entry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064414914}}
+
+[36m[2017-04-13 14:20:14.917] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 14:20:14.917] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 3, route: connector.handler.entry, msg: {"code":200}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:20:15.789] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 2, msg: {"id":4,"route":"auth.handler.verify","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064415789}}
+
+[36m[2017-04-13 14:20:15.790] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 14:20:15.799] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 2
+
+[36m[2017-04-13 14:20:15.800] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: auth.handler.verify, msg: {"code":200,"data":{"id":2,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:20:15.838] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 2, msg: {"id":5,"route":"lobby.handler.enter","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064415838}}
+
+[36m[2017-04-13 14:20:15.839] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:20:15.844] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":2,"name":"","avatar":"","gender":0},"roomID":"039521"}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:20:16.472] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 2, msg: {"id":6,"route":"room.handler.enter","body":{"roomID":"039521","udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064416471}}
+
+[36m[2017-04-13 14:20:16.472] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.enter","serverType":"room","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:20:16.476] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: room.handler.enter, msg: {"code":200,"data":{"uuid":"162ae1cd-627d-4aaa-99de-7a416e0a08cc","createTime":1491963141705,"id":"039521","type":0,"settings":{"times":10,"ghostCount":0,"betType":0},"state":0,"host":2,"members":[2,5],"bids":{},"banker":0,"table":{"uuid":"5429f5e8-fe92-4a07-9791-d3d2de9bb542","createTime":1492047514694,"deck":{},"ghostPokers":[],"indicator":0,"clients":{"2":{"_events":null,"_properties":{},"uuid":"ec99efab-123b-47fc-9e09-0bcb03b06dd5","createTime":1492057078571,"userID":0,"ready":true,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]},"5":{"_events":null,"_properties":{},"uuid":"ad1389b7-892c-419b-89e2-8b38d7e951b2","createTime":1492057310236,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]}}},"chairs":[2,5],"maxChairs":10,"round":0,"maxRound":10}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:20:30.805] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 2, msg: {"id":7,"route":"room.handler.command","body":{"fn":"ready","data":true,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064430803}}
+
+[36m[2017-04-13 14:20:30.805] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:20:30.809] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 7, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:20:30.891] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2], msg: [{"userID":2,"ready":true}], sids: [2,2]
+
+[36m[2017-04-13 14:20:30.891] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [2,2], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:20:38.054] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 2, msg: {"id":8,"route":"room.handler.command","body":{"fn":"ready","data":false,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064438053}}
+
+[36m[2017-04-13 14:20:38.054] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:20:38.056] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 8, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:20:38.092] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2], msg: [{"userID":2,"ready":false}], sids: [2,2]
+
+[36m[2017-04-13 14:20:38.092] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":false}], receivers: [2,2], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:22:01.003] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 2
+
+[36m[2017-04-13 14:22:01.457] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 3
+
+[36m[2017-04-13 14:22:01.465] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 3, msg: {"id":3,"route":"connector.handler.entry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064521464}}
+
+[36m[2017-04-13 14:22:01.465] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 14:22:01.465] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 3, route: connector.handler.entry, msg: {"code":200}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:22:03.469] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 3, msg: {"id":4,"route":"auth.handler.verify","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064523469}}
+
+[36m[2017-04-13 14:22:03.470] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 14:22:03.478] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 2
+
+[36m[2017-04-13 14:22:03.479] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: auth.handler.verify, msg: {"code":200,"data":{"id":2,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:22:03.520] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 3, msg: {"id":5,"route":"lobby.handler.enter","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064523519}}
+
+[36m[2017-04-13 14:22:03.521] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:22:03.526] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":2,"name":"","avatar":"","gender":0},"roomID":"039521"}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:22:04.069] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 3, msg: {"id":6,"route":"room.handler.enter","body":{"roomID":"039521","udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064524068}}
+
+[36m[2017-04-13 14:22:04.069] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.enter","serverType":"room","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:22:04.072] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: room.handler.enter, msg: {"code":200,"data":{"uuid":"162ae1cd-627d-4aaa-99de-7a416e0a08cc","createTime":1491963141705,"id":"039521","type":0,"settings":{"times":10,"ghostCount":0,"betType":0},"state":0,"host":2,"members":[2,5],"bids":{},"banker":0,"table":{"uuid":"5429f5e8-fe92-4a07-9791-d3d2de9bb542","createTime":1492047514694,"deck":{},"ghostPokers":[],"indicator":0,"clients":{"2":{"_events":null,"_properties":{},"uuid":"ec99efab-123b-47fc-9e09-0bcb03b06dd5","createTime":1492057078571,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]},"5":{"_events":null,"_properties":{},"uuid":"ad1389b7-892c-419b-89e2-8b38d7e951b2","createTime":1492057310236,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]}}},"chairs":[2,5],"maxChairs":10,"round":0,"maxRound":10}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:22:16.551] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 3, msg: {"id":7,"route":"room.handler.command","body":{"fn":"ready","data":true,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064536551}}
+
+[36m[2017-04-13 14:22:16.551] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:22:16.553] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 7, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:22:16.641] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2], msg: [{"userID":2,"ready":true}], sids: [3,3,3]
+
+[36m[2017-04-13 14:22:16.641] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [3,3,3], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:22:30.151] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 3, msg: {"id":8,"route":"room.handler.command","body":{"fn":"ready","data":false,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492064550150}}
+
+[36m[2017-04-13 14:22:30.151] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:22:30.153] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 8, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:22:30.243] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2], msg: [{"userID":2,"ready":false}], sids: [3,3,3]
+
+[36m[2017-04-13 14:22:30.243] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":false}], receivers: [3,3,3], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:26:28.971] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 3
+
+[36m[2017-04-13 14:26:53.851] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2], msg: [{"userID":2,"ready":true}], sids: []
+
+[36m[2017-04-13 14:26:53.851] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:27:00.851] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2], msg: [{"userID":2,"ready":false}], sids: []
+
+[36m[2017-04-13 14:27:00.852] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":false}], receivers: [], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:28:02.539] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 4
+
+[36m[2017-04-13 14:28:02.572] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 4, msg: {"id":4,"route":"connector.handler.entry","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492064882563}}
+
+[36m[2017-04-13 14:28:02.573] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 14:28:02.573] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: connector.handler.entry, msg: {"code":200}, receivers: [4], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:28:10.046] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 4, msg: {"id":5,"route":"auth.handler.verify","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492064890044}}
+
+[36m[2017-04-13 14:28:10.047] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 14:28:10.050] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 5
+
+[36m[2017-04-13 14:28:10.051] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: auth.handler.verify, msg: {"code":200,"data":{"id":5,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [4], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:28:10.165] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 4, msg: {"id":6,"route":"lobby.handler.enter","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492064890163}}
+
+[36m[2017-04-13 14:28:10.166] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:28:10.169] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":5,"name":"","avatar":"","gender":0},"roomID":null}}, receivers: [4], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:28:14.529] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 4, msg: {"id":7,"route":"room.handler.enter","body":{"roomID":"039521","udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492064894527}}
+
+[36m[2017-04-13 14:28:14.529] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.enter","serverType":"room","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:28:14.532] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 7, route: room.handler.enter, msg: {"code":200,"data":{"uuid":"162ae1cd-627d-4aaa-99de-7a416e0a08cc","createTime":1491963141705,"id":"039521","type":0,"settings":{"times":10,"ghostCount":0,"betType":0},"state":0,"host":2,"members":[2,5],"bids":{},"banker":0,"table":{"uuid":"5429f5e8-fe92-4a07-9791-d3d2de9bb542","createTime":1492047514694,"deck":{},"ghostPokers":[],"indicator":0,"clients":{"2":{"_events":null,"_properties":{},"uuid":"ec99efab-123b-47fc-9e09-0bcb03b06dd5","createTime":1492057078571,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]},"5":{"_events":null,"_properties":{},"uuid":"ad1389b7-892c-419b-89e2-8b38d7e951b2","createTime":1492057310236,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]}}},"chairs":[2,5],"maxChairs":10,"round":0,"maxRound":10}}, receivers: [4], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:28:15.912] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 4, msg: {"id":8,"route":"room.handler.command","body":{"fn":"ready","data":true,"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492064895910}}
+
+[36m[2017-04-13 14:28:15.913] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:28:15.915] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 8, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [4], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:28:15.960] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5], msg: [{"userID":5,"ready":true}], sids: [4]
+
+[36m[2017-04-13 14:28:15.960] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":5,"ready":true}], receivers: [4], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:28:24.412] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 4, msg: {"id":9,"route":"room.handler.command","body":{"fn":"ready","data":false,"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492064904410}}
+
+[36m[2017-04-13 14:28:24.412] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:28:24.414] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 9, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [4], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:28:24.461] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5], msg: [{"userID":5,"ready":false}], sids: [4]
+
+[36m[2017-04-13 14:28:24.461] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":5,"ready":false}], receivers: [4], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:29:55.350] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 4
+
+[36m[2017-04-13 14:30:34.290] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5], msg: [{"userID":2,"ready":true}], sids: []
+
+[36m[2017-04-13 14:30:34.290] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:31:35.122] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5], msg: [{"userID":2,"ready":true}], sids: []
+
+[36m[2017-04-13 14:31:35.123] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:33:41.314] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 5
+
+[36m[2017-04-13 14:33:41.322] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 5, msg: {"id":3,"route":"connector.handler.entry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065221319}}
+
+[36m[2017-04-13 14:33:41.322] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 14:33:41.322] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 3, route: connector.handler.entry, msg: {"code":200}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:33:43.101] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 5, msg: {"id":4,"route":"auth.handler.verify","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065223099}}
+
+[36m[2017-04-13 14:33:43.101] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 14:33:43.111] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 2
+
+[36m[2017-04-13 14:33:43.112] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: auth.handler.verify, msg: {"code":200,"data":{"id":2,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:33:43.167] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 5, msg: {"id":5,"route":"lobby.handler.enter","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065223166}}
+
+[36m[2017-04-13 14:33:43.167] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:33:43.174] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":2,"name":"","avatar":"","gender":0},"roomID":"039521"}}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:33:44.867] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 5, msg: {"id":6,"route":"room.handler.enter","body":{"roomID":"039521","udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065224866}}
+
+[36m[2017-04-13 14:33:44.867] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.enter","serverType":"room","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:33:44.871] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: room.handler.enter, msg: {"code":200,"data":{"uuid":"162ae1cd-627d-4aaa-99de-7a416e0a08cc","createTime":1491963141705,"id":"039521","type":0,"settings":{"times":10,"ghostCount":0,"betType":0},"state":0,"host":2,"members":[2,5],"bids":{},"banker":0,"table":{"uuid":"5429f5e8-fe92-4a07-9791-d3d2de9bb542","createTime":1492047514694,"deck":{},"ghostPokers":[],"indicator":0,"clients":{"2":{"_events":null,"_properties":{},"uuid":"ec99efab-123b-47fc-9e09-0bcb03b06dd5","createTime":1492057078571,"userID":0,"ready":true,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]},"5":{"_events":null,"_properties":{},"uuid":"ad1389b7-892c-419b-89e2-8b38d7e951b2","createTime":1492057310236,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]}}},"chairs":[2,5],"maxChairs":10,"round":0,"maxRound":10}}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:33:54.582] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 5, msg: {"id":7,"route":"room.handler.command","body":{"fn":"ready","data":true,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065234581}}
+
+[36m[2017-04-13 14:33:54.583] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:33:54.585] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 7, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:33:54.656] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5,2], msg: [{"userID":2,"ready":true}], sids: [5,5,5,5]
+
+[36m[2017-04-13 14:33:54.656] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [5,5,5,5], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:34:17.383] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 5, msg: {"id":8,"route":"room.handler.command","body":{"fn":"ready","data":false,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065257381}}
+
+[36m[2017-04-13 14:34:17.383] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:34:17.385] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 8, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:34:17.461] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5,2], msg: [{"userID":2,"ready":false}], sids: [5,5,5,5]
+
+[36m[2017-04-13 14:34:17.461] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":false}], receivers: [5,5,5,5], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:34:44.182] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 5
+
+[36m[2017-04-13 14:34:49.250] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 6
+
+[36m[2017-04-13 14:34:49.273] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 6, msg: {"id":4,"route":"connector.handler.entry","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492065289269}}
+
+[36m[2017-04-13 14:34:49.274] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 14:34:49.274] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: connector.handler.entry, msg: {"code":200}, receivers: [6], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:35:15.897] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 6
+
+[36m[2017-04-13 14:35:27.884] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5,2], msg: [{"userID":2,"ready":true}], sids: []
+
+[36m[2017-04-13 14:35:27.885] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:35:38.884] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5,2], msg: [{"userID":2,"ready":false}], sids: []
+
+[36m[2017-04-13 14:35:38.884] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":false}], receivers: [], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:38:04.665] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 7
+
+[36m[2017-04-13 14:38:04.697] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 7, msg: {"id":3,"route":"connector.handler.entry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065484694}}
+
+[36m[2017-04-13 14:38:04.697] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 14:38:04.697] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 3, route: connector.handler.entry, msg: {"code":200}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:38:11.759] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 7, msg: {"id":4,"route":"auth.handler.verify","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065491758}}
+
+[36m[2017-04-13 14:38:11.759] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 14:38:11.763] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 2
+
+[36m[2017-04-13 14:38:11.763] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: auth.handler.verify, msg: {"code":200,"data":{"id":2,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:38:11.809] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 7, msg: {"id":5,"route":"lobby.handler.enter","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065491809}}
+
+[36m[2017-04-13 14:38:11.810] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:38:11.813] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":2,"name":"","avatar":"","gender":0},"roomID":"039521"}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:38:12.442] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 7, msg: {"id":6,"route":"room.handler.enter","body":{"roomID":"039521","udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065492441}}
+
+[36m[2017-04-13 14:38:12.442] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.enter","serverType":"room","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:38:12.445] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: room.handler.enter, msg: {"code":200,"data":{"uuid":"162ae1cd-627d-4aaa-99de-7a416e0a08cc","createTime":1491963141705,"id":"039521","type":0,"settings":{"times":10,"ghostCount":0,"betType":0},"state":0,"host":2,"members":[2,5],"bids":{},"banker":0,"table":{"uuid":"5429f5e8-fe92-4a07-9791-d3d2de9bb542","createTime":1492047514694,"deck":{},"ghostPokers":[],"indicator":0,"clients":{"2":{"_events":null,"_properties":{},"uuid":"ec99efab-123b-47fc-9e09-0bcb03b06dd5","createTime":1492057078571,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]},"5":{"_events":null,"_properties":{},"uuid":"ad1389b7-892c-419b-89e2-8b38d7e951b2","createTime":1492057310236,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]}}},"chairs":[2,5],"maxChairs":10,"round":0,"maxRound":10}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:38:18.508] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 7, msg: {"id":7,"route":"room.handler.command","body":{"fn":"ready","data":true,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065498508}}
+
+[36m[2017-04-13 14:38:18.509] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:38:18.511] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 7, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:38:18.586] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5,2,2], msg: [{"userID":2,"ready":true}], sids: [7,7,7,7,7]
+
+[36m[2017-04-13 14:38:18.586] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [7,7,7,7,7], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:38:21.493] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 7, msg: {"id":8,"route":"room.handler.command","body":{"fn":"ready","data":false,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065501492}}
+
+[36m[2017-04-13 14:38:21.493] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:38:21.496] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 8, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:38:21.589] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5,2,2], msg: [{"userID":2,"ready":false}], sids: [7,7,7,7,7]
+
+[36m[2017-04-13 14:38:21.589] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":false}], receivers: [7,7,7,7,7], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:38:25.592] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 7, msg: {"id":9,"route":"room.handler.command","body":{"fn":"ready","data":true,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065505591}}
+
+[36m[2017-04-13 14:38:25.592] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:38:25.594] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 9, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:38:25.688] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5,2,2], msg: [{"userID":2,"ready":true}], sids: [7,7,7,7,7]
+
+[36m[2017-04-13 14:38:25.688] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":true}], receivers: [7,7,7,7,7], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:38:27.909] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 7, msg: {"id":10,"route":"room.handler.command","body":{"fn":"ready","data":false,"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492065507908}}
+
+[36m[2017-04-13 14:38:27.909] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:38:27.912] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 10, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:38:27.988] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] pushMessage uids: [2,2,2,5,2,2], msg: [{"userID":2,"ready":false}], sids: [7,7,7,7,7]
+
+[36m[2017-04-13 14:38:27.989] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: null, route: room.command, msg: [{"userID":2,"ready":false}], receivers: [7,7,7,7,7], opts: {"type":"push","userOptions":{},"isPush":true}
+
+[36m[2017-04-13 14:38:36.226] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 7
+
+[36m[2017-04-13 14:46:27.640] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 8
+
+[36m[2017-04-13 14:46:27.649] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 8, msg: {"id":3,"route":"connector.handler.entry","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492065987648}}
+
+[36m[2017-04-13 14:46:27.650] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 14:46:27.650] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 3, route: connector.handler.entry, msg: {"code":200}, receivers: [8], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:46:28.955] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 8, msg: {"id":4,"route":"auth.handler.verify","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492065988956}}
+
+[36m[2017-04-13 14:46:28.956] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 14:46:28.962] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 5
+
+[36m[2017-04-13 14:46:28.963] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: auth.handler.verify, msg: {"code":200,"data":{"id":5,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [8], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:46:29.055] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 8, msg: {"id":5,"route":"lobby.handler.enter","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492065989055}}
+
+[36m[2017-04-13 14:46:29.055] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:46:29.059] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":5,"name":"","avatar":"","gender":0},"roomID":null}}, receivers: [8], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:46:33.554] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 8, msg: {"id":6,"route":"room.handler.enter","body":{"roomID":"039521","udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492065993553}}
+
+[36m[2017-04-13 14:46:33.554] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.enter","serverType":"room","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:46:33.557] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: room.handler.enter, msg: {"code":200,"data":{"uuid":"162ae1cd-627d-4aaa-99de-7a416e0a08cc","createTime":1491963141705,"id":"039521","type":0,"settings":{"times":10,"ghostCount":0,"betType":0},"state":0,"host":2,"members":[2,5],"bids":{},"banker":0,"table":{"uuid":"5429f5e8-fe92-4a07-9791-d3d2de9bb542","createTime":1492047514694,"deck":{},"ghostPokers":[],"indicator":0,"clients":{"2":{"_events":null,"_properties":{},"uuid":"ec99efab-123b-47fc-9e09-0bcb03b06dd5","createTime":1492057078571,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]},"5":{"_events":null,"_properties":{},"uuid":"ad1389b7-892c-419b-89e2-8b38d7e951b2","createTime":1492057310236,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]}}},"chairs":[2,5],"maxChairs":10,"round":0,"maxRound":10}}, receivers: [8], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:46:41.953] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 8, msg: {"id":7,"route":"room.handler.command","body":{"fn":"leave","data":5,"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492066001952}}
+
+[36m[2017-04-13 14:46:41.953] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.command","serverType":"room","handler":"handler","method":"command"}
+
+[36m[2017-04-13 14:46:41.955] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 7, route: room.handler.command, msg: {"code":200,"data":{}}, receivers: [8], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:49:47.761] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 8
+
+[36m[2017-04-13 14:55:25.559] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 9
+
+[36m[2017-04-13 14:55:25.584] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 9, msg: {"id":4,"route":"connector.handler.entry","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492066525581}}
+
+[36m[2017-04-13 14:55:25.584] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 14:55:25.584] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: connector.handler.entry, msg: {"code":200}, receivers: [9], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:55:26.816] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 9, msg: {"id":5,"route":"auth.handler.verify","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492066526816}}
+
+[36m[2017-04-13 14:55:26.817] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 14:55:26.822] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 5
+
+[36m[2017-04-13 14:55:26.823] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: auth.handler.verify, msg: {"code":200,"data":{"id":5,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [9], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:55:26.949] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 9, msg: {"id":6,"route":"lobby.handler.enter","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492066526949}}
+
+[36m[2017-04-13 14:55:26.949] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 14:55:26.952] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":5,"name":"","avatar":"","gender":0},"roomID":null}}, receivers: [9], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 14:55:49.025] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 9
+
+[32m[2017-04-13 16:00:06.050] [connector-server-2] [INFO] pomelo -[39m application inited: "connector-server-2"
+
+[32m[2017-04-13 16:00:06.269] [connector-server-2] [INFO] pomelo-admin -[39m try to connect master: "connector", "127.0.0.1", 6000
+
+[32m[2017-04-13 16:00:06.307] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" enter after start...
+
+[32m[2017-04-13 16:00:06.399] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" finish start
+
+[32m[2017-04-13 16:00:06.399] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" startup in 335 ms
+
+[36m[2017-04-13 16:00:06.679] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":8028}}
+
+[36m[2017-04-13 16:00:06.814] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":5380}}
+
+[36m[2017-04-13 16:00:06.939] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":7260}}
+
+[36m[2017-04-13 16:00:07.050] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":8812}}
+
+[32m[2017-04-13 16:00:13.921] [connector-server-2] [INFO] pomelo -[39m application inited: "connector-server-2"
+
+[32m[2017-04-13 16:00:14.183] [connector-server-2] [INFO] pomelo-admin -[39m try to connect master: "connector", "127.0.0.1", 6000
+
+[32m[2017-04-13 16:00:14.225] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" enter after start...
+
+[32m[2017-04-13 16:00:14.353] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" finish start
+
+[32m[2017-04-13 16:00:14.353] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" startup in 378 ms
+
+[36m[2017-04-13 16:00:14.355] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8272}}
+
+[36m[2017-04-13 16:00:14.489] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":8668}}
+
+[36m[2017-04-13 16:00:20.245] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 1
+
+[36m[2017-04-13 16:00:20.257] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":3,"route":"connector.handler.entry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492070420248}}
+
+[36m[2017-04-13 16:00:20.257] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 16:00:20.260] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 3, route: connector.handler.entry, msg: {"code":200}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 16:00:23.909] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":4,"route":"auth.handler.verify","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492070423909}}
+
+[36m[2017-04-13 16:00:23.910] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 16:00:24.028] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 2
+
+[36m[2017-04-13 16:00:24.031] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: auth.handler.verify, msg: {"code":200,"data":{"id":2,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 16:00:24.076] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":5,"route":"lobby.handler.enter","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492070424075}}
+
+[36m[2017-04-13 16:00:24.076] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 16:00:24.208] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":2,"name":"","avatar":"","gender":0},"roomID":null}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 16:00:30.494] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":6,"route":"room.handler.create","body":{"type":0,"settings":{"times":10,"ghostCount":0,"betType":0},"pokerModels":{"straight_flush":4,"threes":4,"straight":4,"double_ghost":10},"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492070430491}}
+
+[36m[2017-04-13 16:00:30.494] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.create","serverType":"room","handler":"handler","method":"create"}
+
+[36m[2017-04-13 16:00:33.258] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 1
+
+[31m[2017-04-13 16:01:00.495] [connector-server-2] [ERROR] pomelo-rpc -[39m rpc connector-server-2 callback timeout 30000, remote server 0 host: 127.0.0.1, port: 6500
+
+[31m[2017-04-13 16:01:00.496] [connector-server-2] [ERROR] pomelo -[39m fail to process remote message:Error: rpc connector-server-2 callback timeout 30000, remote server 0 host: 127.0.0.1, port: 6500
+    at null.<anonymous> (G:\diuojiuPoker\DejuPoker\pomelo\node_modules\.1.0.7@pomelo-rpc\lib\rpc-client\mailboxes\mqtt-mailbox.js:257:16)
+    at Timer.listOnTimeout (timers.js:92:15)
+
+[31m[2017-04-13 16:01:00.495] [connector-server-2] [ERROR] pomelo-rpc -[39m [pomelo-rpc] fail to send message Error: rpc connector-server-2 callback timeout 30000, remote server 0 host: 127.0.0.1, port: 6500
+    at null.<anonymous> (G:\diuojiuPoker\DejuPoker\pomelo\node_modules\.1.0.7@pomelo-rpc\lib\rpc-client\mailboxes\mqtt-mailbox.js:257:16)
+    at Timer.listOnTimeout (timers.js:92:15)
+
+[36m[2017-04-13 16:01:00.496] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: room.handler.create, msg: {"code":500}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[31m[2017-04-13 16:01:00.496] [connector-server-2] [ERROR] pomelo-rpc -[39m rpc failed with error, remote server: room-server-1, msg: {"namespace":"sys","serverType":"room","service":"msgRemote","method":"forwardMessage","args":[{"id":6,"route":"room.handler.create","body":{"type":0,"settings":{"times":10,"ghostCount":0,"betType":0},"pokerModels":{"straight_flush":4,"threes":4,"straight":4,"double_ghost":10},"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492070430491}},{"id":1,"frontendId":"connector-server-2","uid":2,"settings":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","lobby":true}}]}, error code: 5
+
+[36m[2017-04-13 16:01:00.496] [connector-server-2] [DEBUG] pomelo -[39m Fail to send message for non-existing session, sid: 1 msg: {"id":6,"body":{"code":500}}
+
+[32m[2017-04-13 17:41:00.233] [connector-server-2] [INFO] pomelo -[39m application inited: "connector-server-2"
+
+[32m[2017-04-13 17:41:00.407] [connector-server-2] [INFO] pomelo-admin -[39m try to connect master: "connector", "127.0.0.1", 6000
+
+[32m[2017-04-13 17:41:00.446] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" enter after start...
+
+[32m[2017-04-13 17:41:00.537] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" finish start
+
+[32m[2017-04-13 17:41:00.537] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" startup in 293 ms
+
+[36m[2017-04-13 17:41:00.538] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":4868}}
+
+[36m[2017-04-13 18:10:15.864] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] getSession session is created with session id: 1
+
+[36m[2017-04-13 18:10:15.878] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":3,"route":"connector.handler.entry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492078215869}}
+
+[36m[2017-04-13 18:10:15.879] [connector-server-2] [DEBUG] pomelo -[39m {"route":"connector.handler.entry","serverType":"connector","handler":"handler","method":"entry"}
+
+[36m[2017-04-13 18:10:15.882] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 3, route: connector.handler.entry, msg: {"code":200}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 18:10:18.784] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":4,"route":"auth.handler.verify","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492078218782}}
+
+[36m[2017-04-13 18:10:18.784] [connector-server-2] [DEBUG] pomelo -[39m {"route":"auth.handler.verify","serverType":"auth","handler":"handler","method":"verify"}
+
+[36m[2017-04-13 18:10:18.803] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] bind with uid: 2
+
+[36m[2017-04-13 18:10:18.805] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 4, route: auth.handler.verify, msg: {"code":200,"data":{"id":2,"name":"","avatar":"","tokens":0,"gender":0}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 18:10:18.867] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":5,"route":"lobby.handler.enter","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492078218866}}
+
+[36m[2017-04-13 18:10:18.867] [connector-server-2] [DEBUG] pomelo -[39m {"route":"lobby.handler.enter","serverType":"lobby","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 18:10:18.878] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 5, route: lobby.handler.enter, msg: {"code":200,"data":{"player":{"id":2,"name":"","avatar":"","gender":0},"roomID":"386838"}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 18:10:24.317] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] handleMessage session id: 1, msg: {"id":6,"route":"room.handler.enter","body":{"roomID":"386838","udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492078224315}}
+
+[36m[2017-04-13 18:10:24.318] [connector-server-2] [DEBUG] pomelo -[39m {"route":"room.handler.enter","serverType":"room","handler":"handler","method":"enter"}
+
+[36m[2017-04-13 18:10:24.332] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] send message reqId: 6, route: room.handler.enter, msg: {"code":200,"data":{"uuid":"b2dd1ad4-1e6b-4b30-b466-5287d798dc9c","createTime":1492070430515,"id":"386838","type":0,"settings":{"condition":0,"times":10,"ghostCount":0,"betType":0,"universalGhost":true,"formationGhost":{"god_nine":true,"god_eight":true},"isDouble":false,"zeroPoint":{"three_zero":false,"two_zero":false},"pokerModels":{},"pokerPoint":[]},"state":0,"host":2,"members":[2],"bids":{},"banker":0,"table":{"uuid":"cbc9852e-7299-4fe9-9d7c-88a7cb74faf8","createTime":1492076459667,"deck":[],"ghostPokers":[],"indicator":0,"clients":{"2":{"_events":null,"_properties":{},"uuid":"db355956-9ea6-4387-ac4d-d1358775bae9","createTime":1492078224328,"userID":0,"ready":false,"started":false,"bid":false,"action":false,"end":false,"handPokers":[]}}},"chairs":[2],"maxChairs":10,"round":0,"maxRound":10}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-13 18:10:37.167] [connector-server-2] [DEBUG] pomelo -[39m session on [connector-server-2] is closed with session id: 1
+
+[32m[2017-04-13 18:12:21.495] [connector-server-2] [INFO] pomelo -[39m application inited: "connector-server-2"
+
+[32m[2017-04-13 18:12:21.913] [connector-server-2] [INFO] pomelo-admin -[39m try to connect master: "connector", "127.0.0.1", 6000
+
+[32m[2017-04-13 18:12:21.956] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" enter after start...
+
+[32m[2017-04-13 18:12:22.164] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" finish start
+
+[32m[2017-04-13 18:12:22.164] [connector-server-2] [INFO] pomelo -[39m "connector-server-2" startup in 621 ms
+
+[36m[2017-04-13 18:12:22.165] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":7184}}
+
+[36m[2017-04-13 18:12:22.165] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":2400}}
+
+[36m[2017-04-13 18:12:22.385] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8280}}
+
+[36m[2017-04-13 18:12:22.570] [connector-server-2] [DEBUG] pomelo -[39m [connector-server-2] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":2648}}
+

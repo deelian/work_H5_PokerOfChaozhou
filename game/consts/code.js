@@ -19,7 +19,8 @@
             ENTER:              "room.enter",
             STATE:              "room.state",
             ACTION:             "room.action",
-            COMMAND:            "room.command"
+            COMMAND:            "room.command",             // 玩家操作的反馈
+            DEAL:               "room.deal",                // 发牌完结
         }
 
     };

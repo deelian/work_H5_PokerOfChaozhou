@@ -1,4 +1,4 @@
-/*!  2017-04-12 */
+/*!  2017-04-13 */
 //! moment.js
 //! version : 2.11.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -4556,7 +4556,8 @@
             ENTER:              "room.enter",
             STATE:              "room.state",
             ACTION:             "room.action",
-            COMMAND:            "room.command"
+            COMMAND:            "room.command",             // 玩家操作的反馈
+            DEAL:               "room.deal",                // 发牌完结
         }
 
     };
@@ -5030,8 +5031,9 @@
     var Poker = root.Poker = function(opts) {
         opts = opts || {};
 
-        this.value     = opts.value || 0;
-        this.type      = opts.type  || 0;
+        this.value      = opts.value || 0;
+        this.type       = opts.type  || 0;
+        this.showTarget = opts.showTarget || 0;
     };
 
     root.inherits(Poker, _super);
@@ -5059,6 +5061,8 @@
 
 (function(root) {
     var _super = root.Serialize;
+    var Poker = root.Poker;
+    
     var Deck = root.Deck = function(opts) {
         opts = opts || {};
 
@@ -5093,7 +5097,7 @@
     var _super = root.Entity;
 
     var Poker = root.Poker;
-    var Deck  = root.Deck;
+    var Game = root.Game;
 
     var Client = function(opts) {
         opts = opts || {};
@@ -5104,6 +5108,7 @@
         this.ready         = opts.ready || false;       // 是否准备好
         this.started       = opts.started || false;     // 是否开始过游戏
         this.bid           = opts.bid || false;         // 是否下注
+        this.bidRate       = opts.bidRate || 0;         // 下注倍数
         this.action        = opts.action || false;      // 是否操作过
         this.end           = opts.end || false;         // 是否结束
 
@@ -5138,7 +5143,9 @@
             var i;
             var size;
 
-            this.deck = opts.deck && [] || new Deck();
+            this.deck = [];
+            //如果新桌子 就等start的时候才拿牌出来
+            //旧桌子 有牌就把牌拿出来
             if (opts.deck) {
                 for (i = 0, size = opts.deck.length; i < size; i++) {
                     this.deck.push(
@@ -5229,20 +5236,92 @@
             return this.getClientState("end");
         },
 
-        //
-        start: function() {
+        //开局
+        start: function(roomType) {
+            //先拿出一副新牌
+            this.deck = [];
+            for (var typeKey in Poker.TYPE) {
+                var type = Poker.TYPE[typeKey];
+
+                //定制模式没有王牌
+                if (roomType === Game.ROOM_TYPE.CUSTOMIZED && type === Poker.TYPE.JOKER) {
+                    continue;
+                }
+
+                for (var valId = 0; valId < Poker.VALUES[type].length; valId++) {
+                    var value = Poker.VALUES[type][valId];
+
+                    this.deck.push(new Poker({value: value, type: type}));
+                }
+            }
         },
 
+        //洗牌
         shuffle: function() {
+            var newDeck = [];
 
+            while (this.deck.length) {
+                var min = 0;
+                var max = this.deck.length - 1;
+
+                var index = Math.floor(Math.random()*(max-min) + min);
+                newDeck.push(this.deck[index]);
+                this.deck.splice(index, 1);
+            }
+
+            this.deck = newDeck;
         },
 
-        deal: function() {
-
+        //根据规则发牌
+        deal: function(sitUsers) {
+            var i;
+            var j;
+            
+            // 清理手牌
+            for (i in this.clients) {
+                this.clients[i].handPokers = [];
+            }
+            
+            // 发两张牌
+            for (i = 0; i < 2; i++) {
+                //按顺序发牌
+                for (j = 0; j < sitUsers.length; j++) {
+                    var userID = sitUsers[j];
+                    var client = this.clients[userID];
+                    if (client && this.deck.length > 0) {
+                        client.handPokers.push(this.deck.shift());
+                    }
+                }
+            }
         },
 
-        bid: function() {
+        // 翻鬼牌 参数是要翻多少张
+        ghost: function(amount) {
+            this.ghostPokers = [];
 
+            var i = 0;
+            while (i < amount) {
+                var poker = this.deck.shift();
+                this.ghostPokers.push(poker);
+                if (poker.type != Poker.TYPE.JOKER) {
+                    i++;
+                }
+            }
+        },
+
+        bid: function(userID, rate) {
+            var client = this.clients[userID];
+            if (client == null) {
+                return null;
+            }
+
+            if (typeof rate != "number") {
+                rate = 1;
+            }
+
+            this.clients[userID].bid = true;
+            this.clients[userID].bidRate = rate;
+            return {userID: userID, bid: true, bidRate: rate};
         },
 
         show: function() {
@@ -5279,7 +5358,7 @@
         // public members
         this.id                 = opts.id;
         this.type               = opts.type;
-        this.settings           = opts.settings || {};
+        this.settings           = {};
         this.state              = opts.state || Room.STATE_READY;
 
         this.host               = opts.host;                        //房主
@@ -5301,16 +5380,41 @@
 
     root.inherits(Room, _super);
 
-    Room.STATE_READY       = 0;             //准备
-    Room.STATE_START       = 1;             //开始
-    Room.STATE_DEALED      = 3;             //发了牌
-    Room.STATE_BID         = 4;             //下注
-    Room.STATE_DRAW        = 5;             //要牌
-    Room.STATE_END         = 6;             //结束
-    Room.STATE_CLOSED      = 7;             //完成
-    Room.STATE_DISMISS     = 8;             //解散
+    Room.STATE_READY       = 0;             //等待准备状态
+    Room.STATE_START       = 1;             //准备好后发牌和返鬼牌
+    Room.STATE_BID         = 2;             //等待下注状态
+    Room.STATE_DRAW        = 3;             //下注完闲家要牌
+    Room.STATE_BANKER      = 4;             //闲家要完牌庄家处理阶段 这里包括了结算
+    Room.STATE_END         = 5;             //牌局结束 请求下一局
+    Room.STATE_CLOSED      = 6;             //所有牌局完成房间解散
+    Room.STATE_DISMISS     = 7;             //
 
     root.extend(Room.prototype, {
+        settingInit: function(settings) {
+            settings = settings || {};
+            this.settings.condition      = settings.condition || 0;                                           //经典模式上庄条件
+            this.settings.times          = settings.times || 10;                                              //局数
+            this.settings.ghostCount     = settings.ghostCount || 0;                                          //鬼牌数
+            this.settings.betType        = settings.betType || Game.BET_TYPE.ARBITRARILY;                     //下注类型
+            this.settings.universalGhost = settings.universalGhost || true;                                   //鬼牌万能
+            this.settings.formationGhost = settings.formationGhost || {"god_nine":true, "god_eight":true};    //鬼牌成型
+            this.settings.isDouble       = settings.isDouble || false;                                        //翻倍
+            this.settings.zeroPoint      = settings.zeroPoint || {"three_zero":false, "two_zero":false};      //0点赢鬼牌
+
+            this.settings.pokerModels    = {};
+            var pokerModels = settings.pokerModels || {};
+            for (var i in Game.POKER_MODELS.POKER_MODELS) {
+                var modelKey = Game.POKER_MODELS.POKER_MODELS[i];
+                this.settings.pokerModels[modelKey] = pokerModels[modelKey] || 4;
+            }
+
+            this.settings.pokerPoint     = [];
+            var pokerPoint = settings.pokerPoint || [];
+            for (var index = 0; index < pokerPoint.length; index++) {
+                this.settings.pokerPoint[index] = pokerPoint[index] || 1;
+            }
+        },
+
         init: function(opts) {
             var self = this;
 
@@ -5321,6 +5425,8 @@
             else if (opts.table) {
                 this.table = new Table(opts.table);
             }
+
+            this.settingInit(opts.settings);
 
             // start timer 一段时间检查一下房间游戏进程
             this._timerID = setInterval(function() {
@@ -5474,6 +5580,8 @@
             //更新前完成积压的所有工作
             this.process();
 
+            var i;
+
             switch (this.state) {
                 case Room.STATE_READY:
                     if (this.table.getClientReady()) {
@@ -5484,18 +5592,22 @@
                     var msg = {};
 
                     // 开始-洗牌-发牌
-                    this.table.start();
+                    this.table.start(this.type);
                     this.table.shuffle();
-                    this.table.deal();
+                    // 暂时按座位顺序发牌 这里要做个规则传入发牌顺序的userID数组
+                    var sitUsers = [];
+                    for (i = 0; i < this.maxChairs; i++) {
+                        if (this.chairs[i]) {
+                            sitUsers.push(this.chairs[i]);
+                        }
+                    }
+                    this.table.deal(sitUsers);
+                    // 翻鬼牌 暂时直接2张
+                    this.table.ghost(2);
 
                     this.state++;
                     
-                    this.broadcast(ROUTE.ROOM.STATE, msg);
-                    break;
-                case Room.STATE_DEALED:
-                    if (this.table.getClientStarted()) {
-                        this.state++;
-                    }
+                    this.broadcast(ROUTE.ROOM.DEAL, this.clone());
                     break;
                 case Room.STATE_BID:
                     if (this.table.getClientBid()) {
@@ -5503,6 +5615,11 @@
                     }
                     break;
                 case Room.STATE_DRAW:
+                    break;
+                case Room.STATE_BANKER:
+                    if (this.table.getClientStarted()) {
+                        this.state++;
+                    }
                     break;
                 case Room.STATE_END:
                     if (this.table.getClientEnd()) {

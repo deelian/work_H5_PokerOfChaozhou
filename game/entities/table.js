@@ -13,7 +13,7 @@
     var _super = root.Entity;
 
     var Poker = root.Poker;
-    var Deck  = root.Deck;
+    var Game = root.Game;
 
     var Client = function(opts) {
         opts = opts || {};
@@ -24,6 +24,7 @@
         this.ready         = opts.ready || false;       // 是否准备好
         this.started       = opts.started || false;     // 是否开始过游戏
         this.bid           = opts.bid || false;         // 是否下注
+        this.bidRate       = opts.bidRate || 0;         // 下注倍数
         this.action        = opts.action || false;      // 是否操作过
         this.end           = opts.end || false;         // 是否结束
 
@@ -58,7 +59,9 @@
             var i;
             var size;
 
-            this.deck = opts.deck && [] || new Deck();
+            this.deck = [];
+            //如果新桌子 就等start的时候才拿牌出来
+            //旧桌子 有牌就把牌拿出来
             if (opts.deck) {
                 for (i = 0, size = opts.deck.length; i < size; i++) {
                     this.deck.push(
@@ -149,20 +152,92 @@
             return this.getClientState("end");
         },
 
-        //
-        start: function() {
+        //开局
+        start: function(roomType) {
+            //先拿出一副新牌
+            this.deck = [];
+            for (var typeKey in Poker.TYPE) {
+                var type = Poker.TYPE[typeKey];
+
+                //定制模式没有王牌
+                if (roomType === Game.ROOM_TYPE.CUSTOMIZED && type === Poker.TYPE.JOKER) {
+                    continue;
+                }
+
+                for (var valId = 0; valId < Poker.VALUES[type].length; valId++) {
+                    var value = Poker.VALUES[type][valId];
+
+                    this.deck.push(new Poker({value: value, type: type}));
+                }
+            }
         },
 
+        //洗牌
         shuffle: function() {
+            var newDeck = [];
 
+            while (this.deck.length) {
+                var min = 0;
+                var max = this.deck.length - 1;
+
+                var index = Math.floor(Math.random()*(max-min) + min);
+                newDeck.push(this.deck[index]);
+                this.deck.splice(index, 1);
+            }
+
+            this.deck = newDeck;
         },
 
-        deal: function() {
-
+        //根据规则发牌
+        deal: function(sitUsers) {
+            var i;
+            var j;
+            
+            // 清理手牌
+            for (i in this.clients) {
+                this.clients[i].handPokers = [];
+            }
+            
+            // 发两张牌
+            for (i = 0; i < 2; i++) {
+                //按顺序发牌
+                for (j = 0; j < sitUsers.length; j++) {
+                    var userID = sitUsers[j];
+                    var client = this.clients[userID];
+                    if (client && this.deck.length > 0) {
+                        client.handPokers.push(this.deck.shift());
+                    }
+                }
+            }
         },
 
-        bid: function() {
+        // 翻鬼牌 参数是要翻多少张
+        ghost: function(amount) {
+            this.ghostPokers = [];
 
+            var i = 0;
+            while (i < amount) {
+                var poker = this.deck.shift();
+                this.ghostPokers.push(poker);
+                if (poker.type != Poker.TYPE.JOKER) {
+                    i++;
+                }
+            }
+        },
+
+        bid: function(userID, rate) {
+            var client = this.clients[userID];
+            if (client == null) {
+                return null;
+            }
+
+            if (typeof rate != "number") {
+                rate = 1;
+            }
+
+            this.clients[userID].bid = true;
+            this.clients[userID].bidRate = rate;
+            return {userID: userID, bid: true, bidRate: rate};
         },
 
         show: function() {
