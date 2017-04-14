@@ -1190,3 +1190,275 @@
 
 [36m[2017-04-13 18:12:22.567] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":2648}}
 
+[36m[2017-04-13 18:33:14.301] [auth-server-1] [DEBUG] pomelo -[39m auth-server-1 receive removeServer signal: {"action":"removeServer","id":"room-server-1"}
+
+[32m[2017-04-14 11:05:08.997] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 11:05:11.358] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 11:05:11.388] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 11:05:11.391] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 11:05:11.391] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 2387 ms
+
+[36m[2017-04-14 11:05:11.393] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":7972}}
+
+[36m[2017-04-14 11:05:11.420] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7844}}
+
+[36m[2017-04-14 11:05:11.432] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":7856}}
+
+[36m[2017-04-14 11:05:11.452] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7864}}
+
+[36m[2017-04-14 11:05:11.454] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":7888}}
+
+[36m[2017-04-14 11:05:13.721] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7988}}
+
+[32m[2017-04-14 14:32:22.817] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 14:32:23.214] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:32:23.288] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 14:32:23.290] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 14:32:23.290] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 468 ms
+
+[36m[2017-04-14 14:32:23.334] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":4564}}
+
+[36m[2017-04-14 14:32:23.415] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":3916}}
+
+[36m[2017-04-14 14:32:23.497] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8740}}
+
+[36m[2017-04-14 14:32:23.645] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6380}}
+
+[32m[2017-04-14 14:42:54.772] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 14:42:54.959] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:42:54.995] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 14:42:54.996] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 14:42:54.996] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 219 ms
+
+[36m[2017-04-14 14:42:55.129] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8940}}
+
+[36m[2017-04-14 14:42:55.148] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":4732}}
+
+[36m[2017-04-14 14:42:55.162] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":10036}}
+
+[36m[2017-04-14 14:42:55.495] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":496}}
+
+[32m[2017-04-14 14:44:08.597] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 14:44:08.898] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:44:08.946] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 14:44:08.947] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 14:44:08.948] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 341 ms
+
+[36m[2017-04-14 14:44:09.301] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":1548}}
+
+[32m[2017-04-14 14:53:00.017] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 14:53:00.511] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:53:00.546] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 14:53:00.547] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 14:53:00.547] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 526 ms
+
+[36m[2017-04-14 14:53:00.637] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9104}}
+
+[36m[2017-04-14 14:53:00.721] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":9672}}
+
+[36m[2017-04-14 14:53:00.739] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":8184}}
+
+[32m[2017-04-14 14:54:21.294] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 14:54:21.786] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:54:21.828] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 14:54:21.829] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 14:54:21.830] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 531 ms
+
+[36m[2017-04-14 14:54:22.151] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":9704}}
+
+[36m[2017-04-14 14:54:22.207] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7164}}
+
+[32m[2017-04-14 15:10:06.922] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 15:10:07.195] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:10:07.223] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 15:10:07.224] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 15:10:07.224] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 297 ms
+
+[36m[2017-04-14 15:10:07.299] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":10208}}
+
+[36m[2017-04-14 15:10:07.415] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":8888}}
+
+[36m[2017-04-14 15:10:07.549] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6760}}
+
+[36m[2017-04-14 15:10:07.560] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":10032}}
+
+[36m[2017-04-14 15:10:07.621] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9232}}
+
+[36m[2017-04-14 15:10:07.750] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8976}}
+
+[32m[2017-04-14 15:18:33.462] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 15:18:33.647] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:18:33.680] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 15:18:33.681] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 15:18:33.682] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 216 ms
+
+[36m[2017-04-14 15:18:33.892] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8056}}
+
+[36m[2017-04-14 15:18:34.021] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9360}}
+
+[36m[2017-04-14 15:18:34.396] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":10032}}
+
+[36m[2017-04-14 15:18:34.414] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":8936}}
+
+[36m[2017-04-14 15:18:34.749] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9288}}
+
+[32m[2017-04-14 15:20:34.670] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 15:20:35.030] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:20:35.056] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 15:20:35.057] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 15:20:35.057] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 382 ms
+
+[36m[2017-04-14 15:20:35.065] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":11180}}
+
+[36m[2017-04-14 15:20:35.075] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":11188}}
+
+[36m[2017-04-14 15:20:35.610] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":11220}}
+
+[36m[2017-04-14 15:20:35.653] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":11152}}
+
+[36m[2017-04-14 15:20:35.750] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":11236}}
+
+[36m[2017-04-14 15:20:36.190] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7876}}
+
+[32m[2017-04-14 15:58:27.763] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 15:58:28.174] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:58:28.209] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 15:58:28.210] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 15:58:28.211] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 442 ms
+
+[36m[2017-04-14 15:58:28.407] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":11200}}
+
+[36m[2017-04-14 15:58:28.560] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8188}}
+
+[36m[2017-04-14 15:58:28.573] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":9728}}
+
+[36m[2017-04-14 15:58:28.798] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10568}}
+
+[32m[2017-04-14 17:35:33.299] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 17:35:33.502] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:35:33.551] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 17:35:33.553] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 17:35:33.553] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 250 ms
+
+[36m[2017-04-14 17:35:33.621] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":9616}}
+
+[36m[2017-04-14 17:35:33.894] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7572}}
+
+[36m[2017-04-14 17:35:33.901] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":6116}}
+
+[36m[2017-04-14 17:35:34.088] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":10708}}
+
+[36m[2017-04-14 17:35:34.140] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":10684}}
+
+[32m[2017-04-14 17:36:43.562] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 17:36:44.211] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:36:44.293] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 17:36:44.294] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 17:36:44.294] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 727 ms
+
+[36m[2017-04-14 17:36:44.475] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":3312}}
+
+[36m[2017-04-14 17:36:44.731] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9312}}
+
+[32m[2017-04-14 17:39:18.538] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 17:39:18.946] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:39:18.986] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 17:39:18.987] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 17:39:18.987] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 409 ms
+
+[36m[2017-04-14 17:39:19.081] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":7752}}
+
+[36m[2017-04-14 17:39:19.114] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8340}}
+
+[36m[2017-04-14 17:39:19.191] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7600}}
+
+[36m[2017-04-14 17:39:19.397] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8680}}
+
+[32m[2017-04-14 17:40:24.603] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 17:40:24.838] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:40:24.869] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 17:40:24.870] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 17:40:24.870] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 263 ms
+
+[36m[2017-04-14 17:40:24.872] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":10888}}
+
+[36m[2017-04-14 17:40:25.472] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":10320}}
+
+[36m[2017-04-14 17:40:25.487] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":9200}}
+
+[36m[2017-04-14 17:40:25.510] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10456}}
+
+[32m[2017-04-14 17:53:24.703] [auth-server-1] [INFO] pomelo -[39m application inited: "auth-server-1"
+
+[32m[2017-04-14 17:53:25.021] [auth-server-1] [INFO] pomelo-admin -[39m try to connect master: "auth", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:53:25.063] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" enter after start...
+
+[32m[2017-04-14 17:53:25.064] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" finish start
+
+[32m[2017-04-14 17:53:25.064] [auth-server-1] [INFO] pomelo -[39m "auth-server-1" startup in 357 ms
+
+[36m[2017-04-14 17:53:25.187] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":6800}}
+
+[36m[2017-04-14 17:53:25.222] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":2448}}
+
+[36m[2017-04-14 17:53:25.376] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":8400}}
+
+[36m[2017-04-14 17:53:25.398] [auth-server-1] [DEBUG] pomelo -[39m [auth-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":8440}}
+

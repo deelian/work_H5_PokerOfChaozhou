@@ -5282,3 +5282,1005 @@
 
 [32m[2017-04-13 18:12:22.676] [master-server-1] [INFO] pomelo -[39m all servers startup in 2155 ms
 
+[36m[2017-04-13 18:33:14.301] [master-server-1] [DEBUG] pomelo-admin -[39m disconnect room-server-1 room {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":2400}
+
+[36m[2017-04-13 18:33:14.301] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive remove server event, with server: room-server-1, type: room
+
+[32m[2017-04-13 18:33:14.301] [master-server-1] [INFO] crash-log -[39m [room],[room-server-1],[1492079594301],[disconnect]
+
+[36m[2017-04-13 18:33:14.301] [master-server-1] [DEBUG] pomelo -[39m master-server-1 receive removeServer signal: {"action":"removeServer","id":"room-server-1"}
+
+[33m[2017-04-13 18:33:14.301] [master-server-1] [WARN] pomelo -[39m child process exit with error, error code: 3221225786, executed command: F:\nodejs\node.exe
+
+[36m[2017-04-13 18:33:14.301] [master-server-1] [DEBUG] pomelo-admin -[39m disconnect lobby-server-1 lobby {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8280}
+
+[32m[2017-04-13 18:33:14.301] [master-server-1] [INFO] crash-log -[39m [lobby],[lobby-server-1],[1492079594301],[disconnect]
+
+[36m[2017-04-13 18:33:14.301] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive remove server event, with server: lobby-server-1, type: lobby
+
+[36m[2017-04-13 18:33:14.301] [master-server-1] [DEBUG] pomelo-admin -[39m disconnect auth-server-1 auth {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8612}
+
+[32m[2017-04-13 18:33:14.301] [master-server-1] [INFO] crash-log -[39m [auth],[auth-server-1],[1492079594301],[disconnect]
+
+[36m[2017-04-13 18:33:14.301] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive remove server event, with server: auth-server-1, type: auth
+
+[36m[2017-04-13 18:33:14.301] [master-server-1] [DEBUG] pomelo-admin -[39m disconnect chat-server-1 chat {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":8756}
+
+[32m[2017-04-14 11:05:03.955] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 11:05:07.670] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 11:05:07.673] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 11:05:07.757] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 11:05:07.677] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 11:05:07.678] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 11:05:07.680] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 11:05:07.681] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 11:05:07.682] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 11:05:07.688] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 11:05:07.691] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 11:05:07.892] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":7736}
+
+[32m[2017-04-14 11:05:07.897] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 11:05:07.898] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 11:05:07.898] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 3939 ms
+
+[36m[2017-04-14 11:05:11.376] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7916}
+
+[36m[2017-04-14 11:05:11.377] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":7904}
+
+[36m[2017-04-14 11:05:11.378] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7916}}
+
+[36m[2017-04-14 11:05:11.379] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":7904}}
+
+[36m[2017-04-14 11:05:11.380] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":7972}
+
+[36m[2017-04-14 11:05:11.382] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":7972}}
+
+[36m[2017-04-14 11:05:11.416] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7844}
+
+[36m[2017-04-14 11:05:11.424] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7844}}
+
+[36m[2017-04-14 11:05:11.431] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":7856}
+
+[36m[2017-04-14 11:05:11.440] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":7856}}
+
+[36m[2017-04-14 11:05:11.451] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7864}
+
+[36m[2017-04-14 11:05:11.453] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":7888}
+
+[36m[2017-04-14 11:05:11.454] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7864}}
+
+[36m[2017-04-14 11:05:11.455] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":7888}}
+
+[36m[2017-04-14 11:05:13.719] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7988}
+
+[36m[2017-04-14 11:05:13.721] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7988}}
+
+[32m[2017-04-14 11:05:16.679] [master-server-1] [INFO] pomelo -[39m all servers startup in 12720 ms
+
+[32m[2017-04-14 14:32:21.702] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 14:32:21.819] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 14:32:21.821] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 14:32:21.838] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:32:21.825] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:32:21.826] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:32:21.828] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:32:21.829] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 14:32:21.831] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 14:32:21.832] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 14:32:21.834] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 14:32:21.869] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":8804}
+
+[32m[2017-04-14 14:32:21.872] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 14:32:21.873] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 14:32:21.873] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 166 ms
+
+[36m[2017-04-14 14:32:22.774] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":2948}
+
+[36m[2017-04-14 14:32:22.776] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":2948}}
+
+[36m[2017-04-14 14:32:22.962] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":4712}
+
+[36m[2017-04-14 14:32:22.963] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":4712}}
+
+[36m[2017-04-14 14:32:23.136] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8520}
+
+[36m[2017-04-14 14:32:23.139] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8520}}
+
+[36m[2017-04-14 14:32:23.232] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8436}
+
+[36m[2017-04-14 14:32:23.238] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8436}}
+
+[36m[2017-04-14 14:32:23.328] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":4564}
+
+[36m[2017-04-14 14:32:23.331] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":4564}}
+
+[36m[2017-04-14 14:32:23.404] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":3916}
+
+[36m[2017-04-14 14:32:23.405] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":3916}}
+
+[36m[2017-04-14 14:32:23.489] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8740}
+
+[36m[2017-04-14 14:32:23.492] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8740}}
+
+[36m[2017-04-14 14:32:23.640] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6380}
+
+[36m[2017-04-14 14:32:23.641] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6380}}
+
+[32m[2017-04-14 14:32:23.663] [master-server-1] [INFO] pomelo -[39m all servers startup in 1956 ms
+
+[32m[2017-04-14 14:42:53.497] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 14:42:53.614] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 14:42:53.616] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 14:42:53.639] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:42:53.620] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:42:53.621] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:42:53.623] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:42:53.626] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 14:42:53.630] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 14:42:53.632] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 14:42:53.635] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 14:42:53.661] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":9760}
+
+[32m[2017-04-14 14:42:53.664] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 14:42:53.664] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 14:42:53.664] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 163 ms
+
+[36m[2017-04-14 14:42:54.683] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":9924}
+
+[36m[2017-04-14 14:42:54.684] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":9924}}
+
+[36m[2017-04-14 14:42:54.776] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7328}
+
+[36m[2017-04-14 14:42:54.777] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7328}}
+
+[36m[2017-04-14 14:42:54.930] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":8188}
+
+[36m[2017-04-14 14:42:54.933] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":8188}}
+
+[36m[2017-04-14 14:42:54.977] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":9468}
+
+[36m[2017-04-14 14:42:54.981] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":9468}}
+
+[36m[2017-04-14 14:42:55.126] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8940}
+
+[36m[2017-04-14 14:42:55.128] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8940}}
+
+[36m[2017-04-14 14:42:55.143] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":4732}
+
+[36m[2017-04-14 14:42:55.144] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":4732}}
+
+[36m[2017-04-14 14:42:55.156] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":10036}
+
+[36m[2017-04-14 14:42:55.162] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":10036}}
+
+[36m[2017-04-14 14:42:55.493] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":496}
+
+[36m[2017-04-14 14:42:55.495] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":496}}
+
+[32m[2017-04-14 14:42:55.620] [master-server-1] [INFO] pomelo -[39m all servers startup in 2119 ms
+
+[32m[2017-04-14 14:44:06.983] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 14:44:07.100] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 14:44:07.102] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 14:44:07.122] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:44:07.106] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:44:07.109] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:44:07.110] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:44:07.112] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 14:44:07.114] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 14:44:07.116] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 14:44:07.118] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 14:44:07.239] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":4896}
+
+[32m[2017-04-14 14:44:07.241] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 14:44:07.242] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 14:44:07.242] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 254 ms
+
+[36m[2017-04-14 14:44:08.302] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":2140}
+
+[36m[2017-04-14 14:44:08.304] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":2140}}
+
+[36m[2017-04-14 14:44:08.330] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":9236}
+
+[36m[2017-04-14 14:44:08.332] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":9236}}
+
+[36m[2017-04-14 14:44:08.584] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6760}
+
+[36m[2017-04-14 14:44:08.591] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6760}}
+
+[36m[2017-04-14 14:44:08.623] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7784}
+
+[36m[2017-04-14 14:44:08.633] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7784}}
+
+[36m[2017-04-14 14:44:08.698] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8528}
+
+[36m[2017-04-14 14:44:08.704] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8528}}
+
+[36m[2017-04-14 14:44:08.826] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9628}
+
+[36m[2017-04-14 14:44:08.828] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9628}}
+
+[36m[2017-04-14 14:44:08.923] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7868}
+
+[36m[2017-04-14 14:44:08.932] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7868}}
+
+[36m[2017-04-14 14:44:09.295] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":1548}
+
+[36m[2017-04-14 14:44:09.298] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":1548}}
+
+[32m[2017-04-14 14:44:09.322] [master-server-1] [INFO] pomelo -[39m all servers startup in 2334 ms
+
+[32m[2017-04-14 14:52:58.800] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 14:52:58.913] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 14:52:58.915] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 14:52:58.937] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:52:58.919] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:52:58.920] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:52:58.922] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:52:58.923] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 14:52:58.924] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 14:52:58.929] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 14:52:58.932] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 14:52:58.957] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":5520}
+
+[32m[2017-04-14 14:52:58.959] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 14:52:58.960] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 14:52:58.960] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 156 ms
+
+[36m[2017-04-14 14:53:00.307] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":6124}
+
+[36m[2017-04-14 14:53:00.308] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":6124}}
+
+[36m[2017-04-14 14:53:00.385] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":10044}
+
+[36m[2017-04-14 14:53:00.387] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":10044}}
+
+[36m[2017-04-14 14:53:00.405] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7472}
+
+[36m[2017-04-14 14:53:00.410] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7472}}
+
+[36m[2017-04-14 14:53:00.424] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":7736}
+
+[36m[2017-04-14 14:53:00.430] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":7736}}
+
+[36m[2017-04-14 14:53:00.529] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":9112}
+
+[36m[2017-04-14 14:53:00.533] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":9112}}
+
+[36m[2017-04-14 14:53:00.635] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9104}
+
+[36m[2017-04-14 14:53:00.636] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9104}}
+
+[36m[2017-04-14 14:53:00.719] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":9672}
+
+[36m[2017-04-14 14:53:00.722] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":9672}}
+
+[36m[2017-04-14 14:53:00.738] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":8184}
+
+[36m[2017-04-14 14:53:00.739] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":8184}}
+
+[32m[2017-04-14 14:53:00.835] [master-server-1] [INFO] pomelo -[39m all servers startup in 2031 ms
+
+[32m[2017-04-14 14:54:20.088] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 14:54:20.205] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 14:54:20.208] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 14:54:20.264] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:54:20.212] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:54:20.214] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:54:20.216] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 14:54:20.219] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 14:54:20.223] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 14:54:20.230] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 14:54:20.233] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 14:54:20.332] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":9220}
+
+[32m[2017-04-14 14:54:20.335] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 14:54:20.336] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 14:54:20.336] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 243 ms
+
+[36m[2017-04-14 14:54:21.200] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":7952}
+
+[36m[2017-04-14 14:54:21.201] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":7952}}
+
+[36m[2017-04-14 14:54:21.352] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7508}
+
+[36m[2017-04-14 14:54:21.353] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7508}}
+
+[36m[2017-04-14 14:54:21.597] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9408}
+
+[36m[2017-04-14 14:54:21.602] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9408}}
+
+[36m[2017-04-14 14:54:21.726] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7524}
+
+[36m[2017-04-14 14:54:21.730] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7524}}
+
+[36m[2017-04-14 14:54:21.794] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8096}
+
+[36m[2017-04-14 14:54:21.797] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8096}}
+
+[36m[2017-04-14 14:54:21.810] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":2776}
+
+[36m[2017-04-14 14:54:21.811] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":2776}}
+
+[36m[2017-04-14 14:54:22.142] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":9704}
+
+[36m[2017-04-14 14:54:22.146] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":9704}}
+
+[36m[2017-04-14 14:54:22.203] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7164}
+
+[36m[2017-04-14 14:54:22.204] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7164}}
+
+[32m[2017-04-14 14:54:22.230] [master-server-1] [INFO] pomelo -[39m all servers startup in 2137 ms
+
+[32m[2017-04-14 15:10:05.794] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 15:10:05.907] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 15:10:05.910] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 15:10:05.928] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:10:05.914] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:10:05.915] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:10:05.917] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:10:05.919] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 15:10:05.920] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 15:10:05.923] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 15:10:05.925] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 15:10:05.958] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":9468}
+
+[32m[2017-04-14 15:10:06.003] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 15:10:06.003] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 15:10:06.003] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 205 ms
+
+[36m[2017-04-14 15:10:07.015] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7900}
+
+[36m[2017-04-14 15:10:07.016] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7900}}
+
+[36m[2017-04-14 15:10:07.213] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7876}
+
+[36m[2017-04-14 15:10:07.214] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7876}}
+
+[36m[2017-04-14 15:10:07.283] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":10208}
+
+[36m[2017-04-14 15:10:07.285] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":10208}}
+
+[36m[2017-04-14 15:10:07.363] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":8888}
+
+[36m[2017-04-14 15:10:07.366] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":8888}}
+
+[36m[2017-04-14 15:10:07.547] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6760}
+
+[36m[2017-04-14 15:10:07.549] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6760}}
+
+[36m[2017-04-14 15:10:07.556] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":10032}
+
+[36m[2017-04-14 15:10:07.557] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":10032}}
+
+[36m[2017-04-14 15:10:07.619] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9232}
+
+[36m[2017-04-14 15:10:07.622] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9232}}
+
+[36m[2017-04-14 15:10:07.749] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8976}
+
+[36m[2017-04-14 15:10:07.750] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8976}}
+
+[32m[2017-04-14 15:10:07.775] [master-server-1] [INFO] pomelo -[39m all servers startup in 1977 ms
+
+[32m[2017-04-14 15:18:32.457] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 15:18:32.569] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 15:18:32.572] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 15:18:32.592] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:18:32.576] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:18:32.578] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:18:32.579] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:18:32.580] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 15:18:32.581] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 15:18:32.583] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 15:18:32.586] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 15:18:32.621] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":5048}
+
+[32m[2017-04-14 15:18:32.623] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 15:18:32.624] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 15:18:32.624] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 163 ms
+
+[36m[2017-04-14 15:18:33.554] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":9976}
+
+[36m[2017-04-14 15:18:33.556] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":9976}}
+
+[36m[2017-04-14 15:18:33.572] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":9988}
+
+[36m[2017-04-14 15:18:33.573] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":9988}}
+
+[36m[2017-04-14 15:18:33.667] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7872}
+
+[36m[2017-04-14 15:18:33.673] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7872}}
+
+[36m[2017-04-14 15:18:33.887] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8056}
+
+[36m[2017-04-14 15:18:33.890] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8056}}
+
+[36m[2017-04-14 15:18:34.018] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9360}
+
+[36m[2017-04-14 15:18:34.019] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9360}}
+
+[36m[2017-04-14 15:18:34.394] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":10032}
+
+[36m[2017-04-14 15:18:34.396] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":10032}}
+
+[36m[2017-04-14 15:18:34.412] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":8936}
+
+[36m[2017-04-14 15:18:34.414] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":8936}}
+
+[36m[2017-04-14 15:18:34.747] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9288}
+
+[36m[2017-04-14 15:18:34.749] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9288}}
+
+[32m[2017-04-14 15:18:34.772] [master-server-1] [INFO] pomelo -[39m all servers startup in 2311 ms
+
+[32m[2017-04-14 15:20:33.528] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 15:20:33.647] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 15:20:33.650] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 15:20:33.677] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:20:33.657] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:20:33.659] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:20:33.661] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:20:33.663] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 15:20:33.666] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 15:20:33.668] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 15:20:33.671] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 15:20:33.701] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":11140}
+
+[32m[2017-04-14 15:20:33.704] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 15:20:33.704] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 15:20:33.705] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 173 ms
+
+[36m[2017-04-14 15:20:34.953] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":11216}
+
+[36m[2017-04-14 15:20:34.955] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":11216}}
+
+[36m[2017-04-14 15:20:35.049] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":11252}
+
+[36m[2017-04-14 15:20:35.050] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":11252}}
+
+[36m[2017-04-14 15:20:35.063] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":11180}
+
+[36m[2017-04-14 15:20:35.065] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":11180}}
+
+[36m[2017-04-14 15:20:35.071] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":11188}
+
+[36m[2017-04-14 15:20:35.075] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":11188}}
+
+[36m[2017-04-14 15:20:35.609] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":11220}
+
+[36m[2017-04-14 15:20:35.612] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":11220}}
+
+[36m[2017-04-14 15:20:35.652] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":11152}
+
+[36m[2017-04-14 15:20:35.653] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":11152}}
+
+[36m[2017-04-14 15:20:35.748] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":11236}
+
+[36m[2017-04-14 15:20:35.751] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":11236}}
+
+[36m[2017-04-14 15:20:36.188] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7876}
+
+[36m[2017-04-14 15:20:36.189] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7876}}
+
+[32m[2017-04-14 15:20:36.219] [master-server-1] [INFO] pomelo -[39m all servers startup in 2687 ms
+
+[32m[2017-04-14 15:58:26.534] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 15:58:26.648] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 15:58:26.650] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 15:58:26.670] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:58:26.654] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:58:26.656] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:58:26.657] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 15:58:26.658] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 15:58:26.660] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 15:58:26.663] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 15:58:26.665] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 15:58:26.689] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":10804}
+
+[32m[2017-04-14 15:58:26.692] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 15:58:26.692] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 15:58:26.692] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 154 ms
+
+[36m[2017-04-14 15:58:27.801] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":9708}
+
+[36m[2017-04-14 15:58:27.802] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":9708}}
+
+[36m[2017-04-14 15:58:27.888] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":10916}
+
+[36m[2017-04-14 15:58:27.889] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":10916}}
+
+[36m[2017-04-14 15:58:28.129] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":10388}
+
+[36m[2017-04-14 15:58:28.133] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":10388}}
+
+[36m[2017-04-14 15:58:28.194] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":9284}
+
+[36m[2017-04-14 15:58:28.198] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":9284}}
+
+[36m[2017-04-14 15:58:28.402] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":11200}
+
+[36m[2017-04-14 15:58:28.405] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":11200}}
+
+[36m[2017-04-14 15:58:28.555] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8188}
+
+[36m[2017-04-14 15:58:28.557] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8188}}
+
+[36m[2017-04-14 15:58:28.569] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":9728}
+
+[36m[2017-04-14 15:58:28.572] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":9728}}
+
+[36m[2017-04-14 15:58:28.795] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10568}
+
+[36m[2017-04-14 15:58:28.800] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10568}}
+
+[32m[2017-04-14 15:58:28.817] [master-server-1] [INFO] pomelo -[39m all servers startup in 2279 ms
+
+[36m[2017-04-14 17:35:29.789] [master-server-1] [DEBUG] pomelo-admin -[39m disconnect room-server-1 room {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10568}
+
+[36m[2017-04-14 17:35:29.789] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive remove server event, with server: room-server-1, type: room
+
+[32m[2017-04-14 17:35:29.790] [master-server-1] [INFO] crash-log -[39m [room],[room-server-1],[1492162529790],[disconnect]
+
+[36m[2017-04-14 17:35:29.793] [master-server-1] [DEBUG] pomelo-admin -[39m disconnect lobby-server-1 lobby {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8188}
+
+[36m[2017-04-14 17:35:29.793] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive remove server event, with server: lobby-server-1, type: lobby
+
+[32m[2017-04-14 17:35:29.793] [master-server-1] [INFO] crash-log -[39m [lobby],[lobby-server-1],[1492162529793],[disconnect]
+
+[36m[2017-04-14 17:35:29.796] [master-server-1] [DEBUG] pomelo-admin -[39m disconnect connector-server-3 connector {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":9708}
+
+[36m[2017-04-14 17:35:29.795] [master-server-1] [DEBUG] pomelo -[39m master-server-1 receive removeServer signal: {"action":"removeServer","id":"room-server-1"}
+
+[32m[2017-04-14 17:35:29.797] [master-server-1] [INFO] crash-log -[39m [connector],[connector-server-3],[1492162529797],[disconnect]
+
+[32m[2017-04-14 17:35:32.139] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 17:35:32.253] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 17:35:32.256] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 17:35:32.272] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:35:32.259] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:35:32.261] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:35:32.262] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:35:32.263] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 17:35:32.264] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 17:35:32.267] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 17:35:32.268] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 17:35:32.295] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":8536}
+
+[32m[2017-04-14 17:35:32.297] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 17:35:32.297] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 17:35:32.297] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 154 ms
+
+[36m[2017-04-14 17:35:33.203] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":6404}
+
+[36m[2017-04-14 17:35:33.204] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":6404}}
+
+[36m[2017-04-14 17:35:33.255] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":6420}
+
+[36m[2017-04-14 17:35:33.256] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":6420}}
+
+[36m[2017-04-14 17:35:33.539] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8724}
+
+[36m[2017-04-14 17:35:33.542] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8724}}
+
+[36m[2017-04-14 17:35:33.616] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":9616}
+
+[36m[2017-04-14 17:35:33.619] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":9616}}
+
+[36m[2017-04-14 17:35:33.891] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7572}
+
+[36m[2017-04-14 17:35:33.894] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7572}}
+
+[36m[2017-04-14 17:35:33.900] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":6116}
+
+[36m[2017-04-14 17:35:33.901] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":6116}}
+
+[36m[2017-04-14 17:35:34.086] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":10708}
+
+[36m[2017-04-14 17:35:34.089] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":10708}}
+
+[36m[2017-04-14 17:35:34.137] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":10684}
+
+[36m[2017-04-14 17:35:34.138] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":10684}}
+
+[32m[2017-04-14 17:35:34.159] [master-server-1] [INFO] pomelo -[39m all servers startup in 2016 ms
+
+[32m[2017-04-14 17:36:42.171] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 17:36:42.290] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 17:36:42.292] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 17:36:42.315] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:36:42.296] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:36:42.298] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:36:42.300] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:36:42.302] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 17:36:42.304] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 17:36:42.308] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 17:36:42.311] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 17:36:42.336] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":2084}
+
+[32m[2017-04-14 17:36:42.338] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 17:36:42.338] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 17:36:42.338] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 163 ms
+
+[36m[2017-04-14 17:36:43.302] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":1708}
+
+[36m[2017-04-14 17:36:43.304] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":1708}}
+
+[36m[2017-04-14 17:36:43.367] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":6944}
+
+[36m[2017-04-14 17:36:43.369] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":6944}}
+
+[36m[2017-04-14 17:36:43.943] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":11152}
+
+[36m[2017-04-14 17:36:43.947] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":11152}}
+
+[36m[2017-04-14 17:36:44.022] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8460}
+
+[36m[2017-04-14 17:36:44.027] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8460}}
+
+[36m[2017-04-14 17:36:44.088] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":7580}
+
+[36m[2017-04-14 17:36:44.091] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":7580}}
+
+[36m[2017-04-14 17:36:44.277] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":4520}
+
+[36m[2017-04-14 17:36:44.278] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":4520}}
+
+[36m[2017-04-14 17:36:44.462] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":3312}
+
+[36m[2017-04-14 17:36:44.464] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":3312}}
+
+[36m[2017-04-14 17:36:44.727] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9312}
+
+[36m[2017-04-14 17:36:44.728] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9312}}
+
+[32m[2017-04-14 17:36:44.748] [master-server-1] [INFO] pomelo -[39m all servers startup in 2573 ms
+
+[32m[2017-04-14 17:39:17.401] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 17:39:17.515] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 17:39:17.518] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 17:39:17.538] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:39:17.522] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:39:17.524] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:39:17.525] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:39:17.527] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 17:39:17.528] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 17:39:17.531] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 17:39:17.535] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 17:39:17.565] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":9816}
+
+[32m[2017-04-14 17:39:17.568] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 17:39:17.568] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 17:39:17.568] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 163 ms
+
+[36m[2017-04-14 17:39:18.429] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":7848}
+
+[36m[2017-04-14 17:39:18.431] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":7848}}
+
+[36m[2017-04-14 17:39:18.779] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10880}
+
+[36m[2017-04-14 17:39:18.781] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10880}}
+
+[36m[2017-04-14 17:39:18.869] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":820}
+
+[36m[2017-04-14 17:39:18.872] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":820}}
+
+[36m[2017-04-14 17:39:18.971] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":2948}
+
+[36m[2017-04-14 17:39:18.976] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":2948}}
+
+[36m[2017-04-14 17:39:19.077] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":7752}
+
+[36m[2017-04-14 17:39:19.081] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":7752}}
+
+[36m[2017-04-14 17:39:19.113] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8340}
+
+[36m[2017-04-14 17:39:19.115] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8340}}
+
+[36m[2017-04-14 17:39:19.188] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7600}
+
+[36m[2017-04-14 17:39:19.191] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":7600}}
+
+[36m[2017-04-14 17:39:19.395] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8680}
+
+[36m[2017-04-14 17:39:19.398] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8680}}
+
+[32m[2017-04-14 17:39:19.521] [master-server-1] [INFO] pomelo -[39m all servers startup in 2116 ms
+
+[32m[2017-04-14 17:40:23.359] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 17:40:23.471] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 17:40:23.474] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 17:40:23.489] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:40:23.478] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:40:23.479] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:40:23.480] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:40:23.482] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 17:40:23.483] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 17:40:23.484] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 17:40:23.486] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 17:40:23.518] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":6552}
+
+[32m[2017-04-14 17:40:23.520] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 17:40:23.520] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 17:40:23.520] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 157 ms
+
+[36m[2017-04-14 17:40:24.378] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":9444}
+
+[36m[2017-04-14 17:40:24.379] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":9444}}
+
+[36m[2017-04-14 17:40:24.544] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9480}
+
+[36m[2017-04-14 17:40:24.546] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9480}}
+
+[36m[2017-04-14 17:40:24.740] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":6516}
+
+[36m[2017-04-14 17:40:24.742] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":6516}}
+
+[36m[2017-04-14 17:40:24.857] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":9264}
+
+[36m[2017-04-14 17:40:24.859] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":9264}}
+
+[36m[2017-04-14 17:40:24.864] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":10888}
+
+[36m[2017-04-14 17:40:24.870] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":10888}}
+
+[36m[2017-04-14 17:40:25.471] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":10320}
+
+[36m[2017-04-14 17:40:25.473] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":10320}}
+
+[36m[2017-04-14 17:40:25.484] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":9200}
+
+[36m[2017-04-14 17:40:25.488] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":9200}}
+
+[36m[2017-04-14 17:40:25.504] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10456}
+
+[36m[2017-04-14 17:40:25.506] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10456}}
+
+[32m[2017-04-14 17:40:25.658] [master-server-1] [INFO] pomelo -[39m all servers startup in 2295 ms
+
+[32m[2017-04-14 17:53:23.475] [master-server-1] [INFO] pomelo -[39m application inited: "master-server-1"
+
+[32m[2017-04-14 17:53:23.588] [master-server-1] [INFO] pomelo-admin -[39m [MqttServer] listen on 6000
+
+[32m[2017-04-14 17:53:23.590] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=gate-server-1,host=127.0.0.1,port=6001,clientPort=8000,frontend=true,serverType=gate locally
+
+[32m[2017-04-14 17:53:23.609] [master-server-1] [INFO] pomelo-admin -[39m try to connect master: "master", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:53:23.594] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-1,host=127.0.0.1,port=6100,clientHost=127.0.0.1,clientPort=8001,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:53:23.596] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-2,host=127.0.0.1,port=6101,clientHost=127.0.0.1,clientPort=8002,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:53:23.597] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=connector-server-3,host=127.0.0.1,port=6102,clientHost=127.0.0.1,clientPort=8003,frontend=true,serverType=connector locally
+
+[32m[2017-04-14 17:53:23.598] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=chat-server-1,host=127.0.0.1,port=6200,clientHost=127.0.0.1,serverType=chat locally
+
+[32m[2017-04-14 17:53:23.600] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=auth-server-1,host=127.0.0.1,port=6300,clientHost=127.0.0.1,serverType=auth locally
+
+[32m[2017-04-14 17:53:23.602] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=lobby-server-1,host=127.0.0.1,port=6400,clientHost=127.0.0.1,serverType=lobby locally
+
+[32m[2017-04-14 17:53:23.604] [master-server-1] [INFO] pomelo -[39m Executing F:\nodejs\node.exe G:\diuojiuPoker\DejuPoker\server\app.js,env=development,id=room-server-1,host=127.0.0.1,port=6500,clientHost=127.0.0.1,serverType=room locally
+
+[36m[2017-04-14 17:53:23.630] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"id":"master-server-1","host":"127.0.0.1","port":6000,"pid":10672}
+
+[32m[2017-04-14 17:53:23.632] [master-server-1] [INFO] pomelo -[39m "master-server-1" enter after start...
+
+[32m[2017-04-14 17:53:23.633] [master-server-1] [INFO] pomelo -[39m "master-server-1" finish start
+
+[32m[2017-04-14 17:53:23.633] [master-server-1] [INFO] pomelo -[39m "master-server-1" startup in 154 ms
+
+[36m[2017-04-14 17:53:24.776] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":7112}
+
+[36m[2017-04-14 17:53:24.778] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":7112}}
+
+[36m[2017-04-14 17:53:24.851] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":5172}
+
+[36m[2017-04-14 17:53:24.852] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":5172}}
+
+[36m[2017-04-14 17:53:24.966] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":9828}
+
+[36m[2017-04-14 17:53:24.969] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"gate-server-1","host":"127.0.0.1","port":6001,"clientPort":8000,"frontend":"true","serverType":"gate","pid":9828}}
+
+[36m[2017-04-14 17:53:25.039] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8664}
+
+[36m[2017-04-14 17:53:25.045] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8664}}
+
+[36m[2017-04-14 17:53:25.184] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":6800}
+
+[36m[2017-04-14 17:53:25.187] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":6800}}
+
+[36m[2017-04-14 17:53:25.218] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":2448}
+
+[36m[2017-04-14 17:53:25.219] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":2448}}
+
+[36m[2017-04-14 17:53:25.373] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":8400}
+
+[36m[2017-04-14 17:53:25.376] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":8400}}
+
+[36m[2017-04-14 17:53:25.396] [master-server-1] [DEBUG] pomelo -[39m masterwatcher receive add server event, with server: {"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":8440}
+
+[36m[2017-04-14 17:53:25.398] [master-server-1] [DEBUG] pomelo -[39m [master-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":8440}}
+
+[32m[2017-04-14 17:53:25.512] [master-server-1] [INFO] pomelo -[39m all servers startup in 2033 ms
+

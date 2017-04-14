@@ -6,6 +6,9 @@
     var ROUTE = root.ROUTE;
     var Game = root.Game;
     var Table = root.Table;
+
+    var Utils = root.Utils;
+    
     var Room = root.Room = function(opts) {
         opts = opts || {};
 
@@ -24,9 +27,9 @@
 
         this.host               = opts.host;                        //房主
         this.members            = [];                               //玩家 [ userID, userID, ... ]
-        this.bids               = opts.bids || {};                  //下注倍数 { userID: bid, ... }
 
         this.banker             = opts.banker || 0;                 //庄家 (0 - 无庄家 userID)
+        this.banker             = this.host;                        //todo 暂时房主为庄家
 
         this.table              = null;                             //桌子
 
@@ -193,7 +196,6 @@
             this.table = null;
             this.members = null;
             this.chairs = null;
-            this.bids = null;
         },
 
         send: function(userID, route, msg, opts, cb) {
@@ -202,6 +204,17 @@
 
         broadcast: function(route, msg, opts, cb) {
             this._service && this._service.broadcast(this.id, route, msg, opts, cb);
+        },
+
+        sendEachMsg: function(route, opts) {
+            if (!this._service) {
+                return;
+            }
+
+            for (var i in this.chairs) {
+                var userID = this.chairs[i];
+                this._service && this._service.send(this.id, userID, route, this.infoToPlayer(userID), opts, null);
+            }
         },
 
         process: function() {
@@ -220,13 +233,25 @@
                 if (fn && typeof this.table[fn] === "function") {
                     var result = this.table[fn](userID, command.msg.data);
                     if (result != null) {
+                        results.fn = fn;
                         results.push(result);
                     }
                 }
             }
 
             if (results.length > 0) {
-                this.broadcast(ROUTE.ROOM.COMMAND, results);
+                if (!this._service) {
+                    return;
+                }
+
+                for (var i in this.chairs) {
+                    var userID = this.chairs[i];
+                    var sendInfo = {
+                        queue: results,
+                        room: this.infoToPlayer(userID)
+                    };
+                    this._service && this._service.send(this.id, userID, ROUTE.ROOM.COMMAND, sendInfo, null, null);
+                }
             }
         },
 
@@ -256,10 +281,15 @@
                     this.table.start(this.type);
                     this.table.shuffle();
                     // 暂时按座位顺序发牌 这里要做个规则传入发牌顺序的userID数组
+                    this.table.clearDraw();
                     var sitUsers = [];
                     for (i = 0; i < this.maxChairs; i++) {
                         if (this.chairs[i]) {
                             sitUsers.push(this.chairs[i]);
+                            //闲家加入要牌行列
+                            if (this.chairs[i] != this.banker) {
+                                this.table.insertDraw(this.chairs[i]);
+                            }
                         }
                     }
                     this.table.deal(sitUsers);
@@ -267,8 +297,8 @@
                     this.table.ghost(2);
 
                     this.state++;
-                    
-                    this.broadcast(ROUTE.ROOM.DEAL, this.clone());
+
+                    this.sendEachMsg(ROUTE.ROOM.DEAL, null);
                     break;
                 case Room.STATE_BID:
                     if (this.table.getClientBid()) {
@@ -276,6 +306,9 @@
                     }
                     break;
                 case Room.STATE_DRAW:
+                    if (this.table.getClientDraw()) {
+                        this.state++;
+                    }
                     break;
                 case Room.STATE_BANKER:
                     if (this.table.getClientStarted()) {
@@ -299,6 +332,26 @@
                 case Room.STATE_DISMISS:
                     break;
             }
+        },
+
+        //拷贝一份房间信息给玩家 针对这个玩家能看到的部分
+        infoToPlayer: function(userID) {
+            var info = {};
+            info.id = this.id;
+            info.type = this.type;
+            info.state = this.state;
+            info.host = this.host;
+            info.banker = this.banker;
+            info.settings = Utils.object_clone(this.settings);
+            info.members = Utils.object_clone(this.members);
+            info.chairs = Utils.object_clone(this.chairs);
+            info.maxChairs = this.maxChairs;
+            info.round = this.round;
+            info.maxRound = this.maxRound;
+
+            info.table = this.table.infoToPlayer(userID);
+
+            return info;
         }
     });
 }(DejuPoker));

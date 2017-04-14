@@ -5,10 +5,14 @@ var Dialog=laya.ui.Dialog;
 var RoomPlayerUI=(function(_super){
 		function RoomPlayerUI(){
 			
+		    this.readyIcon=null;
+		    this.headTouch=null;
+		    this.hostTag=null;
+		    this.timeBar=null;
 		    this.nameLab=null;
 		    this.balanceLab=null;
-		    this.headTouch=null;
-		    this.readyIcon=null;
+		    this.pokerBox=null;
+		    this.positivePokerBox=null;
 
 			RoomPlayerUI.__super.call(this);
 		}
@@ -22,7 +26,7 @@ var RoomPlayerUI=(function(_super){
 		}
 
 		STATICATTR$(RoomPlayerUI,
-		['uiView',function(){return this.uiView={"type":"View","props":{"width":122,"height":139},"child":[{"type":"Circle","props":{"y":43,"x":60,"radius":40,"lineWidth":1,"lineColor":"#ffffff","fillColor":"#ffffff"}},{"type":"Image","props":{"y":88,"x":12,"width":101,"skin":"assets/ui.image/mc.png","height":21}},{"type":"Image","props":{"y":114,"x":12,"width":101,"skin":"assets/ui.image/mc.png","height":21}},{"type":"Label","props":{"y":92,"x":14,"width":94,"var":"nameLab","text":"这个是名字","height":12,"color":"#ffffff","align":"center"}},{"type":"Label","props":{"y":120,"x":18,"width":89,"var":"balanceLab","text":"0000","height":12,"color":"#ffffff","align":"center"}},{"type":"Box","props":{"y":4,"x":20,"width":81,"var":"headTouch","height":79}},{"type":"Label","props":{"y":14,"x":48,"visible":false,"var":"readyIcon","text":"准备","color":"#ff0400","bold":true}}]};}
+		['uiView',function(){return this.uiView={"type":"View","props":{"width":180,"height":150},"child":[{"type":"Label","props":{"y":35,"x":130,"wordWrap":true,"width":16,"visible":false,"var":"readyIcon","text":"准备中","height":44,"fontSize":15,"color":"#fcfc7a","bold":true}},{"type":"Image","props":{"y":7,"x":18,"var":"headTouch","skin":"assets/ui.room/img_Model.png"}},{"type":"Image","props":{"y":6,"x":17,"var":"hostTag","skin":"assets/ui.room/img_AvatarFrame1.png"}},{"type":"Image","props":{"y":6,"x":17,"skin":"assets/ui.room/img_AvatarFrame.png"}},{"type":"Image","props":{"y":1,"x":13,"visible":false,"var":"timeBar","skin":"assets/ui.room/ani_Countdown.png"}},{"type":"Image","props":{"y":98,"x":21,"skin":"assets/ui.room/img_0002.png"}},{"type":"Image","props":{"y":125,"x":26,"skin":"assets/ui.room/img_0002.png"}},{"type":"Label","props":{"y":101,"x":49,"width":120,"var":"nameLab","text":"名字是七个字的","height":17,"fontSize":13,"color":"#ffffff","align":"center"}},{"type":"Label","props":{"y":130,"x":41,"width":118,"var":"balanceLab","text":"0000","height":16,"fontSize":13,"color":"#ffffff","align":"center"}},{"type":"Box","props":{"y":96,"x":0,"width":59,"var":"pokerBox","height":56}},{"type":"Box","props":{"y":85,"x":-21,"width":92,"var":"positivePokerBox","height":71}}]};}
 		]);
 		return RoomPlayerUI;
 	})(View);
@@ -182,12 +186,29 @@ var SelectModeDialogUI=(function(_super){
 var GameRoomViewUI=(function(_super){
 		function GameRoomViewUI(){
 			
-		    this.roomIdLab=null;
+		    this.yellowTable=null;
+		    this.functionsBox=null;
+		    this.chatBtn=null;
+		    this.voiceChatBtn=null;
+		    this.recordbtn=null;
+		    this.setupBtn=null;
+		    this.gamePlayBtn=null;
+		    this.menuBtn=null;
+		    this.battery=null;
+		    this.wifi=null;
 		    this.playersBox=null;
 		    this.deckNode=null;
-		    this.functionsBox=null;
-		    this.ruleBtn=null;
-		    this.dealPokerBtn=null;
+		    this.ghostBox=null;
+		    this.operationBox=null;
+		    this.allOpenBtn=null;
+		    this.openOutsBtn=null;
+		    this.outsBtn=null;
+		    this.outsActionBtn=null;
+		    this.unDoHostBtn=null;
+		    this.tickImg=null;
+		    this.bidBox=null;
+		    this.startBox=null;
+		    this.roomIdLab=null;
 		    this.readyBtn=null;
 		    this.readyLab=null;
 		    this.closeBtn=null;
@@ -205,7 +226,7 @@ var GameRoomViewUI=(function(_super){
 		}
 
 		STATICATTR$(GameRoomViewUI,
-		['uiView',function(){return this.uiView={"type":"View","props":{"width":1136,"height":640},"child":[{"type":"Image","props":{"y":0,"x":0,"width":1136,"skin":"assets/ui.image/table.jpg","height":640}},{"type":"Label","props":{"y":365,"x":570,"var":"roomIdLab","text":"4444444","fontSize":30,"font":"Arial","color":"#ffffff"}},{"type":"Label","props":{"y":363,"x":455,"text":"房间号：","fontSize":30,"font":"Arial","color":"#ffffff"}},{"type":"Box","props":{"y":0,"x":0,"width":1137,"var":"playersBox","height":646},"child":[{"type":"Sprite","props":{"y":591,"x":505,"name":"player_0"}},{"type":"Sprite","props":{"y":572,"x":746,"name":"player_1"}},{"type":"Sprite","props":{"y":511,"x":1002,"name":"player_2"}},{"type":"Sprite","props":{"y":317,"x":1089,"name":"player_3"}},{"type":"Sprite","props":{"y":135,"x":990,"name":"player_4"}},{"type":"Sprite","props":{"y":62,"x":725,"name":"player_5"}},{"type":"Sprite","props":{"y":54,"x":469,"name":"player_6"}},{"type":"Sprite","props":{"y":77,"x":274,"name":"player_7"}},{"type":"Sprite","props":{"y":155,"x":62,"name":"player_8"}},{"type":"Sprite","props":{"y":338,"x":7,"name":"player_9"}},{"type":"Sprite","props":{"y":309,"x":827,"var":"deckNode"}}]},{"type":"Box","props":{"y":560,"x":9,"width":337,"var":"functionsBox","height":69},"child":[{"type":"Button","props":{"stateNum":"2","skin":"assets/ui.button/btn_003.png","labelSize":20,"label":"文字"}},{"type":"Button","props":{"y":1,"x":114,"stateNum":"2","skin":"assets/ui.button/btn_003.png","labelSize":20,"label":"语音"}},{"type":"Button","props":{"y":0,"x":232,"stateNum":"2","skin":"assets/ui.button/btn_003.png","labelSize":20,"label":"战绩"}},{"type":"Button","props":{"y":-551,"x":1012,"var":"ruleBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png","labelStrokeColor":"#ffffff","labelSize":20,"label":"查看规则"}}]},{"type":"Button","props":{"y":268,"x":570,"visible":false,"var":"dealPokerBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png"},"child":[{"type":"Text","props":{"y":16,"x":20,"text":"发牌","fontSize":"30","color":"#ffffff"}}]},{"type":"Button","props":{"y":420,"x":438.99999999999994,"var":"readyBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png"},"child":[{"type":"Text","props":{"y":16,"x":20,"var":"readyLab","text":"准备","fontSize":"30","color":"#ffffff"}}]},{"type":"Button","props":{"y":422.00000000000006,"x":552.9999999999999,"var":"closeBtn","stateNum":"2","skin":"assets/ui.button/btn_001.png"},"child":[{"type":"Text","props":{"y":17,"x":40,"text":"返回","fontSize":"30","color":"#ffffff"}}]}]};}
+		['uiView',function(){return this.uiView={"type":"View","props":{"y":30,"width":1136,"height":640},"child":[{"type":"Image","props":{"y":0,"x":0,"width":1136,"skin":"assets/ui.room/bg_table.png","height":640}},{"type":"Image","props":{"y":151.00000000000003,"x":155.99999999999991,"visible":false,"var":"yellowTable","skin":"assets/ui.room/bg_yellow.png"}},{"type":"Box","props":{"y":1.0000000000000207,"x":2.9999999999999587,"width":1144,"var":"functionsBox","height":643},"child":[{"type":"Image","props":{"y":-1,"x":-3,"skin":"assets/ui.room/img_upper.png"}},{"type":"Button","props":{"y":581,"x":2,"var":"chatBtn","stateNum":"1","skin":"assets/ui.room/icon_chat.png","labelSize":20}},{"type":"Button","props":{"y":581,"x":82,"var":"voiceChatBtn","stateNum":"1","skin":"assets/ui.room/icon_Voice2.png","labelSize":20}},{"type":"Button","props":{"y":581,"x":162,"var":"recordbtn","stateNum":"1","skin":"assets/ui.room/icon_Record.png","labelSize":20}},{"type":"Button","props":{"y":2,"x":1051,"var":"setupBtn","stateNum":"1","skin":"assets/ui.room/icon_setup.png","labelStrokeColor":"#ffffff","labelSize":20}},{"type":"Button","props":{"y":6,"x":992,"var":"gamePlayBtn","stateNum":"1","skin":"assets/ui.room/icon_gameplay.png","labelStrokeColor":"#ffffff","labelSize":20}},{"type":"Button","props":{"y":10,"x":14,"var":"menuBtn","stateNum":"1","skin":"assets/ui.room/icon_menu.png"}},{"type":"Image","props":{"y":13,"x":93,"var":"battery","skin":"assets/ui.room/icon_Battery.png"},"child":[{"type":"Image","props":{"y":3,"x":4,"skin":"assets/ui.room/icon_Battery2.png"}},{"type":"Image","props":{"y":3,"x":13,"skin":"assets/ui.room/icon_Battery2.png"}},{"type":"Image","props":{"y":3,"x":23,"skin":"assets/ui.room/icon_Battery2.png"}},{"type":"Image","props":{"y":3,"x":32.5,"skin":"assets/ui.room/icon_Battery2.png"}},{"type":"Image","props":{"y":3,"x":42,"skin":"assets/ui.room/icon_Battery2.png"}}]},{"type":"Image","props":{"y":8,"x":175,"var":"wifi","skin":"assets/ui.room/icon_WIFI.png"}},{"type":"Image","props":{"y":579,"x":-3.999999999999876,"width":1136,"skin":"assets/ui.room/img_upper.png","height":61}}]},{"type":"Box","props":{"y":95,"x":19,"width":1092,"var":"playersBox","height":481},"child":[{"type":"Sprite","props":{"y":382,"x":549,"name":"player_0"}},{"type":"Sprite","props":{"y":383,"x":799,"name":"player_1"}},{"type":"Sprite","props":{"y":309,"x":1011,"name":"player_2"}},{"type":"Sprite","props":{"y":118,"x":997,"name":"player_3"}},{"type":"Sprite","props":{"y":48,"x":800,"name":"player_4"}},{"type":"Sprite","props":{"y":46,"x":552,"name":"player_5"}},{"type":"Sprite","props":{"y":48,"x":275,"name":"player_6"}},{"type":"Sprite","props":{"y":117,"x":82,"name":"player_7"}},{"type":"Sprite","props":{"y":310,"x":83,"name":"player_8"}},{"type":"Sprite","props":{"y":382,"x":272,"name":"player_9"}},{"type":"Sprite","props":{"y":217,"x":542,"var":"deckNode"}},{"type":"Box","props":{"y":-91.00000000000001,"x":466.9999999999999,"width":183,"var":"ghostBox","height":50}}]},{"type":"Box","props":{"y":587,"x":337,"width":797,"visible":false,"var":"operationBox","height":50},"child":[{"type":"Button","props":{"y":9,"x":0,"var":"allOpenBtn","stateNum":"2","skin":"assets/ui.room/btn_04.png"},"child":[{"type":"Image","props":{"y":6,"x":21,"skin":"assets/ui.room/img_Open.png"}}]},{"type":"Button","props":{"y":9,"x":129,"var":"openOutsBtn","stateNum":"2","skin":"assets/ui.room/btn_01.png"},"child":[{"type":"Image","props":{"y":6,"x":20,"skin":"assets/ui.room/img_Openup.png"}}]},{"type":"Button","props":{"y":9,"x":255,"var":"outsBtn","stateNum":"2","skin":"assets/ui.room/btn_01.png"},"child":[{"type":"Image","props":{"y":6,"x":21,"skin":"assets/ui.room/img_supplement2.png"}}]},{"type":"Button","props":{"y":9,"x":386,"var":"outsActionBtn","stateNum":"2","skin":"assets/ui.room/btn_01.png"},"child":[{"type":"Image","props":{"y":7,"x":19,"skin":"assets/ui.room/img_Shuffling2.png"}}]},{"type":"Image","props":{"y":3,"x":661,"var":"unDoHostBtn","skin":"assets/ui.room/img_banker.png"},"child":[{"type":"Image","props":{"y":10,"x":13,"var":"tickImg","skin":"assets/ui.room/img_Tick.png"}}]}]},{"type":"Box","props":{"y":595,"x":339,"width":519,"visible":false,"var":"bidBox","height":45},"child":[{"type":"Button","props":{"stateNum":"2","skin":"assets/ui.room/btn_03.png","name":"bet_0","labelStrokeColor":"#ffffff","labelSize":25,"labelColors":"#ffffff","label":"1"}},{"type":"Button","props":{"y":1,"x":127,"stateNum":"2","skin":"assets/ui.room/btn_03.png","name":"bet_1","labelSize":25,"labelColors":"#ffffff","label":"2"}},{"type":"Button","props":{"y":2,"x":253,"stateNum":"2","skin":"assets/ui.room/btn_03.png","name":"bet_2","labelSize":25,"labelColors":"#ffffff","label":"3"}},{"type":"Button","props":{"y":2,"x":385,"stateNum":"2","skin":"assets/ui.room/btn_03.png","name":"bet_3","labelSize":25,"labelColors":"#ffffff","label":"4"}}]},{"type":"Box","props":{"y":244,"x":405,"width":313,"var":"startBox","height":189},"child":[{"type":"Label","props":{"y":2,"x":57,"text":"房间号：","fontSize":30,"font":"Arial","color":"#ffffff"}},{"type":"Label","props":{"y":5.999999999999972,"x":166.0000000000001,"var":"roomIdLab","text":"4444444","fontSize":30,"font":"Arial","color":"#ffffff"}},{"type":"Button","props":{"y":59.99999999999994,"x":59.00000000000034,"var":"readyBtn","stateNum":"2","skin":"assets/ui.room/btn_03.png"},"child":[{"type":"Text","props":{"y":7,"x":5,"width":82,"var":"readyLab","text":"准备","height":25,"fontSize":"20","color":"#ffffff","align":"center"}}]},{"type":"Button","props":{"y":59.99999999999994,"x":182.9999999999999,"var":"closeBtn","stateNum":"2","skin":"assets/ui.room/btn_04.png"},"child":[{"type":"Text","props":{"y":9,"x":26,"text":"返回","fontSize":"20","color":"#ffffff"}}]}]}]};}
 		]);
 		return GameRoomViewUI;
 	})(View);

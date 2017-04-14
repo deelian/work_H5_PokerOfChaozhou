@@ -14,6 +14,10 @@
     root.extend(Poker.prototype, {
         isJoker: function() {
             return this.type === Poker.TYPE.JOKER;
+        },
+        
+        setShow: function(type) {
+            this.showTarget = type;
         }
     });
 
@@ -30,4 +34,10 @@
     Poker.VALUES[Poker.TYPE.CLUB]    = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
     Poker.VALUES[Poker.TYPE.HEART]   = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
     Poker.VALUES[Poker.TYPE.SPADE]   = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
+
+    Poker.SHOW_TARGET = {
+        NONE    : 0,
+        ME      : 1,
+        ALL     : 2
+    }
 } (DejuPoker));

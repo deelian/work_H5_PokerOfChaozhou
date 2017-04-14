@@ -20,6 +20,7 @@ var UIManager = (function(_super) {
         else {
             this.gameRoomView = new GameRoomView(data);
             App.sceneLayer.addChild(this.gameRoomView);
+            App.tableManager.saveGameRoom(this.gameRoomView);
         }
     };
 

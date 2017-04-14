@@ -226,7 +226,7 @@ var Application = (function (_super) {
                     return;
                 }
 
-                App.uiManager.runGameRoomView(data);
+                self.uiManager.runGameRoomView(data);
             })
         );
     };

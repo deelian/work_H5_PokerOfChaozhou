@@ -44,7 +44,7 @@ proto.enterRoom = function(session, roomID, callback) {
         .getChannel(roomID, true)
         .add(session.uid, session.frontendId);
 
-    callback(null, room.clone());
+    callback(null, room.infoToPlayer(userID));
 };
 
 proto.leaveRoom = function(session, callback) {

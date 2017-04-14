@@ -45,6 +45,11 @@ var AssetsManager = (function(_super) {
         {
             url: "assets/atlas/assets/ui.main.json",
             type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.room.json",
+            type: Laya.Loader.ATLAS
         }
     ];
     

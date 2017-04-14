@@ -5714,3 +5714,1071 @@
 
 [32m[2017-04-13 18:12:22.675] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 295 ms
 
+[36m[2017-04-13 18:33:14.301] [gate-server-1] [DEBUG] pomelo -[39m gate-server-1 receive removeServer signal: {"action":"removeServer","id":"room-server-1"}
+
+[32m[2017-04-14 11:05:08.441] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 11:05:11.394] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 11:05:11.439] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 11:05:16.670] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 11:05:16.670] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 8223 ms
+
+[36m[2017-04-14 11:05:16.671] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":7856}}
+
+[36m[2017-04-14 11:05:16.674] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7864}}
+
+[36m[2017-04-14 11:05:16.674] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":7888}}
+
+[36m[2017-04-14 11:05:16.675] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7988}}
+
+[36m[2017-04-14 11:05:19.596] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 11:05:19.621] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139119616}}
+
+[36m[2017-04-14 11:05:19.623] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:05:19.642] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:05:19.649] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 11:05:25.208] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 11:05:25.255] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139125251}}
+
+[36m[2017-04-14 11:05:25.256] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:05:25.256] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:05:25.262] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 11:06:41.107] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 11:06:41.149] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139201145}}
+
+[36m[2017-04-14 11:06:41.150] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:06:41.150] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:06:41.157] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[36m[2017-04-14 11:06:53.225] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 4
+
+[36m[2017-04-14 11:06:53.272] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 4, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139213268}}
+
+[36m[2017-04-14 11:06:53.272] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:06:53.272] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [4], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:06:53.278] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 4
+
+[36m[2017-04-14 11:09:32.921] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 5
+
+[36m[2017-04-14 11:09:32.959] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 5, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139372955}}
+
+[36m[2017-04-14 11:09:32.960] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:09:32.960] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:09:32.967] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 5
+
+[36m[2017-04-14 11:09:42.287] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 6
+
+[36m[2017-04-14 11:09:42.340] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 6, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139382337}}
+
+[36m[2017-04-14 11:09:42.340] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:09:42.341] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [6], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:09:42.347] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 6
+
+[36m[2017-04-14 11:10:27.937] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 7
+
+[36m[2017-04-14 11:10:27.975] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 7, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139427969}}
+
+[36m[2017-04-14 11:10:27.975] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:10:27.975] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:10:27.983] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 7
+
+[36m[2017-04-14 11:10:35.670] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 8
+
+[36m[2017-04-14 11:10:35.719] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 8, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139435712}}
+
+[36m[2017-04-14 11:10:35.719] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:10:35.720] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [8], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:10:35.734] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 8
+
+[36m[2017-04-14 11:10:47.036] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 9
+
+[36m[2017-04-14 11:10:47.072] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 9, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139447069}}
+
+[36m[2017-04-14 11:10:47.072] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:10:47.072] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [9], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:10:47.076] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 9
+
+[36m[2017-04-14 11:10:55.786] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 10
+
+[36m[2017-04-14 11:10:55.828] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 10, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139455824}}
+
+[36m[2017-04-14 11:10:55.828] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:10:55.829] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [10], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:10:55.841] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 10
+
+[36m[2017-04-14 11:11:07.437] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 11
+
+[36m[2017-04-14 11:11:07.479] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 11, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139467473}}
+
+[36m[2017-04-14 11:11:07.479] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:11:07.479] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [11], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:11:07.514] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 11
+
+[36m[2017-04-14 11:11:13.803] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 12
+
+[36m[2017-04-14 11:11:13.861] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 12, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139473857}}
+
+[36m[2017-04-14 11:11:13.862] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:11:13.862] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [12], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:11:13.869] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 12
+
+[36m[2017-04-14 11:11:22.889] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 13
+
+[36m[2017-04-14 11:11:22.937] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 13, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139482934}}
+
+[36m[2017-04-14 11:11:22.938] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:11:22.938] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [13], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:11:22.977] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 13
+
+[36m[2017-04-14 11:11:40.036] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 14
+
+[36m[2017-04-14 11:11:40.082] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 14, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139500079}}
+
+[36m[2017-04-14 11:11:40.083] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:11:40.083] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [14], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:11:40.121] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 14
+
+[36m[2017-04-14 11:11:48.518] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 15
+
+[36m[2017-04-14 11:11:48.563] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 15, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139508560}}
+
+[36m[2017-04-14 11:11:48.564] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:11:48.564] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [15], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:11:48.581] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 15
+
+[36m[2017-04-14 11:12:35.618] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 16
+
+[36m[2017-04-14 11:12:35.669] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 16, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492139555665}}
+
+[36m[2017-04-14 11:12:35.669] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:12:35.669] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [16], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:12:35.673] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 16
+
+[36m[2017-04-14 11:12:56.232] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 17
+
+[36m[2017-04-14 11:12:56.307] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 17, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492139576289}}
+
+[36m[2017-04-14 11:12:56.307] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:12:56.308] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [17], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:12:56.314] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 17
+
+[36m[2017-04-14 11:13:13.923] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 18
+
+[36m[2017-04-14 11:13:13.995] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 18, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492139593991}}
+
+[36m[2017-04-14 11:13:13.996] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:13:13.996] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [18], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:13:14.080] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 18
+
+[36m[2017-04-14 11:13:14.516] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 19
+
+[36m[2017-04-14 11:13:14.564] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 19, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492139594560}}
+
+[36m[2017-04-14 11:13:14.564] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:13:14.564] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [19], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:13:14.578] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 19
+
+[36m[2017-04-14 11:14:51.814] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 20
+
+[36m[2017-04-14 11:14:51.887] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 20, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"4a8a5683-a4c2-41f4-bd2f-372ee974a143","timestamp":1492139691865}}
+
+[36m[2017-04-14 11:14:51.887] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:14:51.888] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [20], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:14:51.896] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 20
+
+[36m[2017-04-14 11:15:01.866] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 21
+
+[36m[2017-04-14 11:15:01.911] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 21, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492139701907}}
+
+[36m[2017-04-14 11:15:01.912] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 11:15:01.912] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [21], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 11:15:01.919] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 21
+
+[36m[2017-04-14 12:16:52.250] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 22
+
+[36m[2017-04-14 12:16:52.306] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 22, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492143412301}}
+
+[36m[2017-04-14 12:16:52.306] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 12:16:52.306] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [22], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 12:16:52.314] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 22
+
+[36m[2017-04-14 12:17:00.808] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 23
+
+[36m[2017-04-14 12:17:00.840] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 23, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492143420837}}
+
+[36m[2017-04-14 12:17:00.840] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 12:17:00.840] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [23], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 12:17:00.848] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 23
+
+[36m[2017-04-14 12:17:01.393] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 24
+
+[36m[2017-04-14 12:17:01.437] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 24, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492143421433}}
+
+[36m[2017-04-14 12:17:01.437] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 12:17:01.438] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [24], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 12:17:01.447] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 24
+
+[32m[2017-04-14 14:32:22.526] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 14:32:22.757] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:32:22.780] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 14:32:23.073] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 14:32:23.073] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 543 ms
+
+[36m[2017-04-14 14:32:23.075] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":4712}}
+
+[36m[2017-04-14 14:32:23.150] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8520}}
+
+[36m[2017-04-14 14:32:23.238] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8436}}
+
+[36m[2017-04-14 14:32:23.329] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":4564}}
+
+[36m[2017-04-14 14:32:23.404] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":3916}}
+
+[36m[2017-04-14 14:32:23.491] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8740}}
+
+[36m[2017-04-14 14:32:23.641] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6380}}
+
+[36m[2017-04-14 14:32:26.105] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 14:32:26.185] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492151546180}}
+
+[36m[2017-04-14 14:32:26.186] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:32:26.188] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:32:26.197] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 14:32:43.708] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 14:32:43.745] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492151563742}}
+
+[36m[2017-04-14 14:32:43.746] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:32:43.746] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:32:43.749] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 14:32:51.741] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 14:32:51.790] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492151571785}}
+
+[36m[2017-04-14 14:32:51.790] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:32:51.790] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:32:51.874] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[36m[2017-04-14 14:32:52.339] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 4
+
+[36m[2017-04-14 14:32:52.385] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 4, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492151572381}}
+
+[36m[2017-04-14 14:32:52.385] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:32:52.385] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [4], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:32:52.405] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 4
+
+[36m[2017-04-14 14:39:49.490] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 5
+
+[36m[2017-04-14 14:39:49.537] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 5, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492151989534}}
+
+[36m[2017-04-14 14:39:49.538] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:39:49.538] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:39:49.545] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 5
+
+[36m[2017-04-14 14:39:55.600] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 6
+
+[36m[2017-04-14 14:39:55.635] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 6, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492151995632}}
+
+[36m[2017-04-14 14:39:55.635] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:39:55.636] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [6], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:39:55.645] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 6
+
+[36m[2017-04-14 14:39:56.200] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 7
+
+[36m[2017-04-14 14:39:56.245] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 7, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492151996242}}
+
+[36m[2017-04-14 14:39:56.245] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:39:56.245] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:39:56.265] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 7
+
+[36m[2017-04-14 14:40:49.499] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 8
+
+[36m[2017-04-14 14:40:49.556] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 8, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492152049552}}
+
+[36m[2017-04-14 14:40:49.557] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:40:49.557] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [8], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:40:49.561] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 8
+
+[36m[2017-04-14 14:41:00.932] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 9
+
+[36m[2017-04-14 14:41:00.979] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 9, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492152060975}}
+
+[36m[2017-04-14 14:41:00.980] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:41:00.980] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [9], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:41:00.993] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 9
+
+[32m[2017-04-14 14:42:54.710] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 14:42:55.123] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:42:55.177] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 14:42:55.283] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 14:42:55.283] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 568 ms
+
+[36m[2017-04-14 14:42:55.498] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":496}}
+
+[36m[2017-04-14 14:42:58.060] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 14:42:58.101] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492152178095}}
+
+[36m[2017-04-14 14:42:58.102] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:42:58.105] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:42:58.116] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 14:43:03.282] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 14:43:03.322] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492152183316}}
+
+[36m[2017-04-14 14:43:03.322] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:43:03.322] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:43:03.336] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 14:43:03.930] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 14:43:03.974] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492152183970}}
+
+[36m[2017-04-14 14:43:03.974] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:43:03.974] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:43:03.992] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[32m[2017-04-14 14:44:08.223] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 14:44:08.584] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:44:08.642] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 14:44:08.776] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 14:44:08.776] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 548 ms
+
+[36m[2017-04-14 14:44:08.778] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8528}}
+
+[36m[2017-04-14 14:44:08.832] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9628}}
+
+[36m[2017-04-14 14:44:08.934] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7868}}
+
+[36m[2017-04-14 14:44:09.301] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":1548}}
+
+[36m[2017-04-14 14:44:14.376] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 14:44:14.413] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492152254405}}
+
+[36m[2017-04-14 14:44:14.413] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:44:14.416] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:44:14.431] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 14:44:21.915] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 14:44:21.962] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492152261958}}
+
+[36m[2017-04-14 14:44:21.962] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:44:21.962] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:44:22.046] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 14:44:22.512] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 14:44:22.562] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492152262560}}
+
+[36m[2017-04-14 14:44:22.563] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:44:22.563] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:44:22.568] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[32m[2017-04-14 14:53:00.056] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 14:53:00.335] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:53:00.393] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 14:53:00.520] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 14:53:00.520] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 459 ms
+
+[36m[2017-04-14 14:53:00.521] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7472}}
+
+[36m[2017-04-14 14:53:00.521] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":7736}}
+
+[36m[2017-04-14 14:53:00.532] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":9112}}
+
+[36m[2017-04-14 14:53:00.636] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9104}}
+
+[36m[2017-04-14 14:53:00.721] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":9672}}
+
+[36m[2017-04-14 14:53:00.739] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":8184}}
+
+[36m[2017-04-14 14:53:01.865] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 14:53:01.909] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492152781904}}
+
+[36m[2017-04-14 14:53:01.910] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:53:01.912] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:53:01.920] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 14:53:10.839] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 14:53:10.872] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492152790870}}
+
+[36m[2017-04-14 14:53:10.872] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:53:10.873] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:53:10.882] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 14:53:11.453] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 14:53:11.498] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492152791496}}
+
+[36m[2017-04-14 14:53:11.499] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:53:11.499] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:53:11.515] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[32m[2017-04-14 14:54:21.046] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 14:54:21.332] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 14:54:21.366] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 14:54:21.580] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 14:54:21.580] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 528 ms
+
+[36m[2017-04-14 14:54:21.621] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9408}}
+
+[36m[2017-04-14 14:54:21.730] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":7524}}
+
+[36m[2017-04-14 14:54:21.795] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8096}}
+
+[36m[2017-04-14 14:54:21.811] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":2776}}
+
+[36m[2017-04-14 14:54:22.144] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":9704}}
+
+[36m[2017-04-14 14:54:22.204] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7164}}
+
+[36m[2017-04-14 14:54:22.981] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 14:54:23.030] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492152863023}}
+
+[36m[2017-04-14 14:54:23.031] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:54:23.033] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:54:23.057] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 14:54:31.099] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 14:54:31.141] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492152871138}}
+
+[36m[2017-04-14 14:54:31.141] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 14:54:31.142] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 14:54:31.152] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[32m[2017-04-14 15:10:06.924] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 15:10:07.347] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:10:07.375] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 15:10:07.510] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 15:10:07.510] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 582 ms
+
+[36m[2017-04-14 15:10:07.550] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":6760}}
+
+[36m[2017-04-14 15:10:07.561] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":10032}}
+
+[36m[2017-04-14 15:10:07.622] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9232}}
+
+[36m[2017-04-14 15:10:07.752] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8976}}
+
+[36m[2017-04-14 15:10:09.683] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 15:10:09.738] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492153809731}}
+
+[36m[2017-04-14 15:10:09.738] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 15:10:09.741] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 15:10:09.762] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 15:10:18.775] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 15:10:18.817] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492153818815}}
+
+[36m[2017-04-14 15:10:18.818] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 15:10:18.818] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 15:10:18.902] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 15:10:19.372] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 15:10:19.415] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492153819412}}
+
+[36m[2017-04-14 15:10:19.415] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 15:10:19.415] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 15:10:19.433] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[32m[2017-04-14 15:18:33.196] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 15:18:33.531] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:18:33.579] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 15:18:33.706] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 15:18:33.706] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 504 ms
+
+[36m[2017-04-14 15:18:33.723] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":7872}}
+
+[36m[2017-04-14 15:18:33.890] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":8056}}
+
+[36m[2017-04-14 15:18:34.019] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9360}}
+
+[36m[2017-04-14 15:18:34.395] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":10032}}
+
+[36m[2017-04-14 15:18:34.414] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":8936}}
+
+[36m[2017-04-14 15:18:34.749] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":9288}}
+
+[36m[2017-04-14 15:18:35.309] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 15:18:35.361] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492154315355}}
+
+[36m[2017-04-14 15:18:35.362] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 15:18:35.365] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 15:18:35.372] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 15:18:44.454] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 15:18:44.489] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492154324486}}
+
+[36m[2017-04-14 15:18:44.489] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 15:18:44.490] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 15:18:44.499] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 15:18:45.066] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 15:18:45.108] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492154325106}}
+
+[36m[2017-04-14 15:18:45.108] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 15:18:45.108] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 15:18:45.126] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[32m[2017-04-14 15:20:34.627] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 15:20:34.927] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:20:34.963] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 15:20:35.114] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 15:20:35.114] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 481 ms
+
+[36m[2017-04-14 15:20:35.115] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":11252}}
+
+[36m[2017-04-14 15:20:35.117] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":11180}}
+
+[36m[2017-04-14 15:20:35.120] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":11188}}
+
+[36m[2017-04-14 15:20:35.611] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":11220}}
+
+[36m[2017-04-14 15:20:35.653] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":11152}}
+
+[36m[2017-04-14 15:20:35.750] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":11236}}
+
+[36m[2017-04-14 15:20:36.189] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7876}}
+
+[36m[2017-04-14 15:20:36.362] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 15:20:36.436] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492154436429}}
+
+[36m[2017-04-14 15:20:36.436] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 15:20:36.439] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 15:20:36.450] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 15:21:17.614] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 15:21:17.651] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492154477648}}
+
+[36m[2017-04-14 15:21:17.652] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 15:21:17.652] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 15:21:17.661] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 15:21:18.229] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 15:21:18.270] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492154478268}}
+
+[36m[2017-04-14 15:21:18.270] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 15:21:18.270] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 15:21:18.279] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[32m[2017-04-14 15:58:27.829] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 15:58:28.345] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 15:58:28.424] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 15:58:28.548] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 15:58:28.548] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 714 ms
+
+[36m[2017-04-14 15:58:28.560] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":8188}}
+
+[36m[2017-04-14 15:58:28.572] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":9728}}
+
+[36m[2017-04-14 15:58:28.798] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10568}}
+
+[36m[2017-04-14 16:00:30.873] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 16:00:30.922] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492156830915}}
+
+[36m[2017-04-14 16:00:30.923] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 16:00:30.927] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 16:00:30.934] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 16:01:52.279] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 16:01:52.327] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492156912324}}
+
+[36m[2017-04-14 16:01:52.328] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 16:01:52.328] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 16:01:52.334] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 16:06:49.776] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 16:06:49.827] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492157209824}}
+
+[36m[2017-04-14 16:06:49.827] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 16:06:49.828] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 16:06:49.835] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[36m[2017-04-14 16:07:26.610] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 4
+
+[36m[2017-04-14 16:07:26.695] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 4
+
+[36m[2017-04-14 16:07:27.653] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 5
+
+[36m[2017-04-14 16:07:27.663] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 5, msg: {"id":3,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492157247660}}
+
+[36m[2017-04-14 16:07:27.663] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 16:07:27.663] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 3, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 16:07:27.670] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 5
+
+[36m[2017-04-14 16:08:11.009] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 6
+
+[36m[2017-04-14 16:08:11.067] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 6, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492157291063}}
+
+[36m[2017-04-14 16:08:11.068] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 16:08:11.068] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [6], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 16:08:11.075] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 6
+
+[36m[2017-04-14 16:14:13.533] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 7
+
+[36m[2017-04-14 16:14:13.592] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 7, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492157653587}}
+
+[36m[2017-04-14 16:14:13.592] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 16:14:13.592] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [7], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 16:14:13.599] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 7
+
+[36m[2017-04-14 16:14:34.682] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 8
+
+[36m[2017-04-14 16:14:34.767] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 8
+
+[36m[2017-04-14 16:14:35.547] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 9
+
+[36m[2017-04-14 16:14:35.561] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 9, msg: {"id":3,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492157675557}}
+
+[36m[2017-04-14 16:14:35.561] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 16:14:35.561] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 3, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [9], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 16:14:35.568] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 9
+
+[36m[2017-04-14 16:14:52.815] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 10
+
+[36m[2017-04-14 16:14:52.864] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 10, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492157692861}}
+
+[36m[2017-04-14 16:14:52.864] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 16:14:52.865] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [10], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 16:14:52.871] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 10
+
+[36m[2017-04-14 16:15:07.466] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 11
+
+[36m[2017-04-14 16:15:07.527] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 11, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492157707520}}
+
+[36m[2017-04-14 16:15:07.527] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 16:15:07.527] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [11], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 16:15:07.536] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 11
+
+[32m[2017-04-14 17:35:33.014] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 17:35:33.238] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:35:33.262] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 17:35:33.433] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 17:35:33.433] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 414 ms
+
+[36m[2017-04-14 17:35:33.583] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8724}}
+
+[36m[2017-04-14 17:35:33.619] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":9616}}
+
+[36m[2017-04-14 17:35:33.894] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":7572}}
+
+[36m[2017-04-14 17:35:33.907] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":6116}}
+
+[36m[2017-04-14 17:35:34.088] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":10708}}
+
+[36m[2017-04-14 17:35:34.139] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":10684}}
+
+[36m[2017-04-14 17:35:39.672] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 17:35:39.713] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492162539709}}
+
+[36m[2017-04-14 17:35:39.714] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:35:39.716] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:35:39.725] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 17:35:47.743] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 17:35:47.790] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492162547787}}
+
+[36m[2017-04-14 17:35:47.791] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:35:47.791] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:35:47.875] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 17:35:48.328] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 17:35:48.372] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492162548369}}
+
+[36m[2017-04-14 17:35:48.372] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:35:48.373] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:35:48.390] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[32m[2017-04-14 17:36:43.081] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 17:36:43.282] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:36:43.308] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 17:36:43.524] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 17:36:43.524] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 437 ms
+
+[36m[2017-04-14 17:36:43.526] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":6944}}
+
+[36m[2017-04-14 17:36:43.947] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"lobby-server-1","host":"127.0.0.1","port":6400,"clientHost":"127.0.0.1","serverType":"lobby","pid":11152}}
+
+[36m[2017-04-14 17:36:44.027] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8460}}
+
+[36m[2017-04-14 17:36:44.126] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":7580}}
+
+[36m[2017-04-14 17:36:44.278] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":4520}}
+
+[36m[2017-04-14 17:36:44.464] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":3312}}
+
+[36m[2017-04-14 17:36:44.730] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":9312}}
+
+[36m[2017-04-14 17:36:45.647] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 17:36:45.697] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492162605691}}
+
+[36m[2017-04-14 17:36:45.697] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:36:45.700] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:36:45.709] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 17:36:53.607] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 17:36:53.645] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492162613642}}
+
+[36m[2017-04-14 17:36:53.646] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:36:53.646] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:36:53.663] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 17:36:54.225] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 17:36:54.265] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492162614262}}
+
+[36m[2017-04-14 17:36:54.265] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:36:54.266] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:36:54.271] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[36m[2017-04-14 17:38:48.710] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 4
+
+[36m[2017-04-14 17:38:48.761] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 4, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492162728757}}
+
+[36m[2017-04-14 17:38:48.762] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:38:48.762] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [4], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:38:48.768] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 4
+
+[36m[2017-04-14 17:38:58.926] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 5
+
+[36m[2017-04-14 17:38:58.968] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 5, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492162738964}}
+
+[36m[2017-04-14 17:38:58.968] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:38:58.968] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [5], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:38:58.987] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 5
+
+[32m[2017-04-14 17:39:18.705] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 17:39:19.160] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:39:19.207] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 17:39:19.314] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 17:39:19.314] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 604 ms
+
+[36m[2017-04-14 17:39:19.399] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-2","host":"127.0.0.1","port":6101,"clientHost":"127.0.0.1","clientPort":8002,"frontend":"true","serverType":"connector","pid":8680}}
+
+[36m[2017-04-14 17:39:22.018] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 17:39:22.095] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 17:39:22.599] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 17:39:22.642] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 2, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492162762636}}
+
+[36m[2017-04-14 17:39:22.643] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:39:22.645] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [2], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:39:22.655] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 17:39:25.660] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 17:39:25.720] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492162765716}}
+
+[36m[2017-04-14 17:39:25.720] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:39:25.720] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:39:25.727] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[32m[2017-04-14 17:40:25.210] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 17:40:25.452] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:40:25.526] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 17:40:25.657] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 17:40:25.657] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 440 ms
+
+[36m[2017-04-14 17:40:25.664] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":10456}}
+
+[36m[2017-04-14 17:40:26.468] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 17:40:26.523] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492162826513}}
+
+[36m[2017-04-14 17:40:26.523] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:40:26.526] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:40:26.533] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 17:40:34.309] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 17:40:34.392] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 17:40:34.922] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 17:40:34.966] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492162834962}}
+
+[36m[2017-04-14 17:40:34.966] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:40:34.966] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8003}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:40:34.984] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+
+[32m[2017-04-14 17:53:24.520] [gate-server-1] [INFO] pomelo -[39m application inited: "gate-server-1"
+
+[32m[2017-04-14 17:53:24.945] [gate-server-1] [INFO] pomelo-admin -[39m try to connect master: "gate", "127.0.0.1", 6000
+
+[32m[2017-04-14 17:53:24.978] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" enter after start...
+
+[32m[2017-04-14 17:53:25.100] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" finish start
+
+[32m[2017-04-14 17:53:25.100] [gate-server-1] [INFO] pomelo -[39m "gate-server-1" startup in 575 ms
+
+[36m[2017-04-14 17:53:25.101] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"auth-server-1","host":"127.0.0.1","port":6300,"clientHost":"127.0.0.1","serverType":"auth","pid":8664}}
+
+[36m[2017-04-14 17:53:25.188] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":6100,"clientHost":"127.0.0.1","clientPort":8001,"frontend":"true","serverType":"connector","pid":6800}}
+
+[36m[2017-04-14 17:53:25.220] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"chat-server-1","host":"127.0.0.1","port":6200,"clientHost":"127.0.0.1","serverType":"chat","pid":2448}}
+
+[36m[2017-04-14 17:53:25.377] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"room-server-1","host":"127.0.0.1","port":6500,"clientHost":"127.0.0.1","serverType":"room","pid":8400}}
+
+[36m[2017-04-14 17:53:25.397] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] receive addServer signal: {"action":"addServer","server":{"main":"G:\\diuojiuPoker\\DejuPoker\\server\\app.js","env":"development","id":"connector-server-3","host":"127.0.0.1","port":6102,"clientHost":"127.0.0.1","clientPort":8003,"frontend":"true","serverType":"connector","pid":8440}}
+
+[36m[2017-04-14 17:53:28.908] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 1
+
+[36m[2017-04-14 17:53:28.950] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 1, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"0aaaac51-7929-4c2a-a6ae-f38c154ff750","timestamp":1492163608944}}
+
+[36m[2017-04-14 17:53:28.950] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:53:28.953] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8001}}, receivers: [1], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:53:28.963] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 1
+
+[36m[2017-04-14 17:53:36.002] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 2
+
+[36m[2017-04-14 17:53:36.085] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 2
+
+[36m[2017-04-14 17:53:36.528] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] getSession session is created with session id: 3
+
+[36m[2017-04-14 17:53:36.571] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] handleMessage session id: 3, msg: {"id":2,"route":"gate.handler.getEntry","body":{"udid":"5cf81138-72be-4532-9ec0-80af56b9840a","timestamp":1492163616568}}
+
+[36m[2017-04-14 17:53:36.571] [gate-server-1] [DEBUG] pomelo -[39m {"route":"gate.handler.getEntry","serverType":"gate","handler":"handler","method":"getEntry"}
+
+[36m[2017-04-14 17:53:36.572] [gate-server-1] [DEBUG] pomelo -[39m [gate-server-1] send message reqId: 2, route: gate.handler.getEntry, msg: {"code":200,"data":{"host":"127.0.0.1","port":8002}}, receivers: [3], opts: {"type":"response","userOptions":{},"isResponse":true}
+
+[36m[2017-04-14 17:53:36.586] [gate-server-1] [DEBUG] pomelo -[39m session on [gate-server-1] is closed with session id: 3
+

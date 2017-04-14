@@ -42,4 +42,14 @@
         ARBITRARILY:        0,  //任意下注
         MORE_THEN_MORE:     1   //一杠到底，要比之前的多
     };
+
+    // 要牌操作
+    Game.DRAW_COMMAND = {
+        OPEN:       0,      //明牌
+        PASS:       1,      //过牌
+        DRAW:       2,      //补牌
+        RUBBED:     3,      //搓牌
+        BET_ALL:    4,      //全开
+        BET_DRAW:   5       //开补
+    };
 }(DejuPoker));

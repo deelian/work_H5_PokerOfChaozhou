@@ -15,6 +15,8 @@
     var Poker = root.Poker;
     var Game = root.Game;
 
+    var Utils = root.Utils;
+
     var Client = function(opts) {
         opts = opts || {};
 
@@ -45,6 +47,7 @@
 
         this.deck           = null;                 // 整副牌
         this.ghostPokers    = null;                 // 桌面鬼牌
+        this.drawList       = opts.drawList || [];  // 要牌列表
 
         this.indicator      = opts.indicator || 0;  // 指示器
         this.clients        = {};                   // 客人列表
@@ -152,6 +155,10 @@
             return this.getClientState("end");
         },
 
+        getClientDraw: function() {
+            return this.drawList.length <= 0;
+        },
+
         //开局
         start: function(roomType) {
             //先拿出一副新牌
@@ -237,19 +244,122 @@
 
             this.clients[userID].bid = true;
             this.clients[userID].bidRate = rate;
-            return {userID: userID, bid: true, bidRate: rate};
+            for (var i in this.clients[userID].handPokers) {
+                this.clients[userID].handPokers[i].setShow(Poker.SHOW_TARGET.ME);
+            }
+            return {userID: userID, bidRate: rate};
+        },
+
+        clearDraw: function() {
+            this.drawList = [];
+        },
+
+        insertDraw: function(userID) {
+            if (!(this.drawList instanceof Array)) {
+                this.drawList = [];
+            }
+
+            this.drawList.push(userID);
         },
 
         show: function() {
 
         },
 
-        draw: function() {
+        draw: function(userID, type) {
+            //排队来
+            if (userID != this.drawList[0]) {
+                return null;
+            }
 
+            var client = this.clients[userID];
+            if (client == null) {
+                return null;
+            }
+
+            var i;
+            var results = {
+                userID: userID
+            };
+
+            switch (type) {
+                // 明牌 不补牌 直接将牌面公开
+                case Game.DRAW_COMMAND.OPEN: {
+                    for (i in client.handPokers) {
+                        client.handPokers.setShow(Poker.SHOW_TARGET.ALL);
+                    }
+                    break;
+                }
+                // 要一张牌
+                case Game.DRAW_COMMAND.DRAW: {
+                    var poker = this.deck.shift();
+                    poker.setShow(Poker.SHOW_TARGET.ME);
+                    client.handPokers.push(poker);
+                    break;
+                }
+                // 搓牌 要扣东西的
+                case Game.DRAW_COMMAND.RUBBED: {
+                    var poker = this.deck.shift();
+                    poker.setShow(Poker.SHOW_TARGET.ME);
+                    client.handPokers.push(poker);
+                    break;
+                }
+                // 过牌
+                default: {
+                    type = Game.DRAW_COMMAND.PASS;
+                    break;
+                }
+            }
+
+            this.drawList.shift();
+            results.type = type;
+
+            return results;
         },
 
         end: function() {
 
+        },
+
+        infoToPlayer: function(userID) {
+            var info = {};
+            info.ghostPokers = Utils.object_clone(this.ghostPokers);
+            info.drawList = Utils.object_clone(this.drawList);
+            info.indicator = this.indicator;
+            info.clients = {};
+            for (var uid in this.clients) {
+                info.clients[uid] = {};
+                var client = info.clients[uid];
+                client.userID   = this.clients[uid].userID;
+                client.ready    = this.clients[uid].ready;
+                client.started  = this.clients[uid].started;
+                client.bid      = this.clients[uid].bid;
+                client.bidRate  = this.clients[uid].bidRate;
+                client.end      = this.clients[uid].end;
+
+                client.handPokers = [];                        // 手牌
+                var showRight = Poker.SHOW_TARGET.ALL;
+                if (client.userID == userID) {
+                    showRight = Poker.SHOW_TARGET.ME;
+                }
+                if (this.clients[uid].handPokers) {
+                    for (var i = 0, size = this.clients[uid].handPokers.length; i < size; i++) {
+                        if (showRight > this.clients[uid].handPokers[i].showTarget) {
+                            client.handPokers.push({showTarget: this.clients[uid].handPokers[i].showTarget});
+                            continue;
+                        }
+                        client.handPokers.push(
+                            {
+                                type: this.clients[uid].handPokers[i].type,
+                                value: this.clients[uid].handPokers[i].value,
+                                showTarget: this.clients[uid].handPokers[i].showTarget
+                            }
+                        );
+                    }
+                }
+            }
+            
+            return info;
         }
     });
 }(DejuPoker));
