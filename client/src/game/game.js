@@ -1,4 +1,4 @@
-/*!  2017-03-24 */
+/*!  2017-04-12 */
 //! moment.js
 //! version : 2.11.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -4098,7 +4098,7 @@
         this;
 
     //Declare game's namespace
-    var Namespace = root.Game = root.dejuPoker = {};
+    var Namespace = root.Game = root.DejuPoker = {};
 
     Namespace.isNodeJS = (typeof exports === "object");
 
@@ -4232,7 +4232,7 @@
 
     Handler._pool=[];
     Handler._gid=1;
-})(dejuPoker);
+})(DejuPoker);
 
 (function(root){
     var _super = root.Handler;
@@ -4261,7 +4261,7 @@
     };
 
     EventHandler._pool = [];
-})(dejuPoker);
+})(DejuPoker);
 
 (function(root) {
     var EventHandler = root.EventHandler;
@@ -4416,7 +4416,7 @@
             }
         }
     };
-})(dejuPoker);
+})(DejuPoker);
 
 (function(root) {
     var _super = root.EventDispatcher;
@@ -4504,7 +4504,7 @@
             }
         }
     });
-}(dejuPoker));
+}(DejuPoker));
 
 (function(root) {
     var _super = root.Serialize;
@@ -4534,77 +4534,483 @@
             return this._properties[key];
         }
     });
-}(dejuPoker));
+}(DejuPoker));
 (function(root) {
+    root.wrapMsg = function(err, data) {
+        var msg = {};
+
+        if (err != null) {
+            msg.code = root.Code.FAILED;
+            msg.err  = err;
+            msg.msg  = "";
+        } else {
+            msg.code = root.Code.OK;
+            msg.data = data;
+        }
+
+        return msg;
+    };
+
+    root.ROUTE = {
+        ROOM: {
+            ENTER:              "room.enter",
+            STATE:              "room.state",
+            ACTION:             "room.action",
+            COMMAND:            "room.command"
+        }
+
+    };
+
     root.Code = {
         OK: 200,
         FAILED: 500,
         TIMEOUT: 1000,
 
-        MySQL: {
-            DB_ERROR: 1001,
-            RECORD_ERROR: 1002,
-            PROCEDURE_ERROR: 1003
+        SYSTEM: {
+            MySQL_ERROR:        1001,
+            REDIS_ERROR:        1002,
+            HTTP_ERROR:         1003,
+            CHANNEL_ERROR:      1004,
+            RPC_ERROR:          1005,
+            SESSION_ERROR:      1006
         },
 
-        REDIS: {
-            REDIS_ERROR: 1101
+        ROUTE: {
+            UNAUTHORIZED:       1101,
+            INVALID_PARAMS:     1102,
+            INVALID_SESSION:    1103
         },
 
-        HTTP: {
-            REQUEST_ERROR: 1201,
-            STATUS_ERROR: 1202,
-            BODY_ERROR: 1203
+        // 1200~1299
+        GATE: {
+            NOT_EXIST_ENTRY:    1201
         },
 
-        GAME_ERR: {
-            NOT_ENOUGH_GOLD:            10001,      //金币不足
-
-            NO_ERR:                     null        //没有错误 一般不用
-        },
-
+        // 1300~1399
         AUTH: {
 
         },
 
-        REQUEST: {
-            INVALID_PARAMS: 1500,
-            INVALID_SIGNATURE: 1501,
-            UNZIP_ERROR: 1502,
-            JSON_ERROR: 1503,
-            TOKEN_ERROR: 1504,
-            SDK_ERROR: 1505,
-            DATA_ERROR: 1506,
-            INVALID_PLATFORM: 1507,
-            INVALID_SERVER: 1508,
-            INTERNAL_ERROR: 1509
+        // 1400~1499
+        CONNECTOR: {
+
+        },
+
+        // 1500~1599
+        LOBBY: {
+
+        },
+
+        // 1600~1699
+        ROOM: {
+            NOT_EXIST:          1601,
+            NOT_IN_ROOM:        1602,
+            ALREADY_HAVE_ROOM:  1603
+
         }
     };
-}(dejuPoker));
+}(DejuPoker));
 (function(root) {
     var Game = root.Game = function() {
           
     };
 
-    Game.MAX_SKILL = 6;
-}(dejuPoker));
+    //*牌型倍数
+    Game.POKER_FORMATION_MULTIPLE = {
+        STRAIGHT_FLUSH: {min:4, max:10},//*同花顺
+        THREES: {min:4, max:10},//*三条
+        STRAIGHT: {min:4, max:10},//*顺子
+        DOUBLE_GHOST: {min:10, max:20}//*双鬼
+    };
+
+    //*定制模式设置(局数，点数倍率)
+    Game.CUSTOMIZED_SETTINGS = {
+        ROUND: {min:10, max:100, dValue:10},
+        POINT_MULTIPLE: {min:1, max: 10}
+    };
+
+    //牌型
+    Game.POKER_MODELS = {
+        PAIR:           'pair',             //对子
+        THREES:         'threes',           //三条
+        STRAIGHT:       'straight',         //顺子
+        FLUSH:          'flush',            //同花
+        STRAIGHT_FLUSH: 'straight_flush',   //同花顺
+        DOUBLE_GHOST:   'double_ghost',     //双鬼
+        GOD_NINE:       'god_nine',         //天公9
+        GOD_EIGHT:      'god_eight'         //天公8
+    };
+
+    //*房间类型(模式)
+    Game.ROOM_TYPE = {
+        STATIC:     0,          //长庄模式
+        CLASSICAL:  1,          //经典模式
+        CHAOS:      2,          //混战模式
+        CUSTOMIZED: 3           //定制模式
+    };
+
+    //*下注类型
+    Game.BET_TYPE = {
+        ARBITRARILY:        0,  //任意下注
+        MORE_THEN_MORE:     1   //一杠到底，要比之前的多
+    };
+}(DejuPoker));
+(function(root) {
+    var Utils = root.Utils = {};
+
+    //根据权重从列表中抽取礼品并且返回下标
+    Utils.calcWeight = function(list) {
+        //list 需要抽取的礼品列表
+        //格式 [ {xxx:xx, weight: 10}, {xxx:xx, weight: 20} ]  每个object里面至少要有一个weight
+        if (typeof list != "object" || !(list instanceof Array)) {
+            return null;
+        }
+
+        var i;
+        var row;
+        var result = 0;
+        var totalWeight = 0;
+
+        for (i = 0; i < list.length; i++) {
+            row = list[i];
+            if (row.weight > 0) {
+                totalWeight += row.weight;
+            }
+        }
+
+        if (totalWeight <= 0) {
+            return null;
+        }
+
+        var rand = Math.floor(Math.random() *  totalWeight);
+        for (i = 0; i < list.length; i++) {
+            row = list[i];
+            if (rand < row.weight) {
+                result = i;
+                break;
+            }
+
+            rand -= row.weight;
+        }
+
+        return result;
+    };
+
+    //返回 min~max之间的一个数 不包含max 如果需要包含最大值 可在调用的时候max为你需要的最大值+1
+    Utils.range_value = function(min, max) {
+        return Math.floor(Math.random()*(max-min) + min);
+    };
+
+    //返回 0~max之间的一个数 不包含max
+    Utils.random_number = function(max) {
+        return Utils.range_value(0, max);
+    };
+
+    // 将数字的小数点转换成A (replaceSymbol：被替换的字符，transformSymbol：替换后的字符)
+    Utils.transform_font_type = function(number, replaceSymbol, transformSymbol) {
+        var str = String(number);
+        var transformStr = transformSymbol || "A";
+        var replaceStr = replaceSymbol || ".";
+
+        return str.replace(replaceStr,transformStr);
+    };
+
+    // 分割数字，每3位加个逗号
+    Utils.format_by_comma = function(number) {
+        var str = String(number);
+        var newStr = "";
+        
+        var format = function(params) {
+            var resultStr = "";
+            var count = 0;
+            for (var index = params.length-1 ; index >= 0 ; index--) {
+                if (count % 3 == 0 && count != 0) {
+                    resultStr = params.charAt(index) + "," + resultStr;
+                }
+                else {
+                    resultStr = params.charAt(index) + resultStr;
+                }
+                count++;
+            }
+            return resultStr;
+        };
+
+
+        if (str.indexOf(".") == -1) {
+            newStr = format(str);
+        }
+        else {
+            // 小数点后的数字
+            var commaRight = str.slice(str.indexOf("."));
+
+            // 小数点前的数字
+            var commaLeft = str.slice(0,str.indexOf("."));
+
+            newStr = format(commaLeft);
+            newStr += commaRight;
+        }
+        
+        return newStr;
+    };
+
+    //随机生成一个N位数字
+    Utils.gen_room_id = function(n) {
+        var id = "";
+        for (var i = 0; i < n; i++) {
+            id += Utils.random_number(10);
+        }
+        
+        return id;
+    };
+
+    Utils.object_clone = function(obj) {
+        if (obj == null || typeof obj != "object") {
+            return obj;
+        }
+        return JSON.parse(JSON.stringify(obj));
+    };
+}(DejuPoker));
+(function(root) {
+    /*
+     I've wrapped Makoto Matsumoto and Takuji Nishimura's code in a namespace
+     so it's better encapsulated. Now you can have multiple random number generators
+     and they won't stomp all over eachother's state.
+
+     If you want to use this as a substitute for Math.random(), use the random()
+     method like so:
+
+     var m = new MersenneTwister();
+     var randomNumber = m.random();
+
+     You can also call the other genrand_{foo}() methods on the instance.
+
+     If you want to use a specific seed in order to get a repeatable random
+     sequence, pass an integer into the constructor:
+
+     var m = new MersenneTwister(123);
+
+     and that will always produce the same random sequence.
+
+     Sean McCullough (banksean@gmail.com)
+     */
+    /*
+     A C-program for MT19937, with initialization improved 2002/1/26.
+     Coded by Takuji Nishimura and Makoto Matsumoto.
+
+     Before using, initialize the state by using init_genrand(seed)
+     or init_by_array(init_key, key_length).
+
+     Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura,
+     All rights reserved.
+
+     Redistribution and use in source and binary forms, with or without
+     modification, are permitted provided that the following conditions
+     are met:
+
+     1. Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+
+     2. Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the distribution.
+
+     3. The names of its contributors may not be used to endorse or promote
+     products derived from this software without specific prior written
+     permission.
+
+     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+     "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+     LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+     A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+     CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+     EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+     PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+     PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+     LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+     NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+     Any feedback is very welcome.
+     http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
+     email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)
+     */
+    var MersenneTwister = root.MersenneTwister = function(seed) {
+        if (seed == undefined) {
+            seed = new Date().getTime();
+        }
+        /* Period parameters */
+        this.N = 624;
+        this.M = 397;
+        this.MATRIX_A = 0x9908b0df; /* constant vector a */
+        this.UPPER_MASK = 0x80000000; /* most significant w-r bits */
+        this.LOWER_MASK = 0x7fffffff; /* least significant r bits */
+
+        this.mt = new Array(this.N); /* the array for the state vector */
+        this.mti = this.N + 1; /* mti==N+1 means mt[N] is not initialized */
+
+        this.init_genrand(seed);
+    };
+
+    /* initializes mt[N] with a seed */
+    MersenneTwister.prototype.init_genrand = function(s) {
+        this.mt[0] = s >>> 0;
+        for (this.mti = 1; this.mti < this.N; this.mti++) {
+            var s = this.mt[this.mti - 1] ^ (this.mt[this.mti - 1] >>> 30);
+            this.mt[this.mti] = (((((s & 0xffff0000) >>> 16) * 1812433253) << 16) + (s & 0x0000ffff) * 1812433253) + this.mti;
+            /* See Knuth TAOCP Vol2. 3rd Ed. P.106 for multiplier. */
+            /* In the previous versions, MSBs of the seed affect   */
+            /* only MSBs of the array mt[].                        */
+            /* 2002/01/09 modified by Makoto Matsumoto             */
+            this.mt[this.mti] >>>= 0;
+            /* for >32 bit machines */
+        }
+    };
+
+    /* initialize by an array with array-length */
+    /* init_key is the array for initializing keys */
+    /* key_length is its length */
+    /* slight change for C++, 2004/2/26 */
+    MersenneTwister.prototype.init_by_array = function(init_key, key_length) {
+        var i, j, k;
+        this.init_genrand(19650218);
+        i = 1;
+        j = 0;
+        k = (this.N > key_length ? this.N : key_length);
+        for (; k; k--) {
+            var s = this.mt[i - 1] ^ (this.mt[i - 1] >>> 30)
+            this.mt[i] = (this.mt[i] ^ (((((s & 0xffff0000) >>> 16) * 1664525) << 16) + ((s & 0x0000ffff) * 1664525))) + init_key[j] + j; /* non linear */
+            this.mt[i] >>>= 0; /* for WORDSIZE > 32 machines */
+            i++;
+            j++;
+            if (i >= this.N) {
+                this.mt[0] = this.mt[this.N - 1];
+                i = 1;
+            }
+            if (j >= key_length) j = 0;
+        }
+        for (k = this.N - 1; k; k--) {
+            var s = this.mt[i - 1] ^ (this.mt[i - 1] >>> 30);
+            this.mt[i] = (this.mt[i] ^ (((((s & 0xffff0000) >>> 16) * 1566083941) << 16) + (s & 0x0000ffff) * 1566083941)) - i; /* non linear */
+            this.mt[i] >>>= 0; /* for WORDSIZE > 32 machines */
+            i++;
+            if (i >= this.N) {
+                this.mt[0] = this.mt[this.N - 1];
+                i = 1;
+            }
+        }
+
+        this.mt[0] = 0x80000000; /* MSB is 1; assuring non-zero initial array */
+    };
+
+    /* generates a random number on [0,0xffffffff]-interval */
+    MersenneTwister.prototype.genrand_int32 = function() {
+        var y;
+        var mag01 = new Array(0x0, this.MATRIX_A);
+        /* mag01[x] = x * MATRIX_A  for x=0,1 */
+
+        if (this.mti >= this.N) { /* generate N words at one time */
+            var kk;
+
+            if (this.mti == this.N + 1) /* if init_genrand() has not been called, */
+                this.init_genrand(5489); /* a default initial seed is used */
+
+            for (kk = 0; kk < this.N - this.M; kk++) {
+                y = (this.mt[kk] & this.UPPER_MASK) | (this.mt[kk + 1] & this.LOWER_MASK);
+                this.mt[kk] = this.mt[kk + this.M] ^ (y >>> 1) ^ mag01[y & 0x1];
+            }
+            for (; kk < this.N - 1; kk++) {
+                y = (this.mt[kk] & this.UPPER_MASK) | (this.mt[kk + 1] & this.LOWER_MASK);
+                this.mt[kk] = this.mt[kk + (this.M - this.N)] ^ (y >>> 1) ^ mag01[y & 0x1];
+            }
+            y = (this.mt[this.N - 1] & this.UPPER_MASK) | (this.mt[0] & this.LOWER_MASK);
+            this.mt[this.N - 1] = this.mt[this.M - 1] ^ (y >>> 1) ^ mag01[y & 0x1];
+
+            this.mti = 0;
+        }
+
+        y = this.mt[this.mti++];
+
+        /* Tempering */
+        y ^= (y >>> 11);
+        y ^= (y << 7) & 0x9d2c5680;
+        y ^= (y << 15) & 0xefc60000;
+        y ^= (y >>> 18);
+
+        return y >>> 0;
+    };
+
+    /* generates a random number on [0,0x7fffffff]-interval */
+    MersenneTwister.prototype.genrand_int31 = function() {
+        return (this.genrand_int32() >>> 1);
+    };
+
+    /* generates a random number on [0,1]-real-interval */
+    MersenneTwister.prototype.genrand_real1 = function() {
+        return this.genrand_int32() * (1.0 / 4294967295.0);
+        /* divided by 2^32-1 */
+    };
+
+    /* generates a random number on [0,1)-real-interval */
+    MersenneTwister.prototype.random = function() {
+        return this.genrand_int32() * (1.0 / 4294967296.0);
+        /* divided by 2^32 */
+    };
+
+    /* generates a random number on (0,1)-real-interval */
+    MersenneTwister.prototype.genrand_real3 = function() {
+        return (this.genrand_int32() + 0.5) * (1.0 / 4294967296.0);
+        /* divided by 2^32 */
+    };
+
+    /* generates a random number on [0,1) with 53-bit resolution*/
+    MersenneTwister.prototype.genrand_res53 = function() {
+        var a = this.genrand_int32() >>> 5,
+            b = this.genrand_int32() >>> 6;
+        return (a * 67108864.0 + b) * (1.0 / 9007199254740992.0);
+    };
+
+    MersenneTwister.prototype.range_value = function(min, max) {
+        return Math.floor(this.random()*(max-min) + min);
+    };
+
+    //range_value 是不包含max的, range_between 是包含max的
+    MersenneTwister.prototype.range_between = function(min, max) {
+        return this.range_value(min, max + 1);
+    };
+
+    MersenneTwister.prototype.random_number = function(max) {
+        return this.range_value(0, max);
+    };
+    /* These real versions are due to Isaku Wada, 2002/01/09 added */
+
+    // Export an instance
+    root.m = new MersenneTwister();
+})(DejuPoker);
+
 (function(root) {
     var _super = root.Serialize;
     var Player = root.Player = function(opts) {
         opts = opts || {};
-
-
+        
         this.id             = opts.id || 0;
-        this.name           = opts.name || "Guest";
-        this.balance        = opts.balance || 10000;
-        this.language       = opts.language || "zh-CN";
-
-        console.log(this);
+        this.name           = opts.name || "";
+        this.avatar         = opts.avatar || "";
+        this.tokens         = opts.tokens || 0;
+        this.gender         = opts.gender || 0;
     };
 
     root.inherits(Player, _super);
 
     root.extend(Player.prototype, {
+        setId: function(id) {
+            this.id = id;
+        },
+        
+        getId: function() {
+            return this.id;
+        },
+        
         update: function(opts) {
             var obj = this;
             opts = opts || {};
@@ -4615,14 +5021,759 @@
                     obj[key] = opts[key];
                 }
             }
-        },
-
-        setBalance: function(amount) {
-            this.balance = amount;
-        },
-
-        getBalance: function() {
-            return this.balance;
         }
     });
-} (dejuPoker));
+} (DejuPoker));
+
+(function(root) {
+    var _super = root.Serialize;
+    var Poker = root.Poker = function(opts) {
+        opts = opts || {};
+
+        this.value     = opts.value || 0;
+        this.type      = opts.type  || 0;
+    };
+
+    root.inherits(Poker, _super);
+
+    root.extend(Poker.prototype, {
+        isJoker: function() {
+            return this.type === Poker.TYPE.JOKER;
+        }
+    });
+
+    Poker.TYPE         = {};
+    Poker.TYPE.DIAMOND = 1;
+    Poker.TYPE.CLUB    = 2;
+    Poker.TYPE.HEART   = 3;
+    Poker.TYPE.SPADE   = 4;
+    Poker.TYPE.JOKER   = 5;
+
+    Poker.VALUES       = {};
+    Poker.VALUES[Poker.TYPE.JOKER]   = [ 14, 15, 16 ];              // 14 小王 15 大王 16 翻倍
+    Poker.VALUES[Poker.TYPE.DIAMOND] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
+    Poker.VALUES[Poker.TYPE.CLUB]    = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
+    Poker.VALUES[Poker.TYPE.HEART]   = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
+    Poker.VALUES[Poker.TYPE.SPADE]   = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
+} (DejuPoker));
+
+(function(root) {
+    var _super = root.Serialize;
+    var Deck = root.Deck = function(opts) {
+        opts = opts || {};
+
+        _super.call(this, opts);
+
+        this.pokers         = opts.pokers;
+
+        this.init();
+    };
+
+    root.inherits(Deck, _super);
+
+    root.extend(Deck.prototype, {
+        init: function(opts) {
+
+        }
+    });
+
+} (DejuPoker));
+/**
+ * Created by monkey on 2017/3/25.
+ * room
+ * ..players []
+ * ..pokerSet Object
+ * ..handPokers []
+ * ..ghostPokers []
+ * ..showOnPokers []
+ * ..setting {}
+ */
+
+(function(root){
+    var _super = root.Entity;
+
+    var Poker = root.Poker;
+    var Deck  = root.Deck;
+
+    var Client = function(opts) {
+        opts = opts || {};
+
+        _super.call(this, opts);
+
+        this.userID        = opts.userID || 0;          // id
+        this.ready         = opts.ready || false;       // 是否准备好
+        this.started       = opts.started || false;     // 是否开始过游戏
+        this.bid           = opts.bid || false;         // 是否下注
+        this.action        = opts.action || false;      // 是否操作过
+        this.end           = opts.end || false;         // 是否结束
+
+        this.handPokers    = [];                        // 手牌
+        if (opts.handPokers) {
+            for (var i = 0, size = opts.handPokers.length; i < size; i++) {
+                this.handPokers.push(
+                    new Poker(opts.handPokers[i])
+                );
+            }
+        }
+    };
+
+    var Table = root.Table = function(opts) {
+        opts = opts || {};
+
+        _super.call(this, opts);
+
+        this.deck           = null;                 // 整副牌
+        this.ghostPokers    = null;                 // 桌面鬼牌
+
+        this.indicator      = opts.indicator || 0;  // 指示器
+        this.clients        = {};                   // 客人列表
+
+        this.init(opts);
+    };
+
+    root.inherits(Table, _super);
+
+    root.extend(Table.prototype, {
+        init: function(opts) {
+            var i;
+            var size;
+
+            this.deck = opts.deck && [] || new Deck();
+            if (opts.deck) {
+                for (i = 0, size = opts.deck.length; i < size; i++) {
+                    this.deck.push(
+                        new Poker(opts.deck[i])
+                    );
+                }
+            }
+
+            this.ghostPokers = [];
+            if (opts.ghostPokers) {
+                for (i = 0, size = opts.ghostPokers.length; i < size; i++) {
+                    this.ghostPokers.push(
+                        new Poker(opts.ghostPokers[i])
+                    );
+                }
+            }
+
+            if (opts.clients) {
+                var keys = Object.keys(opts.clients);
+                for (i = 0, size = keys.length; i < size; i++) {
+                    var userID = keys[i];
+                    this.clients[userID] = new Client(opts.clients[i]);
+                }
+            }
+        },
+
+        enter: function(userID) {
+            var client = this.clients[userID];
+            if (client != null) {
+                return;
+            }
+
+            this.clients[userID] = new Client(userID);
+        },
+
+        leave: function(userID) {
+            delete this.clients[userID];
+        },
+
+        ready: function(userID, data) {
+            var client = this.clients[userID];
+            if (client == null) {
+                return null;
+            }
+
+            this.clients[userID].ready = data ? true : false;
+            return {userID: userID, ready: this.clients[userID].ready};
+        },
+
+        //是否全部客人都做了某操作
+        getClientState: function(state) {
+            var i;
+            var size;
+            var keys;
+
+            keys = Object.keys(this.clients);
+            size = keys.length;
+            // 一个人就不能成型
+            if (size <= 1) {
+                return false;
+            }
+
+            for (i = 0; i < size; i++) {
+                var userID = keys[i];
+                var client = this.clients[userID];
+
+                if (client[state] != true) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
+        getClientReady: function() {
+            return this.getClientState("ready");
+        },
+
+        getClientStarted: function() {
+            return this.getClientState("started");
+        },
+
+        getClientBid: function() {
+            return this.getClientState("bid");
+        },
+
+        getClientEnd: function() {
+            return this.getClientState("end");
+        },
+
+        //
+        start: function() {
+        },
+
+        shuffle: function() {
+
+        },
+
+        deal: function() {
+
+        },
+
+        bid: function() {
+
+        },
+
+        show: function() {
+
+        },
+
+        draw: function() {
+
+        },
+
+        end: function() {
+
+        }
+    });
+}(DejuPoker));
+
+(function(root){
+    var _super = root.Entity;
+
+    var Code = root.Code;
+    var ROUTE = root.ROUTE;
+    var Game = root.Game;
+    var Table = root.Table;
+    var Room = root.Room = function(opts) {
+        opts = opts || {};
+
+        _super.call(this, opts);
+
+        // private members
+        this._service           = opts.service;                      //房间服务
+        this._queue             = [];                                //消息队列
+        this._timerID           = null;                              //定时器
+
+        // public members
+        this.id                 = opts.id;
+        this.type               = opts.type;
+        this.settings           = opts.settings || {};
+        this.state              = opts.state || Room.STATE_READY;
+
+        this.host               = opts.host;                        //房主
+        this.members            = [];                               //玩家 [ userID, userID, ... ]
+        this.bids               = opts.bids || {};                  //下注倍数 { userID: bid, ... }
+
+        this.banker             = opts.banker || 0;                 //庄家 (0 - 无庄家 userID)
+
+        this.table              = null;                             //桌子
+
+        this.chairs             = opts.chairs || new Array(10);     //椅子 [ userID, userID, ... ]
+        this.maxChairs          = opts.maxChairs || 10;
+
+        this.round              = opts.round || 0;                  //局数
+        this.maxRound           = opts.maxRound || 10;
+
+        this.init(opts);
+    };
+
+    root.inherits(Room, _super);
+
+    Room.STATE_READY       = 0;             //准备
+    Room.STATE_START       = 1;             //开始
+    Room.STATE_DEALED      = 3;             //发了牌
+    Room.STATE_BID         = 4;             //下注
+    Room.STATE_DRAW        = 5;             //要牌
+    Room.STATE_END         = 6;             //结束
+    Room.STATE_CLOSED      = 7;             //完成
+    Room.STATE_DISMISS     = 8;             //解散
+
+    root.extend(Room.prototype, {
+        init: function(opts) {
+            var self = this;
+
+            // init table
+            if (this.state === Room.STATE_READY) {
+                this.ready();
+            }
+            else if (opts.table) {
+                this.table = new Table(opts.table);
+            }
+
+            // start timer 一段时间检查一下房间游戏进程
+            this._timerID = setInterval(function() {
+                self.update();
+            }, 100);
+        },
+
+        getMember: function(userID) {
+            return (this.members.indexOf(userID) != -1);
+        },
+
+        getMembers: function() {
+            return this.members;
+        },
+
+        sitDown: function(userID, pos) {
+            if (this.chairs.indexOf(userID) != -1) {
+                return -1;
+            }
+
+            if (pos != null && pos >= 0 && pos < this.maxChairs) {
+                this.chairs[pos] = userID;
+                return pos;
+            }
+
+            for (var i = 0, size = this.maxChairs; i < size; i++) {
+                if (this.chairs[i] != null) {
+                    continue;
+                }
+
+                this.chairs[i] = userID;
+
+                if (this.state === Room.STATE_READY) {
+                    this.table.enter(userID);
+                }
+
+                return i;
+            }
+
+            return -1;
+        },
+
+        standUp: function(userID) {
+            for (var i = 0, size = this.chairs.length; i < size; i++) {
+                if (this.chairs[i] === userID) {
+                    this.chairs[i] = null;
+                    this.table.leave(userID);
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        enter: function(userID) {
+            if (this.getMember(userID) === true) {
+                return false;
+            }
+
+            this.members.push(userID);
+            var pos = this.sitDown(userID);
+            this.broadcast(ROUTE.ROOM.ENTER, {userID: userID, pos: pos});
+        },
+
+        leave: function(userID) {
+            this.standUp(userID);
+
+            var index = this.members.indexOf(userID);
+            if (index != -1) {
+                this.members.splice(index, 1);
+            }
+        },
+
+        dismiss: function() {
+
+        },
+
+        ready: function() {
+            var i;
+            var size;
+
+            var table = new Table();
+
+            for (i = 0, size = this.chairs.length; i < size; i++) {
+                var userID = this.chairs[i];
+                if (userID == null) {
+                    continue;
+                }
+
+                table.enter(userID);
+            }
+
+            this.table = table;
+        },
+
+        destroy: function() {
+            if (this._timerID) {
+                clearInterval(this._timerID);
+                this._timerID = null;
+            }
+
+            this._service.destroyRoom(this.id);
+            this.table = null;
+            this.members = null;
+            this.chairs = null;
+            this.bids = null;
+        },
+
+        send: function(userID, route, msg, opts, cb) {
+            this._service && this._service.send(this.id, userID, route, msg, opts, cb);
+        },
+
+        broadcast: function(route, msg, opts, cb) {
+            this._service && this._service.broadcast(this.id, route, msg, opts, cb);
+        },
+
+        process: function() {
+            var results = [];
+
+            while (this._queue.length) {
+                // 从操作队列中获取第一个操作
+                var command = this._queue.shift();
+                var userID = command.id;
+                if (userID == null) {
+                    continue;
+                }
+
+                command.msg = command.msg || {};
+                var fn = command.msg.fn;
+                if (fn && typeof this.table[fn] === "function") {
+                    var result = this.table[fn](userID, command.msg.data);
+                    if (result != null) {
+                        results.push(result);
+                    }
+                }
+            }
+
+            if (results.length > 0) {
+                this.broadcast(ROUTE.ROOM.COMMAND, results);
+            }
+        },
+
+        queue: function(userID, msg) {
+            this._queue.push({
+                id: userID,
+                msg: msg
+            });
+        },
+
+        update: function() {
+            //更新前完成积压的所有工作
+            this.process();
+
+            switch (this.state) {
+                case Room.STATE_READY:
+                    if (this.table.getClientReady()) {
+                        this.state++;
+                    }
+                    break;
+                case Room.STATE_START:
+                    var msg = {};
+
+                    // 开始-洗牌-发牌
+                    this.table.start();
+                    this.table.shuffle();
+                    this.table.deal();
+
+                    this.state++;
+                    
+                    this.broadcast(ROUTE.ROOM.STATE, msg);
+                    break;
+                case Room.STATE_DEALED:
+                    if (this.table.getClientStarted()) {
+                        this.state++;
+                    }
+                    break;
+                case Room.STATE_BID:
+                    if (this.table.getClientBid()) {
+                        this.state++;
+                    }
+                    break;
+                case Room.STATE_DRAW:
+                    break;
+                case Room.STATE_END:
+                    if (this.table.getClientEnd()) {
+                        this.round++;
+
+                        if (this.round >= this.maxRound) {
+                            this.state = Room.STATE_CLOSED;
+                        } else {
+                            this.state = Room.STATE_READY;
+                        }
+                    }
+                    break;
+                case Room.STATE_CLOSED:
+                    this.destroy();
+                    break;
+                case Room.STATE_DISMISS:
+                    break;
+            }
+        }
+    });
+}(DejuPoker));
+
+//
+// (function(root){
+//     var _super = root.Entity;
+//
+//     var Game= root.Game;
+//     var PokerSet = root.PokerSet;
+//     var Utils = root.Utils;
+//
+//     var Room = root.Room = function(opts) {
+//         opts = opts || {};
+//
+//         _super.call(this, opts);
+//
+//         this.id                 = opts.id || 0;
+//         this.type               = opts.type || Game.ROOM_TYPE.STATIC;
+//         this.host               = opts.host;                        //房主
+//         this.players            = opts.players || [];
+//         this.banker             = opts.banker || 0;                 //庄家 默认是房主 -1为没有庄家
+//         this.pokerSet           = new PokerSet(opts.pokerSet);
+//         this.handPokers         = opts.handPokers || [];            //所有人的手牌
+//         this.ghostPokers        = opts.ghostPokers || [];           //翻出的鬼牌
+//         this.showOnPokers       = opts.showOnPokers || [];          //翻鬼牌时候翻出的牌 由于翻到joker需要重新翻 所以这里跟鬼牌可能会有区别
+//         this.setting            = {};
+//
+//         this.init(opts);
+//     };
+//
+//     root.inherits(Room, _super);
+//
+//     root.extend(Room.prototype, {
+//         init: function(opts) {
+//             var setting = opts.setting || {};
+//             this.setting.condition      = setting.condition || 0;                                           //经典模式上庄条件
+//             this.setting.times          = setting.times || 10;                                              //局数
+//             this.setting.ghostCount     = setting.ghostCount || 0;                                          //鬼牌数
+//             this.setting.betType        = setting.betType || Game.BET_TYPE.ARBITRARILY;                     //下注类型
+//             this.setting.universalGhost = setting.universalGhost || true;                                   //鬼牌万能
+//             this.setting.formationGhost = setting.formationGhost || {"god_nine":true, "god_eight":true};    //鬼牌成型
+//             this.setting.isDouble       = setting.isDouble || false;                                        //翻倍
+//             this.setting.zeroPoint      = setting.zeroPoint || {"three_zero":false, "two_zero":false};      //0点赢鬼牌
+//
+//             this.setting.pokerModels    = {};
+//             var pokerModels = opts.pokerModels || {};
+//             for (var i in Game.POKER_MODELS.POKER_MODELS) {
+//                 var modelKey = Game.POKER_MODELS.POKER_MODELS[i];
+//                 this.setting.pokerModels[modelKey] = pokerModels[modelKey] || 4;
+//             }
+//
+//             this.setting.pokerPoint     = [];
+//             var pokerPoint = opts.pokerPoint || [];
+//             for (var index = 0; index < pokerPoint.length; index++) {
+//                 this.setting.pokerPoint[index] = pokerPoint[index] || 1;
+//             }
+//         },
+//
+//         //给每一位坐下的玩家发一张牌
+//         deal: function() {
+//             var banker = this.banker || 0;
+//
+//             for (var i = 0; i < this.players.length; i++) {
+//                 //从庄家的下一位玩家开始发牌
+//                 var sitID = i + banker + 1;
+//                 if (sitID >= this.players.length) {
+//                     sitID = sitID - this.players.length;
+//                 }
+//
+//                 //暂时不判断是否站起
+//                 if (this.players[sitID]) {
+//                     if (this.handPokers[sitID] == null) {
+//                         this.handPokers[sitID] = [];
+//                     }
+//                     this.handPokers[sitID].push(this.pokerSet.extract());
+//                 }
+//             }
+//         },
+//
+//         //翻鬼牌 一直翻到有两张非joker的牌为止
+//         extractGhost: function() {
+//             this.ghostPokers = [];
+//             this.showOnPokers = [];
+//
+//             var ghostCount = 0;
+//             while (ghostCount < 2) {
+//                 var poker = this.pokerSet.extract();
+//                 if (poker.number != 0) {
+//                     this.ghostPokers.push(poker);
+//                     ghostCount++;
+//                 }
+//
+//                 this.showOnPokers.push(poker);
+//             }
+//         },
+//
+//         //已经在房间里就返回true
+//         isPlayerIn: function(playerId) {
+//             return this.players.indexOf(playerId) != -1;
+//         },
+//
+//         playerJoin: function(playerId) {
+//             var arrId = 0;
+//             while (true) {
+//                 if (this.players[arrId] == null) {
+//                     this.players[arrId] = playerId;
+//                     return;
+//                 }
+//                 arrId++;
+//             }
+//         },
+//
+//         //拷贝一份房间信息给玩家 针对这个玩家能看到的部分
+//         infoToPlayer: function(playerId) {
+//             var info = {};
+//             info.id = this.id;
+//             info.type = this.type;
+//             info.host = this.host;
+//             info.banker = this.banker;
+//             info.players = Utils.object_clone(this.players);
+//             info.ghostPokers = Utils.object_clone(this.ghostPokers);
+//             info.showOnPokers = Utils.object_clone(this.showOnPokers);
+//             info.setting = Utils.object_clone(this.setting);
+//
+//             info.handPokers = [];
+//             for (var sitID = 0; sitID < this.players.length; sitID++) {
+//                 var sitPlayer = this.players[sitID];
+//                 var handPoker = this.handPokers[sitID];
+//                 if (sitPlayer && handPoker) {
+//                     var showRight = PokerSet.SHOW_TARGET.ALL;
+//                     if (sitPlayer == playerId) {
+//                         showRight = PokerSet.SHOW_TARGET.ME;
+//                     }
+//                     info.handPokers[sitID] = [];
+//                     for (var pokerId = 0; pokerId < handPoker.length; pokerId++) {
+//                         var poker = handPoker[pokerId];
+//                         if (poker == null) {
+//                             info.handPokers[sitID][pokerId] = null;
+//                             continue;
+//                         }
+//                         if (showRight < poker.showTarget) {
+//                             info.handPokers[sitID][pokerId] = {showTarget: poker.showTarget};
+//                             continue;
+//                         }
+//                         info.handPokers[sitID][pokerId] = Utils.object_clone(poker);
+//                     }
+//                 }
+//             }
+//
+//             return info;
+//         }
+//     });
+// }(DejuPoker));
+/**
+ * Created by publish on 2017/3/24.
+ */
+//一副牌
+(function(root) {
+    var _super = root.Serialize;
+    var PokerSet = root.PokerSet = function(opts) {
+        opts = opts || {};
+
+        _super.call(this, opts);
+
+        /**
+         * poker结构
+         * ..number 0~13 0为Joker 1为Ace 11为J 12为Q 13为K
+         * ..flower 0~3 0为方块 1为梅花 2为红桃 3为黑桃   当joker时 0为小鬼 1为大鬼 2为翻倍
+         * ..name 名字 主要用于客户端寻找资源
+         * ..showTarget 显示对象 对谁显示
+         */
+
+        this.pokers         = opts.pokers || [];
+        this.needJoker      = opts.needJoker;
+        this.init();
+    };
+    
+    root.inherits(PokerSet, _super);
+
+    root.extend(PokerSet.prototype, {
+        init: function() {
+            //创建的时候已经传入牌了 就不用初始化
+            if (this.pokers.length > 0) {
+                return;
+            }
+
+            if (this.needJoker) {
+                this.pokers.push({
+                    number: 0, 
+                    flower: 2, 
+                    showTarget: 0, 
+                    name: PokerSet.NUMBERS_NAME[0] + "_" + PokerSet.JOKER_NAME[2]
+                });       //翻倍牌
+                this.pokers.push({
+                    number: 0,
+                    flower: 1,
+                    showTarget: 0,
+                    name: PokerSet.NUMBERS_NAME[0] + "_" + PokerSet.JOKER_NAME[1]
+                });       //大鬼
+                this.pokers.push({
+                    number: 0,
+                    flower: 0,
+                    showTarget: 0,
+                    name: PokerSet.NUMBERS_NAME[0] + "_" + PokerSet.JOKER_NAME[0]
+                });       //小鬼
+            }
+
+            for (var number = 1; number <= 13; number++) {
+                for (var flower = 0; flower <= 3; flower++) {
+                    this.pokers.push({
+                        number: number,
+                        flower: flower,
+                        showTarget: 0,
+                        name: PokerSet.FLOWERS_NAME[flower] + "_" + PokerSet.NUMBERS_NAME[number]
+                    });
+                }
+            }
+        },
+
+        //发牌
+        extract: function() {
+            if (this.pokers.length <= 0) {
+                return null;
+            }
+
+            var i = root.Utils.random_number(this.pokers.length);
+            var result = this.pokers[i];
+            this.pokers.splice(i, 1);
+            return result;
+        },
+
+        update: function(opts) {
+            var obj = this;
+            opts = opts || {};
+
+            for (var key in opts) {
+                if (opts.hasOwnProperty(key)
+                    && obj.hasOwnProperty(key)) {
+                    obj[key] = opts[key];
+                }
+            }
+        }
+    });
+
+    //花色 0 方块 1 梅花 2 红桃 3 黑桃
+    PokerSet.FLOWERS_NAME = ["diamond", "club", "heart", "spade"];
+    PokerSet.NUMBERS_NAME = ["joker", "ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"];
+    PokerSet.JOKER_NAME = ["small", "big", "double"];
+
+    PokerSet.SHOW_TARGET = {
+        NONE    : 0,
+        ME      : 1,
+        ALL     : 2
+    };
+} (DejuPoker));

@@ -27,4 +27,4 @@
             return this._properties[key];
         }
     });
-}(dejuPoker));
+}(DejuPoker));

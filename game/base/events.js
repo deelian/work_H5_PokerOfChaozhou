@@ -84,7 +84,7 @@
 
     Handler._pool=[];
     Handler._gid=1;
-})(dejuPoker);
+})(DejuPoker);
 
 (function(root){
     var _super = root.Handler;
@@ -113,7 +113,7 @@
     };
 
     EventHandler._pool = [];
-})(dejuPoker);
+})(DejuPoker);
 
 (function(root) {
     var EventHandler = root.EventHandler;
@@ -268,4 +268,4 @@
             }
         }
     };
-})(dejuPoker);
+})(DejuPoker);

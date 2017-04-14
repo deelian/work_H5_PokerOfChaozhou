@@ -1,21 +1,16 @@
 
 var NetManager = (function(_super) {
-    // var CODE = ;
+    var CODE = DejuPoker.Code;
 
     function NetManager() {
         NetManager.super(this);
 
         // 游戏服务器地址
-        this.service           = App.config.service;
+        this.host              = App.config.host;
+        this.port              = App.config.port;
 
         // 游戏服务器连接
-        this.socket            = null;
-
-        // 消息序列号
-        this.msgIndex          = 0;
-
-        // 回调队列
-        this.handlers          = {};
+        this.socket            = new Pomelo();
 
         // 服务器唯一标识
         this.uuid              = null;
@@ -27,15 +22,51 @@ var NetManager = (function(_super) {
     Laya.class(NetManager, "NetManager", _super);
 
     NetManager.prototype.init = function(callback) {
-        this.socket = new SocketIO();
+        var self = this;
 
-        this.socket.on(SocketIO.CONNECTED, this, this.onServerConnected);
-        this.socket.on(SocketIO.DICONNECTED, this, this.onServerDisconnected);
-        this.socket.on(SocketIO.ERROR, this, this.onServerError);
-        this.socket.on(SocketIO.CLOSED, this, this.onServerClosed);
-        this.socket.on(SocketIO.MESSAGE, this, this.onServerMessage);
+        this.socket.init({
+            host: this.host,
+            port: this.port
+        }, function(socket) {
+            var complete = function(err, data) {
+                self.socket.disconnect();
 
-        callback && callback();
+                if (err != null) {
+                    console.log("network connection error");
+                    return;
+                }
+
+                self.host    = data.host;
+                self.port    = data.port;
+                self.socket.init({
+                    host:    data.host,
+                    port:    data.port
+                }, function(socket) {
+                    self.send(
+                        "connector.handler.entry",
+                        {},
+                        Laya.Handler.create(null, function(err, data) {
+                            if (err != null) {
+                                console.log("network connection error");
+                                return;
+                            }
+
+                            console.log("NetManager inited...");
+
+                            self.socket.on("message", self, self.processMessage);
+                            
+                            callback && callback();
+                        })
+                    )
+                });
+            };
+
+            self.send(
+                "gate.handler.getEntry",
+                {},
+                Laya.Handler.create(null, complete)
+            );
+        });
     };
 
     NetManager.prototype.encode = function() {
@@ -146,10 +177,10 @@ var NetManager = (function(_super) {
             }
 
             // 这里统一同步账户余额
-            var player = App.player;
-            if (data.balance) {
-                player && player.setBalance(data.balance);
-            }
+            // var player = App.player;
+            // if (data.balance) {
+            //     player && player.setBalance(data.balance);
+            // }
 
             if (handler) {
                 handler.runWith([err, data]);
@@ -158,169 +189,53 @@ var NetManager = (function(_super) {
         this.get(url, Laya.Handler.create(null, complete));
     };
 
-    NetManager.prototype.send = function(router, data, handler) {
-        var msg = {};
+    NetManager.prototype.send = function(route, msg, handler) {
+        msg = msg || {};
+        msg.udid = App.storageManager.getDeviceId();
+        this.socket.request(route, msg, function(body) {
+            var err = null;
+            var data = null;
 
-        msg.id = ++this.msgIndex;
-        msg.router = router;
-        msg.data = data;
-
-        if (handler != undefined) {
-            this.handlers[msg.id] = handler;
-        }
-
-        this.socket.send(msg);
-    };
-
-    NetManager.prototype.accountAuth = function(handler) {
-        // 如果token不为空，已经获取浏览器重定向参数，可以直接进入下一步
-        if (this.token != null) {
-            handler && handler.runWith([null, {}]);
-            return;
-        }
-
-        var self = this;
-        var complete = function(err, data) {
-            if (err == null) {
-                self.uuid      = data.userID;
-                self.token     = data.token;
+            if (body.code === CODE.OK) {
+                data = body.data;
+            } else {
+                err = {
+                    err: body.err,
+                    msg: body.msg
+                }
             }
 
             if (handler) {
                 handler.runWith([err, data]);
             }
-        };
-
-        var api = "/user/auth";
-        var params = {};
-        this.request(api, params, Laya.Handler.create(null, complete));
+        });
     };
 
-    NetManager.prototype.accountSync = function(handler) {
-        var self = this;
-        var complete = function(err, data) {
-            if (err == null) {
-                self.token     = data.token;
+    NetManager.prototype.processMessage = function(msg) {
+        console.log("recv socket message: ", msg.route, msg.body);
+        var route   = msg.route;
+        var info    = msg.body;
+        switch (route) {
+            case Game.ROUTE.ROOM.ENTER: {
+                App.uiManager.gameRoomView.joinPlayer(info);
+                break;
             }
 
-            if (handler) {
-                handler.runWith([err, data]);
+            case Game.ROUTE.ROOM.STATE: {
+                break;
             }
-        };
 
-        var api = "/user/sync";
-        var params = {};
-        this.request(api, params, Laya.Handler.create(null, complete));
-    };
-
-    NetManager.prototype.connectServer = function() {
-        this.socket.connect(this.service);
-    };
-
-    NetManager.prototype.onServerConnected = function() {
-        this.event(SocketIO.CONNECTED);
-    };
-
-    NetManager.prototype.onServerDisconnected = function() {
-        this.event(SocketIO.DICONNECTED);
-    };
-
-    NetManager.prototype.onServerError = function() {
-        this.event(SocketIO.ERROR);
-    };
-
-    NetManager.prototype.onServerClosed = function() {
-        this.event(SocketIO.CLOSED);
-    };
-
-    NetManager.prototype.onServerMessage = function(data) {
-        try {
-            var msg = JSON.parse(data);
-            var handler = this.handlers[msg.id];
-
-            if (handler != undefined) {
-                if (msg.code == CODE.OK) {
-                    handler.runWith([null, msg.data]);
-                }
-                else {
-                    var error = {
-                        number: msg.err,
-                        message: msg.msg
-                    };
-                    handler.runWith(error);
-                }
-
-                delete this.handlers[msg.id];
+            case Game.ROUTE.ROOM.ACTION: {
+                break;
             }
-        }
-        catch (e) {
-            console.log(e.stack);
+
+            case Game.ROUTE.ROOM.COMMAND: {
+                App.tableManager.commandHandler(info);
+                console.log("netManager:" + JSON.stringify(info));
+                break;
+            }
         }
     };
 
     return NetManager;
 }(laya.events.EventDispatcher));
-
-var SingleAlone = (function(_super) {
-    function SingleAlone() {
-        SingleAlone.super(this);
-    }
-
-    Laya.class(SingleAlone, "SingleAlone", _super);
-
-    // @Override
-    SingleAlone.prototype.init = function(callback) {
-        callback && callback();
-    };
-
-    SingleAlone.prototype.encode = function() {
-    };
-
-    SingleAlone.prototype.formatURL = function() {
-    };
-
-    SingleAlone.prototype.resolve = function() {
-    };
-
-    SingleAlone.prototype.get = function() {
-    };
-
-    SingleAlone.prototype.post = function() {
-    };
-
-    SingleAlone.prototype.send = function() {
-    };
-
-    SingleAlone.prototype.connectServer = function() {
-        Laya.timer.once(1000, this, this.onServerConnected);
-    };
-
-    SingleAlone.prototype.onServerConnected = function() {
-        this.event(SocketIO.CONNECTED);
-    };
-
-    SingleAlone.prototype.request = function(api, params, handler) {
-        var data = {};
-        var resp = SingleAlone.response[api];
-
-        if (typeof resp === 'object') {
-            data = resp;
-        }
-        else if (typeof resp == "function") {
-            data = resp(params);
-        }
-        else {
-            data = {};
-        }
-
-        handler.runWith([null, data]);
-    };
-
-    SingleAlone.response = {};
-    SingleAlone.response['/user/auth'] = {};
-    SingleAlone.response['/user/sync'] = {};
-
-    SingleAlone.response['/user/enter'] = {};
-
-    return SingleAlone;
-}(NetManager));

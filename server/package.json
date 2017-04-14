@@ -10,5 +10,13 @@
     "DejuPoker"
   ],
   "author": "Narwhale",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.3.0",
+    "commander": "^2.9.0",
+    "mysql": "^2.13.0",
+    "pomelo-logger": "^0.1.7",
+    "sequelize": "^3.30.4",
+    "sprintf": "^0.1.5"
+  }
 }

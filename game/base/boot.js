@@ -9,7 +9,7 @@
         this;
 
     //Declare game's namespace
-    var Namespace = root.Game = root.dejuPoker = {};
+    var Namespace = root.Game = root.DejuPoker = {};
 
     Namespace.isNodeJS = (typeof exports === "object");
 

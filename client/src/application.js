@@ -15,16 +15,18 @@ var Application = (function (_super) {
         this.actionManager       = new ActionManager();
         this.assetsManager       = new AssetsManager();
         this.storageManager      = new StorageManager();
-        this.netManager          = this["config"]["singleAlone"] ? new SingleAlone() : new NetManager();
+        this.netManager          = new NetManager();
         this.uiManager           = new UIManager();
         this.animManager         = new AnimationManager();
         this.soundManager        = new SoundAndMusicMgr();
+        this.tableManager        = new RoomTableMgr();
 
         // Controllers
         this.game = null;
 
         // Modules
         this.player = null;
+        this.roomID = null;
 
         // Layers
         this.sceneLayer = new Laya.Sprite();
@@ -45,7 +47,6 @@ var Application = (function (_super) {
         this.state = Application.STATE_PRELOADING;
         this.runView(this.loaderView);
 
-        var resources = this.assetsManager.getPreload();
         async.series([
             function (callback) {
                 self.loaderView.setText("正在初始化网络......");
@@ -54,6 +55,45 @@ var Application = (function (_super) {
                 });
             },
 
+        ], function(err, results) {
+            console.log("assets loaded...");
+            self.state = Application.STATE_PRELOADED;
+            //* 创建登录界面
+            self.loginView = new LoginView();
+        });
+    };
+
+    Application.login = function() {
+        var self = this;
+        var complete = function(err, data) {
+            if (err != null) {
+                self.loaderView.setText("请检查网络设置......");
+                return;
+            }
+            
+            self.state = Application.STATE_AUTHORIZED;
+            self.loaderView.setText("授权成功!");
+            console.log("account authed...");
+        };
+
+        self.loaderView.setText("正在获取授权...");
+        this.state = Application.STATE_AUTHORIZING;
+        this.netManager.send(
+            "auth.handler.verify",
+            {
+                udid: this.storageManager.getDeviceId()
+            },
+            Laya.Handler.create(null, complete)
+        )
+    };
+
+    Application.prepare = function() {
+        var self = this;
+        var resources = this.assetsManager.getPreload();
+
+        this.state = Application.STATE_PREPAREING;
+        this.runView(this.loaderView);
+        async.series([
             function (callback) {
                 self.loaderView.setText("正在加载图片......");
 
@@ -131,104 +171,64 @@ var Application = (function (_super) {
             //        callback(null);
             //    });
             //}
-
         ], function(err, results) {
-            console.log("assets loaded...");
-
-            self.state = Application.STATE_PRELOADED;
-
-            //* 创建登录界面
-            self.loginView = new LoginView();
+            self.state = Application.STATE_PREPARED;
             //*大厅界面创建
             self.lobbyView = new LobbyView();
         });
     };
 
-    Application.connectServer = function() {
-        this.state = Application.STATE_CONNECTED;
-
-        //var self = this;
-        //
-        //self.state = Application.STATE_CONNECTING;
-        //self.loaderView.setText("连接游戏服务器...");
-        //
-        //var onConnected = function() {
-        //    self.loaderView.setText("连接成功!");
-        //    self.state = Application.STATE_CONNECTED;
-        //    console.log("game server connected...");
-        //};
-        //
-        //var onError = function() {
-        //    console.log("error");
-        //};
-        //
-        //self.netManager.connectServer();
-        //self.netManager.once(SocketIO.CONNECTED, null, onConnected);
-        //self.netManager.once(SocketIO.ERROR, null, onError);
-    };
-
-    Application.accountAuth = function() {
-        var self = this;
-        var onComplete = function(err, data) {
-            if (err != null) {
-                Laya.timer.once(1000, self, self.accountAuth);
-                return;
-            }
-            self.state = Application.STATE_AUTHORIZED;
-            self.loaderView.setText("授权成功!");
-
-            console.log("account authed...", data);
-        };
-
-        self.loaderView.setText("正在获取授权...");
-        this.state = Application.STATE_AUTHORIZING;
-
-        this.netManager.accountAuth(Laya.Handler.create(null, onComplete));
-    };
-
-    Application.accountSync = function() {
-        var self = this;
-        var onComplete = function(err, data) {
-            if (err != null) {
-                Laya.timer.once(1000, self, self.accountSync);
-                return;
-            }
-
-            self.player = new Game.Player(data.player);
-
-            self.state = Application.STATE_SYNCHRONIZED;
-            self.loaderView.setText("同步成功!");
-
-            console.log("account synced...", data);
-        };
-
-        self.loaderView.setText("正在同步账号...");
-        this.state = Application.STATE_SYNCHRONIZING;
-
-        this.netManager.accountSync(Laya.Handler.create(null, onComplete));
-    };
-
     Application.enter = function() {
         var self = this;
-        var onComplete = function(err, data) {
+        var complete = function(err, data) {
             if (err != null) {
-                Laya.timer.once(1000, self, self.enter);
+                self.loaderView.setText("进入失败...");
                 return;
             }
+
             self.state = Application.STATE_ENTERED;
+            self.player = new Game.Player(data.player);
+            self.roomID = data.roomID;
+
             self.loaderView.setText("进入成功!");
 
-            console.log("account entered...", JSON.stringify(data));
-
             self.lobbyView.init();
+
+            console.log("account entered...", self.roomID, self.player);
         };
 
         self.loaderView.setText("正在进入游戏...");
         this.state = Application.STATE_ENTERING;
+        this.netManager.send(
+            "lobby.handler.enter",
+            {},
+            Laya.Handler.create(null, complete)
+        )
+    };
 
-        var api = "/user/enter";
-        var params = {};
-        this.netManager.request(api, params, Laya.Handler.create(null, onComplete));
+    Application.getRoomId = function () {
+        //this.roomID = 313307;
+        return this.roomID;
+    };
+
+    Application.enterRoom = function(roomID, callback) {
+        var self = this;
+
+        App.netManager.send(
+            "room.handler.enter",
+            {
+                roomID: roomID
+            },
+            Laya.Handler.create(null, function(err, data) {
+                callback && callback();
+
+                if (err != null) {
+                    return;
+                }
+
+                App.uiManager.runGameRoomView(data);
+            })
+        );
     };
 
     Application.runLoginView = function () {
@@ -278,29 +278,25 @@ var Application = (function (_super) {
             case Application.STATE_PRELOADING:
                 break;
             case Application.STATE_PRELOADED:
-                this.connectServer();
-                break;
-            case Application.STATE_CONNECTING:
-                break;
-            case Application.STATE_CONNECTED:
-                this.accountAuth();
+                //进入登录界面
+                this.runLoginView();
                 break;
             case Application.STATE_AUTHORIZING:
                 break;
             case Application.STATE_AUTHORIZED:
-                this.accountSync();
+                //进入资源加载界面
+                this.prepare();
                 break;
-            case Application.STATE_SYNCHRONIZING:
+            case Application.STATE_PREPAREING:
                 break;
-            case Application.STATE_SYNCHRONIZED:
-                //*进入登录界面
-                this.runLoginView();
-                break;
-            case Application.STATE_WITEING_LOGIN:
+            case Application.STATE_PREPARED:
+                //进入游戏大厅
+                this.enter();
                 break;
             case Application.STATE_ENTERING:
                 break;
             case Application.STATE_ENTERED:
+                //加载完毕进入游戏大厅
                 this.runLobbyView();
                 break;
             case Application.STATE_RUNNING:
@@ -319,18 +315,14 @@ var Application = (function (_super) {
     Application.STATE_STARTED          = 2;
     Application.STATE_PRELOADING       = 3;
     Application.STATE_PRELOADED        = 4;
-    Application.STATE_CONNECTING       = 5;
-    Application.STATE_CONNECTED        = 6;
-    Application.STATE_AUTHORIZING      = 7;
-    Application.STATE_AUTHORIZED       = 8;
-    Application.STATE_SYNCHRONIZING    = 9;
-    Application.STATE_SYNCHRONIZED     = 10;
-    Application.STATE_WITEING_LOGIN    = 11;
-    Application.STATE_ENTERING         = 12;
-    Application.STATE_ENTERED          = 13;
+    Application.STATE_AUTHORIZING      = 5;
+    Application.STATE_AUTHORIZED       = 6;
+    Application.STATE_PREPAREING       = 7;
+    Application.STATE_PREPARED         = 8;
+    Application.STATE_ENTERING         = 9;
+    Application.STATE_ENTERED          = 10;
 
     Application.STATE_RUNNING          = 100;
-
 
     Application.Event                  = {};
 

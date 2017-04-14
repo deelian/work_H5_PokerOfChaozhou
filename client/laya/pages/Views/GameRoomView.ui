@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":3,
+    "selecteID":27,
     "props":{"width":1280,"sceneColor":"#000000","height":720},
     "nodeParent":-1,
     "label":"View",
@@ -41,10 +41,50 @@
         },
         {
             "x":15,
-            "type":"Button",
-            "props":{"y":591,"x":626,"var":"closeBtn","stateNum":"2","skin":"assets/ui.button/btn_001.png"},
+            "type":"Label",
+            "props":{"y":365,"x":570,"var":"roomIdLab","text":"4444444","fontSize":30,"font":"Arial","color":"#ffffff"},
             "nodeParent":1,
-            "label":"Button(closeBtn)",
+            "label":"Label(roomIdLab)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"text":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":7,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Label",
+            "props":{"y":363,"x":455,"text":"房间号：","fontSize":30,"font":"Arial","color":"#ffffff"},
+            "nodeParent":1,
+            "label":"Label",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"text":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":8,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "props":{"y":0,"x":0,"width":1274,"var":"playersBox","height":723},
+            "nodeParent":1,
+            "label":"Box(playersBox)",
             "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
@@ -52,17 +92,353 @@
             "frames":[
                 {
                     "type":1,
-                    "props":{"skin":"assets/ui.button/btn_001.png","label":"label"},
+                    "props":{},
                     "frame":0,
                     "__InPool":false
                 }],
-            "compId":3,
+            "compId":9,
             "child":[
                 {
                     "x":30,
+                    "type":"Sprite",
+                    "props":{"y":662,"x":566,"name":"player_0"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_0)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":20,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":643,"x":807,"name":"player_1"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_1)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":10,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":582,"x":1063,"name":"player_2"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_2)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":11,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":388,"x":1150,"name":"player_3"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_3)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":12,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":206,"x":1051,"name":"player_4"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_4)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":13,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":133,"x":786,"name":"player_5"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_5)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":14,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":125,"x":530,"name":"player_6"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_6)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":15,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":148,"x":335,"name":"player_7"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_7)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":16,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":226,"x":123,"name":"player_8"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_8)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":17,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":409,"x":68,"name":"player_9"},
+                    "nodeParent":9,
+                    "label":"Sprite(player_9)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":18,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":380.0000000000001,"x":888.0000000000001,"var":"deckNode"},
+                    "nodeParent":9,
+                    "label":"Sprite(deckNode)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":31,
+                    "child":[
+                        ]
+                }],
+            "$LOCKED":false
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "props":{"y":636,"x":21,"width":337,"var":"functionsBox","height":69},
+            "nodeParent":1,
+            "label":"Box(functionsBox)",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":21,
+            "child":[
+                {
+                    "type":"Button",
+                    "props":{"stateNum":"2","skin":"assets/ui.button/btn_003.png","labelSize":20,"label":"文字"},
+                    "nodeParent":21,
+                    "label":"Button",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/ui.button/btn_003.png","label":"label"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":23,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Button",
+                    "props":{"y":1,"x":114,"stateNum":"2","skin":"assets/ui.button/btn_003.png","labelSize":20,"label":"语音"},
+                    "nodeParent":21,
+                    "label":"Button",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/ui.button/btn_003.png","label":"label"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":24,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Button",
+                    "props":{"y":0,"x":232,"stateNum":"2","skin":"assets/ui.button/btn_003.png","labelSize":20,"label":"战绩"},
+                    "nodeParent":21,
+                    "label":"Button",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/ui.button/btn_003.png","label":"label"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":25,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Button",
+                    "props":{"y":-607,"x":1119,"var":"ruleBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png","labelStrokeColor":"#ffffff","labelSize":20,"label":"查看规则"},
+                    "nodeParent":21,
+                    "label":"Button(ruleBtn)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/ui.button/btn_003.png","label":"label"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":26,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "props":{"y":268,"x":570,"var":"dealPokerBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png"},
+            "nodeParent":1,
+            "label":"Button(dealPokerBtn)",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"skin":"assets/ui.button/btn_003.png","label":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":29,
+            "child":[
+                {
                     "type":"Text",
-                    "props":{"y":17,"x":40,"text":"返回","fontSize":"30","color":"#ffffff"},
-                    "nodeParent":3,
+                    "props":{"y":16,"x":20,"text":"发牌","fontSize":"30","color":"#ffffff"},
+                    "nodeParent":29,
                     "label":"Text",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -74,7 +450,7 @@
                             "frame":0,
                             "__InPool":false
                         }],
-                    "compId":6,
+                    "compId":30,
                     "child":[
                         ]
                 }]
@@ -82,10 +458,10 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"y":591,"x":415,"stateNum":"2","skin":"assets/ui.button/btn_003.png"},
+            "props":{"y":420,"x":438.99999999999994,"var":"readyBtn","stateNum":"2","skin":"assets/ui.button/btn_003.png"},
             "nodeParent":1,
-            "label":"Button",
-            "isOpen":true,
+            "label":"Button(readyBtn)",
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
@@ -99,7 +475,6 @@
             "compId":4,
             "child":[
                 {
-                    "x":30,
                     "type":"Text",
                     "props":{"y":16,"x":20,"text":"准备","fontSize":"30","color":"#ffffff"},
                     "nodeParent":4,
@@ -115,6 +490,45 @@
                             "__InPool":false
                         }],
                     "compId":5,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "props":{"y":422.00000000000006,"x":552.9999999999999,"var":"closeBtn","stateNum":"2","skin":"assets/ui.button/btn_001.png"},
+            "nodeParent":1,
+            "label":"Button(closeBtn)",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"skin":"assets/ui.button/btn_001.png","label":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":3,
+            "child":[
+                {
+                    "type":"Text",
+                    "props":{"y":17,"x":40,"text":"返回","fontSize":"30","color":"#ffffff"},
+                    "nodeParent":3,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"text"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":6,
                     "child":[
                         ]
                 }]

@@ -17,8 +17,14 @@ prioritys.push({path:"base/events.js", p:2});
 prioritys.push({path:"base/serialize.js", p:3});
 prioritys.push({path:"base/entity.js", p:4});
 prioritys.push({path:"consts/", p:5});
-// prioritys.push({path:"entities/interface.js", p:6});
-//
+prioritys.push({path:"utils/utils.js",p:6});
+prioritys.push({path:"utils/random.js",p:7});
+prioritys.push({path:"entities/player.js",p:8});
+prioritys.push({path:"entities/poker.js", p:9});
+prioritys.push({path:"entities/deck.js", p:10});
+prioritys.push({path:"entities/table.js", p:11});
+prioritys.push({path:"entities/room.js", p:12});
+
 // prioritys.push({path:"entities/stage.js", p:999});
 // prioritys.push({path:"entities/player.js", p:1000});
 // prioritys.push({path:"entities/playerHandle.js", p:1001});

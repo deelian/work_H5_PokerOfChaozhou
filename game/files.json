@@ -8,5 +8,12 @@
     "base/entity.js",
     "consts/code.js",
     "consts/game.js",
-    "entities/player.js"
+    "utils/utils.js",
+    "utils/random.js",
+    "entities/player.js",
+    "entities/poker.js",
+    "entities/deck.js",
+    "entities/table.js",
+    "entities/room.js",
+    "entities/pokerSet.js"
 ]

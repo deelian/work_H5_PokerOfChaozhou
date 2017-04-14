@@ -14,7 +14,7 @@ var LoginView = (function(_super) {
     LoginView.prototype.loginGame = function () {
         //*要提示正在登录
 
-        App.enter();
+        App.login();
     };
 
     LoginView.prototype.initEvent = function () {
