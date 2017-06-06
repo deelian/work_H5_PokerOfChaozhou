@@ -1,4 +1,19 @@
 {
+  "yomato@home": {
+    "id": "master-server-1", "host": "127.0.0.1", "port": 6000
+  },
+  "yomato": {
+    "id": "master-server-1", "host": "127.0.0.1", "port": 6000
+  },
+  "monkey": {
+    "id": "master-server-1", "host": "127.0.0.1", "port": 6000
+  },
+  "localhost": {
+    "id": "master-server-1", "host": "127.0.0.1", "port": 6000
+  },
+  "debug": {
+    "id": "master-server-1", "host": "127.0.0.1", "port": 6000
+  },
   "development": {
     "id": "master-server-1", "host": "127.0.0.1", "port": 6000
   },

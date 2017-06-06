@@ -11,7 +11,7 @@ var logger = pomelo.logger.getLogger('application', __filename);
 /*
  * Game Dependencies
  */
-var Game = require('../../../../../Game');
+var Game = require('../../../../../game');
 var Code = Game.Code;
 
 module.exports = function(app) {
@@ -32,7 +32,7 @@ Handler.prototype.getEntry = function(msg, session, next) {
     var connector = connectors[parseInt(Math.random() * connectors.length)];
 
     var data = {
-        host: connector.host,
+        host: connector.clientHost,
         port: connector.clientPort
     };
 

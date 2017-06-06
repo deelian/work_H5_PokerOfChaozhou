@@ -56,7 +56,8 @@ Connector.prototype.start = function(cb) {
     opts.pingTimeout = this.heartbeatTimeout;
     opts.pingInterval = this.heartbeatInterval;
 
-    var sio = this.sio = require('socket.io')(httpServer, opts);
+    //var sio = this.sio = require('socket.io')(httpServer, opts);
+    var sio = this.sio = require('socket.io')(httpServer);
 
     var port = this.port;
     httpServer.listen(port, function () {

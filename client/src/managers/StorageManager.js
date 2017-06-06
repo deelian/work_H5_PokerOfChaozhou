@@ -1,9 +1,7 @@
 var StorageManager = (function(_super) {
-    var AppKey = "EdSIlrzBmUE2I4XPBVACUWN9v0JVzrjqWu7Y";
-    
     function StorageManager() {
-        this.storage = localStorage || {};
-        this.aesKey = CryptoJS.enc.Utf8.parse(AppKey);
+        this.storage = Laya.LocalStorage || window.localStorage || {};
+        this.aesKey = CryptoJS.enc.Utf8.parse("EdSIlrzBmUE2I4XPBVACUWN9v0JVzrjqWu7Y");
 
         this.init();
     }
@@ -28,7 +26,7 @@ var StorageManager = (function(_super) {
     };
 
     StorageManager.prototype.getItem = function(key, decode) {
-        var value = this.storage[key];
+        var value = this.storage.getItem(key);
         if (value == undefined) {
             return undefined;
         }
@@ -37,7 +35,11 @@ var StorageManager = (function(_super) {
     };
 
     StorageManager.prototype.setItem = function(key, value, encode) {
-        this.storage[key] = encode ? this.encrypt(value) : value;
+        this.storage.setItem(key, encode ? this.encrypt(value) : value);
+    };
+
+    StorageManager.prototype.removeItem = function(key) {
+        this.storage.removeItem(key);
     };
 
     StorageManager.prototype.getDeviceId = function() {
@@ -51,7 +53,27 @@ var StorageManager = (function(_super) {
         return deviceId;
     };
 
+    StorageManager.prototype.removeToken = function() {
+        this.removeItem(StorageManager.KEY_ACCESS_TOKEN);
+    };
+
+    StorageManager.prototype.getToken = function() {
+        var key = StorageManager.KEY_ACCESS_TOKEN;
+        var token = this.getItem(key, true);
+        if (token == undefined || token == "") {
+            return null;
+        }
+
+        return token;
+    };
+
+    StorageManager.prototype.setToken = function(token) {
+        var key = StorageManager.KEY_ACCESS_TOKEN;
+        this.setItem(key, token, true);
+    };
+
     StorageManager.KEY_DEVICE_ID = "deviceId";
+    StorageManager.KEY_ACCESS_TOKEN = "token";
 
     return StorageManager;
 }(laya.events.EventDispatcher));

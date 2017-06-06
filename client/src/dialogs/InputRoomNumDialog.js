@@ -6,6 +6,7 @@ var InputRoomNumberDialog = (function(_super) {
         InputRoomNumberDialog.super(this);
 
         this._roomNumber = "";
+        this._roomNumberLabList = [];
         this.init();
     }
 
@@ -27,28 +28,55 @@ var InputRoomNumberDialog = (function(_super) {
             this._roomNumber = "";
         }
 
-        this.roomNumLab.text = this._roomNumber;
-
-        if (this._roomNumber.length >= 6) {
-            this.enterRoom();
+        for (var j = 0; j < 6; j ++) {
+            this._roomNumberLabList[j].text = "";
         }
+
+        if (this._roomNumber.length > 6) {
+            return;
+        }
+
+        if (this._roomNumber.length <= 0) {
+            for (var index = 0; index < 6; index ++) {
+                this._roomNumberLabList[index].text = "";
+            }
+            return;
+        }
+
+        var temp = 0;
+        for (var i in this._roomNumber) {
+            if (this._roomNumber[i]) {
+                this._roomNumberLabList[temp].text = this._roomNumber[i];
+            }
+            temp ++;
+        }
+
+        if (temp >= 6) {
+            this.touchYes();
+        }
+    };
+
+    InputRoomNumberDialog.prototype.touchYes = function () {
+        this.enterRoom();
     };
 
     InputRoomNumberDialog.prototype.inputRoomNumber = function (num) {
         if (this._roomNumber.length >= 6) {
             return;
         }
-
+        App.soundManager.playSound("btnSound");
         this.setRoomNumberLab(num);
     };
 
     InputRoomNumberDialog.prototype.deleteLastNum = function () {
+        App.soundManager.playSound("btnSound");
         //*删除最后一个输入的数字
         this._roomNumber = this._roomNumber.substring(0,this._roomNumber.length-1);
         this.setRoomNumberLab();
     };
 
     InputRoomNumberDialog.prototype.resetRoomNumLab = function () {
+        App.soundManager.playSound("btnSound");
         //*重新输入
         this.setRoomNumberLab("");
     };
@@ -64,7 +92,12 @@ var InputRoomNumberDialog = (function(_super) {
     };
 
     InputRoomNumberDialog.prototype.init = function() {
-        this.roomNumLab.text = "";
+
+        for (var i = 0; i < 6; i++) {
+            var roomNumLab = this.numBox.getChildByName("roomNum_" + i);
+            this._roomNumberLabList.push(roomNumLab);
+        }
+
         this.initEvent();
     };
 

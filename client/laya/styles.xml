@@ -1,0 +1,22 @@
+<res>
+   <item name="assets/ui.room/icon_Return.png" type="Image" compress="0" pack="0" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/icon_Return_j.png" type="Image" compress="0" pack="0" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/icon_Standup.png" type="Image" compress="0" pack="0" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/icon_Standup_j.png" type="Image" compress="0" pack="0" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/icon_dissolution.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/icon_dissolution_j.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/icon_Record.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/icon_Record_j.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/showRule/img_dingzhi.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/showRule/img_hunzhan.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/showRule/img_jingdian.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/showRule/img_zhangzhuang.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/pokers/joker_title.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/btn_blue.png" type="Button" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/btn_yellow.png" type="Button" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.room/img_Go.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.setting/hslider_bar.png" type="HSlider" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.setting/hslider.png" type="HSlider" compress="0" pack="1" quality="80" props="" picType="0"/>
+   <item name="assets/ui.setting/bg_03.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.setting/bg_04.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+</res>

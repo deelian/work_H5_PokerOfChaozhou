@@ -2,8 +2,8 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":6,
-    "props":{"width":1136,"sceneColor":"#000000","height":640},
+    "selecteID":15,
+    "props":{"x":0,"width":1136,"sceneColor":"#000000","height":640},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -21,14 +21,34 @@
     "child":[
         {
             "x":15,
-            "type":"Button",
-            "props":{"y":477,"x":608,"var":"loginBtn","stateNum":"2","skin":"assets/ui.button/btn_001.png"},
+            "type":"Image",
+            "props":{"y":0,"x":0,"skin":"assets/ui.loader/bg.png"},
             "nodeParent":1,
-            "label":"Button(loginBtn)",
-            "isOpen":true,
-            "isDirectory":true,
+            "label":"Image",
+            "isDirectory":false,
             "isAniNode":true,
-            "hasChild":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"skin":"assets/ui.loader/bg.png"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":9,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "props":{"y":459,"x":568,"var":"wxAuthorizeBtn","stateNum":"2","skin":"assets/ui.button/btn_wxdl.png","anchorY":0.5,"anchorX":0.5},
+            "nodeParent":1,
+            "label":"Button(wxAuthorizeBtn)",
+            "isOpen":true,
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
             "frames":[
                 {
                     "type":1,
@@ -38,11 +58,92 @@
                 }],
             "compId":6,
             "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"skin":"assets/ui.loader/logo.png"},
+            "nodeParent":1,
+            "label":"Image",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"skin":"assets/ui.loader/logo.png"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":10,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "props":{"y":544,"x":568,"var":"guestBtn","stateNum":"2","skin":"assets/ui.button/btn_yk.png","labelSize":30,"labelColors":"#ffffff","labelBold":true,"labelAlign":"center","anchorY":0.5,"anchorX":0.5},
+            "nodeParent":1,
+            "label":"Button(guestBtn)",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"y":598,"x":508,"skin":"assets/ui.button/btn_bule.png","label":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":11,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"y":12,"x":51,"skin":"assets/ui.loader/img_yk.png"},
+                    "nodeParent":11,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/ui.loader/img_yk.png"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":12,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"CheckBox",
+            "props":{"y":594,"x":490,"stateNum":"2","skin":"assets/ui.button/btn_gouxuan.png","selected":true},
+            "nodeParent":1,
+            "label":"CheckBox",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"label":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":13,
+            "child":[
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":20,"x":13,"text":"微信登录","fontSize":30,"color":"#ffffff"},
-                    "nodeParent":6,
+                    "props":{"y":5,"x":41,"width":129,"text":"同意用户协议","height":31,"fontSize":20,"font":"Microsoft YaHei","color":"#ffffff"},
+                    "nodeParent":13,
                     "label":"Label",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -54,7 +155,7 @@
                             "frame":0,
                             "__InPool":false
                         }],
-                    "compId":7,
+                    "compId":14,
                     "child":[
                         ]
                 }]
@@ -62,9 +163,9 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":262,"x":454,"width":400,"text":"登录界面","height":108,"fontSize":100,"color":"#ffffff"},
+            "props":{"y":613,"x":4,"var":"revision","valign":"middle","text":"版本号：1.0.0.636","fontSize":22,"color":"#ffffff","align":"center"},
             "nodeParent":1,
-            "label":"Label",
+            "label":"Label(revision)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -75,10 +176,9 @@
                     "frame":0,
                     "__InPool":false
                 }],
-            "compId":8,
+            "compId":15,
             "child":[
-                ],
-            "$HIDDEN":false
+                ]
         }],
     "animations":[
         {

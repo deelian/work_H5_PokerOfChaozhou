@@ -1,0 +1,24 @@
+[32m[2017-04-21 17:08:34.839] [%x{sid}] [INFO] pomelo -[39m application inited: undefined
+
+[32m[2017-04-21 17:08:34.950] [%x{sid}] [INFO] pomelo-admin -[39m [MqttServer] listen on NaN
+
+[31m[2017-04-21 17:08:34.957] [%x{sid}] [ERROR] application -[39m Caught exception: TypeError: port should be a number or string: null
+    at lookupAndConnect (net.js:918:13)
+    at Socket.connect (net.js:897:5)
+    at Object.exports.connect.exports.createConnection (net.js:65:35)
+    at MqttClient.connect (G:\diuojiuPoker\DejuPoker\pomelo\node_modules\.1.0.0@pomelo-admin\lib\protocol\mqtt\mqttClient.js:54:19)
+    at MonitorAgent.connect (G:\diuojiuPoker\DejuPoker\pomelo\node_modules\.1.0.0@pomelo-admin\lib\monitor\monitorAgent.js:58:15)
+    at ConsoleService.start (G:\diuojiuPoker\DejuPoker\pomelo\node_modules\.1.0.0@pomelo-admin\lib\consoleService.js:84:14)
+    at Monitor.startConsole (G:\diuojiuPoker\DejuPoker\pomelo\lib\monitor\monitor.js:41:23)
+    at Monitor.start (G:\diuojiuPoker\DejuPoker\pomelo\lib\monitor\monitor.js:34:8)
+    at pro.start (G:\diuojiuPoker\DejuPoker\pomelo\lib\components\monitor.js:28:16)
+    at G:\diuojiuPoker\DejuPoker\pomelo\lib\util\appUtil.js:111:19
+    at iterate (G:\diuojiuPoker\DejuPoker\pomelo\node_modules\.0.2.5@async\lib\async.js:123:13)
+    at G:\diuojiuPoker\DejuPoker\pomelo\node_modules\.0.2.5@async\lib\async.js:138:29
+    at Object.utils.invokeCallback (G:\diuojiuPoker\DejuPoker\pomelo\lib\util\utils.js:17:14)
+    at G:\diuojiuPoker\DejuPoker\pomelo\lib\master\master.js:45:13
+    at Object.utils.invokeCallback (G:\diuojiuPoker\DejuPoker\pomelo\lib\util\utils.js:21:14)
+    at startModule (G:\diuojiuPoker\DejuPoker\pomelo\lib\util\moduleUtil.js:84:11)
+
+[32m[2017-04-21 17:08:34.954] [%x{sid}] [INFO] pomelo-admin -[39m try to connect master: "master", undefined, undefined
+

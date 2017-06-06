@@ -9,6 +9,8 @@
 	<meta name='screen-orientation' content='portrait' />
 	<meta name='x5-fullscreen' content='true' />
 	<meta name='360-fullscreen' content='true' />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv='expires' content='0' />
 </head>
 <body>
@@ -39,7 +41,6 @@
     <script type="text/javascript" src="libs/matter-RenderLaya.js"></script>
 
 	<!-- 第三方开发库 -->
-	<script type="text/javascript" src="libs/third-party/socket.io.js"></script>
 	<script type="text/javascript" src="libs/third-party/async.js"></script>
 	<script type="text/javascript" src="libs/third-party/moment.js"></script>
 	<script type="text/javascript" src="libs/third-party/sprintf.js"></script>
@@ -50,8 +51,9 @@
 	
 	<script src="../src/ui/layaUI.max.all.js"></script>
 	<!--jsfile--startTag-->
-	<script src="../src/poker/Poker.js"></script>
-	<script src="../src/modules/network/Pomelo.js"></script>
+	<script src="../src/modules/pomelo/protobuf.js"></script>
+	<script src="../src/modules/pomelo/protocol.js"></script>
+	<script src="../src/modules/pomelo/client.js"></script>
 	<script src="../src/modules/actions/Action.js"></script>
 	<script src="../src/modules/actions/ActionInstant.js"></script>
 	<script src="../src/modules/actions/ActionInterval.js"></script>
@@ -59,14 +61,38 @@
 	<script src="../src/modules/support/Point.js"></script>
 	<script src="../src/modules/support/PointExtension.js"></script>
 	<script src="../src/modules/utils/URLUtils.js"></script>
+	<script src="../src/poker/Poker.js"></script>
 	<script src="../src/game/game.js"></script>
+	<script src="../src/boxs/LobbyEffortPlayerIconBox.js"></script>
+	<script src="../src/boxs/EffortIcon.js"></script>
+	<script src="../src/boxs/RecordPokerBox.js"></script>
+	<script src="../src/boxs/LobbyEffortItemBox.js"></script>
+	<script src="../src/boxs/ChatItemBox.js"></script>
+	<script src="../src/boxs/EffortBox.js"></script>
+	<script src="../src/boxs/RoomEffortBox.js"></script>
+	<script src="../src/boxs/FinalItemBox.js"></script>
 	<script src="../src/boxs/RoomPlayer.js"></script>
+	<script src="../src/dialogs/DisbandDialog.js"></script>
+	<script src="../src/dialogs/ConnectDialog.js"></script>
+	<script src="../src/dialogs/RecordOfPokerDialog.js"></script>
+	<script src="../src/dialogs/RoomEffortDialog.js"></script>
+	<script src="../src/dialogs/LobbyEffortDialog.js"></script>
+	<script src="../src/dialogs/FinalDialog.js"></script>
+	<script src="../src/dialogs/EffortOfRoomDialog.js"></script>
+	<script src="../src/dialogs/ExplainDialog.js"></script>
+	<script src="../src/dialogs/ShareDialog.js"></script>
+	<script src="../src/dialogs/SettingDialog.js"></script>
+	<script src="../src/dialogs/BuyItemDialog.js"></script>
 	<script src="../src/dialogs/InputRoomNumDialog.js"></script>
 	<script src="../src/dialogs/PlayerInfoDialog.js"></script>
-	<script src="../src/dialogs/RuleDialog.js"></script>
 	<script src="../src/dialogs/MessageDialog.js"></script>
 	<script src="../src/dialogs/SelectModeDialog.js"></script>
-	<script src="../src/application.js"></script>
+	<script src="../src/dialogs/ShowRuleDialog.js"></script>
+	<script src="../src/dialogs/ChatViewDialog.js"></script>
+	<script src="../src/dialogs/ShowPokerTypeDialog.js"></script>
+	<script src="../src/dialogs/LoadingAniDialog.js"></script>
+	<script src="../src/dialogs/SelectMultipleComboBox.js"></script>
+	<script src="../src/dialogs/RubbedPokerDialog.js"></script>
 	<script src="../src/effects/Effect.js"></script>
 	<script src="../src/effects/SpineEffect.js"></script>
 	<script src="../src/factory/SpineFactory.js"></script>
@@ -82,6 +108,7 @@
 	<script src="../src/scenes/LoadingView.js"></script>
 	<script src="../src/scenes/LobbyView.js"></script>
 	<script src="../src/scenes/LoginView.js"></script>
+	<script src="../src/application.js"></script>
 	<script src="../src/main.js"></script>
 	<!--jsfile--endTag-->
 </body>

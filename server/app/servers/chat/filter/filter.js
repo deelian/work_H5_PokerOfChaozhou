@@ -10,7 +10,7 @@ var logger = pomelo.logger.getLogger('application', __filename);
 /*
  * Game Dependencies
  */
-var Game = require('../../../../../Game');
+var Game = require('../../../../../game');
 
 module.exports = function() {
     return new Filter();

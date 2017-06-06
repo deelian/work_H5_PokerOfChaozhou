@@ -2,50 +2,98 @@
  * 选择游戏模式界面
  */
 var SelectModeDialog = (function(_super) {
+
+    var introduction = {
+        0:{
+            title:"长庄玩法简介",
+            details:"1.房主霸王庄，游戏过程不换庄。\n" +
+            "2.默认不翻鬼，即只有2张鬼牌(大小王)，最多可翻两张牌做为鬼牌。翻鬼，可选择翻1或2张牌当鬼牌，若翻出的鬼牌为大小王，系统会重新再翻一张牌当鬼牌。\n" +
+            "3.鬼牌百变：鬼牌可当任意一张牌及花色，首轮牌鬼、8（9）不能算天公，必须补牌。\n" +
+            "4.鬼牌成型：鬼牌不能拼成特殊牌型(三支、同花顺、顺子)时，仅能当10点，可变花色。首轮牌鬼、8（9）算天公，可不补牌，同时可选择首轮牌鬼、8（9）是否算双倍天公。\n" +
+            "5.任意下注：每一局可任意选择下注倍数。\n" +
+            "6.一杠到底：在同一个庄上，下注倍数只能加不能减。换庄后，可重新选择下注倍数。\n" +
+            "7.木虱：可设置木虱赢双鬼，三倍木虱赢双鬼，三倍木虱赢三鬼。\n" +
+            "8.比牌：有倍赢无倍，双倍天公9>天公9，双倍天公8>天公8，普通牌点数相同时，倍数大者为大，即三倍>二倍>一倍，倍数相同打平。\n" +
+            "9.功能牌：游戏中增加一张功能牌，游戏过程中拿到功能牌的玩家，赢牌时，按照手中牌型翻倍计算积分，同时，此牌具备鬼牌功能。"
+        },
+
+        1:{
+            title:"经典玩法简介",
+            details:"1.首局房主为庄家，过后按照上庄规则，满足条件者上庄，多位玩家满足条件，则牌型倍数最大的上庄，同样牌型则按照发牌顺序，先发牌的玩家上庄。\n" +
+            "2.默认不翻鬼，即只有2张鬼牌(大小王)，最多可翻两张牌做为鬼牌。翻鬼，可选择翻1或2张牌当鬼牌，若翻出的鬼牌为大小王，系统会重新再翻一张牌当鬼牌。\n" +
+            "3.鬼牌百变：鬼牌可当任意一张牌及花色，首轮牌鬼、8（9）不能算天公，必须补牌	。\n" +
+            "4.鬼牌成型：鬼牌不能拼成特殊牌型(三支、同花顺、顺子)时，仅能当10点，可变花色。首轮牌鬼、8（9）算天公，可不补牌，同时可选择首轮牌鬼、8（9）是否算双倍天公。\n" +
+            "5.任意下注：每一局可任意选择下注倍数。\n" +
+            "6.一杠到底：在同一个庄上，下注倍数只能加不能减。换庄后，可重新选择下注倍数。\n" +
+            "7.木虱：可设置木虱赢双鬼，三倍木虱赢双鬼，三倍木虱赢三鬼。\n" +
+            "8.比牌：有倍赢无倍，双倍天公9>天公9，双倍天公8>天公8，普通牌点数相同时，倍数大者为大，即三倍>二倍>一倍，倍数相同打平。\n" +
+            "9.功能牌：游戏中增加一张功能牌，游戏过程中拿到功能牌的玩家，赢牌时，按照手中牌型翻倍计算积分，同时，此牌具备鬼牌功能。"
+        },
+
+        2:{
+            title:"混战玩法简介",
+            details:"1.木虱鱼，无庄家，各玩家之间相互比牌。\n" +
+            "2.默认不翻鬼，即只有2张鬼牌(大小王)，最多可翻两张牌做为鬼牌。翻鬼，可选择翻1或2张牌当鬼牌，若翻出的鬼牌为大小王，系统会重新再翻一张牌当鬼牌。\n" +
+            "3.鬼牌百变：鬼牌可当任意一张牌及花色，首轮牌鬼、8（9）不能算天公，必须补牌。\n" +
+            "4.鬼牌成型：鬼牌不能拼成特殊牌型(三支、同花顺、顺子)时，仅能当10点，可变花色。首轮牌鬼、8（9）算天公，可不补牌，同时可选择首轮牌鬼、8（9）是否算双倍天公。\n" +
+            "5.木虱：可设置木虱赢双鬼，三倍木虱赢双鬼，三倍木虱赢三鬼。\n" +
+            "6.比牌：有倍赢无倍，双倍天公9>天公9，双倍天公8>天公8，普通牌点数相同时，倍数大者为大，即三倍>二倍>一倍，倍数相同打平。\n" +
+            "7.功能牌：游戏中增加一张功能牌，游戏过程中拿到功能牌的玩家，赢牌时，按照手中牌型翻倍计算积分，同时，此牌具备鬼牌功能"
+        },
+
+        3:{
+            title:"定制玩法简介",
+            details:"1.游戏牌数：一副扑克牌，去掉大小王，共52张牌。\n" +
+            "2.每一局都要抢庄，确定庄家后，每位玩家各派三张牌，按照牌型，点数比大小。\n" +
+            "3.可自定义牌型倍数，散牌点数倍数。"
+        }
+    };
+
     function SelectModeDialog() {
         SelectModeDialog.super(this);
 
         this._selectBoxs = [
-            this.conditionBox,
             this.roundNumSetBox,
+            this.conditionBox,
             this.turnJokersBox,
-            this.jokerEffectBox,
-            this.skyGrandpaBox,
             this.betBox,
             this.multipeBox,
             this.zeroSetBox,
+            this.gambleBox,
             this.doubleDealBox
         ];
 
         this._gameRound         = 10;    //*游戏局数
-        this._turnJokerType     = null;  //*翻鬼牌设置类型
         this._isJokerFormation  = false; //*鬼牌是否成型
         this._isAnyBet          = true;  //*是否是任意下注
-        this._threeZeroWin      = false; //*3张零点
-        this._twoZeroWin        = false; //*2张零点
+        this._beatDBLGhost       = SelectModeDialog.BEAT_DBL_GHOST.ALL_BEAT; //*0点赢双鬼类型
         this._isDouble          = false; //*是否翻倍
         this._nineGhost         = true;  //*鬼9
-        this._eightGhost        = true;  //*鬼8
         this._bankerType        = SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_GOD; //*上庄类型
         this._multiple          = {
-                                    STRAIGHT_FLUSH: 4,
-                                    THREES: 4,
-                                    STRAIGHT: 4,
-                                    DOUBLE_GHOST: 10
-                                  };
-        this._pointMultiple     = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; //*定制模式点数
+            STRAIGHT_FLUSH: 6,
+            THREES: 8,
+            STRAIGHT: 4,
+            DOUBLE_GHOST: 10
+
+        };
+        this._pointMultiple     = [1, 1, 2, 3, 4, 5, 6, 7, 8, 9]; //*定制模式点数
+        this._isTripleWinGhost  = false; //*有三鬼
+        this._fancyWin          = false; //*比牌设置
 
         this._gameModeList      = Game.Game.ROOM_TYPE; //*房间类型
-        this._pokerFormation    = Game.Game.POKER_FORMATION_MULTIPLE; //*牌型倍数设置
         this._ghostCounts       = 0; //*鬼牌数
 
         this._allSettings       = null;
 
-        this._gameRoomMode      = this._gameModeList.STATIC; //*房间模式初始化
+        this._gameRoomMode      = this._gameModeList.CLASSICAL; //*房间模式初始化
         this._gameRoomSettings  = null;
+
+        this._chaosBet          = true; //*混战模式是不是能够自由下注
 
         this._gameModeBtnList   = {}; //*模式按钮储存
         this._pointCombos       = []; //*定制模式下拉储存
+
         this.init();
     }
 
@@ -57,10 +105,55 @@ var SelectModeDialog = (function(_super) {
         }
         //*定制模式设置点数倍数
         var index = info.index;
-        var comboBox = info.combo;
 
-        var multiple = comboBox.selectedLabel; //*这个返回的是string
+        var multiple = info.combo;//*这个返回的是string
         this._pointMultiple[index] = Number(multiple);
+    };
+
+    //*有倍赢
+    SelectModeDialog.prototype.setfancyWin = function () {
+        this.fancyWinCheck.selected = !this._fancyWin;
+        this._fancyWin = this.fancyWinCheck.selected;
+        if (this._fancyWin) {
+            this.changeTitleColor(this.fancyWinCheck,"#ffb16c");
+        }
+        else {
+            this.changeTitleColor(this.fancyWinCheck);
+        }
+    };
+
+    //*三倍赢三鬼
+    SelectModeDialog.prototype.setTripleWinGhost = function () {
+        this.tripleWinTripleGhostCheck.selected = !this._isTripleWinGhost;
+        this._isTripleWinGhost = this.tripleWinTripleGhostCheck.selected;
+        if (this._isTripleWinGhost) {
+            this.changeTitleColor(this.tripleWinTripleGhostCheck,"#ffb16c");
+        }
+        else {
+            this.changeTitleColor(this.tripleWinTripleGhostCheck);
+        }
+    };
+
+    //*设置0点赢的条件
+    SelectModeDialog.prototype.setZeroPoint = function (type) {
+        switch (type) {
+            case SelectModeDialog.BEAT_DBL_GHOST.ALL_BEAT: {
+                this._beatDBLGhost = type;
+                this.winDoubleGhostCheck.selected = true;
+                this.tripleWinDoubleGhostCheck.selected = false;
+                this.changeTitleColor(this.winDoubleGhostCheck,"#ffb16c");
+                this.changeTitleColor(this.tripleWinDoubleGhostCheck);
+                break;
+            }
+            case SelectModeDialog.BEAT_DBL_GHOST.FLUSH_THREE_BEAT: {
+                this._beatDBLGhost = type;
+                this.tripleWinDoubleGhostCheck.selected = true;
+                this.winDoubleGhostCheck.selected = false;
+                this.changeTitleColor(this.tripleWinDoubleGhostCheck,"#ffb16c");
+                this.changeTitleColor(this.winDoubleGhostCheck);
+                break;
+            }
+        }
     };
 
     SelectModeDialog.prototype.setCondition = function (type) {
@@ -73,15 +166,21 @@ var SelectModeDialog = (function(_super) {
             case SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_GOD: {
                 this.bigThenGodCheck.selected = true;
                 this.bigThenStraightCheck.selected = false;
+                this.changeTitleColor(this.bigThenGodCheck,"#ffb16c");
+                this.changeTitleColor(this.bigThenStraightCheck,"#ffffff");
                 break;
             }
             case SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_STRAIGHT: {
                 this.bigThenGodCheck.selected = false;
                 this.bigThenStraightCheck.selected = true;
+                this.changeTitleColor(this.bigThenStraightCheck,"#ffb16c");
+                this.changeTitleColor(this.bigThenGodCheck,"#ffffff");
                 break;
             }
             default: {
                 type = SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_GOD;
+                this.changeTitleColor(this.bigThenGodCheck,"#ffb16c");
+                this.changeTitleColor(this.bigThenStraightCheck,"#ffffff");
                 break
             }
         }
@@ -89,17 +188,18 @@ var SelectModeDialog = (function(_super) {
         this._bankerType = type;
     };
 
-    SelectModeDialog.prototype.setFormationType = function (type) {
-        switch (type) {
-            case SelectModeDialog.FORMATION_TYPE.NINE_GHOST: {
-                this._nineGhost = this.nineGhostCheck.selected;
-                break;
-            }
-            case SelectModeDialog.FORMATION_TYPE.EIGHT_GHOST: {
-                this._eightGhost = this.eightGhostCheck.selected;
-                break;
-            }
+
+    SelectModeDialog.prototype.setFormationType = function () {
+        this._nineGhost = this.nineGhostCheck.selected;
+        if(this.nineGhostCheck.selected)
+        {
+            this.changeTitleColor(this.nineGhostCheck,"#ffb16c");
         }
+        else
+        {
+            this.changeTitleColor(this.nineGhostCheck);
+        }
+
     };
 
     SelectModeDialog.prototype.setBetType = function (type) {
@@ -107,14 +207,37 @@ var SelectModeDialog = (function(_super) {
         switch (type) {
             case SelectModeDialog.BET_TYPE.ANY: {
                 this.anyBetCheck.selected = true;
-                this.moreBetCheck.selected = false;
-                this._isAnyBet = true;
+                if (this._gameRoomMode == this._gameModeList.CHAOS) {
+                    //*混战模式
+                    this.autoBetCheck.selected = false;
+                    this._chaosBet = true;
+                    this.changeTitleColor(this.autoBetCheck);
+                }
+                else{
+                    //*非混战模式
+                    this.moreBetCheck.selected = false;
+                    this._isAnyBet = true;
+                    this.changeTitleColor(this.moreBetCheck);
+                }
+                this.changeTitleColor(this.anyBetCheck,"#ffb16c");
                 break;
             }
             case SelectModeDialog.BET_TYPE.MORE_THEN_MORE: {
                 this.anyBetCheck.selected = false;
                 this.moreBetCheck.selected = true;
                 this._isAnyBet = false;
+
+                this.changeTitleColor(this.moreBetCheck,"#ffb16c");
+                this.changeTitleColor(this.anyBetCheck);
+                break;
+            }
+            case SelectModeDialog.BET_TYPE.AUTO: {
+                this.autoBetCheck.selected = true;
+                this.changeTitleColor(this.autoBetCheck,"#ffb16c");
+
+                this.anyBetCheck.selected = false;
+                this.changeTitleColor(this.anyBetCheck);
+                this._chaosBet = false;
                 break;
             }
         }
@@ -123,41 +246,101 @@ var SelectModeDialog = (function(_super) {
     SelectModeDialog.prototype.setJokerTurn = function (type) {
         //*翻转鬼牌设置
         switch (type) {
-            case SelectModeDialog.TURN_JOKER_TYPE.NO_MORE: {
+            case 0: {
                 this.noMoreJokerCheck.selected = true;
                 this.oneMoreCheck.selected = false;
+                this.twoMoreCheck.mouseEnabled = false;
                 this.twoMoreCheck.selected = false;
                 this._ghostCounts = 0;
+
+                this.selectTwoGhost();
+                this.changeTitleColor(this.noMoreJokerCheck,"#ffb16c");
+                this.changeTitleColor(this.oneMoreCheck);
+                this.changeTitleColor(this.twoMoreCheck);
                 break;
             }
-            case SelectModeDialog.TURN_JOKER_TYPE.ONE_MORE: {
+            case 1: {
                 this.noMoreJokerCheck.selected = false;
                 this.oneMoreCheck.selected = true;
-                this.twoMoreCheck.selected = false;
+                this.twoMoreCheck.mouseEnabled = true;
                 this._ghostCounts = 1;
-                break;
-            }
-            case SelectModeDialog.TURN_JOKER_TYPE.TWO_MORE: {
-                this.noMoreJokerCheck.selected = false;
-                this.oneMoreCheck.selected = false;
-                this.twoMoreCheck.selected = true;
-                this._ghostCounts = 2;
+
+                this.changeTitleColor(this.oneMoreCheck,"#ffb16c");
+                this.changeTitleColor(this.noMoreJokerCheck);
                 break;
             }
             default: {
-                type = SelectModeDialog.TURN_JOKER_TYPE.NO_MORE;
                 this._ghostCounts = 0;
             }
         }
 
-        this._turnJokerType = type;
     };
 
-    SelectModeDialog.prototype.setCustomizedGameRound = function (combo) {
-        //*设置定制模式局数
-        if (this._gameRoomMode == this._gameModeList.CUSTOMIZED) {
-            this._gameRound = Number(combo.selectedLabel);
+    SelectModeDialog.prototype.selectTwoGhost = function() {
+        //*设置两张鬼牌
+        if (this._ghostCounts != 0) {
+            if(this.twoMoreCheck.selected)
+            {
+                this._ghostCounts = 2;
+                this.changeTitleColor(this.twoMoreCheck,"#ffb16c");
+            }
+            else
+            {
+                if(this._ghostCounts == 1)
+                {
+                    this._ghostCounts = 1;
+                }
+                else
+                {
+                    this._ghostCounts = 0;
+                }
+                this.changeTitleColor(this.twoMoreCheck);
+            }
         }
+    };
+
+    SelectModeDialog.prototype.setGameRoundOfCustomized = function (round) {
+        switch (round) {
+            case SelectModeDialog.NORMAL_ROUND_TYPE.TEN: {
+                this.customizedTen.selected = true;
+                this.customizedTwenty.selected = false;
+                this.customizedThirty.selected = false;
+                this.changeTitleColor(this.customizedTen,"#ffb16c");
+                this.changeTitleColor(this.customizedTwenty);
+                this.changeTitleColor(this.customizedThirty);
+                break;
+            }
+            case SelectModeDialog.NORMAL_ROUND_TYPE.TWENTY: {
+                this.customizedTen.selected = false;
+                this.customizedTwenty.selected = true;
+                this.customizedThirty.selected = false;
+                this.changeTitleColor(this.customizedTwenty,"#ffb16c");
+                this.changeTitleColor(this.customizedTen);
+                this.changeTitleColor(this.customizedThirty);
+                break;
+            }
+            case SelectModeDialog.NORMAL_ROUND_TYPE.THIRTY: {
+                this.customizedTen.selected = false;
+                this.customizedTwenty.selected = false;
+                this.customizedThirty.selected = true;
+                this.changeTitleColor(this.customizedThirty,"#ffb16c");
+                this.changeTitleColor(this.customizedTen);
+                this.changeTitleColor(this.customizedTwenty);
+                break;
+            }
+            default: {
+                round = SelectModeDialog.NORMAL_ROUND_TYPE.TEN;
+                this.customizedTen.selected = true;
+                this.customizedTwenty.selected = false;
+                this.customizedThirty.selected = false;
+                this.changeTitleColor(this.customizedTen,"#ffb16c");
+                this.changeTitleColor(this.customizedTwenty);
+                this.changeTitleColor(this.customizedThirty);
+                break;
+            }
+        }
+
+        this._gameRound = round;
     };
 
     SelectModeDialog.prototype.setGameRound = function (round) {
@@ -166,36 +349,27 @@ var SelectModeDialog = (function(_super) {
             case SelectModeDialog.NORMAL_ROUND_TYPE.TEN: {
                 this.tenRoundCheck.selected = true;
                 this.twentyRoundCheck.selected = false;
+
+                this.changeTitleColor(this.tenRoundCheck,"#ffb16c");
+                this.changeTitleColor(this.twentyRoundCheck);
                 break;
             }
             case SelectModeDialog.NORMAL_ROUND_TYPE.TWENTY: {
                 this.tenRoundCheck.selected = false;
                 this.twentyRoundCheck.selected = true;
+                this.changeTitleColor(this.twentyRoundCheck,"#ffb16c");
+                this.changeTitleColor(this.tenRoundCheck);
                 break;
             }
             default: {
                 round = SelectModeDialog.NORMAL_ROUND_TYPE.TEN;
+                this.changeTitleColor(this.tenRoundCheck,"#ffb16c");
+                this.changeTitleColor(this.twentyRoundCheck);
                 break;
             }
         }
 
         this._gameRound = round;
-    };
-
-    SelectModeDialog.prototype.setSkyGrandpa = function () {
-        //*鬼牌成型，天公选项
-        var factor = 1;
-        if (this._isJokerFormation) {
-            this.skyGrandpaBox.visible = true;
-        }
-        else {
-            this.skyGrandpaBox.visible = false;
-            factor = -1;
-        }
-
-        for (var i = 4; i < this._selectBoxs.length; i++) {
-            this._selectBoxs[i].y += factor * 35;
-        }
     };
 
     SelectModeDialog.prototype.setJokerEffect = function (effectType) {
@@ -204,12 +378,22 @@ var SelectModeDialog = (function(_super) {
             case SelectModeDialog.JOKER_FUNC_TYPE.ANY: {
                 this.jokerAnyCheck.selected = true;
                 this.jokerFormationCheak.selected = false;
+                this.nineGhostCheck.selected = false;
+                this.nineGhostCheck.mouseEnabled = false;
+
+                this.changeTitleColor(this.jokerAnyCheck,"#ffb16c");
+                this.changeTitleColor(this.jokerFormationCheak);
+                this.setFormationType();
                 break;
             }
 
             case SelectModeDialog.JOKER_FUNC_TYPE.FORMATION: {
                 this.jokerAnyCheck.selected = false;
                 this.jokerFormationCheak.selected = true;
+                this.nineGhostCheck.mouseEnabled = true;
+
+                this.changeTitleColor(this.jokerFormationCheak,"#ffb16c");
+                this.changeTitleColor(this.jokerAnyCheck);
                 break;
             }
 
@@ -220,39 +404,108 @@ var SelectModeDialog = (function(_super) {
 
         if (this._isJokerFormation != this.jokerFormationCheak.selected) {
             this._isJokerFormation = this.jokerFormationCheak.selected;
-            this.setSkyGrandpa();
         }
     };
 
     SelectModeDialog.prototype.setDoubleDeal = function () {
         //*设置翻倍牌
         this._isDouble = this.doubleCheck.selected;
+        if(this.doubleCheck.selected)
+        {
+            this.changeTitleColor(this.doubleCheck,"#ffb16c");
+        }
+        else
+        {
+            this.changeTitleColor(this.doubleCheck);
+        }
     };
 
+    //*创建房间
     SelectModeDialog.prototype.touchCreateRoom = function () {
-        //*需要传入的参数
-        var type = this._gameRoomMode;
-        var times = this._gameRound;
-        var ghostCount = this._ghostCounts;
-        var pokerModels = {};
-        
+        App.soundManager.playSound("btnSound");
+        var settings    = {}; //*需要传入的参数
+        var pokerModels = {}; //*牌型倍数
+        var pokerPoint  = []; //*点数倍数
+
         for (var i in this._multiple) {
             var multiple = this._multiple[i];
             var index = Game.Game.POKER_MODELS[i];
             pokerModels[index] = multiple;
         }
 
-        var settings = {
-            times: times,
-            ghostCount: ghostCount,
-            betType: 0
-        };
+        var type = this._gameRoomMode;
+        if (type == this._gameModeList.CUSTOMIZED) {
+            //*定制模式
+            //*点数倍数
+            var point;
+            for (var pointIndex in this._pointCombos) {
+                point = Number(this._pointCombos[pointIndex].getChildByName("title").text);
+                pokerPoint.push(point);
+            }
+            settings.pokerPoint = pokerPoint;
+            //*牌型倍数
+            settings.pokerModels = pokerModels;
+        }
+        else {
+            //*非定制模式
+            var ghostCount = this._ghostCounts;
+            var betType = Game.Game.BET_TYPE.MORE_THEN_MORE;
+            var fancyGod = this._nineGhost;
+            var universalGhost = !this._isJokerFormation;
+            var isDouble = this._isDouble;
+            var beatDBLGhost = this._beatDBLGhost;
+            var isTripleWinGhost = this._isTripleWinGhost;
+            var fancyWin = this._fancyWin;
+            var chaosBet = this._chaosBet;
 
+            var condition;
+            if (this._bankerType == SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_GOD) {
+                condition = Game.Game.BANKER_CONDITION.GOD;
+            }
+            else if (this._bankerType == SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_STRAIGHT) {
+                condition = Game.Game.BANKER_CONDITION.NORMAL;
+            }
+
+            if (type == this._gameModeList.CHAOS) {
+                betType = Game.Game.BET_TYPE.ARBITRARILY;
+            }
+            else {
+                if (this._isAnyBet) {
+                    betType = Game.Game.BET_TYPE.ARBITRARILY;
+                }
+            }
+
+            settings.ghostCount = ghostCount;
+            settings.betType = betType;
+            settings.pokerModels = pokerModels;
+            settings.fancyGod = fancyGod;
+            settings.universalGhost = universalGhost;
+            settings.isDouble = isDouble;
+            settings.condition = condition;
+            settings.beatDBLGhost = beatDBLGhost;
+            settings.beatThreeGhost = isTripleWinGhost;
+            settings.fancyWin = fancyWin;
+            settings.chaosBet = chaosBet;
+        }
+
+        var times = this._gameRound;
+        settings.times = times;
 
         var self = this;
-        var roomData;
+        var code = Game.Code.ROOM;
         var complete = function(err, data) {
             if (err != null) {
+                var errCode = err.err;
+                switch (errCode) {
+                    case code.NOT_ENOUGH_TOKENS: {
+                        App.uiManager.showMessage({msg:"钻石不足！"});
+                        break;
+                    }
+                    default: {
+                        App.uiManager.showMessage({msg:"房间创建失败！"});
+                        break;
+                    }
+                }
                 return;
             }
 
@@ -266,19 +519,10 @@ var SelectModeDialog = (function(_super) {
             "room.handler.create",
             {
                 type: type,
-                settings: settings,
-                pokerModels: pokerModels
+                settings: settings
             },
             Laya.Handler.create(null, complete)
         );
-    };
-
-    SelectModeDialog.prototype.pokerModeMultiple = function (info) {
-        var pokerMode = info.pokerMode;
-        var comboBox = info.combo;
-
-        var multiple = comboBox.selectedLabel; //*这个返回的是string
-        this._multiple[pokerMode] = Number(multiple);
     };
 
     //*切换设置显示和储存变量
@@ -287,16 +531,16 @@ var SelectModeDialog = (function(_super) {
         var modeName = SelectModeDialog.ROOM_NAME[this._gameRoomMode];
         this._gameRoomSettings = this._allSettings[modeName];
 
-        this._gameRound             = this._gameRoomSettings.gameRound;
-        this._isAnyBet              = this._gameRoomSettings.isAnyBet;
-        this._isDouble              = this._gameRoomSettings.isDouble;
-        this._twoZeroWin            = this._gameRoomSettings.twoZeroWin;
-        this._threeZeroWin          = this._gameRoomSettings.threeZeroWin;
-        this._turnJokerType         = this._gameRoomSettings.turnJokerType;
-        this._multiple              = this._gameRoomSettings.multiples;
-        this._eightGhost            = this._gameRoomSettings.eightGhost;
-        this._nineGhost             = this._gameRoomSettings.nineGhost;
-        this._pointMultiple         = this._gameRoomSettings.pointMultiple;
+        this._gameRound         = this._gameRoomSettings.gameRound;
+        this._isDouble          = this._gameRoomSettings.isDouble;
+        this._beatDBLGhost      = this._gameRoomSettings.beatDBLGhost;
+        this._multiple          = this._gameRoomSettings.multiples;
+        this._nineGhost         = this._gameRoomSettings.nineGhost;
+        this._pointMultiple     = this._gameRoomSettings.pointMultiple;
+        this._isJokerFormation  = this._gameRoomSettings.isJokerFormation;
+        this._isTripleWinGhost  = this._gameRoomSettings.isTripleWinGhost;
+        this._fancyWin          = this._gameRoomSettings.fancyWin;
+        this._ghostCounts       = this._gameRoomSettings.ghostCounts;
 
         //*初始化设置的显示
         if (this._gameRoomMode != this._gameModeList.CUSTOMIZED) {
@@ -305,17 +549,45 @@ var SelectModeDialog = (function(_super) {
         }
         else {
             //*定制模式
+            this.setGameRoundOfCustomized(this._gameRound);
             this.initCustomizedComboShow();
             return;
         }
-        this.setJokerTurn(this._turnJokerType);
-        this.doubleCheck.selected = this._isDouble;
 
-        if (this._isAnyBet) {
-            this.setBetType(SelectModeDialog.BET_TYPE.ANY);
+        if (this._gameRoomMode != this._gameModeList.CHAOS) {
+            this._isAnyBet = this._gameRoomSettings.isAnyBet;
+            if (this._isAnyBet) {
+                this.setBetType(SelectModeDialog.BET_TYPE.ANY);
+            }
+            else {
+                this.setBetType(SelectModeDialog.BET_TYPE.MORE_THEN_MORE);
+            }
         }
         else {
-            this.setBetType(SelectModeDialog.BET_TYPE.MORE_THEN_MORE);
+            this._chaosBet = this._gameRoomSettings.chaosBet;
+            if (this._chaosBet) {
+                this.setBetType(SelectModeDialog.BET_TYPE.ANY);
+            }
+            else {
+                this.setBetType(SelectModeDialog.BET_TYPE.AUTO);
+            }
+        }
+
+        this.doubleCheck.selected = this._isDouble;
+        this.setDoubleDeal();
+
+        if (this._ghostCounts >= 2) {
+            this.twoMoreCheck.selected = true;
+            this.selectTwoGhost();
+
+            this.oneMoreCheck.selected = true;
+            this.changeTitleColor(this.oneMoreCheck,"#ffb16c");
+
+            this.noMoreJokerCheck.selected = false;
+            this.changeTitleColor(this.noMoreJokerCheck);
+        }
+        else {
+            this.setJokerTurn(this._ghostCounts);
         }
 
         if (this._gameRoomSettings.isJokerFormation) {
@@ -329,26 +601,46 @@ var SelectModeDialog = (function(_super) {
             this.setCondition(this._gameRoomSettings.bankerType);
         }
 
+        this.tripleWinTripleGhostCheck.selected = this._isTripleWinGhost;
+        if (this._isTripleWinGhost) {
+            this.changeTitleColor(this.tripleWinTripleGhostCheck,"#ffb16c");
+        }
+        else {
+            this.changeTitleColor(this.tripleWinTripleGhostCheck);
+        }
+
+        this.fancyWinCheck.selected = this._fancyWin;
+        if (this._fancyWin) {
+            this.changeTitleColor(this.fancyWinCheck,"#ffb16c");
+        }
+        else {
+            this.changeTitleColor(this.fancyWinCheck);
+        }
+
+        this.setZeroPoint(this._beatDBLGhost);
+
         this.initFormationCombos();
 
-        this.threeZeroCheck.selected = this._threeZeroWin;
-        this.twoZeroCheck.selected = this._twoZeroWin;
-
-        this.nineGhostCheck.selected = this._eightGhost;
-        this.eightGhostCheck.selected = this._nineGhost;
+        this.nineGhostCheck.selected = this._nineGhost;
     };
 
     SelectModeDialog.prototype.setModeSettings = function () {
         this._gameRoomSettings.gameRound            = this._gameRound;
         this._gameRoomSettings.isJokerFormation     = this._isJokerFormation;
-        this._gameRoomSettings.isAnyBet             = this._isAnyBet;
         this._gameRoomSettings.isDouble             = this._isDouble;
-        this._gameRoomSettings.twoZeroWin           = this._twoZeroWin;
-        this._gameRoomSettings.threeZeroWin         = this._threeZeroWin;
-        this._gameRoomSettings.turnJokerType        = this._turnJokerType;
+        this._gameRoomSettings.beatDBLGhost         = this._beatDBLGhost;
         this._gameRoomSettings.multiples            = this._multiple;
         this._gameRoomSettings.nineGhost            = this._nineGhost;
-        this._gameRoomSettings.eightGhost           = this._eightGhost;
+        this._gameRoomSettings.isTripleWinGhost     = this._isTripleWinGhost;
+        this._gameRoomSettings.fancyWin             = this._fancyWin;
+        this._gameRoomSettings.ghostCounts          = this._ghostCounts;
+
+        if (this._gameRoomMode == this._gameModeList.CHAOS) {
+            this._gameRoomSettings.chaosBet = this._chaosBet;
+        }
+        else{
+            this._gameRoomSettings.isAnyBet = this._isAnyBet;
+        }
 
         if (this._gameRoomMode == this._gameModeList.CLASSICAL) {
             this._gameRoomSettings.bankerType = this._bankerType;
@@ -360,124 +652,95 @@ var SelectModeDialog = (function(_super) {
     };
 
     SelectModeDialog.prototype.touchModeBtn = function (modeIndex) {
-        if (this._gameRoomMode == modeIndex) {
-            return;
-        }
+        App.soundManager.playSound("btnSound");
         //*储存之前模式的设置
         this.setModeSettings();
         //*切换按钮显示
-        this._gameModeBtnList[this._gameRoomMode].disabled = false;
-        this._gameModeBtnList[modeIndex].disabled = true;
-        //*设置显示切换
-        if (modeIndex == this._gameModeList.CLASSICAL) {
-            //*如果是切换成经典模式，显示上庄条件
+        this._gameModeBtnList[this._gameRoomMode].skin = SelectModeDialog.BTN_SKIN[this._gameRoomMode].NORMAL;
+        this._gameModeBtnList[modeIndex].skin = SelectModeDialog.BTN_SKIN[modeIndex].DISABLED;
+
+        if (this._gameRoomMode == modeIndex) {
+            return;
+        }
+
+        this.customizedBox.visible = false;
+        this.roomSetBox.visible = true;
+
+        var index;
+        var posY;
+        if(modeIndex == this._gameModeList.CLASSICAL)
+        {
             this.conditionBox.visible = true;
-            var index = this._selectBoxs.indexOf(this.conditionBox) + 1;
+            this.betBox.visible = true;
+            posY = this.conditionBox.y + 44;
+            index = this._selectBoxs.indexOf(this.conditionBox) + 1;
             for (index; index < this._selectBoxs.length; index++) {
-                this._selectBoxs[index].y += 27;
+                this._selectBoxs[index].y = posY;
+                posY = this._selectBoxs[index].y + this._selectBoxs[index].height + 8;
             }
         }
-        else if (modeIndex == this._gameModeList.CUSTOMIZED) {
+        else if(modeIndex == this._gameModeList.STATIC)
+        {
+            this.conditionBox.visible = false;
+            this.betBox.visible = true;
+            posY = this.conditionBox.y;
+            index = this._selectBoxs.indexOf(this.conditionBox) + 1;
+            for (index; index < this._selectBoxs.length; index++) {
+                this._selectBoxs[index].y = posY;
+                posY = this._selectBoxs[index].y + this._selectBoxs[index].height + 8;
+            }
+        }
+        else if(modeIndex == this._gameModeList.CHAOS)
+        {
+            this.conditionBox.visible = false;
+            this.betBox.visible = true;
+            posY = this.conditionBox.y;
+            index = this._selectBoxs.indexOf(this.conditionBox) + 1;
+            for (index; index < this._selectBoxs.length; index++) {
+                this._selectBoxs[index].y = posY;
+                posY = this._selectBoxs[index].y + this._selectBoxs[index].height + 8;
+            }
+        }
+        else if(modeIndex == this._gameModeList.CUSTOMIZED)
+        {
             //*定制模式要切换设置的显示
             this.customizedBox.visible = true;
             this.roomSetBox.visible = false;
         }
 
-        if (this._gameRoomMode == this._gameModeList.CLASSICAL) {
-            this.conditionBox.visible = false;
-            var boxIndex = this._selectBoxs.indexOf(this.conditionBox) + 1;
-            for (boxIndex; boxIndex < this._selectBoxs.length; boxIndex++) {
-                this._selectBoxs[boxIndex].y -= 27;
-            }
-        }
-        else if (this._gameRoomMode == this._gameModeList.CUSTOMIZED) {
-            this.customizedBox.visible = false;
-            this.roomSetBox.visible = true;
-        }
         //*切换新的模式
         this._gameRoomMode = modeIndex;
+        this.changeBetBoxDisplay();
+        this.changeIntroduction();
         this.changeModeSetDisplay();
     };
 
     SelectModeDialog.prototype.initFormationCombos = function () {
-        this.straightFlush.selectedLabel = String(this._multiple.STRAIGHT_FLUSH);
-        this.threeOfAKind.selectedLabel = String(this._multiple.THREES);
-        this.straight.selectedLabel = String(this._multiple.STRAIGHT);
-        this.doubleJoker.selectedLabel = String(this._multiple.DOUBLE_GHOST);
+        if(this._gameRoomMode == this._gameModeList.CUSTOMIZED)
+        {
+            this.straightFlushCustomized.getChildByName("title").text = String(this._multiple.STRAIGHT_FLUSH);
+            this.threeOfAKindCustomized.getChildByName("title").text = String(this._multiple.THREES);
+            this.straightCustomized.getChildByName("title").text = String(this._multiple.STRAIGHT);
+        }
+        else{
+            this.straightFlush.getChildByName("title").text = String(this._multiple.STRAIGHT_FLUSH);
+            this.threeOfAKind.getChildByName("title").text = String(this._multiple.THREES);
+        }
     };
 
     SelectModeDialog.prototype.initCustomizedComboShow = function () {
         var pointMultiple = this._pointMultiple;
         for (var i = 0; i < pointMultiple.length; i++) {
             var combo = this._pointCombos[i];
-            combo.selectedLabel = String(pointMultiple[i]);
+            combo.getChildByName("title").text = String(pointMultiple[i]);
         }
-        this.gameRoundCustomized.selectedLabel = String(this._gameRound);
         this.initFormationCombos();
-    };
-
-    SelectModeDialog.prototype.initComboBox = function () {
-        //*初始化倍数选项
-        var i;
-        var multipleInfo;
-        var formation = [
-            {name:this.straightFlush, pokerMode: SelectModeDialog.POKER_MODE_NAME.STRAIGHT_FLUSH},
-            {name:this.threeOfAKind, pokerMode: SelectModeDialog.POKER_MODE_NAME.THREES},
-            {name:this.straight, pokerMode: SelectModeDialog.POKER_MODE_NAME.STRAIGHT},
-            {name:this.doubleJoker, pokerMode: SelectModeDialog.POKER_MODE_NAME.DOUBLE_GHOST},
-            //*定制模式牌型倍数
-            {name:this.straightFlushCustomized, pokerMode: SelectModeDialog.POKER_MODE_NAME.STRAIGHT_FLUSH},
-            {name:this.straightCustomized, pokerMode: SelectModeDialog.POKER_MODE_NAME.THREES},
-            {name:this.threeOfAKindCustomized, pokerMode: SelectModeDialog.POKER_MODE_NAME.STRAIGHT},
-            {name:this.doubleJokerCustomized, pokerMode: SelectModeDialog.POKER_MODE_NAME.DOUBLE_GHOST}
-        ];
-
-        for (i in formation) {
-            var str = "";
-            var comboBox = formation[i].name;
-            var pokerMode = formation[i].pokerMode;
-            multipleInfo = this._pokerFormation[pokerMode];
-            str = this.getComboLabels(multipleInfo);
-
-            comboBox.labels = str;
-            comboBox.selectedIndex = 0;
-            var info = [{
-                combo: comboBox,
-                pokerMode: pokerMode
-            }];
-            comboBox.selectHandler = Laya.Handler.create(this, this.pokerModeMultiple, info, false);
-        }
-
-        //*定制模式倍数设置初始化
-        //*局数
-        var gameRoundList = Game.Game.CUSTOMIZED_SETTINGS.ROUND;
-        this.gameRoundCustomized.labels = this.getComboLabels(gameRoundList);
-        this.gameRoundCustomized.selectedIndex = 0;
-        this.gameRoundCustomized.selectHandler = Laya.Handler.create(this, this.setCustomizedGameRound, [this.gameRoundCustomized], false);
-
-        //*点数倍数
-        var pointMultiple = Game.Game.CUSTOMIZED_SETTINGS.POINT_MULTIPLE;
-        var multipleStr = this.getComboLabels(pointMultiple);
-        for (var pointIndex = 0; pointIndex < 10; pointIndex ++) {
-            var pointComboBox = this.customizedBox.getChildByName("point_" + pointIndex);
-            pointComboBox.labels = multipleStr;
-            pointComboBox.selectedIndex = 0;
-            var selectInfo = [
-                {
-                    combo: pointComboBox,
-                    index: pointIndex
-                }
-            ];
-            pointComboBox.selectHandler = Laya.Handler.create(this, this.setCustomizedPointMul, selectInfo, false);
-            this._pointCombos.push(pointComboBox);
-        }
     };
 
     //*初始化勾选框的点击事件处理
     SelectModeDialog.prototype.initCheckBoxHandler = function () {
         var jokerType = SelectModeDialog.JOKER_FUNC_TYPE;
         var roundType = SelectModeDialog.NORMAL_ROUND_TYPE;
-        var turnJokerType = SelectModeDialog.TURN_JOKER_TYPE;
 
         var checkBoxList = [
             {name:this.doubleCheck, func:this.setDoubleDeal, parameter:null},
@@ -488,18 +751,29 @@ var SelectModeDialog = (function(_super) {
             {name:this.tenRoundCheck, func:this.setGameRound, parameter:[roundType.TEN]},
             {name:this.twentyRoundCheck, func:this.setGameRound, parameter:[roundType.TWENTY]},
 
-            {name:this.noMoreJokerCheck, func:this.setJokerTurn, parameter:[turnJokerType.NO_MORE]},
-            {name:this.oneMoreCheck, func:this.setJokerTurn, parameter:[turnJokerType.ONE_MORE]},
-            {name:this.twoMoreCheck, func:this.setJokerTurn, parameter:[turnJokerType.TWO_MORE]},
+            {name:this.customizedTen, func:this.setGameRoundOfCustomized, parameter:[roundType.TEN]},
+            {name:this.customizedTwenty, func:this.setGameRoundOfCustomized, parameter:[roundType.TWENTY]},
+            {name:this.customizedThirty, func:this.setGameRoundOfCustomized, parameter:[roundType.THIRTY]},
+
+            {name:this.noMoreJokerCheck, func:this.setJokerTurn, parameter:[0]},
+            {name:this.oneMoreCheck, func:this.setJokerTurn, parameter:[1]},
+            {name:this.twoMoreCheck, func:this.selectTwoGhost, parameter:null},
 
             {name:this.anyBetCheck, func:this.setBetType, parameter:[SelectModeDialog.BET_TYPE.ANY]},
             {name:this.moreBetCheck, func:this.setBetType, parameter:[SelectModeDialog.BET_TYPE.MORE_THEN_MORE]},
+            {name:this.autoBetCheck, func:this.setBetType, parameter:[SelectModeDialog.BET_TYPE.AUTO]},
 
-            {name:this.nineGhostCheck, func:this.setFormationType, parameter:[SelectModeDialog.FORMATION_TYPE.NINE_GHOST]},
-            {name:this.eightGhostCheck, func:this.setFormationType, parameter:[SelectModeDialog.FORMATION_TYPE.EIGHT_GHOST]},
+            {name:this.nineGhostCheck, func:this.setFormationType},
 
             {name:this.bigThenGodCheck, func:this.setCondition, parameter:[SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_GOD]},
-            {name:this.bigThenStraightCheck, func:this.setCondition, parameter:[SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_STRAIGHT]}
+            {name:this.bigThenStraightCheck, func:this.setCondition, parameter:[SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_STRAIGHT]},
+
+            {name:this.winDoubleGhostCheck, func:this.setZeroPoint, parameter:[SelectModeDialog.BEAT_DBL_GHOST.ALL_BEAT]},
+            {name:this.tripleWinDoubleGhostCheck, func:this.setZeroPoint, parameter:[SelectModeDialog.BEAT_DBL_GHOST.FLUSH_THREE_BEAT]},
+
+            {name:this.tripleWinTripleGhostCheck, func:this.setTripleWinGhost, parameter:null},
+
+            {name:this.fancyWinCheck, func:this.setfancyWin, parameter:null}
         ];
 
         for (var index = 0; index < checkBoxList.length; index ++) {
@@ -508,20 +782,11 @@ var SelectModeDialog = (function(_super) {
             var parameter = checkBoxList[index].parameter;
             component.clickHandler = Laya.Handler.create(this, func, parameter, false);
         }
-
-        this.initComboBox();
-    };
-
-    SelectModeDialog.prototype.touchAutoSettings = function () {
-        this.createAutoSettings();
     };
 
     SelectModeDialog.prototype.initEvent = function () {
         //*创建房间
         this.createRoomBtn.on (Laya.Event.CLICK, this, this.touchCreateRoom);
-        //*恢复默认设置（测试用）
-        this.autoSettingBtn.on (Laya.Event.CLICK, this, this.touchAutoSettings);
-        this.autoSettingBtn.visible = true;
         //*模式按钮
         var modeBtnList = [
             {btn:this.classicalBtn, parameter: [this._gameModeList.CLASSICAL]},
@@ -540,6 +805,7 @@ var SelectModeDialog = (function(_super) {
 
         //*初始化选框的点击事件
         this.initCheckBoxHandler();
+
     };
 
     SelectModeDialog.prototype.createAutoSettings = function () {
@@ -547,64 +813,67 @@ var SelectModeDialog = (function(_super) {
             CLASSICAL: {
                 bankerType: SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_GOD,
                 gameRound:10,
+                ghostCounts: 0,
                 isJokerFormation: false,
                 isAnyBet: true,
                 multiples: {
-                    STRAIGHT_FLUSH: 4,
-                    THREES: 4,
+                    STRAIGHT_FLUSH: 6,
+                    THREES: 8,
                     STRAIGHT: 4,
                     DOUBLE_GHOST: 10
                 },
                 nineGhost: true,
                 eightGhost: true,
-                turnJokerType: SelectModeDialog.TURN_JOKER_TYPE.NO_MORE,
-                threeZeroWin:false,
-                twoZeroWin:false,
+                beatDBLGhost: SelectModeDialog.BEAT_DBL_GHOST.ALL_BEAT,
+                isTripleWinGhost: false,
+                fancyWin: false,
                 isDouble: false
             },
             STATIC: {
                 gameRound:10,
+                ghostCounts: 0,
                 isJokerFormation: false,
                 isAnyBet: true,
                 multiples: {
-                    STRAIGHT_FLUSH: 4,
-                    THREES: 4,
+                    STRAIGHT_FLUSH: 6,
+                    THREES: 8,
                     STRAIGHT: 4,
                     DOUBLE_GHOST: 10
                 },
                 nineGhost: true,
                 eightGhost: true,
-                turnJokerType: SelectModeDialog.TURN_JOKER_TYPE.NO_MORE,
-                threeZeroWin:false,
-                twoZeroWin:false,
+                beatDBLGhost: SelectModeDialog.BEAT_DBL_GHOST.ALL_BEAT,
+                isTripleWinGhost: false,
+                fancyWin: false,
                 isDouble: false
             },
             CHAOS: {
                 gameRound:10,
+                ghostCounts: 0,
                 isJokerFormation: false,
-                isAnyBet: true,
+                chaosBet: true,
                 multiples: {
-                    STRAIGHT_FLUSH: 4,
-                    THREES: 4,
+                    STRAIGHT_FLUSH: 6,
+                    THREES: 8,
                     STRAIGHT: 4,
                     DOUBLE_GHOST: 10
                 },
                 nineGhost: true,
                 eightGhost: true,
-                turnJokerType: SelectModeDialog.TURN_JOKER_TYPE.NO_MORE,
-                threeZeroWin: false,
-                twoZeroWin: false,
+                beatDBLGhost: SelectModeDialog.BEAT_DBL_GHOST.ALL_BEAT,
+                isTripleWinGhost: false,
+                fancyWin: false,
                 isDouble: false
             },
             CUSTOMIZED: {
                 gameRound:10,
                 multiples: {
-                    STRAIGHT_FLUSH: 4,
-                    THREES: 4,
-                    STRAIGHT: 4,
+                    STRAIGHT_FLUSH: 10,
+                    THREES: 10,
+                    STRAIGHT: 10,
                     DOUBLE_GHOST: 10
                 },
-                pointMultiple: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+                pointMultiple: [1, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             }
         };
     };
@@ -619,7 +888,6 @@ var SelectModeDialog = (function(_super) {
     //*获得所有模式的设置
     SelectModeDialog.prototype.getRoomSettings = function () {
         var saveValue = App.storageManager.getItem(SelectModeDialog.GAME_ROOM_SETTINGS);
-
         if (saveValue != undefined) {
             this._allSettings = JSON.parse(saveValue);
         }
@@ -632,8 +900,10 @@ var SelectModeDialog = (function(_super) {
     SelectModeDialog.prototype.init = function() {
         this.getRoomSettings();//*获取储存的设置
         this.initEvent();
+        this.initMultipleTouch();
         this.changeModeSetDisplay();//*设置的显示初始化，要恢复到这个模式最后一次的有效设置
         this.touchModeBtn(this._gameModeList.CLASSICAL);
+        this.changeIntroduction();
     };
 
     SelectModeDialog.prototype.close = function() {
@@ -643,22 +913,80 @@ var SelectModeDialog = (function(_super) {
         App.uiManager.removeUiLayer(this);
     };
 
-    SelectModeDialog.prototype.getComboLabels = function (combos) {
-        var min = combos.min;
-        var max = combos.max;
-        var dValue = combos.dValue || 1;
-        var str = "";
-
-        for (var index = min; index <= max; index += dValue) {
-            if (index == max) {
-                str += index;
-            }
-            else {
-                str += index + ",";
+    // 改变checkBox旁边文字的颜色
+    SelectModeDialog.prototype.changeTitleColor = function(touchBox,color) {
+        var children = touchBox._childs;
+        var node;
+        for(var i = 0 ; i < children.length ; i++)
+        {
+            node = children[i];
+            if(node instanceof Laya.Label || node instanceof Laya.Text)
+            {
+                node.color = color || "#ffffff";
             }
         }
+    };
 
-        return str;
+    //*设置下注选项的显示
+    SelectModeDialog.prototype.changeBetBoxDisplay = function () {
+        if (this._gameRoomMode == this._gameModeList.CHAOS) {
+            this.autoBetCheck.visible = true;
+            this.moreBetCheck.visible = false;
+        }
+        else {
+            this.autoBetCheck.visible = false;
+            this.moreBetCheck.visible = true;
+        }
+    };
+
+    // 改变描述
+    SelectModeDialog.prototype.changeIntroduction = function() {
+        this.titleIntroduction.text = introduction[this._gameRoomMode].title;
+        this.detailsIntroduction.text = introduction[this._gameRoomMode].details;
+
+        this.introductionPanel.vScrollBarSkin = "";
+        this.introductionPanel.vScrollBar.visible = false;
+        this.introductionPanel.refresh();
+        this.introductionPanel.scrollTo();
+    };
+
+    // 设置苹果类型的选择特效
+    SelectModeDialog.prototype.initMultipleTouch = function() {
+
+        for(var i = 0 ; i < 10 ; i++)
+        {
+            this["point"+i].on(Laya.Event.CLICK,this,this.onClickMultiple,[Game.Game.CUSTOMIZED_SETTINGS.POINT_MULTIPLE,"point"+i]);
+            this._pointCombos.push(this["point"+i]);
+        }
+
+        this.straightFlushCustomized.on(Laya.Event.CLICK,this,this.onClickMultiple, [Game.Game.CUSTOMIZED_SETTINGS.STRAIGHT_FLUSH,SelectModeDialog.POKER_MODE_NAME.STRAIGHT_FLUSH]);
+
+        this.straightCustomized.on(Laya.Event.CLICK,this,this.onClickMultiple, [Game.Game.CUSTOMIZED_SETTINGS.STRAIGHT,SelectModeDialog.POKER_MODE_NAME.STRAIGHT]);
+
+        this.threeOfAKindCustomized.on(Laya.Event.CLICK,this,this.onClickMultiple, [Game.Game.CUSTOMIZED_SETTINGS.THREES,SelectModeDialog.POKER_MODE_NAME.THREES]);
+
+        this.straightFlush.on(Laya.Event.CLICK, this, this.onClickMultiple, [Game.Game.POKER_FORMATION_MULTIPLE.STRAIGHT_FLUSH,SelectModeDialog.POKER_MODE_NAME.STRAIGHT_FLUSH]);
+
+        this.threeOfAKind.on(Laya.Event.CLICK,this,this.onClickMultiple, [Game.Game.POKER_FORMATION_MULTIPLE.THREES,SelectModeDialog.POKER_MODE_NAME.THREES]);
+    };
+
+    SelectModeDialog.prototype.onClickMultiple = function(data,type) {
+        var selectMultipleDialog = new SelectMultipleDialog(data);
+        selectMultipleDialog.on("multipleChange",this,this.changeMultiple, [type]);
+        App.uiManager.addUiLayer(selectMultipleDialog,{isAddShield:true,alpha:0.5,isDispose:true});
+    };
+
+    SelectModeDialog.prototype.changeMultiple = function(type,multiple) {
+        if(type.indexOf("point") != -1)
+        {
+            this[type].getChildByName("title").text = multiple;
+            this.setCustomizedPointMul({index:type.replace("point",""),combo:multiple});
+        }
+        else
+        {
+            this._multiple[type] = multiple;
+            this.initFormationCombos();
+        }
     };
 
     //*鬼牌功能类型（万能，牌型）
@@ -669,7 +997,8 @@ var SelectModeDialog = (function(_super) {
     //*局数类型，除了定制模式
     SelectModeDialog.NORMAL_ROUND_TYPE = {
         TEN: 10,
-        TWENTY: 20
+        TWENTY: 20,
+        THIRTY: 30
     };
     //*翻鬼牌
     SelectModeDialog.TURN_JOKER_TYPE = {
@@ -680,7 +1009,8 @@ var SelectModeDialog = (function(_super) {
     //*下注类型
     SelectModeDialog.BET_TYPE = {
         ANY: 0,
-        MORE_THEN_MORE: 1
+        MORE_THEN_MORE: 1,
+        AUTO: 2
     };
     //*鬼牌成型类型
     SelectModeDialog.FORMATION_TYPE = {
@@ -691,6 +1021,11 @@ var SelectModeDialog = (function(_super) {
     SelectModeDialog.CONDITION_CLASSICAL = {
         BIG_THEN_GOD: "BIG_THEN_GOD",
         BIG_THEN_STRAIGHT: "BIG_THEN_STRAIGHT"
+    };
+    //*零点类型
+    SelectModeDialog.BEAT_DBL_GHOST = {
+        ALL_BEAT:           0,  // 木虱赢双鬼
+        FLUSH_THREE_BEAT:   1   // 三条同花木虱赢双鬼
     };
 
     SelectModeDialog.GAME_ROOM_SETTINGS = "gameRoomSettings";
@@ -703,6 +1038,30 @@ var SelectModeDialog = (function(_super) {
         STRAIGHT: "STRAIGHT",
         DOUBLE_GHOST: "DOUBLE_GHOST"
     };
+
+    SelectModeDialog.BTN_SKIN = {
+        0:     {
+            NORMAL: "assets/ui.button/img_changzhuang.png",
+            DISABLED: "assets/ui.button/img_changzhuang_2.png"
+        },
+
+        1:  {
+            NORMAL: "assets/ui.button/img_jingdian.png",
+            DISABLED: "assets/ui.button/img_jingdian_2.png"
+        },
+
+        2:      {
+            NORMAL: "assets/ui.button/img_hunzhan.png",
+            DISABLED: "assets/ui.button/img_hunzhan_2.png"
+        },
+
+        3: {
+            NORMAL: "assets/ui.button/img_dingzhi.png",
+            DISABLED: "assets/ui.button/img_dingzhi_2.png"
+        }
+    };
+
+
 
     return SelectModeDialog;
 }(SelectModeDialogUI));

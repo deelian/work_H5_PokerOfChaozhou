@@ -1,0 +1,23 @@
+{
+    "apps" : [
+        {
+            "name"             : "web-server",
+            "script"           : "server.js",
+            "env_production" : {
+                "NODE_ENV": "production",
+                "DEBUG": "deju-poker:*",
+                "DEBUG_COLORS": true
+            },
+            "env_development" : {
+                "NODE_ENV": "development",
+                "DEBUG": "deju-poke:*",
+                "DEBUG_COLORS": true
+            },
+            "env_debug" : {
+                "NODE_ENV": "debug",
+                "DEBUG": "deju-poke:*",
+                "DEBUG_COLORS": true
+            }
+        }
+    ]
+}

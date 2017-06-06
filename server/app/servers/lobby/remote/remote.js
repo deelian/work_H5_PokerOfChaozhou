@@ -11,7 +11,7 @@ var logger = pomelo.logger.getLogger('application', __filename);
 /*
  * Game Dependencies
  */
-var Game = require('../../../../../Game');
+var Game = require('../../../../../game');
 
 module.exports = function(app) {
     return new Remote(app);
@@ -30,4 +30,9 @@ proto.getUser = function(args, callback) {
     this.service.getUser(uid, function(err, user) {
         callback && callback(err, user);
     });
+};
+
+proto.userLeave = function(uid, callback) {
+    logger.info("lobby-user-leave", uid);
+    callback && callback(null);
 };

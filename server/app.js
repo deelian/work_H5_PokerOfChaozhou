@@ -8,6 +8,12 @@
 var pomelo = require('../pomelo');
 var logger = pomelo.logger.getLogger('application', __filename);
 
+/**
+ * Init app for client.
+ */
+var app = pomelo.createApp();
+app.set('name', 'server');
+
 var ChatService = require('./app/services/ChatService');
 var RoomService = require('./app/services/RoomService');
 var LobbyService = require('./app/services/LobbyService');
@@ -16,40 +22,32 @@ var AuthService = require('./app/services/AuthService');
 /*
  * Game Dependencies
  */
-var Game = require('../Game');
+var Game = require('../game');
 var Code = Game.Code;
 
-/**
- * Init app for client.
- */
-var app = pomelo.createApp();
-app.set('name', 'server');
-
 // app configuration
-app.configure('production|development', 'connector', function(){
+app.configure('all', 'connector|gate', function(){
     app.set('connectorConfig',
         {
-            connector : pomelo.connectors.sioconnector,
-            transports : ['websocket', 'polling'],
-            heartbeats : true,
-            closeTimeout : 60 * 1000,
-            heartbeatTimeout : 60 * 1000,
-            heartbeatInterval : 25 * 1000
+            connector : pomelo.connectors.hybridconnector,
+            heartbeat : 3,
+            useDict : true,
+            useProtobuf : true
         }
     );
 });
 
-app.configure('production|development', 'chat', function() {
+app.configure('all', 'chat', function() {
     var chatService = new ChatService(app);
     app.set('chatService', chatService);
 });
 
-app.configure('production|development', 'lobby', function() {
+app.configure('all', 'lobby', function() {
     var lobbyService = new LobbyService(app);
     app.set('lobbyService', lobbyService);
 });
 
-app.configure('production|development', 'room', function() {
+app.configure('all', 'room', function() {
     var roomService = new RoomService(app);
     app.set('roomService', roomService);
 
@@ -57,7 +55,7 @@ app.configure('production|development', 'room', function() {
     app.load(room, { service: roomService });
 });
 
-app.configure('production|development', 'auth', function() {
+app.configure('all', 'auth', function() {
     var authService = new AuthService(app);
     app.set('authService', authService);
 });
@@ -75,15 +73,15 @@ app.before(function(msg, session, next) {
         next(null);
         return;
     }
-
-    console.log(session);
-
+    
     if (session.get('udid') != msg.udid) {
         next(new Error("Invalid request"));
         return;
     }
 
-    if (route === "auth.handler.verify") {
+    if (route === "auth.handler.verify"
+    ||  route === "auth.handler.guest"
+    ||  route === "auth.handler.refresh") {
         next(null);
         return;
     }

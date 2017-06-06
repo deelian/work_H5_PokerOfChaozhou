@@ -5,25 +5,53 @@ var LoginView = (function(_super) {
     function LoginView() {
         LoginView.super(this);
 
+        this.revision.text = "版本号：" + App.config.version;
+
         this.init();
     }
 
     Laya.class(LoginView, "LoginView", _super);
 
-    //*登录游戏
-    LoginView.prototype.loginGame = function () {
-        //*要提示正在登录
+    LoginView.prototype.init = function() {
 
-        App.login();
+        //window.alert(App.storageManager.getToken());
+        // 如果已经获得微信授权码，则自动登录
+        if (App._code) {
+            Laya.timer.once(300, this, this.loginGame);
+        }
+        // 本地有Token
+        else if (App.storageManager.getToken()) {
+            Laya.timer.once(300, this, this.loginGame);
+        }
+        // 默认显示登录界面
+        else {
+
+        }
+
+        this.initEvent();
     };
 
     LoginView.prototype.initEvent = function () {
-        //*登录按钮
-        this.loginBtn.on(Laya.Event.CLICK, this, this.loginGame);
+        this.guestBtn.on(Laya.Event.CLICK, this, this.loginGame);
+        this.wxAuthorizeBtn.on(Laya.Event.CLICK, this, this.authorize);
     };
 
-    LoginView.prototype.init = function() {
-        this.initEvent();
+    LoginView.prototype.authorize = function() {
+        App.wxAuthorize();
+    };
+
+    LoginView.prototype.loginGame = function () {
+        App.login();
+    };
+
+    LoginView.prototype.block = function() {
+        this.guestBtn.disable = true;
+        this.wxAuthorizeBtn.disable = true;
+    };
+
+    LoginView.prototype.unblock = function() {
+        this.guestBtn.disable = false;
+        this.wxAuthorizeBtn.disable = false;
     };
 
     return LoginView;

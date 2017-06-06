@@ -1,8 +1,9 @@
 {
     "renderMode": 0,
-    "showFPS": true,
-    "frameRate": 30,
-    "version": "0.0.1",
-    "host": "127.0.0.1",
-    "port": "8000"
+    "showFPS": false,
+    "frameRate": true,
+    "version": "1.0.0",
+    "host": "39.108.5.167",
+    "port": "8000",
+    "state": "PORTAL_DEV"
 }

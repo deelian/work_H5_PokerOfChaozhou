@@ -4,9 +4,288 @@
 
 	var Bezier=laya.maths.Bezier,Browser=laya.utils.Browser,Byte=laya.utils.Byte,Event=laya.events.Event;
 	var EventDispatcher=laya.events.EventDispatcher,Graphics=laya.display.Graphics,Handler=laya.utils.Handler;
-	var Loader=laya.net.Loader,MathUtil=laya.maths.MathUtil,Matrix=laya.maths.Matrix,Render=laya.renders.Render;
+	var Loader=laya.net.Loader,MathUtil=laya.maths.MathUtil,Matrix=laya.maths.Matrix,Node=laya.display.Node,Render=laya.renders.Render;
 	var Resource=laya.resource.Resource,RunDriver=laya.utils.RunDriver,Sprite=laya.display.Sprite,Stat=laya.utils.Stat;
-	var Texture=laya.resource.Texture,URL=laya.net.URL;
+	var Texture=laya.resource.Texture,URL=laya.net.URL,Utils=laya.utils.Utils;
+	/**
+	*...
+	*@author ...
+	*/
+	//class laya.ani.AnimationContent
+	var AnimationContent=(function(){
+		function AnimationContent(){
+			this.nodes=null;
+			this.name=null;
+			this.playTime=NaN;
+			this.bone3DMap=null;
+			this.totalKeyframeDatasLength=0;
+		}
+
+		__class(AnimationContent,'laya.ani.AnimationContent');
+		return AnimationContent;
+	})()
+
+
+	/**
+	*...
+	*@author ...
+	*/
+	//class laya.ani.AnimationNodeContent
+	var AnimationNodeContent=(function(){
+		function AnimationNodeContent(){
+			this.name=null;
+			this.parentIndex=0;
+			this.parent=null;
+			this.keyframeWidth=0;
+			this.lerpType=0;
+			this.interpolationMethod=null;
+			this.childs=null;
+			this.keyFrame=null;
+			this.playTime=NaN;
+			this.extenData=null;
+			this.dataOffset=0;
+		}
+
+		__class(AnimationNodeContent,'laya.ani.AnimationNodeContent');
+		return AnimationNodeContent;
+	})()
+
+
+	/**
+	*@private
+	*/
+	//class laya.ani.AnimationParser01
+	var AnimationParser01=(function(){
+		function AnimationParser01(){};
+		__class(AnimationParser01,'laya.ani.AnimationParser01');
+		AnimationParser01.parse=function(templet,reader){
+			var data=reader.__getBuffer();
+			var i=0,j=0,k=0,n=0,l=0,m=0,o=0;
+			var aniClassName=reader.readUTFString();
+			templet._aniClassName=aniClassName;
+			var strList=reader.readUTFString().split("\n");
+			var aniCount=reader.getUint8();
+			var publicDataPos=reader.getUint32();
+			var publicExtDataPos=reader.getUint32();
+			var publicData;
+			if (publicDataPos > 0)
+				publicData=data.slice(publicDataPos,publicExtDataPos);
+			var publicRead=new Byte(publicData);
+			if (publicExtDataPos > 0)
+				templet._publicExtData=data.slice(publicExtDataPos,data.byteLength);
+			templet._useParent=!!reader.getUint8();
+			templet._anis.length=aniCount;
+			for (i=0;i < aniCount;i++){
+				var ani=templet._anis[i]=new AnimationContent();
+				{};
+				ani.nodes=new Array;
+				var name=ani.name=strList[reader.getUint16()];
+				templet._aniMap[name]=i;
+				ani.bone3DMap={};
+				ani.playTime=reader.getFloat32();
+				var boneCount=ani.nodes.length=reader.getUint8();
+				ani.totalKeyframeDatasLength=0;
+				for (j=0;j < boneCount;j++){
+					var node=ani.nodes[j]=new AnimationNodeContent();
+					{};
+					node.childs=[];
+					var nameIndex=reader.getInt16();
+					if (nameIndex >=0){
+						node.name=strList[nameIndex];
+						ani.bone3DMap[node.name]=j;
+					}
+					node.keyFrame=new Array;
+					node.parentIndex=reader.getInt16();
+					node.parentIndex==-1 ? node.parent=null :node.parent=ani.nodes[node.parentIndex]
+					node.lerpType=reader.getUint8();
+					var keyframeParamsOffset=reader.getUint32();
+					publicRead.pos=keyframeParamsOffset;
+					var keyframeDataCount=node.keyframeWidth=publicRead.getUint16();
+					ani.totalKeyframeDatasLength+=keyframeDataCount;
+					if (node.lerpType===0 || node.lerpType===1){
+						node.interpolationMethod=[];
+						node.interpolationMethod.length=keyframeDataCount;
+						for (k=0;k < keyframeDataCount;k++)
+						node.interpolationMethod[k]=AnimationTemplet.interpolation[publicRead.getUint8()];
+					}
+					if (node.parent !=null)
+						node.parent.childs.push(node);
+					var privateDataLen=reader.getUint16();
+					if (privateDataLen > 0){
+						node.extenData=data.slice(reader.pos,reader.pos+privateDataLen);
+						reader.pos+=privateDataLen;
+					};
+					var keyframeCount=reader.getUint16();
+					node.keyFrame.length=keyframeCount;
+					var startTime=0;
+					for (k=0,n=keyframeCount;k < n;k++){
+						var keyFrame=node.keyFrame[k]=new KeyFramesContent();
+						{};
+						keyFrame.duration=reader.getFloat32();
+						keyFrame.startTime=startTime;
+						if (node.lerpType===2){
+							keyFrame.interpolationData=[];
+							var interDataLength=reader.getUint8();
+							var lerpType=0;
+							lerpType=reader.getFloat32();
+							switch (lerpType){
+								case 254:
+									keyFrame.interpolationData.length=keyframeDataCount;
+									for (o=0;o < keyframeDataCount;o++)
+									keyFrame.interpolationData[o]=0;
+									break ;
+								case 255:
+									keyFrame.interpolationData.length=keyframeDataCount;
+									for (o=0;o < keyframeDataCount;o++)
+									keyFrame.interpolationData[o]=5;
+									break ;
+								default :
+									keyFrame.interpolationData.push(lerpType);
+									for (m=1;m < interDataLength;m++){
+										keyFrame.interpolationData.push(reader.getFloat32());
+									}
+								}
+						}
+						keyFrame.data=new Float32Array(keyframeDataCount);
+						keyFrame.dData=new Float32Array(keyframeDataCount);
+						keyFrame.nextData=new Float32Array(keyframeDataCount);
+						for (l=0;l < keyframeDataCount;l++){
+							keyFrame.data[l]=reader.getFloat32();
+							if (keyFrame.data[l] >-0.00000001 && keyFrame.data[l] < 0.00000001)keyFrame.data[l]=0;
+						}
+						startTime+=keyFrame.duration;
+					}
+					node.playTime=ani.playTime;
+					templet._calculateKeyFrame(node,keyframeCount,keyframeDataCount);
+				}
+			}
+		}
+
+		return AnimationParser01;
+	})()
+
+
+	/**
+	*@private
+	*/
+	//class laya.ani.AnimationParser02
+	var AnimationParser02=(function(){
+		function AnimationParser02(){};
+		__class(AnimationParser02,'laya.ani.AnimationParser02');
+		AnimationParser02.READ_DATA=function(){
+			AnimationParser02._DATA.offset=AnimationParser02._reader.getUint32();
+			AnimationParser02._DATA.size=AnimationParser02._reader.getUint32();
+		}
+
+		AnimationParser02.READ_BLOCK=function(){
+			var count=AnimationParser02._BLOCK.count=AnimationParser02._reader.getUint16();
+			var blockStarts=AnimationParser02._BLOCK.blockStarts=[];
+			var blockLengths=AnimationParser02._BLOCK.blockLengths=[];
+			for (var i=0;i < count;i++){
+				blockStarts.push(AnimationParser02._reader.getUint32());
+				blockLengths.push(AnimationParser02._reader.getUint32());
+			}
+		}
+
+		AnimationParser02.READ_STRINGS=function(){
+			var offset=AnimationParser02._reader.getUint32();
+			var count=AnimationParser02._reader.getUint16();
+			var prePos=AnimationParser02._reader.pos;
+			AnimationParser02._reader.pos=offset+AnimationParser02._DATA.offset;
+			for (var i=0;i < count;i++)
+			AnimationParser02._strings[i]=AnimationParser02._reader.readUTFString();
+			AnimationParser02._reader.pos=prePos;
+		}
+
+		AnimationParser02.parse=function(templet,reader){
+			AnimationParser02._templet=templet;
+			AnimationParser02._reader=reader;
+			var arrayBuffer=reader.__getBuffer();
+			AnimationParser02.READ_DATA();
+			AnimationParser02.READ_BLOCK();
+			AnimationParser02.READ_STRINGS();
+			for (var i=0,n=AnimationParser02._BLOCK.count;i < n;i++){
+				var index=reader.getUint16();
+				var blockName=AnimationParser02._strings[index];
+				var fn=AnimationParser02["READ_"+blockName];
+				if (fn==null)
+					throw new Error("model file err,no this function:"+index+" "+blockName);
+				else
+				fn.call();
+			}
+		}
+
+		AnimationParser02.READ_ANIMATIONS=function(){
+			var reader=AnimationParser02._reader;
+			var arrayBuffer=reader.__getBuffer();
+			var i=0,j=0,k=0,n=0,l=0;
+			var keyframeWidth=reader.getUint16();
+			var interpolationMethod=[];
+			interpolationMethod.length=keyframeWidth;
+			for (i=0;i < keyframeWidth;i++)
+			interpolationMethod[i]=AnimationTemplet.interpolation[reader.getByte()];
+			var aniCount=reader.getUint8();
+			AnimationParser02._templet._anis.length=aniCount;
+			for (i=0;i < aniCount;i++){
+				var ani=AnimationParser02._templet._anis[i]=
+				{};
+				ani.nodes=new Array;
+				var aniName=ani.name=AnimationParser02._strings[reader.getUint16()];
+				AnimationParser02._templet._aniMap[aniName]=i;
+				ani.bone3DMap={};
+				ani.playTime=reader.getUint32();
+				var boneCount=ani.nodes.length=reader.getInt16();
+				ani.totalKeyframeDatasLength=0;
+				for (j=0;j < boneCount;j++){
+					var node=ani.nodes[j]=
+					{};
+					node.keyframeWidth=keyframeWidth;
+					node.childs=[];
+					var nameIndex=reader.getUint16();
+					if (nameIndex >=0){
+						node.name=AnimationParser02._strings[nameIndex];
+						ani.bone3DMap[node.name]=j;
+					}
+					node.keyFrame=new Array;
+					node.parentIndex=reader.getInt16();
+					node.parentIndex==-1 ? node.parent=null :node.parent=ani.nodes[node.parentIndex]
+					ani.totalKeyframeDatasLength+=keyframeWidth;
+					node.interpolationMethod=interpolationMethod;
+					if (node.parent !=null)
+						node.parent.childs.push(node);
+					var keyframeCount=reader.getUint16();
+					node.keyFrame.length=keyframeCount;
+					var startTime=0;
+					for (k=0,n=keyframeCount;k < n;k++){
+						var keyFrame=node.keyFrame[k]=
+						{};
+						keyFrame.duration=reader.getUint32();
+						keyFrame.startTime=startTime;
+						keyFrame.dData=new Float32Array(keyframeWidth);
+						keyFrame.nextData=new Float32Array(keyframeWidth);
+						var offset=AnimationParser02._DATA.offset;
+						var keyframeDataOffset=reader.getUint32();
+						var keyframeDataLength=keyframeWidth *4;
+						var keyframeArrayBuffer=arrayBuffer.slice(offset+keyframeDataOffset,offset+keyframeDataOffset+keyframeDataLength);
+						keyFrame.data=new Float32Array(keyframeArrayBuffer);
+						startTime+=keyFrame.duration;
+					}
+					node.playTime=ani.playTime;
+					AnimationParser02._templet._calculateKeyFrame(node,keyframeCount,keyframeWidth);
+				}
+			}
+		}
+
+		AnimationParser02._templet=null
+		AnimationParser02._reader=null
+		AnimationParser02._strings=[];
+		__static(AnimationParser02,
+		['_BLOCK',function(){return this._BLOCK={count:0};},'_DATA',function(){return this._DATA={offset:0,size:0};}
+		]);
+		return AnimationParser02;
+	})()
+
+
 	/**
 	*@private
 	*/
@@ -219,8 +498,11 @@
 			this._parentMatrix=null;
 			this._resultMatrix=null;
 			this._replaceDic={};
+			this._curDiyUV=null;
+			this._curDiyVS=null;
 			this._skinSprite=null;
 			this.deformData=null;
+			this._mVerticleArr=null;
 		}
 
 		__class(BoneSlot,'laya.ani.bone.BoneSlot');
@@ -229,10 +511,13 @@
 		*设置要显示的插槽数据
 		*@param slotData
 		*@param disIndex
+		*@param freshIndex 是否重置纹理
 		*/
-		__proto.showSlotData=function(slotData){
+		__proto.showSlotData=function(slotData,freshIndex){
+			(freshIndex===void 0)&& (freshIndex=true);
 			this.currSlotData=slotData;
-			this.displayIndex=this.srcDisplayIndex;
+			if(freshIndex)
+				this.displayIndex=this.srcDisplayIndex;
 			this.currDisplayData=null;
 			this.currTexture=null;
 		}
@@ -258,9 +543,7 @@
 			preIndex=this.currSlotData.getDisplayByName(tarName);
 			var newIndex=0;
 			newIndex=this.currSlotData.getDisplayByName(newName);
-			if (newIndex >=0){
-				this.replaceDisplayByIndex(preIndex,newIndex);
-			}
+			this.replaceDisplayByIndex(preIndex,newIndex);
 		}
 
 		/**
@@ -305,6 +588,10 @@
 		*/
 		__proto.replaceSkin=function(_texture){
 			this._diyTexture=_texture;
+			if (this._curDiyUV)this._curDiyUV.length=0;
+			if (this.currDisplayData&&this._diyTexture==this.currDisplayData.texture){
+				this._diyTexture=null;
+			}
 		}
 
 		/**
@@ -347,7 +634,8 @@
 									tResultMatrix=new Matrix();
 								}
 								if ((!Render.isWebGL && this.currDisplayData.uvs)|| (Render.isWebGL && this._diyTexture && this.currDisplayData.uvs)){
-									var tTestMatrix=new Matrix(1,0,0,1);
+									var tTestMatrix=BoneSlot._tempMatrix;
+									tTestMatrix.identity();
 									if (this.currDisplayData.uvs[1] > this.currDisplayData.uvs[5]){
 										tTestMatrix.d=-1;
 									}
@@ -381,8 +669,7 @@
 					if (tSkinSprite==null){
 						return;
 					};
-					var tVBArray=[];
-					var tIBArray=[];
+					var tIBArray;
 					var tRed=1;
 					var tGreed=1;
 					var tBlue=1;
@@ -391,19 +678,24 @@
 						var tVertices=this.currDisplayData.weights;
 						if (this.deformData){
 							tVertices=this.deformData;
-						}
-						for (var i=0,ii=0;i < tVertices.length && ii< this.currDisplayData.uvs.length;){
-							var tX=tVertices[i++];
-							var tY=tVertices[i++];
-							tVBArray.push(tX,tY,this.currDisplayData.uvs[ii++],this.currDisplayData.uvs[ii++],tRed,tGreed,tBlue,tAlpha);
 						};
-						var tTriangleNum=this.currDisplayData.triangles.length / 3;
-						for (i=0;i < tTriangleNum;i++){
-							tIBArray.push(this.currDisplayData.triangles[i *3]);
-							tIBArray.push(this.currDisplayData.triangles[i *3+1]);
-							tIBArray.push(this.currDisplayData.triangles[i *3+2]);
+						var tUVs;
+						if (this._diyTexture){
+							if (!this._curDiyUV){
+								this._curDiyUV=[];
+							}
+							if (this._curDiyUV.length==0){
+								this._curDiyUV=UVTools.getRelativeUV(this.currTexture.uv,this.currDisplayData.uvs,this._curDiyUV);
+								this._curDiyUV=UVTools.getAbsoluteUV(this._diyTexture.uv,this._curDiyUV,this._curDiyUV);
+							}
+							tUVs=this._curDiyUV;
+							}else{
+							tUVs=this.currDisplayData.uvs;
 						}
-						tSkinSprite.init(this.currTexture,tVBArray,tIBArray);
+						this._mVerticleArr=tVertices;
+						var tTriangleNum=this.currDisplayData.triangles.length / 3;
+						tIBArray=this.currDisplayData.triangles;
+						tSkinSprite.init2(tTexture,null ,tIBArray,this._mVerticleArr,tUVs);
 						var tCurrentMatrix2=this.getDisplayMatrix();
 						if (this._parentMatrix){
 							if (tCurrentMatrix2){
@@ -449,12 +741,25 @@
 		*@param boneMatrixArray 当前帧的骨骼矩阵
 		*/
 		__proto.skinMesh=function(boneMatrixArray,skinSprite,alpha){
+			var tTexture=this.currTexture;
 			var tBones=this.currDisplayData.bones;
-			var tUvs=this.currDisplayData.uvs;
+			var tUvs;
+			if (this._diyTexture){
+				tTexture=this._diyTexture;
+				if (!this._curDiyUV){
+					this._curDiyUV=[];
+				}
+				if (this._curDiyUV.length==0){
+					this._curDiyUV=UVTools.getRelativeUV(this.currTexture.uv,this.currDisplayData.uvs,this._curDiyUV);
+					this._curDiyUV=UVTools.getAbsoluteUV(this._diyTexture.uv,this._curDiyUV,this._curDiyUV);
+				}
+				tUvs=this._curDiyUV;
+				}else{
+				tUvs=this.currDisplayData.uvs;
+			};
 			var tWeights=this.currDisplayData.weights;
 			var tTriangles=this.currDisplayData.triangles;
-			var tVBArray=[];
-			var tIBArray=[];
+			var tIBArray;
 			var tRx=0;
 			var tRy=0;
 			var nn=0;
@@ -501,15 +806,9 @@
 					tVertices.push(tRx,tRy);
 				}
 			}
-			for (i=0,j=0;i < tVertices.length && j < tUvs.length;){
-				tRx=tVertices[i++];
-				tRy=tVertices[i++];
-				tVBArray.push(tRx,tRy,tUvs[j++],tUvs[j++],tRed,tGreed,tBlue,tAlpha);
-			}
-			for (i=0,n=tTriangles.length;i < n;i++){
-				tIBArray.push(tTriangles[i]);
-			}
-			skinSprite.init(this.currTexture,tVBArray,tIBArray);
+			this._mVerticleArr=tVertices;
+			tIBArray=tTriangles;
+			skinSprite.init2(tTexture,null,tIBArray,this._mVerticleArr,tUvs);
 		}
 
 		/**
@@ -560,6 +859,9 @@
 			return tBoneSlot;
 		}
 
+		__static(BoneSlot,
+		['_tempMatrix',function(){return this._tempMatrix=new Matrix();}
+		]);
 		return BoneSlot;
 	})()
 
@@ -1111,7 +1413,7 @@
 					var bone=this.bones[i];
 					var length=bone.length;
 					var x=length *bone.resultMatrix.a;
-					var y=length *bone.resultMatrix.c;
+					var y=length *bone.resultMatrix.b;
 					length=Math.sqrt(x *x+y *y);
 					if (tScale)lengths[i]=length;
 					spaces[++i]=tLengthSpacing ? Math.max(0,length+spacing):spacing;
@@ -1158,8 +1460,8 @@
 				boneY=y;
 				if (tRotate){
 					var a=bone.resultMatrix.a;
-					var b=bone.resultMatrix.b;
-					var c=bone.resultMatrix.c;
+					var b=bone.resultMatrix.c;
+					var c=bone.resultMatrix.b;
 					var d=bone.resultMatrix.d;
 					var r=NaN;
 					var cos=NaN;
@@ -1825,6 +2127,80 @@
 
 
 	/**
+	*用于UV转换的工具类
+	*@private
+	*/
+	//class laya.ani.bone.UVTools
+	var UVTools=(function(){
+		function UVTools(){}
+		__class(UVTools,'laya.ani.bone.UVTools');
+		UVTools.getRelativeUV=function(bigUV,smallUV,rst){
+			var startX=bigUV[0];
+			var width=bigUV[2]-bigUV[0];
+			var startY=bigUV[1];
+			var height=bigUV[5]-bigUV[1];
+			if(!rst)rst=[];
+			rst.length=smallUV.length;
+			var i=0,len=0;
+			len=rst.length;
+			var dWidth=1 / width;
+			var dHeight=1 / height;
+			for (i=0;i < len;i+=2){
+				rst[i]=(smallUV[i]-startX)*dWidth;
+				rst[i+1]=(smallUV[i+1]-startY)*dHeight;
+			}
+			return rst;
+		}
+
+		UVTools.getAbsoluteUV=function(bigUV,smallUV,rst){
+			if (bigUV[0]==0 && bigUV[1]==0 && bigUV[4]==1 && bigUV[5]==1){
+				if (rst){
+					Utils.copyArray(rst,smallUV);
+					return rst;
+					}else{
+					return smallUV;
+				}
+			};
+			var startX=bigUV[0];
+			var width=bigUV[2]-bigUV[0];
+			var startY=bigUV[1];
+			var height=bigUV[5]-bigUV[1];
+			if(!rst)rst=[];
+			rst.length=smallUV.length;
+			var i=0,len=0;
+			len=rst.length;
+			for (i=0;i < len;i+=2){
+				rst[i]=smallUV[i]*width+startX;
+				rst[i+1]=smallUV[i+1]*height+startY;
+			}
+			return rst;
+		}
+
+		return UVTools;
+	})()
+
+
+	/**
+	*...
+	*@author ...
+	*/
+	//class laya.ani.KeyFramesContent
+	var KeyFramesContent=(function(){
+		function KeyFramesContent(){
+			this.startTime=NaN;
+			this.duration=NaN;
+			this.interpolationData=null;
+			this.data=null;
+			this.dData=null;
+			this.nextData=null;
+		}
+
+		__class(KeyFramesContent,'laya.ani.KeyFramesContent');
+		return KeyFramesContent;
+	})()
+
+
+	/**
 	*...
 	*@author ww
 	*/
@@ -1877,6 +2253,7 @@
 	//class laya.ani.AnimationPlayer extends laya.events.EventDispatcher
 	var AnimationPlayer=(function(_super){
 		function AnimationPlayer(){
+			this._destroyed=false;
 			this._templet=null;
 			this._currentTime=NaN;
 			this._currentFrameTime=NaN;
@@ -1896,8 +2273,9 @@
 			this._fullFrames=null;
 			this.isCache=true;
 			this.playbackRate=1.0;
-			this.returnToZeroStopped=true;
+			this.returnToZeroStopped=false;
 			AnimationPlayer.__super.call(this);
+			this._destroyed=false;
 			this._currentAnimationClipIndex=-1;
 			this._currentKeyframeIndex=-1;
 			this._currentTime=0.0;
@@ -1907,6 +2285,7 @@
 			this._startUpdateLoopCount=-1;
 			this._cachePlayRate=1.0;
 			this.cacheFrameRate=60;
+			this.returnToZeroStopped=false;
 		}
 
 		__class(AnimationPlayer,'laya.ani.AnimationPlayer',_super);
@@ -1931,7 +2310,7 @@
 				var aniFullFrame=[];
 				for (var j=0,jNum=templet.getAnimation(i).nodes.length;j < jNum;j++){
 					var node=templet.getAnimation(i).nodes[j];
-					var frameCount=Math.floor(node.playTime / cacheFrameInterval);
+					var frameCount=Math.floor(node.playTime / cacheFrameInterval+0.01);
 					var nodeFullFrames=new Uint16Array(frameCount+1);
 					var lastFrameIndex=-1;
 					for (var n=0,nNum=node.keyFrame.length;n < nNum;n++){
@@ -1956,13 +2335,85 @@
 		/**
 		*@private
 		*/
+		__proto._onAnimationTempletLoaded=function(){
+			(this.destroyed)|| (this._calculatePlayDuration());
+		}
+
+		/**
+		*@private
+		*/
 		__proto._calculatePlayDuration=function(){
 			if (this.state!==/*laya.ani.AnimationState.stopped*/0){
 				var oriDuration=this._templet.getAniDuration(this._currentAnimationClipIndex);
 				(this._playEnd===0)&& (this._playEnd=oriDuration);
-				if (this._playEnd> oriDuration)
+				if (this._playEnd > oriDuration)
 					this._playEnd=oriDuration;
 				this._playDuration=this._playEnd-this._playStart;
+			}
+		}
+
+		/**
+		*@private
+		*/
+		__proto._setPlayParams=function(time,cacheFrameInterval){
+			this._currentTime=time;
+			this._currentKeyframeIndex=Math.floor((this.currentPlayTime)/ cacheFrameInterval+0.01);
+			this._currentFrameTime=this._currentKeyframeIndex *cacheFrameInterval;
+		}
+
+		/**
+		*@private
+		*/
+		__proto._setPlayParamsWhenStop=function(currentAniClipPlayDuration,cacheFrameInterval){
+			this._currentTime=currentAniClipPlayDuration;
+			this._currentKeyframeIndex=Math.floor(currentAniClipPlayDuration / cacheFrameInterval+0.01);
+			this._currentFrameTime=this._currentKeyframeIndex *cacheFrameInterval;
+			this._currentAnimationClipIndex=-1;
+		}
+
+		/**
+		*@private
+		*/
+		__proto._update=function(elapsedTime){
+			if (this._currentAnimationClipIndex===-1 || this._paused || !this._templet || !this._templet.loaded)
+				return;
+			var cacheFrameInterval=this._cacheFrameRateInterval *this._cachePlayRate;
+			var time=0;
+			(this._startUpdateLoopCount!==Stat.loopCount)&& (time=elapsedTime *this.playbackRate,this._elapsedPlaybackTime+=time);
+			var currentAniClipPlayDuration=this.playDuration;
+			if ((this._overallDuration!==0 && this._elapsedPlaybackTime >=this._overallDuration)|| (this._overallDuration===0 && this._elapsedPlaybackTime >=currentAniClipPlayDuration)){
+				this._setPlayParamsWhenStop(currentAniClipPlayDuration,cacheFrameInterval);
+				this.event(/*laya.events.Event.STOPPED*/"stopped");
+				return;
+			}
+			time+=this._currentTime;
+			if (currentAniClipPlayDuration > 0){
+				if (time >=currentAniClipPlayDuration){
+					do {
+						time-=currentAniClipPlayDuration;
+						if (this._stopWhenCircleFinish){
+							this._setPlayParamsWhenStop(currentAniClipPlayDuration,cacheFrameInterval);
+							this._stopWhenCircleFinish=false;
+							this.event(/*laya.events.Event.STOPPED*/"stopped");
+							return;
+						}
+						if (time < currentAniClipPlayDuration){
+							this._setPlayParams(time,cacheFrameInterval);
+							this.event(/*laya.events.Event.COMPLETE*/"complete");
+						}
+					}while (time >=currentAniClipPlayDuration)
+					}else {
+					this._setPlayParams(time,cacheFrameInterval);
+				}
+				}else {
+				if (this._stopWhenCircleFinish){
+					this._setPlayParamsWhenStop(currentAniClipPlayDuration,cacheFrameInterval);
+					this._stopWhenCircleFinish=false;
+					this.event(/*laya.events.Event.STOPPED*/"stopped");
+					return;
+				}
+				this._currentTime=this._currentFrameTime=this._currentKeyframeIndex=0;
+				this.event(/*laya.events.Event.COMPLETE*/"complete");
 			}
 		}
 
@@ -1973,6 +2424,7 @@
 			this.offAll();
 			this._templet=null;
 			this._fullFrames=null;
+			this._destroyed=true;
 		}
 
 		/**
@@ -2010,8 +2462,8 @@
 			if (this._templet.loaded)
 				this._calculatePlayDuration();
 			else
-			this._templet.once(/*laya.events.Event.LOADED*/"loaded",this,this._calculatePlayDuration);
-			this.update(0);
+			this._templet.once(/*laya.events.Event.LOADED*/"loaded",this,this._onAnimationTempletLoaded);
+			this._update(0);
 		}
 
 		/**
@@ -2040,50 +2492,11 @@
 		__proto.stop=function(immediate){
 			(immediate===void 0)&& (immediate=true);
 			if (immediate){
-				this._currentAnimationClipIndex=this._currentKeyframeIndex=-1;
+				this._currentTime=this._currentFrameTime=this._currentKeyframeIndex=0;
+				this._currentAnimationClipIndex=-1;
 				this.event(/*laya.events.Event.STOPPED*/"stopped");
 				}else {
 				this._stopWhenCircleFinish=true;
-			}
-		}
-
-		/**更新动画播放器 */
-		__proto.update=function(elapsedTime){
-			if (this._currentAnimationClipIndex===-1 || this._paused || !this._templet || !this._templet.loaded)
-				return;
-			var cacheFrameInterval=this._cacheFrameRateInterval *this._cachePlayRate;
-			var time=0;
-			(this._startUpdateLoopCount!==Stat.loopCount)&& (time=elapsedTime *this.playbackRate,this._elapsedPlaybackTime+=time);
-			var currentAniClipPlayDuration=this.playDuration;
-			if ((this._overallDuration!==0 && this._elapsedPlaybackTime >=this._overallDuration)|| (this._overallDuration===0 && this._elapsedPlaybackTime >=currentAniClipPlayDuration)){
-				this._currentAnimationClipIndex=this._currentKeyframeIndex=-1;
-				this.event(/*laya.events.Event.STOPPED*/"stopped");
-				return;
-			}
-			time+=this._currentTime;
-			if (currentAniClipPlayDuration > 0){
-				while (time >=currentAniClipPlayDuration){
-					if (this._stopWhenCircleFinish){
-						this._currentAnimationClipIndex=this._currentKeyframeIndex=-1;
-						this._stopWhenCircleFinish=false;
-						this.event(/*laya.events.Event.STOPPED*/"stopped");
-						return;
-					}
-					time-=currentAniClipPlayDuration;
-					this.event(/*laya.events.Event.COMPLETE*/"complete");
-				}
-				this._currentTime=time;
-				this._currentKeyframeIndex=Math.floor((this.currentPlayTime)/ cacheFrameInterval);
-				this._currentFrameTime=this._currentKeyframeIndex *cacheFrameInterval;
-				}else {
-				if (this._stopWhenCircleFinish){
-					this._currentAnimationClipIndex=this._currentKeyframeIndex=-1;
-					this._stopWhenCircleFinish=false;
-					this.event(/*laya.events.Event.STOPPED*/"stopped");
-					return;
-				}
-				this._currentTime=this._currentFrameTime=this._currentKeyframeIndex=0;
-				this.event(/*laya.events.Event.COMPLETE*/"complete");
 			}
 		}
 
@@ -2267,6 +2680,14 @@
 			return this._cacheFrameRateInterval;
 		});
 
+		/**
+		*获取是否已销毁。
+		*@return 是否已销毁。
+		*/
+		__getset(0,__proto,'destroyed',function(){
+			return this._destroyed;
+		});
+
 		return AnimationPlayer;
 	})(EventDispatcher)
 
@@ -2305,6 +2726,7 @@
 	//class laya.ani.AnimationTemplet extends laya.resource.Resource
 	var AnimationTemplet=(function(_super){
 		function AnimationTemplet(){
+			//this._aniVersion=null;
 			this._aniMap={};
 			//this._publicExtData=null;
 			//this._useParent=false;
@@ -2312,8 +2734,7 @@
 			//this.unfixedCurrentTimes=null;
 			//this.unfixedKeyframes=null;
 			this.unfixedLastAniIndex=-1;
-			//this.aniClassName=null;
-			//this._aniVersion=null;
+			//this._aniClassName=null;
 			//this._animationDatasCache=null;
 			AnimationTemplet.__super.call(this);
 			this._anis=new Array;
@@ -2321,115 +2742,26 @@
 
 		__class(AnimationTemplet,'laya.ani.AnimationTemplet',_super);
 		var __proto=AnimationTemplet.prototype;
+		/**
+		*@private
+		*/
+		__proto.parse=function(data){
+			var reader=new Byte(data);
+			this._aniVersion=reader.readUTFString();
+			AnimationParser01.parse(this,reader);
+		}
+
+		/**
+		*@private
+		*/
 		__proto._endLoaded=function(){
 			this._loaded=true;
 			this.event(/*laya.events.Event.LOADED*/"loaded",this);
 		}
 
-		__proto.parse=function(data){
-			var i=0,j=0,k=0,n=0,l=0,m=0,o=0;
-			var read=new Byte(data);
-			this._aniVersion=read.readUTFString();
-			var aniClassName=read.readUTFString();
-			this.aniClassName=aniClassName;
-			var strList=read.readUTFString().split("\n");
-			var aniCount=read.getUint8();
-			var publicDataPos=read.getUint32();
-			var publicExtDataPos=read.getUint32();
-			var publicData;
-			if (publicDataPos > 0)
-				publicData=data.slice(publicDataPos,publicExtDataPos);
-			var publicRead=new Byte(publicData);
-			if (publicExtDataPos > 0)
-				this._publicExtData=data.slice(publicExtDataPos,data.byteLength);
-			this._useParent=!!read.getUint8();
-			this._anis.length=aniCount;
-			for (i=0;i < aniCount;i++){
-				var ani=this._anis[i]=
-				{};
-				ani.nodes=new Array;
-				var name=ani.name=strList[read.getUint16()];
-				this._aniMap[name]=i;
-				ani.bone3DMap={};
-				ani.playTime=read.getFloat32();
-				var boneCount=ani.nodes.length=read.getUint8();
-				ani.totalKeyframesLength=0;
-				for (j=0;j < boneCount;j++){
-					var node=ani.nodes[j]=
-					{};
-					node.childs=[];
-					var nameIndex=read.getInt16();
-					if (nameIndex >=0){
-						node.name=strList[nameIndex];
-						ani.bone3DMap[node.name]=j;
-					}
-					node.keyFrame=new Array;
-					node.parentIndex=read.getInt16();
-					node.parentIndex==-1 ? node.parent=null :node.parent=ani.nodes[node.parentIndex]
-					node.lerpType=read.getUint8();
-					var keyframeParamsOffset=read.getUint32();
-					publicRead.pos=keyframeParamsOffset;
-					var keyframeDataCount=node.keyframeWidth=publicRead.getUint16();
-					ani.totalKeyframesLength+=keyframeDataCount;
-					if (node.lerpType===0||node.lerpType===1){
-						node.interpolationMethod=[];
-						node.interpolationMethod.length=keyframeDataCount;
-						for (k=0;k < keyframeDataCount;k++)
-						node.interpolationMethod[k]=AnimationTemplet.interpolation[publicRead.getUint8()];
-					}
-					if (node.parent !=null)
-						node.parent.childs.push(node);
-					var privateDataLen=read.getUint16();
-					if (privateDataLen > 0){
-						node.extenData=data.slice(read.pos,read.pos+privateDataLen);
-						read.pos+=privateDataLen;
-					};
-					var keyframeCount=read.getUint16();
-					node.keyFrame.length=keyframeCount;
-					var startTime=0;
-					for (k=0,n=keyframeCount;k < n;k++){
-						var keyFrame=node.keyFrame[k]=
-						{};
-						keyFrame.duration=read.getFloat32();
-						keyFrame.startTime=startTime;
-						if (node.lerpType===2){
-							keyFrame.interpolationData=[];
-							var interDataLength=read.getUint8();
-							var lerpType=0;
-							lerpType=read.getFloat32();
-							switch (lerpType){
-								case 254:
-									keyFrame.interpolationData.length=keyframeDataCount;
-									for (o=0;o < keyframeDataCount;o++)
-									keyFrame.interpolationData[o]=0;
-									break ;
-								case 255:
-									keyFrame.interpolationData.length=keyframeDataCount;
-									for (o=0;o < keyframeDataCount;o++)
-									keyFrame.interpolationData[o]=5;
-									break ;
-								default :
-									keyFrame.interpolationData.push(lerpType);
-									for (m=1;m < interDataLength;m++){
-										keyFrame.interpolationData.push(read.getFloat32());
-									}
-								}
-						}
-						keyFrame.data=new Float32Array(keyframeDataCount);
-						keyFrame.dData=new Float32Array(keyframeDataCount);
-						keyFrame.nextData=new Float32Array(keyframeDataCount);
-						for (l=0;l < keyframeDataCount;l++){
-							keyFrame.data[l]=read.getFloat32();
-							if (keyFrame.data[l] >-0.00000001 && keyFrame.data[l] < 0.00000001)keyFrame.data[l]=0;
-						}
-						startTime+=keyFrame.duration;
-					}
-					node.playTime=ani.playTime;
-					this._calculateKeyFrame(node,keyframeCount,keyframeDataCount);
-				}
-			}
-		}
-
+		/**
+		*@private
+		*/
 		__proto._calculateKeyFrame=function(node,keyframeCount,keyframeDataCount){
 			var keyFrames=node.keyFrame;
 			keyFrames[keyframeCount]=keyFrames[0];
@@ -2444,10 +2776,18 @@
 		}
 
 		/**
-		*@private
+		*@inheritDoc
 		*/
-		__proto.onAsynLoaded=function(url,data){
-			this.parse(data);
+		__proto.onAsynLoaded=function(url,data,params){
+			var reader=new Byte(data);
+			this._aniVersion=reader.readUTFString();
+			switch (this._aniVersion){
+				case "LAYAANIMATION:02":
+					AnimationParser02.parse(this,reader);
+					break ;
+				default :
+					AnimationParser01.parse(this,reader);
+				}
 			this._endLoaded();
 		}
 
@@ -2476,7 +2816,7 @@
 		}
 
 		__proto.getTotalkeyframesLength=function(aniIndex){
-			return this._anis[aniIndex].totalKeyframesLength;
+			return this._anis[aniIndex].totalKeyframeDatasLength;
 		}
 
 		__proto.getPublicExtData=function(){
@@ -2513,31 +2853,37 @@
 				key=node.keyFrame[nodesFrameIndices[i][frameIndex]];
 				node.dataOffset=outOfs;
 				var dt=playCurTime-key.startTime;
-				switch (node.lerpType){
-					case 0:
-					case 1:
-						for (j=0;j < node.keyframeWidth;)
-						j+=node.interpolationMethod[j](node,j,originalData,outOfs+j,key.data,dt,key.dData,key.duration,key.nextData);
+				var lerpType=node.lerpType;
+				if (lerpType){
+					switch (lerpType){
+						case 0:
+						case 1:
+							for (j=0;j < node.keyframeWidth;)
+							j+=node.interpolationMethod[j](node,j,originalData,outOfs+j,key.data,dt,key.dData,key.duration,key.nextData);
+							break ;
+						case 2:;
+							var interpolationData=key.interpolationData;
+							var interDataLen=interpolationData.length;
+							var dataIndex=0;
+							for (j=0;j < interDataLen;){
+								var type=interpolationData[j];
+							switch (type){
+								case 6:
+									j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData,interpolationData,j+1);
+									break ;
+								case 7:
+									j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData,interpolationData,j+1);
+									break ;
+								default :
+									j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData);
+								}
+							dataIndex++;
+						}
 						break ;
-					case 2:;
-						var interpolationData=key.interpolationData;
-						var interDataLen=interpolationData.length;
-						var dataIndex=0;
-						for (j=0;j < interDataLen;){
-							var type=interpolationData[j];
-						switch(type){
-							case 6:
-								j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData,interpolationData.slice(j+1,j+5));
-								break ;
-							case 7:
-								j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData,interpolationData.slice(j+1,j+9));
-								break ;
-							default :
-								j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData);
-							}
-						dataIndex++;
 					}
-					break ;
+					}else {
+					for (j=0;j < node.keyframeWidth;)
+					j+=node.interpolationMethod[j](node,j,originalData,outOfs+j,key.data,dt,key.dData,key.duration,key.nextData);
 				}
 				outOfs+=node.keyframeWidth;
 			}
@@ -2590,38 +2936,45 @@
 				var key=this.unfixedKeyframes[i];
 				node.dataOffset=outOfs;
 				var dt=playCurTime-key.startTime;
-				switch (node.lerpType){
-					case 0:
-					case 1:
-						for (j=0;j < node.keyframeWidth;)
-						j+=node.interpolationMethod[j](node,j,originalData,outOfs+j,key.data,dt,key.dData,key.duration,key.nextData);
+				var lerpType=node.lerpType;
+				if (lerpType){
+					switch (node.lerpType){
+						case 0:
+						case 1:
+							for (j=0;j < node.keyframeWidth;)
+							j+=node.interpolationMethod[j](node,j,originalData,outOfs+j,key.data,dt,key.dData,key.duration,key.nextData);
+							break ;
+						case 2:;
+							var interpolationData=key.interpolationData;
+							var interDataLen=interpolationData.length;
+							var dataIndex=0;
+							for (j=0;j < interDataLen;){
+								var type=interpolationData[j];
+							switch (type){
+								case 6:
+									j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData,interpolationData,j+1);
+									break ;
+								case 7:
+									j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData,interpolationData,j+1);
+									break ;
+								default :
+									j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData);
+								}
+							dataIndex++;
+						}
 						break ;
-					case 2:;
-						var interpolationData=key.interpolationData;
-						var interDataLen=interpolationData.length;
-						var dataIndex=0;
-						for (j=0;j < interDataLen;){
-							var type=interpolationData[j];
-						switch(type){
-							case 6:
-								j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData,interpolationData.slice(j+1,j+5));
-								break ;
-							case 7:
-								j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData,interpolationData.slice(j+1,j+9));
-								break ;
-							default :
-								j+=AnimationTemplet.interpolation[type](node,dataIndex,originalData,outOfs+dataIndex,key.data,dt,key.dData,key.duration,key.nextData);
-							}
-						dataIndex++;
 					}
-					break ;
+					}else {
+					for (j=0;j < node.keyframeWidth;)
+					j+=node.interpolationMethod[j](node,j,originalData,outOfs+j,key.data,dt,key.dData,key.duration,key.nextData);
 				}
 				outOfs+=node.keyframeWidth;
 			}
 		}
 
 		__proto.dispose=function(){
-			this.resourceManager.removeResource(this);
+			if (this.resourceManager)
+				this.resourceManager.removeResource(this);
 			_super.prototype.dispose.call(this);
 		}
 
@@ -2655,13 +3008,15 @@
 			return 1;
 		}
 
-		AnimationTemplet._BezierInterpolation_6=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData){
-			out[outOfs]=data[index]+(nextData[index]-data[index])*BezierLerp.getBezierRate(dt / duration,interData[0],interData[1],interData[2],interData[3]);
+		AnimationTemplet._BezierInterpolation_6=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData,offset){
+			(offset===void 0)&& (offset=0);
+			out[outOfs]=data[index]+(nextData[index]-data[index])*BezierLerp.getBezierRate(dt / duration,interData[offset],interData[offset+1],interData[offset+2],interData[offset+3]);
 			return 5;
 		}
 
-		AnimationTemplet._BezierInterpolation_7=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData){
-			out[outOfs]=interData[4]+interData[5] *BezierLerp.getBezierRate((dt*0.001+interData[6])/ interData[7],interData[0],interData[1],interData[2],interData[3]);
+		AnimationTemplet._BezierInterpolation_7=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData,offset){
+			(offset===void 0)&& (offset=0);
+			out[outOfs]=interData[offset+4]+interData[offset+5] *BezierLerp.getBezierRate((dt *0.001+interData[offset+6])/ interData[offset+7],interData[offset],interData[offset+1],interData[offset+2],interData[offset+3]);
 			return 9;
 		}
 
@@ -2670,7 +3025,6 @@
 		}
 
 		AnimationTemplet.interpolation=[AnimationTemplet._LinearInterpolation_0,AnimationTemplet._QuaternionInterpolation_1,AnimationTemplet._AngleInterpolation_2,AnimationTemplet._RadiansInterpolation_3,AnimationTemplet._Matrix4x4Interpolation_4,AnimationTemplet._NoInterpolation_5,AnimationTemplet._BezierInterpolation_6,AnimationTemplet._BezierInterpolation_7];
-		AnimationTemplet.LAYA_ANIMATION_VISION="LAYAANIMATION:1.6.0";
 		return AnimationTemplet;
 	})(Resource)
 
@@ -2716,6 +3070,7 @@
 			this._drawOrderIndex=0;
 			this._drawOrder=null;
 			this._lastAniClipIndex=-1;
+			this._lastUpdateAniClipIndex=-1;
 			Skeleton.__super.call(this);
 			(aniMode===void 0)&& (aniMode=0);
 			if (templet)this.init(templet,aniMode);
@@ -2942,12 +3297,20 @@
 			};
 			var tCurrTime=Laya.timer.currTimer;
 			var preIndex=this._player.currentKeyframeIndex;
+			var dTime=tCurrTime-this._lastTime;
 			if (autoKey){
-				this._player.update(tCurrTime-this._lastTime)
+				this._player._update(dTime);
+				}else{
+				preIndex=-1;
 			}
 			this._lastTime=tCurrTime;
-			this._aniClipIndex=this._player.currentAnimationClipIndex;
-			this._clipIndex=this._player.currentKeyframeIndex;
+			if (!this._player)return;
+			this._index=this._clipIndex=this._player.currentKeyframeIndex;
+			if (this._index < 0)return;
+			if (dTime>0&&this._clipIndex==preIndex&&this._lastUpdateAniClipIndex==this._aniClipIndex){
+				return;
+			}
+			this._lastUpdateAniClipIndex=this._aniClipIndex;
 			if (preIndex > this._clipIndex&&this._eventIndex!=0){
 				this._emitMissedEvents(this._player.playStart,this._player.playEnd,this._eventIndex);
 				this._eventIndex=0;
@@ -2965,8 +3328,7 @@
 					}else {
 					this._eventIndex++;
 				}
-			}
-			if (this._aniClipIndex==-1)return;
+			};
 			var tGraphics;
 			if (this._aniMode==0){
 				tGraphics=this._templet.getGrahicsDataWithCache(this._aniClipIndex,this._clipIndex);
@@ -3171,27 +3533,17 @@
 					}
 				};
 				var tSkinDeformAni=tDeformAniArr[this._aniClipIndex];
-				tDeformAniData=(tSkinDeformAni[this._skinName] || tSkinDeformAni["default"]);
-				if (!tDeformAniData){
-					var tSkin;
-					for (tSkin in tSkinDeformAni){
+				tDeformAniData=(tSkinDeformAni["default"]);
+				this._setDeform(tDeformAniData,tDeformDic,this._boneSlotArray,curTime);
+				var tSkin;
+				for (tSkin in tSkinDeformAni){
+					if (tSkin!="default"&&tSkin!=this._skinName){
 						tDeformAniData=tSkinDeformAni [tSkin];
+						this._setDeform(tDeformAniData,tDeformDic,this._boneSlotArray,curTime);
 					}
 				}
-				if (tDeformAniData){
-					for (i=0,n=tDeformAniData.deformSlotDataList.length;i < n;i++){
-						tDeformSlotData=tDeformAniData.deformSlotDataList[i];
-						for (j=0;j < tDeformSlotData.deformSlotDisplayList.length;j++){
-							tDeformSlotDisplayData=tDeformSlotData.deformSlotDisplayList[j];
-							tDBBoneSlot=this._boneSlotArray[tDeformSlotDisplayData.slotIndex];
-							tDeformSlotDisplayData.apply(curTime,tDBBoneSlot);
-							if (!tDeformDic[tDeformSlotDisplayData.slotIndex]){
-								tDeformDic[tDeformSlotDisplayData.slotIndex]={};
-							}
-							tDeformDic[tDeformSlotDisplayData.slotIndex][tDeformSlotDisplayData.attachment]=tDeformSlotDisplayData.deformData;
-						}
-					}
-				}
+				tDeformAniData=(tSkinDeformAni[this._skinName]);
+				this._setDeform(tDeformAniData,tDeformDic,this._boneSlotArray,curTime);
 			};
 			var tSlotData2;
 			var tSlotData3;
@@ -3205,7 +3557,7 @@
 						tGraphics.save();
 						tGraphics.alpha(tSlotData3);
 					}
-					if (!isNaN(tSlotData2)){
+					if (!isNaN(tSlotData2)&&tSlotData2!=-2){
 						if (this._templet.attachmentNames){
 							tDBBoneSlot.showDisplayByName(this._templet.attachmentNames[tSlotData2]);
 							}else {
@@ -3240,7 +3592,7 @@
 						tGraphics.save();
 						tGraphics.alpha(tSlotData3);
 					}
-					if (!isNaN(tSlotData2)){
+					if (!isNaN(tSlotData2)&&tSlotData2!=-2){
 						if (this._templet.attachmentNames){
 							tDBBoneSlot.showDisplayByName(this._templet.attachmentNames[tSlotData2]);
 							}else {
@@ -3275,6 +3627,35 @@
 		}
 
 		/**
+		*设置deform数据
+		*@param tDeformAniData
+		*@param tDeformDic
+		*@param _boneSlotArray
+		*@param curTime
+		*/
+		__proto._setDeform=function(tDeformAniData,tDeformDic,_boneSlotArray,curTime){
+			if (!tDeformAniData)return;
+			var tDeformSlotData;
+			var tDeformSlotDisplayData;
+			var tDBBoneSlot;
+			var i=0,n=0,j=0;
+			if (tDeformAniData){
+				for (i=0,n=tDeformAniData.deformSlotDataList.length;i < n;i++){
+					tDeformSlotData=tDeformAniData.deformSlotDataList[i];
+					for (j=0;j < tDeformSlotData.deformSlotDisplayList.length;j++){
+						tDeformSlotDisplayData=tDeformSlotData.deformSlotDisplayList[j];
+						tDBBoneSlot=_boneSlotArray[tDeformSlotDisplayData.slotIndex];
+						tDeformSlotDisplayData.apply(curTime,tDBBoneSlot);
+						if (!tDeformDic[tDeformSlotDisplayData.slotIndex]){
+							tDeformDic[tDeformSlotDisplayData.slotIndex]={};
+						}
+						tDeformDic[tDeformSlotDisplayData.slotIndex][tDeformSlotDisplayData.attachment]=tDeformSlotDisplayData.deformData;
+					}
+				}
+			}
+		}
+
+		/**
 		*得到当前动画的数量
 		*@return
 		*/
@@ -3302,20 +3683,24 @@
 		/**
 		*通过名字显示一套皮肤
 		*@param name 皮肤的名字
+		*@param freshSlotIndex 是否将插槽纹理重置到初始化状态
 		*/
-		__proto.showSkinByName=function(name){
-			this.showSkinByIndex(this._templet.getSkinIndexByName(name));
+		__proto.showSkinByName=function(name,freshSlotIndex){
+			(freshSlotIndex===void 0)&& (freshSlotIndex=true);
+			this.showSkinByIndex(this._templet.getSkinIndexByName(name),freshSlotIndex);
 		}
 
 		/**
 		*通过索引显示一套皮肤
 		*@param skinIndex 皮肤索引
+		*@param freshSlotIndex 是否将插槽纹理重置到初始化状态
 		*/
-		__proto.showSkinByIndex=function(skinIndex){
+		__proto.showSkinByIndex=function(skinIndex,freshSlotIndex){
+			(freshSlotIndex===void 0)&& (freshSlotIndex=true);
 			for (var i=0;i < this._boneSlotArray.length;i++){
-				(this._boneSlotArray [i]).showSlotData(null);
+				(this._boneSlotArray [i]).showSlotData(null,freshSlotIndex);
 			}
-			if (this._templet.showSkinByIndex(this._boneSlotDic,skinIndex)){
+			if (this._templet.showSkinByIndex(this._boneSlotDic,skinIndex,freshSlotIndex)){
 				var tSkinData=this._templet.skinDataArray[skinIndex];
 				this._skinIndex=skinIndex;
 				this._skinName=tSkinData.name;
@@ -3333,6 +3718,20 @@
 			var tBoneSlot=this.getSlotByName(slotName);
 			if (tBoneSlot){
 				tBoneSlot.showDisplayByIndex(index);
+			}
+			this._clearCache();
+		}
+
+		/**
+		*设置某插槽的皮肤
+		*@param slotName 插槽名称
+		*@param name 皮肤名称
+		*/
+		__proto.showSlotSkinByName=function(slotName,name){
+			if (this._aniMode==0)return;
+			var tBoneSlot=this.getSlotByName(slotName);
+			if (tBoneSlot){
+				tBoneSlot.showDisplayByName(name);
 			}
 			this._clearCache();
 		}
@@ -3399,11 +3798,13 @@
 		*@param force false,如果要播的动画跟上一个相同就不生效,true,强制生效
 		*@param start 起始时间
 		*@param end 结束时间
+		*@param freshSkin 是否刷新皮肤数据
 		*/
-		__proto.play=function(nameOrIndex,loop,force,start,end){
+		__proto.play=function(nameOrIndex,loop,force,start,end,freshSkin){
 			(force===void 0)&& (force=true);
 			(start===void 0)&& (start=0);
 			(end===void 0)&& (end=0);
+			(freshSkin===void 0)&& (freshSkin=true);
 			this._indexControl=false;
 			var index=-1;
 			var duration=NaN;
@@ -3424,18 +3825,21 @@
 				index=nameOrIndex;
 			}
 			if (index >-1 && index < this.getAnimNum()){
+				this._aniClipIndex=index;
 				if (force || this._pause || this._currAniIndex !=index){
 					this._currAniIndex=index;
 					this._curOriginalData=new Float32Array(this._templet.getTotalkeyframesLength(index));
 					this._drawOrder=null;
 					this._eventIndex=0;
 					this._player.play(index,this._player.playbackRate,duration,start,end);
-					this._templet.showSkinByIndex(this._boneSlotDic,this._skinIndex);
+					if(freshSkin)
+						this._templet.showSkinByIndex(this._boneSlotDic,this._skinIndex);
 					if (this._pause){
 						this._pause=false;
 						this._lastTime=Browser.now();
 						Laya.stage.frameLoop(1,this,this._update,null,true);
 					}
+					this._update();
 				}
 			}
 		}
@@ -3520,7 +3924,7 @@
 			(destroyChild===void 0)&& (destroyChild=true);
 			_super.prototype.destroy.call(this,destroyChild);
 			this._templet=null;
-			this._player.offAll();
+			if(this._player)this._player.offAll();
 			this._player=null;
 			this._curOriginalData=null;
 			this._boneMatrixArray.length=0;
@@ -3607,6 +4011,8 @@
 			this._atlasPath=null;
 			this._url=null;
 			this._isRoot=false;
+			this._completeHandler=null;
+			this._endFrame=-1;
 			this.interval=30;
 			this.loop=false;
 			MovieClip.__super.call(this);
@@ -3618,6 +4024,7 @@
 			if (!parentMovieClip){
 				this._movieClipList=[this];
 				this._isRoot=true;
+				this._setUpNoticeType(/*laya.display.Node.NOTICE_DISPLAY*/0x1);
 				}else {
 				this._isRoot=false;
 				this._movieClipList=parentMovieClip._movieClipList;
@@ -3641,13 +4048,13 @@
 		__proto._setDisplay=function(value){
 			_super.prototype._setDisplay.call(this,value);
 			if (this._isRoot){
-				this._$3__onDisplay();
+				this._$3__onDisplay(value);
 			}
 		}
 
 		/**@private */
-		__proto._$3__onDisplay=function(){
-			if (this._displayedInStage)Laya.timer.loop(this.interval,this,this.updates,null,true);
+		__proto._$3__onDisplay=function(value){
+			if (value)Laya.timer.loop(this.interval,this,this.updates,null,true);
 			else Laya.timer.clear(this,this.updates);
 		}
 
@@ -3705,6 +4112,15 @@
 			}
 			this._parse(this._playIndex);
 			if (this._labels && this._labels[this._playIndex])this.event(/*laya.events.Event.LABEL*/"label",this._labels[this._playIndex]);
+			if (this._endFrame!=-1&&this._endFrame==this._playIndex){
+				this._endFrame=-1;
+				if (this._completeHandler !=null){
+					var handler=this._completeHandler;
+					this._completeHandler=null;
+					handler.run();
+				}
+				this.stop();
+			}
 		}
 
 		/**
@@ -3832,12 +4248,17 @@
 						}
 						_data.pos=this._Pos;
 						break ;
-					case 3:
-						(this.addChild(_idOfSprite[ _data.getUint16()])).zOrder=_data.getUint16();
-						ifAdd=true;
+					case 3:;
+						var node=_idOfSprite[ _data.getUint16()];
+						if (node){
+							this.addChild(node);
+							node.zOrder=_data.getUint16();
+							ifAdd=true;
+						}
 						break ;
 					case 4:
-						_idOfSprite[ _data.getUint16()].removeSelf();
+						node=_idOfSprite[ _data.getUint16()];
+						node && node.removeSelf();
 						break ;
 					case 5:
 						_idOfSprite[_data.getUint16()][MovieClip._ValueList[_data.getUint16()]]=(_data.getFloat32());
@@ -3917,10 +4338,13 @@
 
 		/**@private */
 		__proto._onLoaded=function(){
-			this.basePath=this._atlasPath?Loader.getAtlas(this._atlasPath).dir:this._url.split(".swf")[0]+"/image/";
 			var data;
 			data=Loader.getRes(this._url);
-			if (!data)return;
+			if (!data){
+				this.event(/*laya.events.Event.ERROR*/"error","file not find");
+				return;
+			}
+			this.basePath=this._atlasPath?Loader.getAtlas(this._atlasPath).dir:this._url.split(".swf")[0]+"/image/";
 			this._initData(data);
 		}
 
@@ -3946,6 +4370,18 @@
 			this.play(0);
 			this.event(/*laya.events.Event.LOADED*/"loaded");
 			if (!this._parentMovieClip)Laya.timer.loop(this.interval,this,this.updates,null,true);
+		}
+
+		/**
+		*从开始索引播放到结束索引，结束之后出发complete回调
+		*@param start 开始索引
+		*@param end 结束索引
+		*@param complete 结束回调
+		*/
+		__proto.playTo=function(start,end,complete){
+			this._completeHandler=complete;
+			this._endFrame=end;
+			this.play(start,false);
 		}
 
 		/**当前播放索引。*/
@@ -4004,12 +4440,12 @@
 			this.skinDic={};
 			this.subTextureDic={};
 			this.isParseFail=false;
-			this.url=null;
 			this.yReverseMatrix=null;
 			this.drawOrderAniArr=[];
 			this.eventAniArr=[];
 			this.attachmentNames=null;
 			this.deformAniArr=[];
+			this._isDestroyed=false;
 			this._rate=30;
 			this.aniSectionDic={};
 			this._skBufferUrl=null;
@@ -4031,7 +4467,15 @@
 		}
 
 		__proto.onComplete=function(content){
+			if (this._isDestroyed){
+				this.destroy();
+				return;
+			};
 			var tSkBuffer=Loader.getRes(this._skBufferUrl);
+			if (!tSkBuffer){
+				this.event(/*laya.events.Event.ERROR*/"error","load failed:"+this._skBufferUrl);
+				return;
+			}
 			this._path=this._skBufferUrl.slice(0,this._skBufferUrl.lastIndexOf("/"))+"/";
 			this.parseData(null,tSkBuffer);
 		}
@@ -4076,8 +4520,8 @@
 		__proto.parse=function(data){
 			_super.prototype.parse.call(this,data);
 			this._endLoaded();
-			if (this._aniVersion !=AnimationTemplet.LAYA_ANIMATION_VISION){
-				console.log("[Error] 版本不一致，请使用IDE版本（1.6.0）重新导出");
+			if (this._aniVersion !=Templet.LAYA_ANIMATION_VISION){
+				console.log("[Error] 版本不一致，请使用IDE版本配套的重新导出"+this._aniVersion+"->"+Templet.LAYA_ANIMATION_VISION);
 				this._loaded=false;
 			}
 			if (this._loaded){
@@ -4093,6 +4537,10 @@
 		}
 
 		__proto._parseTexturePath=function(){
+			if (this._isDestroyed){
+				this.destroy();
+				return;
+			};
 			var i=0;
 			this._loadList=[];
 			var tByte=new Byte(this.getPublicExtData());
@@ -4151,7 +4599,7 @@
 				this._graphicsCache.push([]);
 			};
 			var isSpine=false;
-			isSpine=this.aniClassName !="Dragon";
+			isSpine=this._aniClassName !="Dragon";
 			var tByte=new Byte(this.getPublicExtData());
 			var tX=0,tY=0,tWidth=0,tHeight=0;
 			var tFrameX=0,tFrameY=0,tFrameWidth=0,tFrameHeight=0;
@@ -4540,8 +4988,10 @@
 		*显示指定的皮肤
 		*@param boneSlotDic 插糟字典的引用
 		*@param skinIndex 皮肤的索引
+		*@param freshDisplayIndex 是否重置插槽纹理
 		*/
-		__proto.showSkinByIndex=function(boneSlotDic,skinIndex){
+		__proto.showSkinByIndex=function(boneSlotDic,skinIndex,freshDisplayIndex){
+			(freshDisplayIndex===void 0)&& (freshDisplayIndex=true);
 			if (skinIndex < 0 && skinIndex >=this.skinDataArray.length)return false;
 			var i=0,n=0;
 			var tBoneSlot;
@@ -4553,8 +5003,8 @@
 					if (tSlotData){
 						tBoneSlot=boneSlotDic[tSlotData.name];
 						if (tBoneSlot){
-							tBoneSlot.showSlotData(tSlotData);
-							if (tBoneSlot.attachmentName !="undefined" && tBoneSlot.attachmentName !="null"){
+							tBoneSlot.showSlotData(tSlotData,freshDisplayIndex);
+							if (freshDisplayIndex&&tBoneSlot.attachmentName !="undefined" && tBoneSlot.attachmentName !="null"){
 								tBoneSlot.showDisplayByName(tBoneSlot.attachmentName);
 								}else {
 								tBoneSlot.showDisplayByIndex(tBoneSlot.displayIndex);
@@ -4609,6 +5059,7 @@
 		*释放纹理
 		*/
 		__proto.destroy=function(){
+			this._isDestroyed=true;
 			var tTexture;
 			/*for each*/for(var $each_tTexture in this.subTextureDic){
 				tTexture=this.subTextureDic[$each_tTexture];
@@ -4628,6 +5079,7 @@
 			if (this.url){
 				delete Templet.TEMPLET_DICTIONARY[this.url];
 			}
+			this.dispose();
 		}
 
 		/**
@@ -4645,6 +5097,7 @@
 			return this._rate;
 		});
 
+		Templet.LAYA_ANIMATION_VISION="LAYAANIMATION:1.6.0";
 		Templet.TEMPLET_DICTIONARY=null
 		return Templet;
 	})(AnimationTemplet)

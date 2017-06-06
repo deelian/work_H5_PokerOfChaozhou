@@ -11,7 +11,7 @@ var logger = pomelo.logger.getLogger('application', __filename);
 /*
  * Game Dependencies
  */
-var Game = require('../../../../../Game');
+var Game = require('../../../../../game');
 
 module.exports = function(app) {
     return new Remote(app);
@@ -28,4 +28,14 @@ proto.getHostRoom = function(uid, callback) {
     var roomID = service.getHostRoom(uid);
 
     callback && callback(null, roomID);
+};
+
+proto.userLeave = function(uid, callback) {
+    var userID = uid;
+    var service = this.app.get('roomService');
+
+    logger.info("room-user-leave", uid);
+    service.leaveRoom(userID, function(err, roomID) {
+        callback && callback(err, roomID);
+    });
 };

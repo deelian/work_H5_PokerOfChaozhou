@@ -12,9 +12,34 @@ var AssetsManager = (function(_super) {
         },
 
         {
+            url: "assets/ui.loader/logo.png",
+            type: Laya.Loader.IMAGE
+        },
+
+        {
+            url: "assets/ui.loader/progressBg.png",
+            type: Laya.Loader.IMAGE
+        },
+
+        {
+            url: "assets/ui.loader/img_yk.png",
+            type: Laya.Loader.IMAGE
+        },
+
+        {
             url: "assets/atlas/assets/ui.button.json",
             type: Laya.Loader.ATLAS
         },
+
+        {
+            url: "assets/atlas/assets/ui.tip.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "unpack.json",
+            type: Laya.Loader.JSON
+        }
     ];
 
     var unpackRes = [
@@ -23,17 +48,27 @@ var AssetsManager = (function(_super) {
 
     var preload = [
         {
-            url: "assets/atlas/assets/ui.button.json",
-            type: Laya.Loader.ATLAS
-        },
-
-        {
             url: "assets/atlas/assets/comp.json",
             type: Laya.Loader.ATLAS
         },
 
         {
             url: "assets/atlas/assets/pokers.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.button.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.buyItem.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.explan.json",
             type: Laya.Loader.ATLAS
         },
 
@@ -48,7 +83,82 @@ var AssetsManager = (function(_super) {
         },
 
         {
+            url: "assets/atlas/assets/ui.recordOfPoker.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.roomEffort.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
             url: "assets/atlas/assets/ui.room.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.setting.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.share.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.inputRoom.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.playerInfo.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.select.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.room/final.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.room/chat.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.effortOfRoomRound.json",
+            type: Laya.Loader.ATLAS
+        },
+
+        {
+            url: "assets/atlas/assets/ui.lobbyEffort.json",
+            type: Laya.Loader.ATLAS
+        },
+        {
+            url: "assets/atlas/assets/ui.room/showRule.json",
+            type: Laya.Loader.ATLAS
+        },
+        {
+            url: "assets/atlas/assets/ui.room/chat/expression.json",
+            type: Laya.Loader.ATLAS
+        },
+        {
+            url: "assets/atlas/assets/ui.room/showPokerType.json",
+            type: Laya.Loader.ATLAS
+        },
+        {
+            url: "assets/atlas/assets/ui.room/disband.json",
+            type: Laya.Loader.ATLAS
+        },
+        {
+            url: "assets/atlas/assets/pokers/rubbedPoker.json",
             type: Laya.Loader.ATLAS
         }
     ];
@@ -195,6 +305,7 @@ var AssetsManager = (function(_super) {
     };
 
     __proto.playSound = function(name) {
+        console.log(name);
         var url = this.getSound(name);
         url && Laya.SoundManager.playSound(url);
     };

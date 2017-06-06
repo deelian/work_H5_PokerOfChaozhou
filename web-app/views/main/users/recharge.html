@@ -1,0 +1,20 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg">
+            <div class="ibox float-e-margins" style="margin-bottom: 5px;">
+                <div class="ibox-content text-center">
+                    <h2>会员充卡</h2><br/>
+                    <div class="form-group">
+                        <label for="userID">
+                            玩家ID: &nbsp;&nbsp;<input id="userID" class="text-center" type="text" placeholder="请输入玩家ID号" autofocus ng-model="data.id">
+                        </label><br/><br/>
+                        <label for="payMoney">
+                            &nbsp;&nbsp;&nbsp;&nbsp;钻石: &nbsp;&nbsp;<input id="payMoney" class="text-center" type="text" placeholder="请输入要充值的整数钻石数量" ng-model="data.tokens">
+                        </label>
+                    </div>
+                    <button class="btn btn-primary" ng-click="recharge()">充值</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

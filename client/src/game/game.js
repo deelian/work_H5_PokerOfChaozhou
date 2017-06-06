@@ -1,4 +1,4 @@
-/*!  2017-04-14 */
+/*!  2017-05-27 */
 //! moment.js
 //! version : 2.11.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -4553,13 +4553,37 @@
 
     root.ROUTE = {
         ROOM: {
+            READY:              "room.ready",               // 准备结束
             ENTER:              "room.enter",
+            LEAVE:              "room.leave",               // 离开房间
+            KICK:               "room.kick",                // 提出房间
             STATE:              "room.state",
             ACTION:             "room.action",
             COMMAND:            "room.command",             // 玩家操作的反馈
+            ROB:                "room.rob",                 // 抢庄操作
             DEAL:               "room.deal",                // 发牌完结
-        }
+            BID:                "room.bid",                 // bid完结
+            DRAW:               "room.draw",                // 闲家要牌完结
+            BANKER_DRAW:        "room.banker.draw",         // 庄家操作结束
+            PAY:                "room.pay",                 // 结算操作
+            END:                "room.end",                 // 牌局结束
+            CLOSE:              "room.close",               // 房间关闭
+            DISMISS_APPLY:      "room.dismiss.apply",       // 申请关房
+            DISMISS_CONFIRM:    "room.dismiss.confirm",     // 申请关房确认
+            DISMISS_RESULT:     "room.dismiss.result",      // 申请关房结果
+        },
 
+        CHAT: {
+            SEND:               "chat.send",                // 发送聊天信息
+            FORBID:             "chat.forbid",              // 禁言
+            FORBID_CANCEL:      "chat.forbid.cancel"        // 取消禁言
+        },
+
+        CHAIR: {
+            SIT_DOWN:           "sit.down",                 // 坐下
+            STAND_UP:           "stand.up",                 // 站起
+            LET_STAND_UP:       "let.stand.up"              // 强制站起
+        }
     };
 
     root.Code = {
@@ -4573,7 +4597,8 @@
             HTTP_ERROR:         1003,
             CHANNEL_ERROR:      1004,
             RPC_ERROR:          1005,
-            SESSION_ERROR:      1006
+            SESSION_ERROR:      1006,
+            TOKEN_ERROR:        1007
         },
 
         ROUTE: {
@@ -4589,7 +4614,7 @@
 
         // 1300~1399
         AUTH: {
-
+            REJECT_GUEST:       1301
         },
 
         // 1400~1499
@@ -4606,9 +4631,42 @@
         ROOM: {
             NOT_EXIST:          1601,
             NOT_IN_ROOM:        1602,
-            ALREADY_HAVE_ROOM:  1603
-
+            ALREADY_HAVE_ROOM:  1603,
+            USER_IS_FORBIDDEN:  1604,
+            IS_LOCKED:          1605,
+            IS_FULL:            1606,
+            NOT_ENOUGH_TOKENS:  1607                //钻石(房卡)不足
         }
+    };
+
+    var Error = root.ERROR = {
+        INTERNAL_ERROR:                 "1000",
+        INVALID_ARGUMENT:               "1001",
+        MISSING_ARGUMENT:               "1002",
+        ALREADY_EXISTS:                 "1003",
+        NOT_EXISTS:                     "1004",
+        INVALID_PASSWORD:               "1005",
+        UNAUTHORIZED_REQUEST:           "1006",
+        INVALID_TOKEN:                  "1007",
+        ACCESS_DENIED:                  "1008",
+        INVALID_REQUEST:                "1009",
+        INVALID_AUTHORIZE_CODE:         "1010",
+        REMOTE_SERVER_ERROR:            "1011"
+    };
+
+    var Message = root.MESSAGE = {
+        "1000": [ 500, "InternalError" ],
+        "1001": [ 400, "InvalidArgument" ],
+        "1002": [ 400, "MissingArgument" ],
+        "1003": [ 400, "AlreadyExists" ],
+        "1004": [ 400, "NotExists" ],
+        "1005": [ 400, "InvalidPassword" ],
+        "1006": [ 401, "UnauthorizedRequest" ],
+        "1007": [ 401, "InvalidToken" ],
+        "1008": [ 400, "AccessDenied" ],
+        "1009": [ 400, "InvalidRequest" ],
+        "1010": [ 400, "InvalidAuthorizeCode" ],
+        "1011": [ 500, "RemoteServerError" ]
     };
 }(DejuPoker));
 (function(root) {
@@ -4616,31 +4674,66 @@
           
     };
 
+    Game.GENDER = {
+        MALE:       0,          //男
+        FEMALE:     1,          //女
+        OTHER:      2           //其他
+    };
+
     //*牌型倍数
     Game.POKER_FORMATION_MULTIPLE = {
-        STRAIGHT_FLUSH: {min:4, max:10},//*同花顺
-        THREES: {min:4, max:10},//*三条
-        STRAIGHT: {min:4, max:10},//*顺子
-        DOUBLE_GHOST: {min:10, max:20}//*双鬼
+        STRAIGHT_FLUSH: {min:5, max:8},     //*同花顺
+        THREES: {min:5, max:8},             //*三条
+        STRAIGHT: {min:4, max:10},          //*顺子
+        DOUBLE_GHOST: {min:10, max:20}      //*双鬼
     };
 
     //*定制模式设置(局数，点数倍率)
     Game.CUSTOMIZED_SETTINGS = {
         ROUND: {min:10, max:100, dValue:10},
-        POINT_MULTIPLE: {min:1, max: 10}
+        POINT_MULTIPLE: {min:1, max: 10},
+        STRAIGHT_FLUSH: {min:10, max:20},   //*同花顺
+        THREES: {min:10, max:20},           //*三条
+        STRAIGHT: {min:10, max:20}          //*顺子
     };
 
     //牌型
     Game.POKER_MODELS = {
-        PAIR:           'pair',             //对子
         THREES:         'threes',           //三条
         STRAIGHT:       'straight',         //顺子
-        FLUSH:          'flush',            //同花
         STRAIGHT_FLUSH: 'straight_flush',   //同花顺
         DOUBLE_GHOST:   'double_ghost',     //双鬼
+        THREE_GHOST:    'three_ghost',      //三鬼
         GOD_NINE:       'god_nine',         //天公9
-        GOD_EIGHT:      'god_eight'         //天公8
+        GOD_EIGHT:      'god_eight',        //天公8
+        POINT:          'point'             //点数
     };
+
+    Game.POKER_MODEL_NAMES = {
+        'threes':           "三条",
+        'straight':         "顺子",
+        'straight_flush':   "同花顺",
+        'double_ghost':     "双鬼",
+        'three_ghost':      "三鬼",
+        'god_nine':         "天公9",
+        'god_eight':        "天公8",
+        'point':            "点数"
+    };
+
+    // 花色
+    Game.FANCY = {
+        FLUSH_TWO:      'flush2',           //2张同花
+        FLUSH_THREE:    'flush3',           //3张同花
+        PAIR:           'pair',             //对子
+        NORMAL:         'normal'            //普通 纯点数
+    };
+
+    // 花色倍数
+    Game.FANCY_MULTIPLE = {};
+    Game.FANCY_MULTIPLE[Game.FANCY.FLUSH_THREE] = 3;
+    Game.FANCY_MULTIPLE[Game.FANCY.FLUSH_TWO]   = 2;
+    Game.FANCY_MULTIPLE[Game.FANCY.PAIR]        = 2;
+    Game.FANCY_MULTIPLE[Game.FANCY.NORMAL]      = 1;
 
     //*房间类型(模式)
     Game.ROOM_TYPE = {
@@ -4656,6 +4749,18 @@
         MORE_THEN_MORE:     1   //一杠到底，要比之前的多
     };
 
+    // 上庄条件
+    Game.BANKER_CONDITION = {
+        NORMAL:     0,          //顺子上庄：双鬼 > 牌型（同花顺、三条、顺子根据设置倍数大者优先，相同时按该顺序优先）
+        GOD:        1           //天公上庄：双鬼 > 牌型（同花顺、三条、顺子根据设置倍数大者优先，相同时按该顺序优先）> 天公9 > 天公8
+    };
+
+    // 木虱赢双鬼的条件
+    Game.BEAT_DBL_GHOST = {
+        ALL_BEAT:           0,  // 木虱赢双鬼
+        FLUSH_THREE_BEAT:   1   // 三条同花木虱赢双鬼
+    };
+
     // 要牌操作
     Game.DRAW_COMMAND = {
         OPEN:       0,      //明牌
@@ -4665,6 +4770,110 @@
         BET_ALL:    4,      //全开
         BET_DRAW:   5       //开补
     };
+    // 玩法说明界面
+    Game.Explain = [
+        {
+            title:"一、游戏介绍",
+            details:"木虱是广东潮汕地区盛行的一种纸牌竞技游戏，以其独特的比牌规则，玩法多样，节奏轻快，挑战玩家的胆识，深受广大玩家欢迎"
+        },
+
+        {
+            title:"二、基本规则",
+            details:
+                "1.游戏人数：2-8人N" +
+                "2.游戏牌数：一副扑克牌，包括大小王和广告牌，其中广告牌定义为功能牌，功能牌可选择是否加入，共54-55张牌"
+        },
+
+        {
+            title:"三、玩法介绍",
+            details:
+            "1.游戏模式：经典模式，长庄模式，混战模式，定制模式N" +
+            "经典模式：经典抢庄，可选择天公上庄或者顺子以上上庄N" +
+            "长庄模式：房主霸王庄，不可换庄N" +
+            "混战模式：俗称木虱鱼，无庄家，各玩家之间相互比牌N" +
+            "定制模式：私人定制，牌型倍数自定义，玩法更刺激N" +
+            "2.发牌：每位玩家首轮牌为两张牌N" +
+            "3.补牌：玩家根据首轮牌情况，选择是否补牌，每位玩家有且仅有一次补牌机会N" +
+            "4.比牌：玩家根据手中持有牌进行牌型大小比较"
+        },
+
+        //{title:"四、牌型说明", details:"img_paixing.png"},
+        //
+        {
+            title:"五、牌型比较",
+            details:
+            "1.特殊牌型：双鬼>天公9>天公8>三条,同花顺>顺子，其中三条，同花顺可自定义倍数，倍数大者为大，同一牌型中的牌不比较大小顺子定义：A-K为闭环关系，任何顺序连在一起的牌都算为顺子，例如9、10、J为顺子，K、A、2亦为顺子，如果花色相同，即为同花顺N" +
+            "2.普通牌型：点数牌>木虱（0点）N" +
+            "点数说明：A-9分别为1-9点，10，J，Q，K均按10点算。三张或两张牌点数相加，个位数点数大者为大，若两张花色相同或者对子，则为2倍，三张牌花色相同为3倍N" +
+            "3.特殊牌型>普通牌型N" +
+            "4.木虱为最小点数牌型，但可以赢双鬼"
+        },
+
+        {
+            title:"六、大小王（鬼牌）",
+            details:
+            "游戏可设置鬼牌不同功能N" +
+            "1.鬼牌跟牌型，能拼出特殊牌型，如鬼牌、7、8为顺子或同花顺，鬼牌、7、7为三条，其他情况鬼牌算10点，如鬼牌、5、8为3点。鬼、8（9）算天公N" +
+            "2.鬼牌可当任意一张牌及花色，即是拿到鬼牌若不能拼出特殊牌型，也最少是9点。首轮牌鬼、8（9）不能算天公，必须补牌N"
+        },
+
+        {
+            title:"七、特殊可选规则",
+            details:
+            "1.鬼牌：默认为不翻鬼，即只有2张鬼牌(大小王)；翻鬼，可选择翻1或2张牌当鬼牌，即牌中最多有8张鬼牌。若翻出的鬼牌为大小王，系统会重新再翻一张牌当鬼牌N" +
+            "2.鬼牌百变：鬼牌可当任意一张牌及花色，首轮牌鬼、8（9）不能算天公，必须补牌N" +
+            "3.鬼牌成型：鬼牌不能拼成特殊牌型(三支、同花顺、顺子)时，仅能当10点，可变花色。首轮牌鬼、8（9）算天公，可不补牌，同时可选择首轮牌鬼、8（9）是否算双倍天公N" +
+            "4.任意下注：每一局可任意选择下注倍数N" +
+            "5.一杠到底：在同一个庄上，开弓没有回头箭，下注倍数只能加不能减。换庄后，可重新选择下注倍数N" +
+            "6.功能牌：游戏中增加一张功能牌，游戏过程中拿到功能牌的玩家，赢牌时，按照手中牌型翻倍计算积分，同时，此牌具备鬼牌功能。N" +
+            "7.木虱：设置木虱赢双鬼、三鬼的条件N"
+        }
+    ];
+
+    Game.Chat = {
+        normal:[
+            "快点吧，我等到花儿都谢了",
+            "有天公，赢定了",
+            "玩太小，没意思",
+            "风水不好，换个位置",
+            "哇，你抢钱啊",
+            "不好意思，又赢了",
+            "来手好牌",
+            "底裤都输光了",
+            "这个庄也太弱了",
+            "又断线，郁闷",
+            "各位不好意思，离开一会",
+            "大家一起下他庄"
+        ],
+
+        expression:[
+            {code:"/001",img:"Expression_001.png"},
+            {code:"/002",img:"Expression_002.png"},
+            {code:"/003",img:"Expression_003.png"},
+            {code:"/004",img:"Expression_004.png"},
+            {code:"/005",img:"Expression_005.png"},
+            {code:"/006",img:"Expression_006.png"},
+            {code:"/007",img:"Expression_007.png"},
+            {code:"/008",img:"Expression_008.png"},
+            {code:"/009",img:"Expression_009.png"},
+            {code:"/010",img:"Expression_010.png"},
+            {code:"/011",img:"Expression_011.png"},
+            {code:"/012",img:"Expression_012.png"},
+            {code:"/013",img:"Expression_013.png"},
+            {code:"/014",img:"Expression_014.png"},
+            {code:"/015",img:"Expression_015.png"},
+            {code:"/016",img:"Expression_016.png"},
+            {code:"/017",img:"Expression_017.png"},
+            {code:"/018",img:"Expression_018.png"},
+            {code:"/019",img:"Expression_019.png"},
+            {code:"/020",img:"Expression_020.png"},
+        ]
+    };
+
+    Game.NOTICE_TEXT = "    所有玩家数据、运算均由服务器端下发，任何人都不可通过外挂破解客户端等手段前提获知其他玩家手牌或公共牌。";
+    Game.PHONE_NUMBER = "18922217616";
+    Game.WECHAT_NUMBER = "欢乐木虱互动娱乐";
+
 }(DejuPoker));
 (function(root) {
     var Utils = root.Utils = {};
@@ -5009,17 +5218,66 @@
         this.avatar         = opts.avatar || "";
         this.tokens         = opts.tokens || 0;
         this.gender         = opts.gender || 0;
+        this.data           = {};
+
+        // this.playTimes      = opts.playTimes || 0;          //参与牌局数
+        // this.winTimes       = opts.winTimes || 0;           //胜利次数
+        // this.fightTimes     = opts.fightTimes || 0;         //比牌次数 用于计算胜率
+        // this.godTimes       = opts.godTimes || 0;           //天公次数
+        // this.ghostTimes     = opts.ghostTimes || 0;
+        // this.logs           = opts.logs || [];
+
+        this.init(opts.data);
     };
 
     root.inherits(Player, _super);
 
     root.extend(Player.prototype, {
-        setId: function(id) {
-            this.id = id;
+        init: function(opts) {
+            opts = opts || {};
+
+            this.data.playTimes      = opts.playTimes || 0;          //参与牌局数
+            this.data.winTimes       = opts.winTimes || 0;           //胜利次数
+            this.data.fightTimes     = opts.fightTimes || 0;         //比牌次数 用于计算胜率
+            this.data.godTimes       = opts.godTimes || 0;           //天公次数
+            this.data.ghostTimes     = opts.ghostTimes || 0;
+            this.data.logs           = opts.logs || [];
         },
-        
+
         getId: function() {
             return this.id;
+        },
+
+        addLog: function(id) {
+            this.data.logs.unshift(id);
+            if (this.data.logs.length > 100) {
+                this.data.logs.pop();
+            }
+        },
+        
+        addPlayTimes: function(times) {
+            times = times || 0;
+            this.data.playTimes += times;
+        },
+
+        addWinTimes: function(times) {
+            times = times || 0;
+            this.data.winTimes += times;
+        },
+
+        addFightTimes: function(times) {
+            times = times || 0;
+            this.data.fightTimes += times;
+        },
+
+        addGodTimes: function(times) {
+            times = times || 0;
+            this.data.godTimes += times;
+        },
+
+        addGhostTimes: function(times) {
+            times = times || 0;
+            this.data.ghostTimes += times;
         },
         
         update: function(opts) {
@@ -5071,6 +5329,12 @@
     Poker.VALUES[Poker.TYPE.CLUB]    = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
     Poker.VALUES[Poker.TYPE.HEART]   = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
     Poker.VALUES[Poker.TYPE.SPADE]   = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
+    
+    Poker.DOUBLE_POKER_VALUE    = 16;               // 翻倍牌的值
+    Poker.POKER_A_VALUE         = 1;                // 牌面A的值
+    Poker.POKER_2_VALUE         = 2;                // 牌面2的值
+    Poker.POKER_Q_VALUE         = 12;               // 牌面Q的值
+    Poker.POKER_K_VALUE         = 13;               // 牌面K的值
 
     Poker.SHOW_TARGET = {
         NONE    : 0,
@@ -5102,879 +5366,475 @@
     });
 
 } (DejuPoker));
-/**
- * Created by monkey on 2017/3/25.
- * room
- * ..players []
- * ..pokerSet Object
- * ..handPokers []
- * ..ghostPokers []
- * ..showOnPokers []
- * ..setting {}
- */
 
-(function(root){
-    var _super = root.Entity;
+(function(root) {
+    var _super = root.Serialize;
 
     var Poker = root.Poker;
     var Game = root.Game;
 
     var Utils = root.Utils;
 
-    var Client = function(opts) {
+    var Gamble = root.StaticGamble = function(opts) {
         opts = opts || {};
 
         _super.call(this, opts);
-
-        this.userID        = opts.userID || 0;          // id
-        this.ready         = opts.ready || false;       // 是否准备好
-        this.started       = opts.started || false;     // 是否开始过游戏
-        this.bid           = opts.bid || false;         // 是否下注
-        this.bidRate       = opts.bidRate || 0;         // 下注倍数
-        this.action        = opts.action || false;      // 是否操作过
-        this.end           = opts.end || false;         // 是否结束
-
-        this.handPokers    = [];                        // 手牌
-        if (opts.handPokers) {
-            for (var i = 0, size = opts.handPokers.length; i < size; i++) {
-                this.handPokers.push(
-                    new Poker(opts.handPokers[i])
-                );
-            }
-        }
-    };
-
-    var Table = root.Table = function(opts) {
-        opts = opts || {};
-
-        _super.call(this, opts);
-
-        this.deck           = null;                 // 整副牌
-        this.ghostPokers    = null;                 // 桌面鬼牌
-        this.drawList       = opts.drawList || [];  // 要牌列表
-
-        this.indicator      = opts.indicator || 0;  // 指示器
-        this.clients        = {};                   // 客人列表
+        this.data = opts;
+        this.data.ghost = [];           // ghost 是正式翻出的鬼牌 撇除了joker的 里面只有value 便于判断
 
         this.init(opts);
     };
 
-    root.inherits(Table, _super);
+    root.inherits(Gamble, _super);
 
-    root.extend(Table.prototype, {
+    root.extend(Gamble.prototype, {
         init: function(opts) {
             var i;
-            var size;
 
-            this.deck = [];
-            //如果新桌子 就等start的时候才拿牌出来
-            //旧桌子 有牌就把牌拿出来
-            if (opts.deck) {
-                for (i = 0, size = opts.deck.length; i < size; i++) {
-                    this.deck.push(
-                        new Poker(opts.deck[i])
-                    );
-                }
-            }
-
-            this.ghostPokers = [];
-            if (opts.ghostPokers) {
-                for (i = 0, size = opts.ghostPokers.length; i < size; i++) {
-                    this.ghostPokers.push(
-                        new Poker(opts.ghostPokers[i])
-                    );
-                }
-            }
-
-            if (opts.clients) {
-                var keys = Object.keys(opts.clients);
-                for (i = 0, size = keys.length; i < size; i++) {
-                    var userID = keys[i];
-                    this.clients[userID] = new Client(opts.clients[i]);
+            for (i in opts.ghostPokers) {
+                var poker = opts.ghostPokers[i];
+                if (poker && poker.type != Poker.TYPE.JOKER) {
+                    this.data.ghost.push(poker.value);
                 }
             }
         },
 
-        enter: function(userID) {
-            var client = this.clients[userID];
-            if (client != null) {
-                return;
-            }
-
-            this.clients[userID] = new Client(userID);
-        },
-
-        leave: function(userID) {
-            delete this.clients[userID];
-        },
-
-        ready: function(userID, data) {
-            var client = this.clients[userID];
-            if (client == null) {
-                return null;
-            }
-
-            this.clients[userID].ready = data ? true : false;
-            return {userID: userID, ready: this.clients[userID].ready};
-        },
-
-        //是否全部客人都做了某操作
-        getClientState: function(state) {
-            var i;
-            var size;
-            var keys;
-
-            keys = Object.keys(this.clients);
-            size = keys.length;
-            // 一个人就不能成型
-            if (size <= 1) {
-                return false;
-            }
-
-            for (i = 0; i < size; i++) {
-                var userID = keys[i];
-                var client = this.clients[userID];
-
-                if (client[state] != true) {
-                    return false;
-                }
-            }
-
-            return true;
-        },
-
-        getClientReady: function() {
-            return this.getClientState("ready");
-        },
-
-        getClientStarted: function() {
-            return this.getClientState("started");
-        },
-
-        getClientBid: function() {
-            return this.getClientState("bid");
-        },
-
-        getClientEnd: function() {
-            return this.getClientState("end");
-        },
-
-        getClientDraw: function() {
-            return this.drawList.length <= 0;
-        },
-
-        //开局
-        start: function(roomType) {
-            //先拿出一副新牌
-            this.deck = [];
-            for (var typeKey in Poker.TYPE) {
-                var type = Poker.TYPE[typeKey];
-
-                //定制模式没有王牌
-                if (roomType === Game.ROOM_TYPE.CUSTOMIZED && type === Poker.TYPE.JOKER) {
-                    continue;
-                }
-
-                for (var valId = 0; valId < Poker.VALUES[type].length; valId++) {
-                    var value = Poker.VALUES[type][valId];
-
-                    this.deck.push(new Poker({value: value, type: type}));
-                }
-            }
-        },
-
-        //洗牌
-        shuffle: function() {
-            var newDeck = [];
-
-            while (this.deck.length) {
-                var min = 0;
-                var max = this.deck.length - 1;
-
-                var index = Math.floor(Math.random()*(max-min) + min);
-                newDeck.push(this.deck[index]);
-                this.deck.splice(index, 1);
-            }
-
-            this.deck = newDeck;
-        },
-
-        //根据规则发牌
-        deal: function(sitUsers) {
-            var i;
-            var j;
-            
-            // 清理手牌
-            for (i in this.clients) {
-                this.clients[i].handPokers = [];
-            }
-            
-            // 发两张牌
-            for (i = 0; i < 2; i++) {
-                //按顺序发牌
-                for (j = 0; j < sitUsers.length; j++) {
-                    var userID = sitUsers[j];
-                    var client = this.clients[userID];
-                    if (client && this.deck.length > 0) {
-                        client.handPokers.push(this.deck.shift());
-                    }
-                }
-            }
-        },
-
-        // 翻鬼牌 参数是要翻多少张
-        ghost: function(amount) {
-            this.ghostPokers = [];
-
-            var i = 0;
-            while (i < amount) {
-                var poker = this.deck.shift();
-                this.ghostPokers.push(poker);
-                if (poker.type != Poker.TYPE.JOKER) {
-                    i++;
-                }
-            }
-        },
-
-        bid: function(userID, rate) {
-            var client = this.clients[userID];
-            if (client == null) {
-                return null;
-            }
-
-            if (typeof rate != "number") {
-                rate = 1;
-            }
-
-            this.clients[userID].bid = true;
-            this.clients[userID].bidRate = rate;
-            for (var i in this.clients[userID].handPokers) {
-                this.clients[userID].handPokers[i].setShow(Poker.SHOW_TARGET.ME);
-            }
-            return {userID: userID, bidRate: rate};
-        },
-
-        clearDraw: function() {
-            this.drawList = [];
-        },
-
-        insertDraw: function(userID) {
-            if (!(this.drawList instanceof Array)) {
-                this.drawList = [];
-            }
-
-            this.drawList.push(userID);
-        },
-
-        show: function() {
-
-        },
-
-        draw: function(userID, type) {
-            //排队来
-            if (userID != this.drawList[0]) {
-                return null;
-            }
-
-            var client = this.clients[userID];
-            if (client == null) {
-                return null;
-            }
-
-            var i;
+        pokerScore: function(handPokers) {
+            var pokers = Utils.object_clone(handPokers);
             var results = {
-                userID: userID
+                score: 0,
+                multiple: 1,
+                fancy: Game.FANCY.NORMAL,
+                type: Game.POKER_MODELS.POINT
             };
 
-            switch (type) {
-                // 明牌 不补牌 直接将牌面公开
-                case Game.DRAW_COMMAND.OPEN: {
-                    for (i in client.handPokers) {
-                        client.handPokers.setShow(Poker.SHOW_TARGET.ALL);
+            // 按照牌面大小排序 倒序
+            var compare = function(a, b) {
+                if (a.value < b.value) {
+                    return 1;
+                }
+                else if (a.value == b.value) {
+                    return 0;
+                }
+                else {
+                    return -1;
+                }
+            };
+
+            pokers.sort(compare);
+
+            // (三鬼 > 双鬼 > 天公9 > 天公8) > (三条\同花顺\顺子 内部大小由设置的倍数决定 倍数大者胜) > (点数按大小)
+            // 第一类型  10000  第二类型  1000  第三类型  100
+            var i;
+            var analyse = [];           // 用于分析的扑克信息
+            var ghostCnt = 0;
+            var double_poker = 1;
+
+            for (i in pokers) {
+                var poker = pokers[i];
+                if (poker.type === Poker.TYPE.JOKER || this.data.ghost.indexOf(poker.value) != -1) {
+                    ghostCnt++;
+                    // 鬼牌从后面插入
+                    analyse.push({
+                        type: "ghost",
+                        value: poker.value,
+                        realValue: 10
+                    });
+                    if (poker.value === Poker.DOUBLE_POKER_VALUE) {
+                        double_poker = 2;
                     }
-                    break;
+                    continue;
                 }
-                // 要一张牌
-                case Game.DRAW_COMMAND.DRAW: {
-                    var poker = this.deck.shift();
-                    poker.setShow(Poker.SHOW_TARGET.ME);
-                    client.handPokers.push(poker);
-                    break;
+                var realValue = poker.value;
+                if (realValue > 10) {
+                    realValue = 10;
                 }
-                // 搓牌 要扣东西的
-                case Game.DRAW_COMMAND.RUBBED: {
-                    var poker = this.deck.shift();
-                    poker.setShow(Poker.SHOW_TARGET.ME);
-                    client.handPokers.push(poker);
-                    break;
-                }
-                // 过牌
-                default: {
-                    type = Game.DRAW_COMMAND.PASS;
-                    break;
-                }
+
+                // 普通牌在前面插入
+                analyse.unshift({
+                    type: poker.type,
+                    value: poker.value,
+                    realValue: realValue
+                });
             }
+            // 记录双倍牌给上一层知道
+            results.double_poker = double_poker;
 
-            this.drawList.shift();
-            results.type = type;
+            var point = 0;
 
-            return results;
-        },
-
-        end: function() {
-
-        },
-
-        infoToPlayer: function(userID) {
-            var info = {};
-            info.ghostPokers = Utils.object_clone(this.ghostPokers);
-            info.drawList = Utils.object_clone(this.drawList);
-            info.indicator = this.indicator;
-            info.clients = {};
-            for (var uid in this.clients) {
-                info.clients[uid] = {};
-                var client = info.clients[uid];
-                client.userID   = this.clients[uid].userID;
-                client.ready    = this.clients[uid].ready;
-                client.started  = this.clients[uid].started;
-                client.bid      = this.clients[uid].bid;
-                client.bidRate  = this.clients[uid].bidRate;
-                client.end      = this.clients[uid].end;
-
-                client.handPokers = [];                        // 手牌
-                var showRight = Poker.SHOW_TARGET.ALL;
-                if (client.userID == userID) {
-                    showRight = Poker.SHOW_TARGET.ME;
+            // 两张牌情况
+            if (analyse.length === 2) {
+                // 花式情况
+                if (pokers[0].type === pokers[1].type) {
+                    results.fancy = Game.FANCY.FLUSH_TWO;
                 }
-                if (this.clients[uid].handPokers) {
-                    for (var i = 0, size = this.clients[uid].handPokers.length; i < size; i++) {
-                        if (showRight > this.clients[uid].handPokers[i].showTarget) {
-                            client.handPokers.push({showTarget: this.clients[uid].handPokers[i].showTarget});
-                            continue;
+                else if (pokers[0].value === pokers[1].value) {
+                    results.fancy = Game.FANCY.PAIR;
+                }
+
+                // 点数
+                point = analyse[0].realValue + analyse[1].realValue || 0;
+                results.point = point;
+                
+                // 双鬼
+                if (ghostCnt === 2) {
+                    results.score = 11000;
+                    results.type = Game.POKER_MODELS.DOUBLE_GHOST;
+                    results.multiple = this.data.settings.pokerModels[results.type];
+                    // 翻倍牌
+                    results.multiple *= double_poker;
+                    return results;
+                }
+                // 有一只鬼
+                if (ghostCnt > 0) {
+                    // 鬼牌万能只能有三张牌 所以这里的情况都是鬼牌成型的处理
+                    if (analyse[0].value === 9) {
+                        results.score = 10100;
+                        results.type = Game.POKER_MODELS.GOD_NINE;
+                        results.multiple = this.data.settings.pokerModels[results.type];
+                        // 花式天公
+                        if (this.data.settings.fancyGod) {
+                            // 变成同花花式
+                            results.fancy = Game.FANCY.FLUSH_TWO;
+                            results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
                         }
-                        client.handPokers.push(
-                            {
-                                type: this.clients[uid].handPokers[i].type,
-                                value: this.clients[uid].handPokers[i].value,
-                                showTarget: this.clients[uid].handPokers[i].showTarget
-                            }
-                        );
+                        // 翻倍牌
+                        results.multiple *= double_poker;
+                        return results;
+                    }
+                    else if (analyse[0].value === 8) {
+                        results.score = 10010;
+                        results.type = Game.POKER_MODELS.GOD_EIGHT;
+                        results.multiple = this.data.settings.pokerModels[results.type];
+                        // 花式天公
+                        if (this.data.settings.fancyGod) {
+                            // 变成同花花式
+                            results.fancy = Game.FANCY.FLUSH_TWO;
+                            results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
+                        }
+                        // 翻倍牌
+                        results.multiple *= double_poker;
+                        return results;
                     }
                 }
+                // 点数形成的天公9
+                if ((analyse[0].realValue + analyse[1].realValue) % 10 === 9) {
+                    results.score = 10100;
+                    results.type = Game.POKER_MODELS.GOD_NINE;
+                    results.multiple = this.data.settings.pokerModels[results.type] * Game.FANCY_MULTIPLE[results.fancy];
+                    return results;
+                }
+                // 点数形成的天公8
+                if ((analyse[0].realValue + analyse[1].realValue) % 10 === 8) {
+                    results.score = 10010;
+                    results.type = Game.POKER_MODELS.GOD_EIGHT;
+                    results.multiple = this.data.settings.pokerModels[results.type] * Game.FANCY_MULTIPLE[results.fancy];
+                    return results;
+                }
+                // 剩下的只能是普通点数牌了
+                results.score = (analyse[0].realValue + analyse[1].realValue) % 10 + 100;
+                results.type = Game.POKER_MODELS.POINT;
+                results.multiple = this.data.settings.pokerModels[results.type] * Game.FANCY_MULTIPLE[results.fancy];
+                // 翻倍牌
+                results.multiple *= double_poker;
+                return results;
             }
+
+            // 接下来是三张牌情况
+
+            // 点数
+            point = analyse[0].realValue + analyse[1].realValue + analyse[2].realValue || 0;
+            results.point = point;
+
+            // 顺子判断
+            var flushDecide = function (v1, v2, v3) {
+                if (v1 == null || v2 == null) {
+                    return false;
+                }
+                
+                // 只需要判断两张 那么就是有一张鬼牌的情况
+                if (v3 == null) {
+                    // 连着或者隔一个
+                    if (v1 === v2 - 1 || v1 === v2 - 2) {
+                        return true;
+                    }
+                    // A + K
+                    if (v1 === Poker.POKER_A_VALUE && v2 === Poker.POKER_K_VALUE) {
+                        return true;
+                    }
+                    // A + Q
+                    if (v1 === Poker.POKER_A_VALUE && v2 === Poker.POKER_Q_VALUE) {
+                        return true;
+                    }
+                    // 2 + K
+                    if (v1 === Poker.POKER_2_VALUE && v2 === Poker.POKER_K_VALUE) {
+                        return true;
+                    }
+                }
+                else {
+                    // 正常的 1 2 3
+                    if (v1 === v2 - 1 && v2 === v3 - 1) {
+                        return true;
+                    }
+                    // Q K A
+                    if (v1 === Poker.POKER_A_VALUE && v2 === Poker.POKER_Q_VALUE && v3 === Poker.POKER_K_VALUE) {
+                        return true;
+                    }
+                    // K A 2
+                    if (v1 === Poker.POKER_A_VALUE && v2 === Poker.POKER_2_VALUE && v3 === Poker.POKER_K_VALUE) {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
             
-            return info;
+            // 花式情况
+            if (pokers[0].type === pokers[1].type && pokers[0].type === pokers[2].type) {
+                results.fancy = Game.FANCY.FLUSH_THREE;
+            }
+
+            // 没有鬼牌
+            if (ghostCnt === 0) {
+                // 三条
+                if (analyse[0].value === analyse[1].value && analyse[1].value === analyse[2].value) {
+                    results.type = Game.POKER_MODELS.THREES;
+                    results.score = 1000 + this.data.settings.pokerModels[Game.POKER_MODELS.THREES];
+                    results.multiple = this.data.settings.pokerModels[results.type];
+                    return results;
+                }
+                // 顺子
+                if (flushDecide(analyse[0].value, analyse[1].value, analyse[2].value)) {
+                    // 同花顺
+                    if (analyse[0].type === analyse[1].type && analyse[1].type === analyse[2].type) {
+                        results.type = Game.POKER_MODELS.STRAIGHT_FLUSH;
+                        results.score = 1000 + this.data.settings.pokerModels[Game.POKER_MODELS.STRAIGHT_FLUSH];
+                        results.multiple = this.data.settings.pokerModels[results.type];
+                        return results;
+                    }
+                    // 普通顺子
+                    results.type = Game.POKER_MODELS.STRAIGHT;
+                    results.score = 1000 + this.data.settings.pokerModels[Game.POKER_MODELS.STRAIGHT];
+                    results.multiple = this.data.settings.pokerModels[results.type];
+                    return results;
+                }
+            }
+
+            // 在排序的时候 因为鬼牌会排在后面 所以一张鬼牌的时候只判断前面两张即可
+            if (ghostCnt === 1) {
+                // 三条
+                if (analyse[0].value === analyse[1].value) {
+                    results.score = 1000 + this.data.settings.pokerModels[Game.POKER_MODELS.THREES];
+                    results.type = Game.POKER_MODELS.THREES;
+                    results.multiple = this.data.settings.pokerModels[results.type];
+                    // 翻倍牌
+                    results.multiple *= double_poker;
+                    return results;
+                }
+                // 顺子
+                if (flushDecide(analyse[0].value, analyse[1].value, null)) {
+                    // 同花顺
+                    if (analyse[0].type === analyse[1].type) {
+                        results.score = 1000 + this.data.settings.pokerModels[Game.POKER_MODELS.STRAIGHT_FLUSH];
+                        results.type = Game.POKER_MODELS.STRAIGHT_FLUSH;
+                        results.multiple = this.data.settings.pokerModels[results.type];
+                        // 翻倍牌
+                        results.multiple *= double_poker;
+                        return results;
+                    }
+                    results.type = Game.POKER_MODELS.STRAIGHT;
+                    results.score = 1000 + this.data.settings.pokerModels[Game.POKER_MODELS.STRAIGHT];
+                    results.multiple = this.data.settings.pokerModels[results.type];
+                    // 翻倍牌
+                    results.multiple *= double_poker;
+                    return results;
+                }
+                // 三张同花的概念
+                if (analyse[0].type === analyse[1].type) {
+                    results.fancy = Game.FANCY.FLUSH_THREE;
+                }
+
+                // 不成型的牌 如果鬼牌万能 直接等于9点
+                if (this.data.settings.universalGhost == true) {
+                    results.type = Game.POKER_MODELS.POINT;
+                    results.score = 9 + 100;
+                    results.point = 9;
+                    results.multiple = this.data.settings.pokerModels[results.type] * Game.FANCY_MULTIPLE[results.fancy];
+                    // 翻倍牌
+                    results.multiple *= double_poker;
+                    return results;
+                }
+            }
+
+            // 两只鬼的情况 变成三条
+            if (ghostCnt == 2) {
+                results.type = Game.POKER_MODELS.THREES;
+                results.score = 1000 + this.data.settings.pokerModels[results.type];
+                results.multiple = this.data.settings.pokerModels[results.type];
+                // 翻倍牌
+                results.multiple *= double_poker;
+                return results;
+            }
+
+            // 三鬼
+            if (ghostCnt == 3) {
+                results.type = Game.POKER_MODELS.THREE_GHOST;
+                results.score = 12000;
+                results.multiple = this.data.settings.pokerModels[results.type];
+                // 翻倍牌
+                results.multiple *= double_poker;
+                return results;
+            }
+
+            // 剩下的就是点数牌了
+            results.type = Game.POKER_MODELS.POINT;
+            results.score = (analyse[0].realValue + analyse[1].realValue + analyse[2].realValue) % 10 + 100;
+            results.multiple = this.data.settings.pokerModels[results.type] * Game.FANCY_MULTIPLE[results.fancy];
+            // 翻倍牌
+            results.multiple *= double_poker;
+            
+            return results;
         }
     });
-}(DejuPoker));
+} (DejuPoker));
+// 定制模式比牌
+(function(root) {
+    var _super = root.Serialize;
 
-(function(root){
-    var _super = root.Entity;
-
-    var Code = root.Code;
-    var ROUTE = root.ROUTE;
+    var Poker = root.Poker;
     var Game = root.Game;
-    var Table = root.Table;
 
     var Utils = root.Utils;
-    
-    var Room = root.Room = function(opts) {
+
+    var Gamble = root.CustomizedGamble = function(opts) {
         opts = opts || {};
 
         _super.call(this, opts);
-
-        // private members
-        this._service           = opts.service;                      //房间服务
-        this._queue             = [];                                //消息队列
-        this._timerID           = null;                              //定时器
-
-        // public members
-        this.id                 = opts.id;
-        this.type               = opts.type;
-        this.settings           = {};
-        this.state              = opts.state || Room.STATE_READY;
-
-        this.host               = opts.host;                        //房主
-        this.members            = [];                               //玩家 [ userID, userID, ... ]
-
-        this.banker             = opts.banker || 0;                 //庄家 (0 - 无庄家 userID)
-        this.banker             = this.host;                        //todo 暂时房主为庄家
-
-        this.table              = null;                             //桌子
-
-        this.chairs             = opts.chairs || new Array(10);     //椅子 [ userID, userID, ... ]
-        this.maxChairs          = opts.maxChairs || 10;
-
-        this.round              = opts.round || 0;                  //局数
-        this.maxRound           = opts.maxRound || 10;
+        this.data = opts;
+        this.data.ghost = [];           // ghost 是正式翻出的鬼牌 撇除了joker的 里面只有value 便于判断
 
         this.init(opts);
     };
 
-    root.inherits(Room, _super);
+    root.inherits(Gamble, _super);
 
-    Room.STATE_READY       = 0;             //等待准备状态
-    Room.STATE_START       = 1;             //准备好后发牌和返鬼牌
-    Room.STATE_BID         = 2;             //等待下注状态
-    Room.STATE_DRAW        = 3;             //下注完闲家要牌
-    Room.STATE_BANKER      = 4;             //闲家要完牌庄家处理阶段 这里包括了结算
-    Room.STATE_END         = 5;             //牌局结束 请求下一局
-    Room.STATE_CLOSED      = 6;             //所有牌局完成房间解散
-    Room.STATE_DISMISS     = 7;             //
-
-    root.extend(Room.prototype, {
-        settingInit: function(settings) {
-            settings = settings || {};
-            this.settings.condition      = settings.condition || 0;                                           //经典模式上庄条件
-            this.settings.times          = settings.times || 10;                                              //局数
-            this.settings.ghostCount     = settings.ghostCount || 0;                                          //鬼牌数
-            this.settings.betType        = settings.betType || Game.BET_TYPE.ARBITRARILY;                     //下注类型
-            this.settings.universalGhost = settings.universalGhost || true;                                   //鬼牌万能
-            this.settings.formationGhost = settings.formationGhost || {"god_nine":true, "god_eight":true};    //鬼牌成型
-            this.settings.isDouble       = settings.isDouble || false;                                        //翻倍
-            this.settings.zeroPoint      = settings.zeroPoint || {"three_zero":false, "two_zero":false};      //0点赢鬼牌
-
-            this.settings.pokerModels    = {};
-            var pokerModels = settings.pokerModels || {};
-            for (var i in Game.POKER_MODELS.POKER_MODELS) {
-                var modelKey = Game.POKER_MODELS.POKER_MODELS[i];
-                this.settings.pokerModels[modelKey] = pokerModels[modelKey] || 4;
-            }
-
-            this.settings.pokerPoint     = [];
-            var pokerPoint = settings.pokerPoint || [];
-            for (var index = 0; index < pokerPoint.length; index++) {
-                this.settings.pokerPoint[index] = pokerPoint[index] || 1;
-            }
-        },
-
+    root.extend(Gamble.prototype, {
         init: function(opts) {
-            var self = this;
-
-            // init table
-            if (this.state === Room.STATE_READY) {
-                this.ready();
-            }
-            else if (opts.table) {
-                this.table = new Table(opts.table);
-            }
-
-            this.settingInit(opts.settings);
-
-            // start timer 一段时间检查一下房间游戏进程
-            this._timerID = setInterval(function() {
-                self.update();
-            }, 100);
-        },
-
-        getMember: function(userID) {
-            return (this.members.indexOf(userID) != -1);
-        },
-
-        getMembers: function() {
-            return this.members;
-        },
-
-        sitDown: function(userID, pos) {
-            if (this.chairs.indexOf(userID) != -1) {
-                return -1;
-            }
-
-            if (pos != null && pos >= 0 && pos < this.maxChairs) {
-                this.chairs[pos] = userID;
-                return pos;
-            }
-
-            for (var i = 0, size = this.maxChairs; i < size; i++) {
-                if (this.chairs[i] != null) {
-                    continue;
-                }
-
-                this.chairs[i] = userID;
-
-                if (this.state === Room.STATE_READY) {
-                    this.table.enter(userID);
-                }
-
-                return i;
-            }
-
-            return -1;
-        },
-
-        standUp: function(userID) {
-            for (var i = 0, size = this.chairs.length; i < size; i++) {
-                if (this.chairs[i] === userID) {
-                    this.chairs[i] = null;
-                    this.table.leave(userID);
-                    return true;
-                }
-            }
-
-            return false;
-        },
-
-        enter: function(userID) {
-            if (this.getMember(userID) === true) {
-                return false;
-            }
-
-            this.members.push(userID);
-            var pos = this.sitDown(userID);
-            this.broadcast(ROUTE.ROOM.ENTER, {userID: userID, pos: pos});
-        },
-
-        leave: function(userID) {
-            this.standUp(userID);
-
-            var index = this.members.indexOf(userID);
-            if (index != -1) {
-                this.members.splice(index, 1);
-            }
-        },
-
-        dismiss: function() {
-
-        },
-
-        ready: function() {
-            var i;
-            var size;
-
-            var table = new Table();
-
-            for (i = 0, size = this.chairs.length; i < size; i++) {
-                var userID = this.chairs[i];
-                if (userID == null) {
-                    continue;
-                }
-
-                table.enter(userID);
-            }
-
-            this.table = table;
-        },
-
-        destroy: function() {
-            if (this._timerID) {
-                clearInterval(this._timerID);
-                this._timerID = null;
-            }
-
-            this._service.destroyRoom(this.id);
-            this.table = null;
-            this.members = null;
-            this.chairs = null;
-        },
-
-        send: function(userID, route, msg, opts, cb) {
-            this._service && this._service.send(this.id, userID, route, msg, opts, cb);
-        },
-
-        broadcast: function(route, msg, opts, cb) {
-            this._service && this._service.broadcast(this.id, route, msg, opts, cb);
-        },
-
-        sendEachMsg: function(route, opts) {
-            if (!this._service) {
-                return;
-            }
-
-            for (var i in this.chairs) {
-                var userID = this.chairs[i];
-                this._service && this._service.send(this.id, userID, route, this.infoToPlayer(userID), opts, null);
-            }
-        },
-
-        process: function() {
-            var results = [];
-
-            while (this._queue.length) {
-                // 从操作队列中获取第一个操作
-                var command = this._queue.shift();
-                var userID = command.id;
-                if (userID == null) {
-                    continue;
-                }
-
-                command.msg = command.msg || {};
-                var fn = command.msg.fn;
-                if (fn && typeof this.table[fn] === "function") {
-                    var result = this.table[fn](userID, command.msg.data);
-                    if (result != null) {
-                        results.fn = fn;
-                        results.push(result);
-                    }
-                }
-            }
-
-            if (results.length > 0) {
-                if (!this._service) {
-                    return;
-                }
-
-                for (var i in this.chairs) {
-                    var userID = this.chairs[i];
-                    var sendInfo = {
-                        queue: results,
-                        room: this.infoToPlayer(userID)
-                    };
-                    this._service && this._service.send(this.id, userID, ROUTE.ROOM.COMMAND, sendInfo, null, null);
-                }
-            }
-        },
-
-        queue: function(userID, msg) {
-            this._queue.push({
-                id: userID,
-                msg: msg
-            });
-        },
-
-        update: function() {
-            //更新前完成积压的所有工作
-            this.process();
-
             var i;
 
-            switch (this.state) {
-                case Room.STATE_READY:
-                    if (this.table.getClientReady()) {
-                        this.state++;
-                    }
-                    break;
-                case Room.STATE_START:
-                    var msg = {};
-
-                    // 开始-洗牌-发牌
-                    this.table.start(this.type);
-                    this.table.shuffle();
-                    // 暂时按座位顺序发牌 这里要做个规则传入发牌顺序的userID数组
-                    this.table.clearDraw();
-                    var sitUsers = [];
-                    for (i = 0; i < this.maxChairs; i++) {
-                        if (this.chairs[i]) {
-                            sitUsers.push(this.chairs[i]);
-                            //闲家加入要牌行列
-                            if (this.chairs[i] != this.banker) {
-                                this.table.insertDraw(this.chairs[i]);
-                            }
-                        }
-                    }
-                    this.table.deal(sitUsers);
-                    // 翻鬼牌 暂时直接2张
-                    this.table.ghost(2);
-
-                    this.state++;
-
-                    this.sendEachMsg(ROUTE.ROOM.DEAL, null);
-                    break;
-                case Room.STATE_BID:
-                    if (this.table.getClientBid()) {
-                        this.state++;
-                    }
-                    break;
-                case Room.STATE_DRAW:
-                    if (this.table.getClientDraw()) {
-                        this.state++;
-                    }
-                    break;
-                case Room.STATE_BANKER:
-                    if (this.table.getClientStarted()) {
-                        this.state++;
-                    }
-                    break;
-                case Room.STATE_END:
-                    if (this.table.getClientEnd()) {
-                        this.round++;
-
-                        if (this.round >= this.maxRound) {
-                            this.state = Room.STATE_CLOSED;
-                        } else {
-                            this.state = Room.STATE_READY;
-                        }
-                    }
-                    break;
-                case Room.STATE_CLOSED:
-                    this.destroy();
-                    break;
-                case Room.STATE_DISMISS:
-                    break;
+            for (i in opts.ghostPokers) {
+                var poker = opts.ghostPokers[i];
+                if (poker && poker.type != Poker.TYPE.JOKER) {
+                    this.data.ghost.push(poker.value);
+                }
             }
         },
 
-        //拷贝一份房间信息给玩家 针对这个玩家能看到的部分
-        infoToPlayer: function(userID) {
-            var info = {};
-            info.id = this.id;
-            info.type = this.type;
-            info.state = this.state;
-            info.host = this.host;
-            info.banker = this.banker;
-            info.settings = Utils.object_clone(this.settings);
-            info.members = Utils.object_clone(this.members);
-            info.chairs = Utils.object_clone(this.chairs);
-            info.maxChairs = this.maxChairs;
-            info.round = this.round;
-            info.maxRound = this.maxRound;
+        pokerScore: function(handPokers) {
+            var pokers = Utils.object_clone(handPokers);
+            var results = {
+                score: 0,
+                multiple: 1,
+                fancy: Game.FANCY.NORMAL,
+                type: Game.POKER_MODELS.POINT
+            };
 
-            info.table = this.table.infoToPlayer(userID);
+            // 按照牌面大小排序
+            var compare = function(a, b) {
+                if (a.value > b.value) {
+                    return 1;
+                }
+                else if (a.value == b.value) {
+                    return 0;
+                }
+                else {
+                    return -1;
+                }
+            };
 
-            return info;
+            pokers.sort(compare);
+
+            // 没有鬼牌 都是三张
+            // 除了 顺子 同花顺 三条 可以设置倍数之外 每个点数也需要设置倍数
+            // 使用倍数比较 倍数大的胜利
+            var i;
+            var analyse = [];           // 用于分析的扑克信息
+
+            for (i in pokers) {
+                var poker = pokers[i];
+                var realValue = poker.value;
+                if (realValue > 10) {
+                    realValue = 10;
+                }
+
+                analyse.push({
+                    type: poker.type,
+                    value: poker.value,
+                    realValue: realValue
+                });
+            }
+
+            // 两张牌就是出错 给最低的他
+            if (analyse.length === 2) {
+                return results;
+            }
+
+            // 接下来是三张牌情况
+            
+            // 花式情况
+            if (pokers[0].type === pokers[1].type && pokers[0].type === pokers[2].type) {
+                results.fancy = Game.FANCY.FLUSH_THREE;
+            }
+            
+            // 点数
+            var point = analyse[0].realValue + analyse[1].realValue + analyse[2].realValue || 0;
+            results.point = point;
+
+            // 三条
+            if (analyse[0].value === analyse[1].value && analyse[1].value === analyse[2].value) {
+                results.type = Game.POKER_MODELS.THREES;
+                results.multiple = this.data.settings.pokerModels[results.type];
+                results.score = results.multiple;
+
+                results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
+                return results;
+            }
+            // 顺子
+            if (analyse[0].value === analyse[1].value - 1 && analyse[1].value === analyse[2].value - 1) {
+                // 同花顺
+                if (analyse[0].type === analyse[1].type && analyse[1].type === analyse[2].type) {
+                    results.type = Game.POKER_MODELS.STRAIGHT_FLUSH;
+                    results.multiple = this.data.settings.pokerModels[results.type];
+                    results.score = results.multiple;
+
+                    results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
+                    return results;
+                }
+                // 普通顺子
+                results.type = Game.POKER_MODELS.STRAIGHT;
+                results.multiple = this.data.settings.pokerModels[results.type];
+                results.score = results.multiple;
+
+                results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
+                return results;
+            }
+
+            // 剩下的就是点数牌了
+            results.type = Game.POKER_MODELS.POINT;
+            var realPoint = point%10;
+            if (realPoint == 0) {
+                results.multiple = 0;
+            }
+            else {
+                results.multiple = this.data.settings.pokerPoint[point % 10] || 1;
+            }
+            results.score = results.multiple;
+
+            results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
+            return results;
         }
     });
-}(DejuPoker));
-
-//
-// (function(root){
-//     var _super = root.Entity;
-//
-//     var Game= root.Game;
-//     var PokerSet = root.PokerSet;
-//     var Utils = root.Utils;
-//
-//     var Room = root.Room = function(opts) {
-//         opts = opts || {};
-//
-//         _super.call(this, opts);
-//
-//         this.id                 = opts.id || 0;
-//         this.type               = opts.type || Game.ROOM_TYPE.STATIC;
-//         this.host               = opts.host;                        //房主
-//         this.players            = opts.players || [];
-//         this.banker             = opts.banker || 0;                 //庄家 默认是房主 -1为没有庄家
-//         this.pokerSet           = new PokerSet(opts.pokerSet);
-//         this.handPokers         = opts.handPokers || [];            //所有人的手牌
-//         this.ghostPokers        = opts.ghostPokers || [];           //翻出的鬼牌
-//         this.showOnPokers       = opts.showOnPokers || [];          //翻鬼牌时候翻出的牌 由于翻到joker需要重新翻 所以这里跟鬼牌可能会有区别
-//         this.setting            = {};
-//
-//         this.init(opts);
-//     };
-//
-//     root.inherits(Room, _super);
-//
-//     root.extend(Room.prototype, {
-//         init: function(opts) {
-//             var setting = opts.setting || {};
-//             this.setting.condition      = setting.condition || 0;                                           //经典模式上庄条件
-//             this.setting.times          = setting.times || 10;                                              //局数
-//             this.setting.ghostCount     = setting.ghostCount || 0;                                          //鬼牌数
-//             this.setting.betType        = setting.betType || Game.BET_TYPE.ARBITRARILY;                     //下注类型
-//             this.setting.universalGhost = setting.universalGhost || true;                                   //鬼牌万能
-//             this.setting.formationGhost = setting.formationGhost || {"god_nine":true, "god_eight":true};    //鬼牌成型
-//             this.setting.isDouble       = setting.isDouble || false;                                        //翻倍
-//             this.setting.zeroPoint      = setting.zeroPoint || {"three_zero":false, "two_zero":false};      //0点赢鬼牌
-//
-//             this.setting.pokerModels    = {};
-//             var pokerModels = opts.pokerModels || {};
-//             for (var i in Game.POKER_MODELS.POKER_MODELS) {
-//                 var modelKey = Game.POKER_MODELS.POKER_MODELS[i];
-//                 this.setting.pokerModels[modelKey] = pokerModels[modelKey] || 4;
-//             }
-//
-//             this.setting.pokerPoint     = [];
-//             var pokerPoint = opts.pokerPoint || [];
-//             for (var index = 0; index < pokerPoint.length; index++) {
-//                 this.setting.pokerPoint[index] = pokerPoint[index] || 1;
-//             }
-//         },
-//
-//         //给每一位坐下的玩家发一张牌
-//         deal: function() {
-//             var banker = this.banker || 0;
-//
-//             for (var i = 0; i < this.players.length; i++) {
-//                 //从庄家的下一位玩家开始发牌
-//                 var sitID = i + banker + 1;
-//                 if (sitID >= this.players.length) {
-//                     sitID = sitID - this.players.length;
-//                 }
-//
-//                 //暂时不判断是否站起
-//                 if (this.players[sitID]) {
-//                     if (this.handPokers[sitID] == null) {
-//                         this.handPokers[sitID] = [];
-//                     }
-//                     this.handPokers[sitID].push(this.pokerSet.extract());
-//                 }
-//             }
-//         },
-//
-//         //翻鬼牌 一直翻到有两张非joker的牌为止
-//         extractGhost: function() {
-//             this.ghostPokers = [];
-//             this.showOnPokers = [];
-//
-//             var ghostCount = 0;
-//             while (ghostCount < 2) {
-//                 var poker = this.pokerSet.extract();
-//                 if (poker.number != 0) {
-//                     this.ghostPokers.push(poker);
-//                     ghostCount++;
-//                 }
-//
-//                 this.showOnPokers.push(poker);
-//             }
-//         },
-//
-//         //已经在房间里就返回true
-//         isPlayerIn: function(playerId) {
-//             return this.players.indexOf(playerId) != -1;
-//         },
-//
-//         playerJoin: function(playerId) {
-//             var arrId = 0;
-//             while (true) {
-//                 if (this.players[arrId] == null) {
-//                     this.players[arrId] = playerId;
-//                     return;
-//                 }
-//                 arrId++;
-//             }
-//         },
-//
-//         //拷贝一份房间信息给玩家 针对这个玩家能看到的部分
-//         infoToPlayer: function(playerId) {
-//             var info = {};
-//             info.id = this.id;
-//             info.type = this.type;
-//             info.host = this.host;
-//             info.banker = this.banker;
-//             info.players = Utils.object_clone(this.players);
-//             info.ghostPokers = Utils.object_clone(this.ghostPokers);
-//             info.showOnPokers = Utils.object_clone(this.showOnPokers);
-//             info.setting = Utils.object_clone(this.setting);
-//
-//             info.handPokers = [];
-//             for (var sitID = 0; sitID < this.players.length; sitID++) {
-//                 var sitPlayer = this.players[sitID];
-//                 var handPoker = this.handPokers[sitID];
-//                 if (sitPlayer && handPoker) {
-//                     var showRight = PokerSet.SHOW_TARGET.ALL;
-//                     if (sitPlayer == playerId) {
-//                         showRight = PokerSet.SHOW_TARGET.ME;
-//                     }
-//                     info.handPokers[sitID] = [];
-//                     for (var pokerId = 0; pokerId < handPoker.length; pokerId++) {
-//                         var poker = handPoker[pokerId];
-//                         if (poker == null) {
-//                             info.handPokers[sitID][pokerId] = null;
-//                             continue;
-//                         }
-//                         if (showRight < poker.showTarget) {
-//                             info.handPokers[sitID][pokerId] = {showTarget: poker.showTarget};
-//                             continue;
-//                         }
-//                         info.handPokers[sitID][pokerId] = Utils.object_clone(poker);
-//                     }
-//                 }
-//             }
-//
-//             return info;
-//         }
-//     });
-// }(DejuPoker));
+} (DejuPoker));
 /**
  * Created by publish on 2017/3/24.
  */
@@ -6077,3 +5937,2575 @@
         ALL     : 2
     };
 } (DejuPoker));
+/**
+ * Created by monkey on 2017/3/25.
+ */
+
+(function(root){
+    var _super = root.Entity;
+
+    var Poker = root.Poker;
+    var Game = root.Game;
+    var StaticGamble = root.StaticGamble;
+    var CustomizedGamble = root.CustomizedGamble;
+
+    var Utils = root.Utils;
+
+    var Client = function(opts) {
+        opts = opts || {};
+
+        _super.call(this, opts);
+
+        this.userID        = opts.userID || 0;          // id
+        this.chairID       = opts.chairID || 0;         // 座位ID
+        this.name          = opts.name || "";           // 玩家名字
+        this.avatar        = opts.avatar || 0;          // 玩家头像
+        this.ready         = opts.ready || false;       // 是否准备好
+        this.started       = opts.started || false;     // 是否开始过游戏
+        this.bid           = opts.bid || false;         // 是否下注
+        this.bidRate       = opts.bidRate || 0;         // 下注倍数
+        this.end           = opts.end || false;         // 是否结束
+        this.compared      = opts.compared || false;    // 是否比过牌
+        this.notBank       = opts.notBank || false;     // 不坐庄 true就不做
+        this.isRubbing     = opts.isRubbing || false;   // 是否在搓牌
+        this.showResult    = opts.showResult || false;  // 是否需要展示牌局结果 这个在reset的时候不能重置
+
+        this.handPokers    = [];                        // 手牌
+        if (opts.handPokers) {
+            for (var i = 0, size = opts.handPokers.length; i < size; i++) {
+                this.handPokers.push(
+                    new Poker(opts.handPokers[i])
+                );
+            }
+        }
+    };
+
+    var Table = root.Table = function(opts) {
+        opts = opts || {};
+
+        _super.call(this, opts);
+
+        this.deck           = null;                     // 整副牌
+        this.ghostPokers    = null;                     // 桌面鬼牌
+        this.dealSequence   = opts.dealSequence || [];  // 发牌列表
+        this.drawList       = opts.drawList || [];      // 要牌列表
+        this.banker         = opts.banker || 0;         // 庄家
+        this.scoreBak       = opts.scoreBak || 0;       // 用于暂存下个庄家的分数以便分辨大小
+        this.typeBak        = opts.typeBak || null;     // 用于暂存下个庄家的牌型评分
+        this.bankerBak      = opts.bankerBak || this.banker;    // 经典模式下个庄家
+        this.bankerDraw     = opts.bankerDraw || 0;     // 庄家操作情况
+        this.settings       = opts.settings || {};
+        this.type           = opts.type;                // 牌局类型
+
+        this.indicator      = opts.indicator || 0;      // 指示器
+        this.clients        = {};                       // 客人列表
+        this.golds          = opts.golds || {};         // 参与过的用户在房间中的金币情况
+        this.lastBidRates   = opts.lastBidRates || {};  // 参与过的用户 上次投注倍数的列表
+        this.whosRubbing    = opts.whosRubbing || 0;
+
+        this.roundLog       = opts.roundLog || {clients: {}};
+
+        this.init(opts);
+    };
+
+    root.inherits(Table, _super);
+
+    root.extend(Table.prototype, {
+        init: function(opts) {
+            var i;
+            var size;
+
+            this.deck = [];
+            //如果新桌子 就等start的时候才拿牌出来
+            //旧桌子 有牌就把牌拿出来
+            if (opts.deck) {
+                for (i = 0, size = opts.deck.length; i < size; i++) {
+                    this.deck.push(
+                        new Poker(opts.deck[i])
+                    );
+                }
+            }
+
+            this.ghostPokers = [];
+            if (opts.ghostPokers) {
+                for (i = 0, size = opts.ghostPokers.length; i < size; i++) {
+                    this.ghostPokers.push(
+                        new Poker(opts.ghostPokers[i])
+                    );
+                }
+            }
+
+            if (opts.clients) {
+                var keys = Object.keys(opts.clients);
+                for (i = 0, size = keys.length; i < size; i++) {
+                    var userID = keys[i];
+                    this.clients[userID] = new Client(opts.clients[userID]);
+                }
+            }
+        },
+
+        enter: function(userID, chairID) {
+            var client = this.clients[userID];
+            if (client != null) {
+                return;
+            }
+
+            this.clients[userID] = new Client({userID: userID, chairID: chairID});
+        },
+
+        leave: function(userID) {
+            delete this.clients[userID];
+        },
+        
+        changeChair: function(userID, chairID) {
+            var client = this.clients[userID];
+            if (client == null) {
+                return false;
+            }
+            
+            client.chairID = chairID;
+            return true;
+        },
+
+        genDealSequence: function() {
+            var chairs = new Array(8);
+            var sequence = [];
+
+            for (var userID in this.clients) {
+                chairs[this.clients[userID].chairID] = this.clients[userID].userID;
+            }
+
+            var bankerIndex = -1;
+            if (this.type != Game.ROOM_TYPE.CHAOS) {
+                bankerIndex = chairs.indexOf(this.banker);
+            }
+
+            var index;
+            for (index = bankerIndex + 1; index < chairs.length; index++) {
+                if (chairs[index] == null) {
+                    continue;
+                }
+
+                sequence.push(chairs[index]);
+            }
+
+            if (bankerIndex >= 0) {
+                for (index = 0; index <= bankerIndex; index++) {
+                    if (chairs[index] == null) {
+                        continue;
+                    }
+
+                    sequence.push(chairs[index]);
+                }
+            }
+
+            this.dealSequence = sequence;
+        },
+
+        decreaseGold: function(userID, amount) {
+            if (this.golds[userID] == null) {
+                this.golds[userID] = 0;
+            }
+
+            this.golds[userID] -= Math.abs(amount);
+
+            if (this.roundLog.clients[userID] != null) {
+                this.roundLog.clients[userID].gold -= Math.abs(amount);
+            }
+        },
+
+        increaseGold: function(userID, amount) {
+            if (this.golds[userID] == null) {
+                this.golds[userID] = 0;
+            }
+
+            this.golds[userID] += Math.abs(amount);
+
+            if (this.roundLog.clients[userID] != null) {
+                this.roundLog.clients[userID].gold += Math.abs(amount);
+            }
+        },
+
+        ready: function(userID, data) {
+            var client = this.getClient(userID);
+            if (client == null) {
+                return null;
+            }
+
+            client.ready = data ? true : false;
+            if (client.showResult == true) {
+                client.showResult = false;
+            }
+            return {userID: userID, ready: client.ready};
+        },
+
+        isClientReady: function(userID) {
+            var client = this.getClient(userID);
+            if (client == null) {
+                return null;
+            }
+
+            return client.ready;
+        },
+
+        getClient: function(userID) {
+            return this.clients[userID];
+        },
+
+        //是否全部客人都做了某操作
+        getClientState: function(state) {
+            var i;
+            var size;
+            var keys;
+
+            keys = Object.keys(this.clients);
+            size = keys.length;
+            // 一个人就不能成型
+            if (size <= 1) {
+                return false;
+            }
+
+            for (i = 0; i < size; i++) {
+                var userID = keys[i];
+                var client = this.getClient(userID);
+
+                if (client[state] != true) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
+        getClientReady: function() {
+            return this.getClientState("ready");
+        },
+
+        getClientStarted: function() {
+            return this.getClientState("started");
+        },
+
+        getClientBid: function() {
+            return this.getClientState("bid");
+        },
+
+        getClientFight: function() {
+            return this.getClientState("compared");
+        },
+
+        getClientEnd: function() {
+            return this.getClientState("end");
+        },
+
+        getClientDraw: function() {
+            return this.drawList.length <= 0;
+        },
+
+        //开局
+        start: function(roomType) {
+            //先拿出一副新牌
+            this.deck = [];
+            for (var typeKey in Poker.TYPE) {
+                var type = Poker.TYPE[typeKey];
+
+                //定制模式没有王牌
+                if (roomType === Game.ROOM_TYPE.CUSTOMIZED && type === Poker.TYPE.JOKER) {
+                    continue;
+                }
+
+                for (var valId = 0; valId < Poker.VALUES[type].length; valId++) {
+                    var value = Poker.VALUES[type][valId];
+                    // 有没有翻倍牌呢
+                    if (value === Poker.DOUBLE_POKER_VALUE && this.settings.isDouble != true) {
+                        continue;
+                    }
+
+                    this.deck.push(new Poker({value: value, type: type}));
+                }
+            }
+        },
+
+        //洗牌
+        shuffle: function() {
+            var newDeck = [];
+
+            while (this.deck.length) {
+                var min = 0;
+                var max = this.deck.length;
+
+                var index = Math.floor(Math.random()*(max-min) + min);
+                newDeck.push(this.deck[index]);
+                this.deck.splice(index, 1);
+            }
+
+            this.deck = newDeck;
+        },
+
+        //根据规则发牌
+        deal: function() {
+            var i;
+            var j;
+            var client;
+            
+            // 清理手牌
+            for (i in this.clients) {
+                client = this.getClient(i);
+                client.handPokers = [];
+            }
+            
+            // 发两张牌
+            for (i = 0; i < 2; i++) {
+                //按顺序发牌
+                for (j = 0; j < this.dealSequence.length; j++) {
+                    var userID = this.dealSequence[j];
+                    client = this.getClient(userID);
+                    if (client && this.deck.length > 0) {
+                        client.handPokers.push(this.deck.shift());
+                    }
+                }
+            }
+        },
+
+        // 翻鬼牌
+        ghost: function() {
+            var amount = this.settings.ghostCount;
+            this.ghostPokers = [];
+
+            var i = 0;
+            while (i < amount) {
+                var poker = this.deck.shift();
+                this.ghostPokers.push(poker);
+                if (poker.type != Poker.TYPE.JOKER) {
+                    i++;
+                }
+            }
+        },
+
+        bid: function(userID, rate) {
+            var client = this.getClient(userID);
+            if (client == null) {
+                return null;
+            }
+
+            if (typeof rate != "number") {
+                rate = 1;
+            }
+
+            // 一杠到底
+            if (this.settings.betType === Game.BET_TYPE.MORE_THEN_MORE) {
+                var lastBidRate = this.lastBidRates[userID] || 1;
+                // 当前倍数 不小于 上一次倍数
+                if (rate < lastBidRate) {
+                    return null;
+                }
+            }
+
+            client.bid = true;
+            client.bidRate = rate;
+            this.lastBidRates[userID] = rate;
+            for (var i in client.handPokers) {
+                // 定制模式直接开牌
+                if (this.type == Game.ROOM_TYPE.CUSTOMIZED) {
+                    client.handPokers[i].setShow(Poker.SHOW_TARGET.ALL);
+                }
+                else {
+                    client.handPokers[i].setShow(Poker.SHOW_TARGET.ME);
+                }
+            }
+            return {userID: userID, bidRate: rate};
+        },
+
+        clearDraw: function() {
+            this.drawList = [];
+        },
+
+        insertDraw: function(userID) {
+            if (!(this.drawList instanceof Array)) {
+                this.drawList = [];
+            }
+
+            this.drawList.push(userID);
+        },
+
+        show: function() {
+
+        },
+
+        rob: function(userID, data) {
+            if (this.banker != 0) {
+                return null;
+            }
+
+            this.banker = userID;
+            return {userID: userID};
+        },
+
+        draw: function(userID, type) {
+            //排队来
+            if (userID != this.drawList[0]) {
+                return null;
+            }
+
+            var client = this.getClient(userID);
+            if (client == null) {
+                return null;
+            }
+
+            var i;
+            var poker;
+            var results = {
+                userID: userID
+            };
+
+            var ghostArray = [];
+            for (i in this.ghostPokers) {
+                poker = this.ghostPokers[i];
+                if (poker && poker.type != Poker.TYPE.JOKER) {
+                    ghostArray.push(poker.value);
+                }
+            }
+
+            // 双鬼判断
+            var ghostCnt = 0;
+            // 天公判断 累计点数
+            var totalValue = 0;
+            for (i in client.handPokers) {
+                poker = client.handPokers[i];
+                if (poker) {
+                    if (poker.type === Poker.TYPE.JOKER || ghostArray.indexOf(poker.value) != -1) {
+                        ghostCnt++;
+                        totalValue += 10;
+                    }
+                    else {
+                        if (poker.value > 10) {
+                            totalValue += 10;
+                        }
+                        else {
+                            totalValue += poker.value;
+                        }
+                    }
+                }
+            }
+
+            totalValue = totalValue % 10;
+
+            var cantOpen = false;
+            var cantPass = false;
+            var cantDraw = false;
+            var cantRubbed = false;
+
+            switch (this.type) {
+                // 长庄
+                case Game.ROOM_TYPE.STATIC: {
+                    // 一只鬼的时候
+                    if (ghostCnt === 1) {
+                        // 鬼牌万能 只能补牌
+                        if (this.settings.universalGhost == true) {
+                            cantOpen = true;
+                            cantPass = true;
+                        }
+                    }
+                    // 天公不能过牌
+                    if (totalValue == 8 || totalValue == 9) {
+                        cantPass = true;
+                    }
+                    break;
+                }
+                // 经典
+                case Game.ROOM_TYPE.CLASSICAL: {
+                    // 一只鬼的时候
+                    if (ghostCnt === 1) {
+                        // 鬼牌万能 只能补牌
+                        if (this.settings.universalGhost == true) {
+                            cantOpen = true;
+                            cantPass = true;
+                        }
+                    }
+                    // 天公不能过牌
+                    if (totalValue == 8 || totalValue == 9) {
+                        cantPass = true;
+                    }
+                    break;
+                }
+                // 混战
+                case Game.ROOM_TYPE.CHAOS: {
+                    // 一只鬼的时候
+                    if (ghostCnt === 1) {
+                        // 鬼牌万能 只能补牌
+                        if (this.settings.universalGhost == true) {
+                            cantOpen = true;
+                            cantPass = true;
+                        }
+                    }
+                    break;
+                }
+                // 定制
+                case Game.ROOM_TYPE.CUSTOMIZED: {
+                    // 定制模式不能明牌和过牌 只能补牌和搓牌
+                    cantPass = true;
+                    cantOpen = true;
+                    break;
+                }
+            }
+
+            switch (type) {
+                // 明牌 不补牌 直接将牌面公开
+                case Game.DRAW_COMMAND.OPEN: {
+                    if (cantOpen) {
+                        return null;
+                    }
+
+                    for (i in client.handPokers) {
+                        client.handPokers[i].setShow(Poker.SHOW_TARGET.ALL);
+                    }
+                    break;
+                }
+                // 要一张牌
+                case Game.DRAW_COMMAND.DRAW: {
+                    if (cantDraw) {
+                        return null;
+                    }
+
+                    poker = this.deck.shift();
+                    poker.setShow(Poker.SHOW_TARGET.ME);
+                    if (this.type == Game.ROOM_TYPE.CUSTOMIZED) {
+                        poker.setShow(Poker.SHOW_TARGET.ALL);
+                    }
+                    client.handPokers.push(poker);
+                    break;
+                }
+                // 搓牌 要扣东西的
+                case Game.DRAW_COMMAND.RUBBED: {
+                    if (cantRubbed) {
+                        return null;
+                    }
+
+                    this.whosRubbing = userID;
+                    client.isRubbing = true;
+
+                    poker = this.deck.shift();
+                    poker.setShow(Poker.SHOW_TARGET.ME);
+                    if (this.type == Game.ROOM_TYPE.CUSTOMIZED) {
+                        poker.setShow(Poker.SHOW_TARGET.ALL);
+                    }
+                    client.handPokers.push(poker);
+                    break;
+                }
+                // 过牌
+                default: {
+                    if (cantPass) {
+                        return null;
+                    }
+
+                    type = Game.DRAW_COMMAND.PASS;
+                    break;
+                }
+            }
+
+            this.drawList.shift();
+            results.type = type;
+            
+            if (this.drawList.length <= 0) {
+                if (this.type === Game.ROOM_TYPE.CHAOS
+                    || this.type === Game.ROOM_TYPE.CUSTOMIZED
+                ) {
+                    this.doPay();
+                }
+            }
+
+            return results;
+        },
+
+        doBankerDraw: function(userID, type) {
+            //闲家捣乱
+            if (userID != this.banker) {
+                return null;
+            }
+
+            var client = this.getClient(userID);
+            if (client == null) {
+                return null;
+            }
+
+            var i;
+            var j;
+            var results = {
+                userID: userID
+            };
+
+            var ghostArray = [];
+            for (i in this.ghostPokers) {
+                poker = this.ghostPokers[i];
+                if (poker && poker.type != Poker.TYPE.JOKER) {
+                    ghostArray.push(poker.value);
+                }
+            }
+
+            // 双鬼判断
+            var ghostCnt = 0;
+            for (i in client.handPokers) {
+                poker = client.handPokers[i];
+                if (poker && (poker.type === Poker.TYPE.JOKER || ghostArray.indexOf(poker.value) != -1)) {
+                    ghostCnt++;
+                }
+            }
+
+            var cantBetAll = false;
+            var cantBetDraw = false;
+            var cantDraw = false;
+            var cantRubbed = false;
+            
+            // 一只鬼的时候
+            if (ghostCnt === 1) {
+                // 鬼牌万能 只能补牌
+                if (this.settings.universalGhost == true) {
+                    cantBetAll = true;
+                    cantBetDraw = true;
+                }
+            }
+
+            var gambleList = [];
+
+            switch (type) {
+                // 开补 对已经补牌的玩家进行开牌比牌操作 已经明牌的也要加上
+                case Game.DRAW_COMMAND.BET_DRAW: {
+                    if (cantBetDraw) {
+                        return null;
+                    }
+                    
+                    this.bankerDraw = 1;
+                    var drawCnt = 0;
+                    var openCnt = 0;
+                    var openArr = [];
+                    var playerCnt = 0;
+
+                    for (i in this.clients) {
+                        var c = this.getClient(i);
+                        if (c == null) {
+                            continue;
+                        }
+
+                        //庄家自己
+                        if (c.userID == userID) {
+                            continue;
+                        }
+
+                        playerCnt++;
+                        if (c.handPokers.length > 2) {
+                            gambleList.push(c.userID);
+                            drawCnt++;
+                        }
+                        else {
+                            // 两张牌都是开牌的
+                            if (c.handPokers[0].showTarget == Poker.SHOW_TARGET.ALL
+                                && c.handPokers[1].showTarget == Poker.SHOW_TARGET.ALL) {
+                                openCnt++;
+                                openArr.push(c.userID);
+                            }
+                        }
+
+                        // 闲家开牌
+                        for (j in c.handPokers) {
+                            c.handPokers[j].setShow(Poker.SHOW_TARGET.ALL);
+                        }
+                    }
+
+                    // 有人补牌 并且补牌+明牌的人数小于总人数 则走开补流程
+                    if (drawCnt > 0 && drawCnt + openCnt < playerCnt) {
+                        for (i in client.handPokers) {
+                            client.handPokers[i].setShow(Poker.SHOW_TARGET.ALL);
+                        }
+                        // 联合补牌和明牌的人
+                        gambleList = gambleList.concat(openArr);
+                        results.gamble = this.fight(gambleList);
+                    }
+                    // 其他情况都全部开牌
+                    else {
+                        this.bankerDraw = 2;
+                    }
+                    break;
+                }
+                // 补牌 要一张牌
+                case Game.DRAW_COMMAND.DRAW: {
+                    if (cantDraw) {
+                        return null;
+                    }
+                    
+                    var poker = this.deck.shift();
+                    poker.setShow(Poker.SHOW_TARGET.ME);
+                    client.handPokers.push(poker);
+                    this.bankerDraw = 2;
+                    break;
+                }
+                // 搓牌 要扣东西的
+                case Game.DRAW_COMMAND.RUBBED: {
+                    if (cantRubbed) {
+                        return null;
+                    }
+
+                    this.whosRubbing = userID;
+                    client.isRubbing = true;
+                    
+                    var poker = this.deck.shift();
+                    poker.setShow(Poker.SHOW_TARGET.ME);
+                    client.handPokers.push(poker);
+                    this.bankerDraw = 2;
+                    break;
+                }
+                // 全开 不补牌直接跟全部人比较
+                default: {
+                    if (cantBetAll) {
+                        return null;
+                    }
+                    type = Game.DRAW_COMMAND.BET_ALL;
+
+                    this.bankerDraw = 2;
+                    break;
+                }
+            }
+
+            results.type = type;
+            
+            if (this.bankerDraw == 2) {
+                this.doPay();
+            }
+
+            return results;
+        },
+
+        rubDone: function(userID, data) {
+            if (userID == this.whosRubbing) {
+                this.whosRubbing = 0;
+
+                var client = this.getClient(this.banker);
+                if (client != null) {
+                    client.isRubbing = false;
+                }
+            }
+
+            return {userID: userID};
+        },
+
+        doPay: function() {
+            var client = this.getClient(this.banker);
+            if (client == null) {
+                return null;
+            }
+
+            if (this.roundLog.ghostPokers == null) {
+                this.roundLog.ghostPokers = Utils.object_clone(this.ghostPokers);
+            }
+
+            var i;
+            var j;
+            var gambleList = [];
+            for (i in this.clients) {
+                var c = this.getClient(i);
+                if (c == null) {
+                    continue;
+                }
+
+                // 比牌要展示结果
+                c.showResult = true;
+
+                //庄家自己 非混战模式不参与
+                if (this.type != Game.ROOM_TYPE.CHAOS) {
+                    if (c.userID == this.banker) {
+                        continue;
+                    }
+                }
+
+                if (c.compared == false) {
+                    gambleList.push(c.userID);
+                }
+
+                // 闲家开牌
+                for (j in c.handPokers) {
+                    c.handPokers[j].setShow(Poker.SHOW_TARGET.ALL);
+                }
+            }
+
+            // 庄家操作之后 就可以展示所有牌给大家看了
+            for (i in client.handPokers) {
+                client.handPokers[i].setShow(Poker.SHOW_TARGET.ALL);
+            }
+
+            var gamble = this.fight(gambleList);
+            return {gamble: gamble};
+        },
+
+        end: function(userID, data) {
+            var client = this.getClient(userID);
+            if (client == null || client.end == true) {
+                return null;
+            }
+
+            client.end = true;
+            return {
+                userID: userID,
+                end: true
+            };
+        },
+
+        rejectBanker: function(userID, data) {
+            var client = this.getClient(userID);
+            if (client == null) {
+                return null;
+            }
+
+            if (client.notBank) {
+                client.notBank = false;
+            }
+            else {
+                client.notBank = true;
+            }
+
+            return {
+                userID: userID,
+                notBank: client.notBank
+            };
+        },
+
+        //比牌的入口 一般情况下是庄家与list里面的玩家比牌
+        fight: function(list) {
+            var l = Utils.object_clone(list);
+
+            switch (this.type) {
+                // 长庄模式
+                case Game.ROOM_TYPE.STATIC: {
+                    return this.staticFight(l);
+                }
+                // 经典模式
+                case Game.ROOM_TYPE.CLASSICAL: {
+                    return this.classicalFight(l);
+                }
+                // 混战模式
+                case Game.ROOM_TYPE.CHAOS: {
+                    return this.chaosFight(l);
+                }
+                // 定制模式
+                case Game.ROOM_TYPE.CUSTOMIZED: {
+                    return this.customizedFight(l);
+                }
+            }
+        },
+
+        // 长庄模式比牌
+        staticFight: function(list) {
+            var results  = {};
+            var gamble = new StaticGamble(this.clone());
+            var bankerObj = this.getClient(this.banker);
+
+            if (bankerObj == null) {
+                return null;
+            }
+
+            var bankerScore = gamble.pokerScore(Utils.object_clone(bankerObj.handPokers));
+            if (bankerScore == null) {
+                return null;
+            }
+
+            bankerObj.compared = true;
+            results.bankerScore = bankerScore;
+
+            var pokerId;
+
+            if (this.roundLog.clients == null) {
+                this.roundLog.clients = {};
+            }
+
+            if (this.roundLog.clients[this.banker] == null) {
+                this.roundLog.clients[this.banker] = {
+                    gold:       0,    // 需要初始化一个gold
+                    fightTimes: 0,
+                    winTimes:   0
+                };
+            }
+
+            this.roundLog.clients[this.banker].score = bankerScore.score;
+            this.roundLog.clients[this.banker].type = bankerScore.type;
+            this.roundLog.clients[this.banker].isBanker = true;
+            this.roundLog.clients[this.banker].point = bankerScore.point;
+            this.roundLog.clients[this.banker].fancy = bankerScore.fancy;
+            this.roundLog.clients[this.banker].handPokers = [];
+            for (pokerId = 0; pokerId < bankerObj.handPokers.length; pokerId++) {
+                if (bankerObj.handPokers[pokerId]) {
+                    this.roundLog.clients[this.banker].handPokers.push(bankerObj.handPokers[pokerId].clone());
+                }
+            }
+
+            var i;
+            var playerScore;
+            var client;
+
+            for (i = 0; i < list.length; i++) {
+                var userID = list[i];
+                // 只处理闲家
+                if (userID === this.banker) {
+                    continue;
+                }
+
+                client = this.getClient(userID);
+                if (client == null) {
+                    continue;
+                }
+
+                playerScore = gamble.pokerScore(Utils.object_clone(client.handPokers));
+                if (playerScore == null) {
+                    continue;
+                }
+
+                if (this.roundLog.clients[userID] == null) {
+                    this.roundLog.clients[userID] = {
+                        gold:       0,    // 需要初始化一个gold
+                        fightTimes: 0,
+                        winTimes:   0
+                    };
+                }
+
+                this.roundLog.clients[userID].score = playerScore.score;
+                this.roundLog.clients[userID].type = playerScore.type;
+                this.roundLog.clients[userID].point = playerScore.point;
+                this.roundLog.clients[userID].fancy = playerScore.fancy;
+                this.roundLog.clients[userID].handPokers = [];
+                for (pokerId = 0; pokerId < client.handPokers.length; pokerId++) {
+                    if (client.handPokers[pokerId]) {
+                        this.roundLog.clients[userID].handPokers.push(client.handPokers[pokerId].clone());
+                    }
+                }
+
+                client.compared = true;
+                if (playerScore.score > bankerScore.score) {
+                    playerScore.result = "win";             //闲家胜利
+                }
+                else if (playerScore.score == bankerScore.score) {
+                    playerScore.result = "draw";            //平局
+                    // 比牌算花式
+                    if (this.settings.fancyWin && bankerScore.type === playerScore.type) {
+                        if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                            playerScore.result = "win";             //闲家胜利
+                        }
+                        else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                            playerScore.result = "lose";            //输牌
+                        }
+                    }
+                }
+                else {
+                    playerScore.result = "lose";            //输牌
+                }
+
+                // 需要判断0点赢双鬼
+                var winGhostMultiple = 0;
+                // 任何木虱赢双鬼
+                if (this.settings.beatDBLGhost === Game.BEAT_DBL_GHOST.ALL_BEAT) {
+                    // 闲家双鬼 庄家0点
+                    if (playerScore.type === Game.POKER_MODELS.DOUBLE_GHOST && bankerScore.score === 100) {
+                        playerScore.result = "lose";            //闲家输牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.DOUBLE_GHOST] * bankerScore.double_poker;
+                    }
+                    // 闲家0点 庄家双鬼
+                    else if (bankerScore.type === Game.POKER_MODELS.DOUBLE_GHOST && playerScore.score === 100) {
+                        playerScore.result = "win";             //闲家赢牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.DOUBLE_GHOST] * playerScore.double_poker;
+                    }
+                }
+                // 三条同花木虱赢双鬼
+                else {
+                    // 闲家双鬼 庄家0点并且是三张同花
+                    if (playerScore.type === Game.POKER_MODELS.DOUBLE_GHOST
+                        && bankerScore.score === 100
+                        && bankerScore.fancy === Game.FANCY.FLUSH_THREE
+                    ) {
+                        playerScore.result = "lose";            //闲家输牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * bankerScore.double_poker;
+                    }
+                    // 闲家0点并且是三张同花 庄家双鬼
+                    else if (bankerScore.type === Game.POKER_MODELS.DOUBLE_GHOST
+                        && playerScore.score === 100
+                        && playerScore.fancy === Game.FANCY.FLUSH_THREE
+                    ) {
+                        playerScore.result = "win";             //闲家赢牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * playerScore.double_poker;
+                    }
+                }
+
+                // 三条同花木虱赢三鬼
+                if (this.settings.beatThreeGhost) {
+                    // 闲家三鬼 庄家0点并且是三张同花
+                    if (playerScore.type === Game.POKER_MODELS.THREE_GHOST
+                        && bankerScore.score === 100
+                        && bankerScore.fancy === Game.FANCY.FLUSH_THREE
+                    ) {
+                        playerScore.result = "lose";            //闲家输牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * bankerScore.double_poker;
+                    }
+                    // 闲家0点并且是三张同花 庄家三鬼
+                    else if (bankerScore.type === Game.POKER_MODELS.THREE_GHOST
+                        && playerScore.score === 100
+                        && playerScore.fancy === Game.FANCY.FLUSH_THREE
+                    ) {
+                        playerScore.result = "win";             //闲家赢牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * playerScore.double_poker;
+                    }
+                }
+
+                var payMultiple = 0;
+                // 闲家赢牌 庄家输牌
+                if (playerScore.result == "win") {
+                    this.roundLog.clients[userID].winTimes++;
+                    if (winGhostMultiple > 0) {
+                        payMultiple = winGhostMultiple;
+                    }
+                    else {
+                        payMultiple = playerScore.multiple;
+                    }
+                    
+                    this.increaseGold(userID, payMultiple * client.bidRate);
+                    this.decreaseGold(this.banker, payMultiple * client.bidRate);
+                }
+                // 闲家输牌 庄家赢牌
+                else if (playerScore.result == "lose") {
+                    this.roundLog.clients[this.banker].winTimes++;
+                    // 需要用庄家的牌型倍率
+                    if (winGhostMultiple > 0) {
+                        payMultiple = winGhostMultiple;
+                    }
+                    else {
+                        payMultiple = bankerScore.multiple;
+                    }
+                    
+                    this.increaseGold(this.banker, payMultiple * client.bidRate);
+                    this.decreaseGold(userID, payMultiple * client.bidRate);
+                }
+
+                this.roundLog.clients[this.banker].fightTimes++;
+                this.roundLog.clients[userID].fightTimes++;
+
+                results[userID] = playerScore;
+            }
+
+            return results;
+        },
+
+        // 经典模式比牌
+        classicalFight: function(list) {
+            var results  = {};
+            var gamble = new StaticGamble(this.clone());
+            var bankerObj = this.getClient(this.banker);
+
+            if (bankerObj == null) {
+                return null;
+            }
+
+            var bankerScore = gamble.pokerScore(Utils.object_clone(bankerObj.handPokers));
+            if (bankerScore == null) {
+                return null;
+            }
+
+            bankerObj.compared = true;
+            results.bankerScore = bankerScore;
+
+            var pokerId;
+
+            if (this.roundLog.clients == null) {
+                this.roundLog.clients = {};
+            }
+
+            if (this.roundLog.clients[this.banker] == null) {
+                this.roundLog.clients[this.banker] = {
+                    gold:       0,    // 需要初始化一个gold
+                    fightTimes: 0,
+                    winTimes:   0
+                };
+            }
+
+            this.roundLog.clients[this.banker].score = bankerScore.score;
+            this.roundLog.clients[this.banker].type = bankerScore.type;
+            this.roundLog.clients[this.banker].isBanker = true;
+            this.roundLog.clients[this.banker].point = bankerScore.point;
+            this.roundLog.clients[this.banker].fancy = bankerScore.fancy;
+            this.roundLog.clients[this.banker].handPokers = [];
+            for (pokerId = 0; pokerId < bankerObj.handPokers.length; pokerId++) {
+                if (bankerObj.handPokers[pokerId]) {
+                    this.roundLog.clients[this.banker].handPokers.push(bankerObj.handPokers[pokerId].clone());
+                }
+            }
+
+            var self = this;
+            var bankerChangeCalc = function(userID, scoreInfo) {
+                // 第一次处理总是庄家 所以可以直接存相应信息
+                if (self.typeBak == null) {
+                    self.typeBak = scoreInfo.type;
+                    return;
+                }
+
+                // 下面就是闲家了
+
+                // 顺子上庄：双鬼 > 牌型（同花顺、三条、顺子根据设置倍数大者优先，相同时按该顺序优先）
+                // 天公上庄：双鬼 > 天公9 > 天公8 > 牌型（同花顺、三条、顺子根据设置倍数大者优先，相同时按该顺序优先）
+
+                // 点数牌的话就别想了
+                if (scoreInfo.type == Game.POKER_MODELS.POINT) {
+                    return;
+                }
+
+                if (self.settings.condition === Game.BANKER_CONDITION.NORMAL) {
+                    // 顺子上庄 天公8 天公9 不上庄
+                    if (scoreInfo.type == Game.POKER_MODELS.GOD_EIGHT || scoreInfo.type == Game.POKER_MODELS.GOD_NINE) {
+                        return;
+                    }
+                }
+
+                var typeGrade = {};
+                // 第一波 双鬼 最屌
+                typeGrade[Game.POKER_MODELS.THREE_GHOST] = 2000;
+                typeGrade[Game.POKER_MODELS.DOUBLE_GHOST] = 1000;
+
+                // 第二波 天公9 > 天公8  直接用 9 和 8 来评分
+                typeGrade[Game.POKER_MODELS.GOD_NINE] = 109;
+                typeGrade[Game.POKER_MODELS.GOD_EIGHT] = 108;
+
+                // 第三波 同花顺 三条 顺子
+                // 用设置的倍数来判断 如果倍数相同 按 同花顺 > 三条 > 顺子
+                typeGrade[Game.POKER_MODELS.STRAIGHT_FLUSH]
+                    = self.settings.pokerModels[Game.POKER_MODELS.STRAIGHT_FLUSH];
+
+                typeGrade[Game.POKER_MODELS.THREES]
+                    = self.settings.pokerModels[Game.POKER_MODELS.THREES];
+
+                typeGrade[Game.POKER_MODELS.STRAIGHT]
+                    = self.settings.pokerModels[Game.POKER_MODELS.STRAIGHT];
+
+                typeGrade[Game.POKER_MODELS.POINT] = 0;
+
+                var bakGrade = typeGrade[self.typeBak] || 0;
+                var currGrade = typeGrade[scoreInfo.type] || 0;
+
+                // 大于就直接换
+                if (currGrade > bakGrade) {
+                    self.typeBak = scoreInfo.type;
+                    self.bankerBak = userID;
+                    return;
+                }
+
+                // 相等的话 按发牌顺序
+                if (currGrade == bakGrade) {
+                    var bankerOrder = self.dealSequence.indexOf(self.bankerBak);
+                    var clientOrder = self.dealSequence.indexOf(userID);
+
+                    if (clientOrder != -1 && clientOrder < bankerOrder) {
+                        self.typeBak = scoreInfo.type;
+                        self.bankerBak = userID;
+                    }
+                }
+            };
+
+            bankerChangeCalc(this.banker, bankerScore);
+
+            var i;
+            var playerScore;
+            var client;
+
+            for (i = 0; i < list.length; i++) {
+                var userID = list[i];
+                // 只处理闲家
+                if (userID === this.banker) {
+                    continue;
+                }
+
+                client = this.getClient(userID);
+                if (client == null) {
+                    continue;
+                }
+
+                playerScore = gamble.pokerScore(Utils.object_clone(client.handPokers));
+                if (playerScore == null) {
+                    continue;
+                }
+
+                if (this.roundLog.clients[userID] == null) {
+                    this.roundLog.clients[userID] = {
+                        gold:       0,    // 需要初始化一个gold
+                        fightTimes: 0,
+                        winTimes:   0
+                    };
+                }
+
+                this.roundLog.clients[userID].score = playerScore.score;
+                this.roundLog.clients[userID].type = playerScore.type;
+                this.roundLog.clients[userID].point = playerScore.point;
+                this.roundLog.clients[userID].fancy = playerScore.fancy;
+                this.roundLog.clients[userID].handPokers = [];
+                for (pokerId = 0; pokerId < client.handPokers.length; pokerId++) {
+                    if (client.handPokers[pokerId]) {
+                        this.roundLog.clients[userID].handPokers.push(client.handPokers[pokerId].clone());
+                    }
+                }
+
+                client.compared = true;
+                if (playerScore.score > bankerScore.score) {
+                    playerScore.result = "win";             //闲家胜利
+                }
+                else if (playerScore.score == bankerScore.score) {
+                    playerScore.result = "draw";            //平局
+                    // 比牌算花式
+                    if (this.settings.fancyWin && bankerScore.type === playerScore.type) {
+                        if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                            playerScore.result = "win";             //闲家胜利
+                        }
+                        else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                            playerScore.result = "lose";            //输牌
+                        }
+                    }
+                }
+                else {
+                    playerScore.result = "lose";            //输牌
+                }
+
+                // 需要判断0点赢双鬼
+                var winGhostMultiple = 0;
+                // 任何木虱赢双鬼
+                if (this.settings.beatDBLGhost === Game.BEAT_DBL_GHOST.ALL_BEAT) {
+                    // 闲家双鬼 庄家0点
+                    if (playerScore.type === Game.POKER_MODELS.DOUBLE_GHOST && bankerScore.score === 100) {
+                        playerScore.result = "lose";            //闲家输牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.DOUBLE_GHOST] * bankerScore.double_poker;
+                    }
+                    // 闲家0点 庄家双鬼
+                    else if (bankerScore.type === Game.POKER_MODELS.DOUBLE_GHOST && playerScore.score === 100) {
+                        playerScore.result = "win";             //闲家赢牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.DOUBLE_GHOST] * playerScore.double_poker;
+                    }
+                }
+                // 三条同花木虱赢双鬼
+                else {
+                    // 闲家双鬼 庄家0点并且是三张同花
+                    if (playerScore.type === Game.POKER_MODELS.DOUBLE_GHOST
+                        && bankerScore.score === 100
+                        && bankerScore.fancy === Game.FANCY.FLUSH_THREE
+                    ) {
+                        playerScore.result = "lose";            //闲家输牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * bankerScore.double_poker;
+                    }
+                    // 闲家0点并且是三张同花 庄家双鬼
+                    else if (bankerScore.type === Game.POKER_MODELS.DOUBLE_GHOST
+                        && playerScore.score === 100
+                        && playerScore.fancy === Game.FANCY.FLUSH_THREE
+                    ) {
+                        playerScore.result = "win";             //闲家赢牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * playerScore.double_poker;
+                    }
+                }
+
+                // 三条同花木虱赢三鬼
+                if (this.settings.beatThreeGhost) {
+                    // 闲家三鬼 庄家0点并且是三张同花
+                    if (playerScore.type === Game.POKER_MODELS.THREE_GHOST
+                        && bankerScore.score === 100
+                        && bankerScore.fancy === Game.FANCY.FLUSH_THREE
+                    ) {
+                        playerScore.result = "lose";            //闲家输牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * bankerScore.double_poker;
+                    }
+                    // 闲家0点并且是三张同花 庄家三鬼
+                    else if (bankerScore.type === Game.POKER_MODELS.THREE_GHOST
+                        && playerScore.score === 100
+                        && playerScore.fancy === Game.FANCY.FLUSH_THREE
+                    ) {
+                        playerScore.result = "win";             //闲家赢牌
+                        winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * playerScore.double_poker;
+                    }
+                }
+
+                var payMultiple = 0;
+                // 闲家赢牌 庄家输牌
+                if (playerScore.result == "win") {
+                    this.roundLog.clients[userID].winTimes++;
+                    // 用闲家的牌型倍率
+                    if (winGhostMultiple > 0) {
+                        payMultiple = winGhostMultiple;
+                    }
+                    else {
+                        payMultiple = playerScore.multiple;
+                    }
+                    
+                    this.increaseGold(userID, payMultiple * client.bidRate);
+                    this.decreaseGold(this.banker, payMultiple * client.bidRate);
+
+                    // 上庄设定 闲家赢牌才有资格上庄
+                    // 这里判断的是他是否选择了不坐庄
+                    if (client.notBank != true) {
+                        bankerChangeCalc(userID, playerScore);
+                    }
+                }
+                // 闲家输牌 庄家赢牌
+                else if (playerScore.result == "lose") {
+                    this.roundLog.clients[this.banker].winTimes++;
+                    // 需要用庄家的牌型倍率
+                    if (winGhostMultiple > 0) {
+                        payMultiple = winGhostMultiple;
+                    }
+                    else {
+                        payMultiple = bankerScore.multiple;
+                    }
+                    
+                    this.increaseGold(this.banker, payMultiple * client.bidRate);
+                    this.decreaseGold(userID, payMultiple * client.bidRate);
+                }
+
+                this.roundLog.clients[this.banker].fightTimes++;
+                this.roundLog.clients[userID].fightTimes++;
+
+                results[userID] = playerScore;
+            }
+
+            return results;
+        },
+
+        // 混战模式比牌
+        chaosFight: function(list) {
+            var results  = {};
+            var scoreList = {};
+
+            var gamble = new StaticGamble(this.clone());
+            var i;
+            var j;
+            var playerScore;
+            var client;
+            var userID;
+
+            for (i = 0; i < list.length; i++) {
+                userID = list[i];
+                client = this.getClient(userID);
+                if (client == null) {
+                    continue;
+                }
+
+                playerScore = gamble.pokerScore(Utils.object_clone(client.handPokers));
+                if (playerScore == null) {
+                    continue;
+                }
+
+                scoreList[userID] = playerScore;
+            }
+
+            var gambleResult = {};
+            for (i = 0; i < list.length; i++) {
+                userID = list[i];
+                var baseScore = scoreList[userID];
+                if (baseScore == null) {
+                    continue;
+                }
+
+                if (this.roundLog.clients == null) {
+                    this.roundLog.clients = {};
+                }
+
+                if (this.roundLog.clients[userID] == null) {
+                    this.roundLog.clients[userID] = {
+                        gold:       0,    // 需要初始化一个gold
+                        fightTimes: 0,
+                        winTimes:   0
+                    };
+                }
+
+                this.roundLog.clients[userID].score = baseScore.score;
+                this.roundLog.clients[userID].type = baseScore.type;
+                this.roundLog.clients[userID].point = baseScore.point;
+                this.roundLog.clients[userID].fancy = baseScore.fancy;
+                this.roundLog.clients[userID].handPokers = [];
+                client = this.getClient(userID);
+                for (var pokerId = 0; pokerId < client.handPokers.length; pokerId++) {
+                    if (client.handPokers[pokerId]) {
+                        this.roundLog.clients[userID].handPokers.push(client.handPokers[pokerId].clone());
+                    }
+                }
+
+                gambleResult[userID] = {};
+
+                for (j = 0; j < list.length; j++) {
+                    var pId = list[j];
+                    if (pId == userID) {
+                        continue;
+                    }
+
+                    playerScore = scoreList[pId];
+                    if (playerScore.score > baseScore.score) {
+                        gambleResult[userID][pId] = "lose";            //userID失败
+                    }
+                    else if (playerScore.score == baseScore.score) {
+                        gambleResult[userID][pId] = "draw";            //平局
+                        // 比牌算花式
+                        if (this.settings.fancyWin && baseScore.type === playerScore.type) {
+                            if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[baseScore.fancy]) {
+                                gambleResult[userID][pId] = "lose";            //userID失败
+                            }
+                            else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[baseScore.fancy]) {
+                                gambleResult[userID][pId] = "win";             //userID胜利
+                            }
+                        }
+                    }
+                    else {
+                        gambleResult[userID][pId] = "win";             //userID胜利
+                    }
+
+                    var target = this.getClient(pId);
+
+                    // 需要判断0点赢双鬼
+                    var winGhostMultiple = 0;
+                    // 任何木虱赢双鬼
+                    if (this.settings.beatDBLGhost === Game.BEAT_DBL_GHOST.ALL_BEAT) {
+                        // 闲家双鬼 庄家0点
+                        if (playerScore.type === Game.POKER_MODELS.DOUBLE_GHOST && baseScore.score === 100) {
+                            gambleResult[userID][pId] = "win";            //userID胜利
+                            winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.DOUBLE_GHOST] * baseScore.double_poker;
+                        }
+                        // 闲家0点 庄家双鬼
+                        else if (baseScore.type === Game.POKER_MODELS.DOUBLE_GHOST && playerScore.score === 100) {
+                            gambleResult[userID][pId] = "lose";            //userID失败
+                            winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.DOUBLE_GHOST] * playerScore.double_poker;
+                        }
+                    }
+                    // 三条同花木虱赢双鬼
+                    else {
+                        // 闲家双鬼 庄家0点并且是三张同花
+                        if (playerScore.type === Game.POKER_MODELS.DOUBLE_GHOST
+                            && baseScore.score === 100
+                            && baseScore.fancy === Game.FANCY.FLUSH_THREE
+                        ) {
+                            gambleResult[userID][pId] = "win";            //userID胜利
+                            winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * baseScore.double_poker;
+                        }
+                        // 闲家0点并且是三张同花 庄家双鬼
+                        else if (baseScore.type === Game.POKER_MODELS.DOUBLE_GHOST
+                            && playerScore.score === 100
+                            && playerScore.fancy === Game.FANCY.FLUSH_THREE
+                        ) {
+                            gambleResult[userID][pId] = "lose";            //userID失败
+                            winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * playerScore.double_poker;
+                        }
+                    }
+
+                    // 三条同花木虱赢三鬼
+                    if (this.settings.beatThreeGhost) {
+                        // 闲家三鬼 庄家0点并且是三张同花
+                        if (playerScore.type === Game.POKER_MODELS.THREE_GHOST
+                            && baseScore.score === 100
+                            && baseScore.fancy === Game.FANCY.FLUSH_THREE
+                        ) {
+                            gambleResult[userID][pId] = "win";            //userID胜利
+                            winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * baseScore.double_poker;
+                        }
+                        // 闲家0点并且是三张同花 庄家三鬼
+                        else if (baseScore.type === Game.POKER_MODELS.THREE_GHOST
+                            && playerScore.score === 100
+                            && playerScore.fancy === Game.FANCY.FLUSH_THREE
+                        ) {
+                            gambleResult[userID][pId] = "lose";            //userID失败
+                            winGhostMultiple = this.settings.pokerModels[Game.POKER_MODELS.THREE_GHOST] * playerScore.double_poker;
+                        }
+                    }
+
+                    //设置已经比牌的状态
+                    client.compared = true;
+
+                    // 技巧: 因为这里重复比较了 所以这里在扣费和增费 只做单方面的 比如 userID 赢 只给他钱 不扣 pId的钱 当pId为主的时候就会扣了
+                    var payMultiple = 0;
+                    if (gambleResult[userID][pId] == "win") {
+                        this.roundLog.clients[userID].winTimes++;
+                        // 赢的时候要用自己的牌型倍数
+                        if (winGhostMultiple > 0) {
+                            payMultiple = winGhostMultiple;
+                        }
+                        else {
+                            payMultiple = baseScore.multiple;
+                        }
+                        this.increaseGold(userID, payMultiple * target.bidRate * client.bidRate);
+                    }
+                    else if (gambleResult[userID][pId] == "lose") {
+                        // 赢的时候要用自己的牌型倍数
+                        if (winGhostMultiple > 0) {
+                            payMultiple = winGhostMultiple;
+                        }
+                        else {
+                            payMultiple = playerScore.multiple;
+                        }
+                        this.decreaseGold(userID, payMultiple * target.bidRate * client.bidRate);
+                    }
+                    
+                    this.roundLog.clients[userID].fightTimes++;
+                }
+            }
+
+            results.gambleResult = gambleResult;
+            results.scoreList = scoreList;
+
+            return results;
+        },
+
+        // 定制模式比牌
+        customizedFight: function(list) {
+            var results  = {};
+            var gamble = new CustomizedGamble(this.clone());
+            var bankerObj = this.getClient(this.banker);
+
+            if (bankerObj == null) {
+                return null;
+            }
+
+            var bankerScore = gamble.pokerScore(Utils.object_clone(bankerObj.handPokers));
+            if (bankerScore == null) {
+                return null;
+            }
+
+            bankerObj.compared = true;
+            results.bankerScore = bankerScore;
+
+            var pokerId;
+
+            if (this.roundLog.clients == null) {
+                this.roundLog.clients = {};
+            }
+
+            if (this.roundLog.clients[this.banker] == null) {
+                this.roundLog.clients[this.banker] = {
+                    gold:       0,    // 需要初始化一个gold
+                    fightTimes: 0,
+                    winTimes:   0
+                };
+            }
+
+            this.roundLog.clients[this.banker].score = bankerScore.score;
+            this.roundLog.clients[this.banker].type = bankerScore.type;
+            this.roundLog.clients[this.banker].isBanker = true;
+            this.roundLog.clients[this.banker].point = bankerScore.point;
+            this.roundLog.clients[this.banker].fancy = bankerScore.fancy;
+            this.roundLog.clients[this.banker].handPokers = [];
+            for (pokerId = 0; pokerId < bankerObj.handPokers.length; pokerId++) {
+                if (bankerObj.handPokers[pokerId]) {
+                    this.roundLog.clients[this.banker].handPokers.push(bankerObj.handPokers[pokerId].clone());
+                }
+            }
+
+            var i;
+            var playerScore;
+            var client;
+
+            for (i = 0; i < list.length; i++) {
+                var userID = list[i];
+                // 只处理闲家
+                if (userID === this.banker) {
+                    continue;
+                }
+
+                client = this.getClient(userID);
+                if (client == null) {
+                    continue;
+                }
+
+                playerScore = gamble.pokerScore(Utils.object_clone(client.handPokers));
+                if (playerScore == null) {
+                    continue;
+                }
+
+                if (this.roundLog.clients[userID] == null) {
+                    this.roundLog.clients[userID] = {
+                        gold:       0,    // 需要初始化一个gold
+                        fightTimes: 0,
+                        winTimes:   0
+                    };
+                }
+
+                this.roundLog.clients[userID].score = playerScore.score;
+                this.roundLog.clients[userID].type = playerScore.type;
+                this.roundLog.clients[userID].point = playerScore.point;
+                this.roundLog.clients[userID].fancy = playerScore.fancy;
+                this.roundLog.clients[userID].handPokers = [];
+                for (pokerId = 0; pokerId < client.handPokers.length; pokerId++) {
+                    if (client.handPokers[pokerId]) {
+                        this.roundLog.clients[userID].handPokers.push(client.handPokers[pokerId].clone());
+                    }
+                }
+
+                client.compared = true;
+                if (playerScore.score > bankerScore.score) {
+                    playerScore.result = "win";             //闲家胜利
+                    this.roundLog.clients[userID].winTimes++;
+                    this.increaseGold(userID, playerScore.multiple * client.bidRate);
+                    this.decreaseGold(this.banker, playerScore.multiple * client.bidRate);
+                }
+                else if (playerScore.score == bankerScore.score) {
+                    playerScore.result = "draw";            //平局
+                }
+                else {
+                    playerScore.result = "lose";            //输牌  用庄家的牌型倍数
+                    this.roundLog.clients[this.banker].winTimes++;
+                    this.increaseGold(this.banker, bankerScore.multiple * client.bidRate);
+                    this.decreaseGold(userID, bankerScore.multiple * client.bidRate);
+                }
+
+                this.roundLog.clients[this.banker].fightTimes++;
+                this.roundLog.clients[userID].fightTimes++;
+
+                results[userID] = playerScore;
+            }
+
+            return results;
+        },
+
+        reset: function() {
+            switch (this.type) {
+                // 长庄模式
+                case Game.ROOM_TYPE.STATIC: {
+                    break;
+                }
+                // 经典模式
+                case Game.ROOM_TYPE.CLASSICAL: {
+                    // 上庄
+                    // 如果庄家不同了
+                    if (this.banker != this.bankerBak) {
+                        this.lastBidRates = {};
+                    }
+                    this.banker = this.bankerBak;
+                    this.scoreBak = 0;
+                    this.typeBak = null;
+                    break;
+                }
+                // 混战模式
+                case Game.ROOM_TYPE.CHAOS: {
+                    break;
+                }
+                // 定制模式
+                case Game.ROOM_TYPE.CUSTOMIZED: {
+                    // 去掉庄家 要重新抢
+                    this.banker = 0;
+                    break;
+                }
+            }
+
+            this.deck           = [];       // 整副牌
+            this.ghostPokers    = [];       // 桌面鬼牌
+            this.drawList       = [];       // 要牌列表
+            this.bankerDraw     = 0;        // 庄家操作情况
+            this.whosRubbing    = 0;        // 搓牌信息刷新
+            this.roundLog       = {clients: {}};       // 比牌记录
+
+            for (var userID in this.clients) {
+                var client = this.getClient(userID);
+                if (client == null) {
+                    continue;
+                }
+
+                client.ready        = false;        // 是否准备好
+                client.started      = false;        // 是否开始过游戏
+                client.bid          = false;        // 是否下注
+                client.bidRate      = 0;            // 下注倍数
+                client.compared     = false;        // 是否比过牌
+                client.end          = false;        // 是否结束
+                client.handPokers   = [];           // 手牌
+                client.isRubbing    = false;        // 是否在搓牌
+            }
+        },
+
+        infoToPlayer: function(userID) {
+            var info = {};
+            info.ghostPokers        = Utils.object_clone(this.ghostPokers);
+            info.drawList           = Utils.object_clone(this.drawList);
+            info.dealSequence       = Utils.object_clone(this.dealSequence);
+            info.roundLog           = Utils.object_clone(this.roundLog);
+            info.banker             = this.banker;
+            info.bankerDraw         = this.bankerDraw;
+            info.indicator          = this.indicator;
+            info.whosRubbing        = this.whosRubbing;
+
+            info.clients = {};
+            for (var uid in this.clients) {
+                info.clients[uid] = {};
+                var client = info.clients[uid];
+                var c = this.getClient(uid);
+                client.userID       = c.userID;
+                client.chairID      = c.chairID;
+                client.gold         = this.golds[uid] || 0;
+                client.lastBidRate  = this.lastBidRates[uid] || 0;
+                client.ready        = c.ready;
+                client.started      = c.started;
+                client.bid          = c.bid;
+                client.bidRate      = c.bidRate;
+                client.end          = c.end;
+                client.compared     = c.compared;
+                client.notBank      = c.notBank;
+                client.isRubbing    = c.isRubbing;
+                client.showResult   = c.showResult;
+
+                client.handPokers = [];                        // 手牌
+                var showRight = Poker.SHOW_TARGET.ALL;
+                if (client.userID == userID) {
+                    showRight = Poker.SHOW_TARGET.ME;
+                }
+                if (c.handPokers) {
+                    for (var i = 0, size = c.handPokers.length; i < size; i++) {
+                        if (showRight > c.handPokers[i].showTarget) {
+                            client.handPokers.push({showTarget: c.handPokers[i].showTarget});
+                            continue;
+                        }
+                        client.handPokers.push(
+                            {
+                                type: c.handPokers[i].type,
+                                value: c.handPokers[i].value,
+                                showTarget: c.handPokers[i].showTarget
+                            }
+                        );
+                    }
+                }
+            }
+            
+            return info;
+        }
+    });
+}(DejuPoker));
+
+(function(root){
+    var _super = root.Entity;
+
+    var Code = root.Code;
+    var ROUTE = root.ROUTE;
+    var Game = root.Game;
+    var Table = root.Table;
+
+    var Utils = root.Utils;
+    
+    var Room = root.Room = function(opts) {
+        opts = opts || {};
+
+        _super.call(this, opts);
+
+        // private members
+        this._service           = opts.service;                      //房间服务
+        this._queue             = [];                                //消息队列
+        this._timerID           = null;                              //定时器
+
+        // public members
+        this.id                 = opts.id;
+        this.type               = opts.type;
+        this.cost               = opts.cost || 1;
+        this.settings           = {};
+        this.state              = opts.state || Room.STATE_READY;
+
+        this.host               = opts.host;                        //房主
+        this.members            = opts.members || [];               //玩家 [ userID, userID, ... ]
+        this.locked             = opts.locked || false;
+
+        this.banker             = opts.banker || this.host;         //庄家 (0 - 无庄家 userID)
+
+        this.table              = null;                             //桌子
+
+        this.chairs             = opts.chairs || new Array(8);      //椅子 [ userID, userID, ... ]
+        this.maxChairs          = opts.maxChairs || 8;
+
+        this.round              = opts.round || 0;                  //局数
+        this.maxRound           = opts.maxRound || 10;
+
+        this.roomLog            = opts.roomLog;
+        this.forbidden          = opts.forbidden || [];             //禁言列表
+
+        this.dismissStamp       = opts.dismissStamp || 0;           //申请解散的时间戳
+        this.dismissNeedConfirm = opts.dismissNeedConfirm || false; //是否可以申请解散
+        this.dismissConfirmList = opts.dismissConfirmList || {};    //解散确认列表
+
+        this.firstPay           = opts.firstPay || false;           //是否有过结算 用于判断是否存盘和是否需要支付房卡
+
+        this.init(opts);
+    };
+
+    root.inherits(Room, _super);
+
+    Room.STATE_READY       = 0;             //等待准备状态
+    Room.STATE_ROB         = 1;             //抢庄
+    Room.STATE_START       = 2;             //准备好后发牌和返鬼牌
+    Room.STATE_BID         = 3;             //等待下注状态
+    Room.STATE_DRAW        = 4;             //下注完闲家要牌
+    Room.STATE_BANKER      = 5;             //闲家要完牌庄家处理阶段
+    Room.STATE_PAY         = 6;             //结算
+    Room.STATE_END         = 7;             //牌局结束 请求下一局
+    Room.STATE_CLOSED      = 8;             //所有牌局完成房间解散
+    Room.STATE_DISMISS     = 9;             //申请解散房间
+
+    root.extend(Room.prototype, {
+        settingInit: function(settings) {
+            settings = settings || {};
+            this.settings.condition      = settings.condition || Game.BANKER_CONDITION.NORMAL;                //经典模式上庄条件
+            this.settings.times          = settings.times || 10;                                              //局数
+            this.settings.ghostCount     = settings.ghostCount || 0;                                          //鬼牌数
+            this.settings.betType        = settings.betType || Game.BET_TYPE.ARBITRARILY;                     //下注类型
+            this.settings.chaosBet       = settings.chaosBet || false;                                        //混战模式是否可以自由下注
+            this.settings.universalGhost = settings.universalGhost || false;                                  //true的时候鬼牌万能/false的时候鬼牌成型
+            this.settings.fancyGod       = settings.fancyGod || false;                                        //鬼牌成型的时候鬼9鬼8是否为花式天公
+            this.settings.isDouble       = settings.isDouble || false;                                        //是否有翻倍牌
+            this.settings.beatDBLGhost   = settings.beatDBLGhost || Game.BEAT_DBL_GHOST.ALL_BEAT;             //0点赢双鬼条件
+            this.settings.beatThreeGhost = settings.beatThreeGhost || false;                                  //是否赢三鬼
+            this.settings.fancyWin       = settings.fancyWin || false;                                        //比牌是否算牌型
+
+            // 牌型倍数
+            this.settings.pokerModels    = {};
+            var mul;
+            var pokerModels = settings.pokerModels || {};
+            for (var i in Game.POKER_MODELS) {
+                var modelKey = Game.POKER_MODELS[i];
+                // 顺子将固定为4倍
+                if (i == "STRAIGHT" && this.type != Game.ROOM_TYPE.CUSTOMIZED) {
+                    this.settings.pokerModels[modelKey] = 4;
+                    continue;
+                }
+                // 双鬼固定为10倍
+                if (i == "DOUBLE_GHOST") {
+                    this.settings.pokerModels[modelKey] = 10;
+                    continue;
+                }
+                // 三鬼固定为30倍
+                if (i == "THREE_GHOST") {
+                    this.settings.pokerModels[modelKey] = 30;
+                    continue;
+                }
+
+                var multiple = Game.POKER_FORMATION_MULTIPLE[i] || {};
+                mul = multiple.min || 1;
+                
+                this.settings.pokerModels[modelKey] = pokerModels[modelKey] || mul;
+            }
+
+            this.settings.pokerPoint = [];
+            mul = Game.CUSTOMIZED_SETTINGS.POINT_MULTIPLE.min || 1;
+
+            var pokerPoint = settings.pokerPoint || [];
+            this.settings.pokerPoint[0] = 0;
+            for (var index = 1; index < 10; index++) {
+                this.settings.pokerPoint[index] = pokerPoint[index] || mul;
+            }
+
+            this.maxRound = this.settings.times;
+        },
+
+        init: function(opts) {
+            var self = this;
+            var userID;
+            var i;
+
+            this.settingInit(opts.settings);
+
+            // init table
+            if (opts.table == null) {
+                // 确保在这个状态下定制模式没有庄家 需要下一个状态来抢
+                if (this.type == Game.ROOM_TYPE.CUSTOMIZED) {
+                    this.banker = 0;
+                }
+
+                this.table = new Table({banker: this.banker, settings: Utils.object_clone(this.settings), type: this.type});
+            }
+            else if (opts.table) {
+                this.table = new Table(opts.table);
+            }
+
+            if (this.roomLog == null) {
+                this.roomLog = {};
+                this.roomLog.info = {
+                    createTime: Number(root.moment().format('x')),
+                    id: this.id,
+                    type: this.type
+                };
+
+                this.roomLog.users = {};
+                this.roomLog.rounds = [];
+            }
+
+            // start timer 一段时间检查一下房间游戏进程
+            this._timerID = setInterval(function() {
+                self.update();
+            }, 100);
+        },
+
+        getMember: function(userID) {
+            return (this.members.indexOf(userID) != -1);
+        },
+
+        getMembers: function() {
+            return this.members;
+        },
+
+        isGotPos: function() {
+            return this.members.length < this.maxChairs;
+        },
+
+        getChairs: function() {
+            return this.chairs;
+        },
+
+        sitDown: function(userID, pos) {
+            // 已经点击了准备 就不给换位置
+            if (this.table.isClientReady(userID) == true) {
+                return -1;
+            }
+
+            var nowChairID = this.chairs.indexOf(userID);
+
+            // 已经坐下的要换位
+            if (nowChairID != -1) {
+                // 坑里有人
+                if (this.chairs[pos] != null) {
+                    return -1;
+                }
+                // 庄家不能换
+                if (userID == this.banker) {
+                    return -1;
+                }
+                
+                this.chairs[nowChairID] = null;
+                this.chairs[pos] = userID;
+                this.table.changeChair(userID, pos);
+                return pos;
+            }
+
+            if (pos >= 0 && pos < this.maxChairs) {
+                if (this.chairs[pos] != null) {
+                    return -1;
+                }
+                this.chairs[pos] = userID;
+                
+                if (this.state === Room.STATE_READY) {
+                    this.table.enter(userID, pos);
+                }
+                return pos;
+            }
+
+            for (var i = 0, size = this.maxChairs; i < size; i++) {
+                if (this.chairs[i] != null) {
+                    continue;
+                }
+
+                this.chairs[i] = userID;
+
+                if (this.state === Room.STATE_READY) {
+                    this.table.enter(userID, i);
+                }
+
+                return i;
+            }
+
+            return -1;
+        },
+
+        standUp: function(userID) {
+            //牌局期间不能操作
+            if (this.state != Room.STATE_READY) {
+                return false;
+            }
+
+            // 庄家不能站起
+            if (userID == this.banker) {
+                return false;
+            }
+
+            // 已经点击了准备 就不给换位置
+            if (this.table.isClientReady(userID) == true) {
+                return false;
+            }
+
+            for (var i = 0, size = this.chairs.length; i < size; i++) {
+                if (this.chairs[i] === userID) {
+                    this.chairs[i] = null;
+                    this.table.leave(userID);
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        letStandUp: function(userID, targetID) {
+            //牌局期间不能操作
+            if (this.state != Room.STATE_READY) {
+                return false;
+            }
+
+            if (userID != this.host) {
+                return false;
+            }
+            
+            return this.standUp(targetID);
+        },
+
+        enter: function(player) {
+            // 已经锁住房间就不能进入
+            if (this.locked) {
+                return false;
+            }
+
+            var userID = player.id;
+
+            if (this.roomLog.users[userID] == null) {
+                this.roomLog.users[userID] = {
+                    name: player.name || "游客",
+                    avatar: player.avatar,
+                    gender: player.gender,
+                    total: 0
+                };
+            }
+
+            if (this.getMember(userID) === false) {
+                this.members.push(userID);
+            }
+
+            if (this.table.getClient(userID) == null) {
+                var pos = this.sitDown(userID);
+                this.sendInfoToEveryOne(ROUTE.ROOM.ENTER, {userID: userID, pos: pos});
+            }
+        },
+
+        leave: function(userID) {
+            // 已经锁住房间就不能离开
+            if (this.locked) {
+                return;
+            }
+
+            if (userID == this.host) {
+                return;
+            }
+
+            this.standUp(userID);
+
+            var index = this.members.indexOf(userID);
+            if (index != -1) {
+                this.members.splice(index, 1);
+            }
+            this.sendInfoToEveryOne(ROUTE.ROOM.LEAVE, {userID: userID});
+        },
+
+        kick: function(userID, targetID) {
+            if (userID != this.host) {
+                return false;
+            }
+
+            this.leave(targetID);
+            return true;
+        },
+
+        ready: function() {
+            var i;
+            var size;
+
+            // 这里主要是处理刚坐下的小朋友们
+            for (i = 0, size = this.chairs.length; i < size; i++) {
+                var userID = this.chairs[i];
+                if (userID == null) {
+                    continue;
+                }
+
+                this.table.enter(userID, i);
+            }
+        },
+
+        destroy: function() {
+            if (this._timerID) {
+                clearInterval(this._timerID);
+                this._timerID = null;
+            }
+
+            this._service.destroyRoom(this.id);
+            this.table = null;
+            this.members = null;
+            this.chairs = null;
+            this.forbidden = null;
+            this.settings = null;
+            this.dismissConfirmList = null;
+        },
+
+        save: function() {
+            this._service && this._service.save(this.id);
+        },
+
+        send: function(userID, route, msg, opts, cb) {
+            this._service && this._service.send(this.id, userID, route, msg, opts, cb);
+        },
+
+        broadcast: function(route, msg, opts, cb) {
+            this._service && this._service.broadcast(this.id, route, msg, opts, cb);
+        },
+
+        sendEachMsg: function(route, opts) {
+            if (!this._service) {
+                return;
+            }
+
+            //转换状态的时候存盘
+            this.save();
+
+            for (var i in this.members) {
+                var userID = this.members[i];
+                this._service && this._service.send(this.id, userID, route, this.infoToPlayer(userID), opts, null);
+            }
+        },
+
+        sendInfoToEveryOne: function(route, sendInfo) {
+            for (var i in this.members) {
+                var userID = this.members[i];
+                sendInfo = sendInfo || {};
+                // 添加每个人不同的room信息
+                sendInfo.room = this.infoToPlayer(userID);
+                this._service && this._service.send(this.id, userID, route, sendInfo, null, null);
+            }
+        },
+
+        process: function() {
+            var results = [];
+
+            while (this._queue.length) {
+                // 从操作队列中获取第一个操作
+                var command = this._queue.shift();
+                var userID = command.id;
+                if (userID == null) {
+                    continue;
+                }
+
+                command.msg = command.msg || {};
+                var fn = command.msg.fn;
+                if (fn && typeof this.table[fn] === "function") {
+                    var result = this.table[fn](userID, command.msg.data);
+                    if (result != null) {
+                        result.fn = fn;
+                        results.push(result);
+                    }
+                }
+            }
+
+            if (results.length > 0) {
+                if (!this._service) {
+                    return;
+                }
+
+                this.sendInfoToEveryOne(ROUTE.ROOM.COMMAND, {queue: results});
+            }
+        },
+
+        queueFilter: function(fn) {
+            if (fn == null || typeof this.table[fn] != "function") {
+                return false;
+            }
+
+            if (fn == "rejectBanker"
+            ) {
+                return true;
+            }
+
+            switch (this.state) {
+                case Room.STATE_READY:
+                    if (fn == "ready") {
+                        return true;
+                    }
+                    break;
+                case Room.STATE_ROB:
+                    if (fn == "rob") {
+                        return true;
+                    }
+                    break;
+                case Room.STATE_START:
+                    break;
+                case Room.STATE_BID:
+                    if (fn == "bid") {
+                        return true;
+                    }
+                    break;
+                case Room.STATE_DRAW:
+                    if (fn == "draw") {
+                        if (this.table.whosRubbing == 0) {
+                            return true;
+                        }
+                    }
+                    if (fn == "rubDone") {
+                        return true;
+                    }
+                    break;
+                case Room.STATE_BANKER:
+                    if (fn == "doBankerDraw") {
+                        if (this.table.whosRubbing == 0) {
+                            return true;
+                        }
+                    }
+                    if (fn == "rubDone") {
+                        return true;
+                    }
+                    break;
+                case Room.STATE_PAY:
+                    break;
+                case Room.STATE_END:
+                    break;
+                case Room.STATE_CLOSED:
+                    break;
+            }
+
+            return false;
+        },
+
+        queue: function(userID, msg) {
+            if (msg == null) {
+                return;
+            }
+            if (this.queueFilter(msg.fn) == false) {
+                return;
+            }
+
+            this._queue.push({
+                id: userID,
+                msg: msg
+            });
+        },
+
+        update: function() {
+            var i;
+
+            if (this.dismissStamp > 0) {
+                var agreeCnt = 0;
+                var notSelect = 0;
+                var memberCnt = this.members.length;
+                var duration = 3*60;
+
+                var nowTime = Number(root.moment().format('X'));
+                for (i = 0; i < memberCnt; i++) {
+                    var u = this.members[i];
+                    if (this.dismissConfirmList[u] == null) {
+                        notSelect++;
+                        continue;
+                    }
+                    if (this.dismissConfirmList[u] == true) {
+                        agreeCnt++;
+                        continue;
+                    }
+
+                    if (this.dismissConfirmList[u] == false) {
+                        // 发现有人拒绝就关房失败
+                        this.dismissStamp = 0;
+                        this.dismissConfirmList = {};
+                        this.broadcast(ROUTE.ROOM.DISMISS_RESULT, {result: false}, null, null);
+                        return;
+                    }
+                }
+
+                // 时间到了
+                if (nowTime > this.dismissStamp + duration) {
+                    // 所有人要么同意 要么还没选择默认同意
+                    if (notSelect + agreeCnt >= memberCnt) {
+                        this.dismissStamp = 0;
+                        this.state = Room.STATE_CLOSED;
+                        this.broadcast(ROUTE.ROOM.DISMISS_RESULT, {result: true}, null, null);
+                        return;
+                    }
+                    else {
+                        this.dismissStamp = 0;
+                        this.dismissConfirmList = {};
+                        this.broadcast(ROUTE.ROOM.DISMISS_RESULT, {result: false}, null, null);
+                        return;
+                    }
+                }
+                // 时间没到
+                else {
+                    // 所有人都操作了
+                    if (notSelect == 0) {
+                        // 所有人都同意
+                        if (agreeCnt >= memberCnt) {
+                            this.dismissStamp = 0;
+                            this.state = Room.STATE_CLOSED;
+                            this.broadcast(ROUTE.ROOM.DISMISS_RESULT, {result: true}, null, null);
+                            return;
+                        }
+                        // 如果不是就取消
+                        else {
+                            this.dismissStamp = 0;
+                            this.dismissConfirmList = {};
+                            this.broadcast(ROUTE.ROOM.DISMISS_RESULT, {result: false}, null, null);
+                            return;
+                        }
+                    }
+                }
+
+                return;
+            }
+            //更新前完成积压的所有工作
+            this.process();
+
+            switch (this.state) {
+                case Room.STATE_READY:
+                    if (this.table.getClientReady()) {
+                        this.state++;
+                        this.locked = true;
+
+                        // 开始了就不是说解散就解散了
+                        if (this.dismissNeedConfirm == false) {
+                            this.dismissNeedConfirm = true;
+                        }
+
+                        this.sendEachMsg(ROUTE.ROOM.READY, null);
+                    }
+                    break;
+                case Room.STATE_ROB:
+                    // 只有定制模式需要抢庄
+                    if (this.type != Game.ROOM_TYPE.CUSTOMIZED) {
+                        this.state++;
+                    }
+                    else {
+                        // 抢庄成功
+                        if (this.table.banker != 0) {
+                            this.banker = this.table.banker;
+                            this.state++;
+                            this.sendEachMsg(ROUTE.ROOM.ROB, null);
+                        }
+                    }
+                    break;
+                case Room.STATE_START:
+                    // 开始-洗牌-发牌
+                    this.table.start(this.type);
+                    this.table.shuffle();
+                    // 暂时按座位顺序发牌 这里要做个规则传入发牌顺序的userID数组
+                    this.table.clearDraw();
+                    this.table.genDealSequence();
+                    for (i = 0; i < this.table.dealSequence.length; i++) {
+                        var userID = this.table.dealSequence[i];
+                        if (userID && this.table.getClient(userID)) {
+                            //要牌行列
+                            // 长庄模式 经典模式 庄家不进入行列
+                            if (userID == this.banker) {
+                                if (this.type == Game.ROOM_TYPE.STATIC || this.type == Game.ROOM_TYPE.CLASSICAL) {
+                                    continue;
+                                }
+                            }
+
+                            this.table.insertDraw(userID);
+                        }
+                    }
+                    this.table.deal();
+                    // 翻鬼牌
+                    // 非定制模式才需要翻鬼牌
+                    if (this.type != Game.ROOM_TYPE.CUSTOMIZED) {
+                        this.table.ghost();
+                    }
+
+                    this.state++;
+
+                    this.sendEachMsg(ROUTE.ROOM.DEAL, null);
+                    break;
+                case Room.STATE_BID:
+                    if (this.table.getClientBid()) {
+                        this.state++;
+                        this.sendEachMsg(ROUTE.ROOM.BID, null);
+                    }
+                    break;
+                case Room.STATE_DRAW:
+                    if (this.table.getClientDraw()) {
+                        this.state++;
+                        this.sendEachMsg(ROUTE.ROOM.DRAW, null);
+                    }
+                    break;
+                case Room.STATE_BANKER:
+                    // 混战模式 定制模式 直接跳过
+                    if (this.type == Game.ROOM_TYPE.CHAOS || this.type == Game.ROOM_TYPE.CUSTOMIZED) {
+                        if (this.table.whosRubbing == 0) {
+                            this.state++;
+                            this.sendEachMsg(ROUTE.ROOM.BANKER_DRAW, null);
+                        }
+                    }
+                    // 非混战模式 需要庄家操作
+                    else {
+                        if (this.table.bankerDraw == 2 && this.table.whosRubbing == 0) {
+                            this.state++;
+                            this.sendEachMsg(ROUTE.ROOM.BANKER_DRAW, null);
+                        }
+                    }
+                    break;
+                case Room.STATE_PAY:
+                    if (this.table.getClientFight()) {
+                        var roundLog = this.table.roundLog || {};
+                        var userLog = roundLog.clients || {};
+
+                        this.roomLog.rounds.push(roundLog);
+                        for (var uid in userLog) {
+                            var log = userLog[uid];
+                            var user = this.roomLog.users[uid] = this.roomLog.users[uid] || {};
+
+                            user.fightTimes  = user.fightTimes || 0;
+                            user.winTimes    = user.winTimes || 0;
+                            user.playTimes   = user.playTimes || 0;
+                            user.total       = user.total || 0;
+                            user.ghostTimes  = user.ghostTimes || 0;
+                            user.godTimes    = user.godTimes || 0;
+
+                            user.fightTimes += log.fightTimes;
+                            user.winTimes   += log.winTimes;
+                            user.playTimes  += 1;
+                            user.total      += log.gold;
+                            if (log.type == Game.POKER_MODELS.GOD_NINE
+                            ||  log.type == Game.POKER_MODELS.GOD_EIGHT) {
+                                user.godTimes++;
+                            }
+
+                            if (log.type == Game.POKER_MODELS.DOUBLE_GHOST) {
+                                user.ghostTimes++;
+                            }
+                        }
+
+                        //记录是否有进行过第一次结算
+                        if (this.firstPay == false) {
+                            this.firstPay = true;
+                        }
+                        this.round++;
+
+                        //重整牌局 更换庄家等
+                        this.table.reset();
+                        this.banker = this.table.banker;
+
+                        if (this.round >= this.settings.times) {
+                            this.state = Room.STATE_CLOSED;
+                        } else {
+                            this.state = Room.STATE_READY;
+                            // 房间自身的准备工作
+                            this.ready();
+                        }
+                        
+                        this.sendEachMsg(ROUTE.ROOM.PAY, null);
+                    }
+                    break;
+                case Room.STATE_END:
+                    if (this.table.getClientEnd()) {
+                        this.round++;
+
+                        //重整牌局 更换庄家等
+                        this.table.reset();
+                        this.banker = this.table.banker;
+                        
+                        if (this.round >= this.settings.times) {
+                            this.state = Room.STATE_CLOSED;
+                        } else {
+                            this.state = Room.STATE_READY;
+                            // 房间自身的准备工作
+                            this.ready();
+                        }
+                        this.sendEachMsg(ROUTE.ROOM.END, null);
+                    }
+                    break;
+                case Room.STATE_CLOSED:
+                    this.sendEachMsg(ROUTE.ROOM.CLOSE, null);
+                    this.destroy();
+                    break;
+                case Room.STATE_DISMISS:
+                    break;
+            }
+        },
+        
+        makeDestroy: function(userID) {
+            if (this.members.indexOf(userID) == -1) {
+                return null;
+            }
+
+            if (this.dismissNeedConfirm) {
+                if (this.dismissStamp > 0) {
+                    return null;
+                }
+
+                this.dismissStamp = Number(root.moment().format('X'));
+                this.dismissConfirmList[userID] = true;
+                var name = this.roomLog[userID] == null ? "游客" : this.roomLog[userID].name;
+                this.broadcast(ROUTE.ROOM.DISMISS_APPLY, {userID: userID, name: name}, null, null);
+            }
+            else {
+                if (userID != this.host) {
+                    return null;
+                }
+
+                this.state = Room.STATE_CLOSED;
+            }
+        },
+
+        dismissConfirm: function(userID, confirm) {
+            if (this.members.indexOf(userID) == -1) {
+                return null;
+            }
+
+            confirm = confirm || false;
+            this.dismissConfirmList[userID] = confirm;
+            this.sendEachMsg(ROUTE.ROOM.DISMISS_CONFIRM, null);
+            this.broadcast(ROUTE.ROOM.DISMISS_CONFIRM, {userID: userID, confirm: confirm}, null, null);
+        },
+
+        getForbidden: function() {
+            return this.forbidden;
+        },
+
+        //如果在禁言列表中 则返回true
+        isForbidden: function(userID) {
+            if (this.forbidden == null) {
+                this.forbidden = [];
+            }
+
+            return this.forbidden.indexOf(userID) != -1;
+        },
+
+        addForbidden: function(userID, targetID) {
+            if (this.forbidden == null) {
+                this.forbidden = [];
+            }
+
+            if (userID != this.host) {
+                return null;
+            }
+            
+            if (this.forbidden.indexOf(targetID) != -1) {
+                return null;
+            }
+
+            this.forbidden.push(targetID);
+
+            return this.forbidden;
+        },
+
+        delForbidden: function(userID, targetID) {
+            if (this.forbidden == null) {
+                this.forbidden = [];
+            }
+
+            if (userID != this.host) {
+                return;
+            }
+
+            var index = this.forbidden.indexOf(targetID);
+            if (index == -1) {
+                return null;
+            }
+
+            this.forbidden.splice(index, 1);
+            return this.forbidden;
+        },
+
+        //拷贝一份房间信息给玩家 针对这个玩家能看到的部分
+        infoToPlayer: function(userID) {
+            var info = {};
+            info.id                     = this.id;
+            info.type                   = this.type;
+            info.state                  = this.state;
+            info.host                   = this.host;
+            info.banker                 = this.banker;
+            info.locked                 = this.locked;
+            info.firstPay               = this.firstPay;
+            info.dismissStamp           = this.dismissStamp || 0;
+            info.dismissNeedConfirm     = this.dismissNeedConfirm || false;
+            info.maxChairs              = this.maxChairs;
+            info.round                  = this.round;
+            info.maxRound               = this.maxRound;
+
+            info.dismissConfirmList     = Utils.object_clone(this.dismissConfirmList);
+            info.settings               = Utils.object_clone(this.settings);
+            info.members                = Utils.object_clone(this.members);
+            info.chairs                 = Utils.object_clone(this.chairs);
+            info.roomLog                = Utils.object_clone(this.roomLog);
+
+            info.table = this.table.infoToPlayer(userID);
+
+            return info;
+        }
+    });
+}(DejuPoker));

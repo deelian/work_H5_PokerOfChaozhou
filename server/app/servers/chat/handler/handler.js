@@ -11,7 +11,7 @@ var logger = pomelo.logger.getLogger('application', __filename);
 /*
  * Game Dependencies
  */
-var Game = require('../../../../../Game');
+var Game = require('../../../../../game');
 var Code = Game.Code;
 
 module.exports = function(app) {

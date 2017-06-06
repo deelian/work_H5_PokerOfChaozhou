@@ -1,0 +1,12 @@
+{
+  "production": {
+    "db"                : "db_deju_poker",
+    "user"              : "game_server",
+    "password"          : "Deju!@#!@#",
+    "options"           : {
+      "host"            : "rm-wz9x131v8e41g52p6.mysql.rds.aliyuncs.com",
+      "dialect"         : "mysql",
+      "pool"            : { "max": 5, "min": 0, "idle": 10000 }
+    }
+  }
+}

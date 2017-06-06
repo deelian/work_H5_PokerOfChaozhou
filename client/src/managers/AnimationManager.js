@@ -1,7 +1,19 @@
 
 var AnimationManager = (function(_super) {
     var Animations = {
-
+        loadingAni:{
+            urls:[
+                "assets/ui.animation/loading/loading0001.png",
+                "assets/ui.animation/loading/loading0002.png",
+                "assets/ui.animation/loading/loading0003.png",
+                "assets/ui.animation/loading/loading0004.png",
+                "assets/ui.animation/loading/loading0005.png",
+                "assets/ui.animation/loading/loading0006.png",
+                "assets/ui.animation/loading/loading0007.png",
+                "assets/ui.animation/loading/loading0008.png",
+            ],
+            interval:100
+        }
     };
 
     var AnimationManager = function() {

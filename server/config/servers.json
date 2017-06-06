@@ -1,7 +1,91 @@
 {
-    "development":{
+    "yomato@home":{
         "gate": [
-            {"id": "gate-server-1", "host": "127.0.0.1", "port": 6001, "clientPort": 8000, "frontend": true}
+            {"id": "gate-server-1", "host": "127.0.0.1", "port": 6001, "clientHost": "192.168.1.106", "clientPort": 8000, "frontend": true}
+        ],
+
+        "connector": [
+            {"id": "connector-server-1", "host": "127.0.0.1", "port": 6100, "clientHost": "192.168.1.106", "clientPort": 8001, "frontend": true},
+            {"id": "connector-server-2", "host": "127.0.0.1", "port": 6101, "clientHost": "192.168.1.106", "clientPort": 8002, "frontend": true},
+            {"id": "connector-server-3", "host": "127.0.0.1", "port": 6102, "clientHost": "192.168.1.106", "clientPort": 8003, "frontend": true}
+        ],
+
+        "chat": [
+            {"id": "chat-server-1", "host": "127.0.0.1", "port": 6200, "clientHost": "127.0.0.1"}
+        ],
+
+        "auth": [
+            {"id": "auth-server-1", "host": "127.0.0.1", "port": 6300, "clientHost": "127.0.0.1"}
+        ],
+
+        "lobby": [
+            {"id": "lobby-server-1", "host": "127.0.0.1", "port": 6400, "clientHost": "127.0.0.1"}
+        ],
+
+        "room": [
+            {"id": "room-server-1", "host": "127.0.0.1", "port": 6500, "clientHost": "127.0.0.1"}
+        ]
+    },
+
+    "yomato":{
+        "gate": [
+            {"id": "gate-server-1", "host": "127.0.0.1", "port": 6001, "clientHost": "192.168.1.185", "clientPort": 8000, "frontend": true}
+        ],
+
+        "connector": [
+            {"id": "connector-server-1", "host": "127.0.0.1", "port": 6100, "clientHost": "192.168.80.185", "clientPort": 8001, "frontend": true},
+            {"id": "connector-server-2", "host": "127.0.0.1", "port": 6101, "clientHost": "192.168.80.185", "clientPort": 8002, "frontend": true},
+            {"id": "connector-server-3", "host": "127.0.0.1", "port": 6102, "clientHost": "192.168.80.185", "clientPort": 8003, "frontend": true}
+        ],
+
+        "chat": [
+            {"id": "chat-server-1", "host": "127.0.0.1", "port": 6200, "clientHost": "127.0.0.1"}
+        ],
+
+        "auth": [
+            {"id": "auth-server-1", "host": "127.0.0.1", "port": 6300, "clientHost": "127.0.0.1"}
+        ],
+
+        "lobby": [
+            {"id": "lobby-server-1", "host": "127.0.0.1", "port": 6400, "clientHost": "127.0.0.1"}
+        ],
+
+        "room": [
+            {"id": "room-server-1", "host": "127.0.0.1", "port": 6500, "clientHost": "127.0.0.1"}
+        ]
+    },
+
+    "monkey":{
+        "gate": [
+            {"id": "gate-server-1", "host": "127.0.0.1", "port": 6001, "clientHost": "192.168.80.176", "clientPort": 8000, "frontend": true}
+        ],
+
+        "connector": [
+            {"id": "connector-server-1", "host": "127.0.0.1", "port": 6100, "clientHost": "192.168.80.176", "clientPort": 8001, "frontend": true},
+            {"id": "connector-server-2", "host": "127.0.0.1", "port": 6101, "clientHost": "192.168.80.176", "clientPort": 8002, "frontend": true},
+            {"id": "connector-server-3", "host": "127.0.0.1", "port": 6102, "clientHost": "192.168.80.176", "clientPort": 8003, "frontend": true}
+        ],
+
+        "chat": [
+            {"id": "chat-server-1", "host": "127.0.0.1", "port": 6200, "clientHost": "127.0.0.1"}
+        ],
+
+        "auth": [
+            {"id": "auth-server-1", "host": "127.0.0.1", "port": 6300, "clientHost": "127.0.0.1"}
+        ],
+
+        "lobby": [
+            {"id": "lobby-server-1", "host": "127.0.0.1", "port": 6400, "clientHost": "127.0.0.1"}
+        ],
+
+        "room": [
+            {"id": "room-server-1", "host": "127.0.0.1", "port": 6500, "clientHost": "127.0.0.1"}
+        ]
+    },
+
+    "localhost":{
+        "gate": [
+            {"id": "gate-server-1", "host": "127.0.0.1", "port": 6001, "clientHost": "127.0.0.1", "clientPort": 8000, "frontend": true}
         ],
 
         "connector": [
@@ -26,6 +110,63 @@
             {"id": "room-server-1", "host": "127.0.0.1", "port": 6500, "clientHost": "127.0.0.1"}
         ]
     },
+
+    "debug":{
+        "gate": [
+            {"id": "gate-server-1", "host": "192.168.80.253", "port": 6001, "clientHost": "192.168.80.253", "clientPort": 8000, "frontend": true}
+        ],
+
+        "connector": [
+            {"id": "connector-server-1", "host": "192.168.80.253", "port": 6100, "clientHost": "192.168.80.253", "clientPort": 8001, "frontend": true},
+            {"id": "connector-server-2", "host": "192.168.80.253", "port": 6101, "clientHost": "192.168.80.253", "clientPort": 8002, "frontend": true},
+            {"id": "connector-server-3", "host": "192.168.80.253", "port": 6102, "clientHost": "192.168.80.253", "clientPort": 8003, "frontend": true}
+        ],
+
+        "chat": [
+            {"id": "chat-server-1", "host": "192.168.80.253", "port": 6200, "clientHost": "192.168.80.253"}
+        ],
+
+        "auth": [
+            {"id": "auth-server-1", "host": "192.168.80.253", "port": 6300, "clientHost": "192.168.80.253"}
+        ],
+
+        "lobby": [
+            {"id": "lobby-server-1", "host": "192.168.80.253", "port": 6400, "clientHost": "192.168.80.253"}
+        ],
+
+        "room": [
+            {"id": "room-server-1", "host": "192.168.80.253", "port": 6500, "clientHost": "192.168.80.253"}
+        ]
+    },
+
+    "development":{
+        "gate": [
+            {"id": "gate-server-1", "host": "127.0.0.1", "port": 6001, "clientHost": "127.0.0.1", "clientPort": 8000, "frontend": true}
+        ],
+
+        "connector": [
+            {"id": "connector-server-1", "host": "127.0.0.1", "port": 6100, "clientHost": "127.0.0.1", "clientPort": 8001, "frontend": true},
+            {"id": "connector-server-2", "host": "127.0.0.1", "port": 6101, "clientHost": "127.0.0.1", "clientPort": 8002, "frontend": true},
+            {"id": "connector-server-3", "host": "127.0.0.1", "port": 6102, "clientHost": "127.0.0.1", "clientPort": 8003, "frontend": true}
+        ],
+
+        "chat": [
+            {"id": "chat-server-1", "host": "127.0.0.1", "port": 6200, "clientHost": "127.0.0.1"}
+        ],
+
+        "auth": [
+            {"id": "auth-server-1", "host": "127.0.0.1", "port": 6300, "clientHost": "127.0.0.1"}
+        ],
+
+        "lobby": [
+            {"id": "lobby-server-1", "host": "127.0.0.1", "port": 6400, "clientHost": "127.0.0.1"}
+        ],
+
+        "room": [
+            {"id": "room-server-1", "host": "127.0.0.1", "port": 6500, "clientHost": "127.0.0.1"}
+        ]
+    },
+
     "production":{
         "connector": [
             {"id": "connector-server-1", "host": "127.0.0.1", "port": 6100, "clientHost": "127.0.0.1", "clientPort": 3010, "frontend": true}

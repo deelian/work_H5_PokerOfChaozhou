@@ -13,7 +13,9 @@
     "entities/player.js",
     "entities/poker.js",
     "entities/deck.js",
+    "entities/staticGamble.js",
+    "entities/customizedGamble.js",
+    "entities/pokerSet.js",
     "entities/table.js",
-    "entities/room.js",
-    "entities/pokerSet.js"
+    "entities/room.js"
 ]

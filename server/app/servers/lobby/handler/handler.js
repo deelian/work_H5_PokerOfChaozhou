@@ -12,7 +12,7 @@ var logger = pomelo.logger.getLogger('application', __filename);
 /*
  * Game Dependencies
  */
-var Game = require('../../../../../Game');
+var Game = require('../../../../../game');
 var Code = Game.Code;
 
 module.exports = function(app) {
@@ -56,5 +56,99 @@ Handler.prototype.enter = function(msg, session, next) {
                 next(null, Game.wrapMsg(null, data));
             });
         });
+    });
+};
+
+Handler.prototype.get_user = function(msg, session, next) {
+    var uid = msg.id || session.uid;
+    if (!uid) {
+        next(null, Game.wrapMsg(Code.ROUTE.UNAUTHORIZED));
+        return;
+    }
+
+    this.service.getUserInfo(uid, function(err, data) {
+        if (err) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, data));
+    });
+};
+
+Handler.prototype.buy_user_tokens = function(msg, session, next) {
+    var uid = session.uid;
+    if (!uid) {
+        next(null, Game.wrapMsg(Code.ROUTE.UNAUTHORIZED));
+        return;
+    }
+
+    this.service.buyUserTokens(uid, function(err, tokens) {
+        if (err) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, tokens));
+    });
+};
+
+Handler.prototype.get_user_tokens = function(msg, session, next) {
+    var uid = session.uid;
+    if (!uid) {
+        next(null, Game.wrapMsg(Code.ROUTE.UNAUTHORIZED));
+        return;
+    }
+
+    this.service.getUserTokens(uid, function(err, tokens) {
+        if (err) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, tokens));
+    });
+};
+
+Handler.prototype.get_logs = function(msg, session, next) {
+    var self = this;
+    var uid = session.uid;
+    if (!uid) {
+        next(null, Game.wrapMsg(Code.ROUTE.UNAUTHORIZED));
+        return;
+    }
+
+    this.service.getUserInfo(uid, function(err, player) {
+        if (err) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        var logs = player.data == null ? [] : (player.data.logs || []);
+
+        self.service.getLogs(logs, function(err, data) {
+            if (err != null) {
+                next(null, Game.wrapMsg(Code.SYSTEM.RPC_ERROR));
+            }
+            
+            next(null, Game.wrapMsg(null, data));
+        });
+    });
+};
+
+Handler.prototype.get_bulletins = function(msg, session, next) {
+    var uid = session.uid;
+    if (!uid) {
+        next(null, Game.wrapMsg(Code.ROUTE.UNAUTHORIZED));
+        return;
+    }
+
+    this.service.getBulletins(uid, function(err, player) {
+        if (err) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, player));
     });
 };

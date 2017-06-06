@@ -34,6 +34,12 @@
     Poker.VALUES[Poker.TYPE.CLUB]    = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
     Poker.VALUES[Poker.TYPE.HEART]   = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
     Poker.VALUES[Poker.TYPE.SPADE]   = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ];
+    
+    Poker.DOUBLE_POKER_VALUE    = 16;               // 翻倍牌的值
+    Poker.POKER_A_VALUE         = 1;                // 牌面A的值
+    Poker.POKER_2_VALUE         = 2;                // 牌面2的值
+    Poker.POKER_Q_VALUE         = 12;               // 牌面Q的值
+    Poker.POKER_K_VALUE         = 13;               // 牌面K的值
 
     Poker.SHOW_TARGET = {
         NONE    : 0,

@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":25,
+    "selecteID":57,
     "props":{"width":180,"sceneColor":"#000000","height":150},
     "nodeParent":-1,
     "label":"View",
@@ -21,33 +21,14 @@
     "child":[
         {
             "x":15,
-            "type":"Label",
-            "props":{"y":35,"x":130,"wordWrap":true,"width":16,"visible":false,"var":"readyIcon","text":"准备中","height":44,"fontSize":15,"color":"#fcfc7a","bold":true},
-            "nodeParent":1,
-            "label":"Label(readyIcon)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"text":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
-            "compId":11,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
             "type":"Image",
-            "props":{"y":7,"x":18,"var":"headTouch","skin":"assets/ui.room/img_Model.png"},
+            "props":{"y":8,"x":39,"width":107,"var":"headTouch","skin":"assets/ui.room/img_head_icon.png","height":107},
             "nodeParent":1,
             "label":"Image(headTouch)",
-            "isDirectory":false,
+            "isOpen":true,
+            "isDirectory":true,
             "isAniNode":true,
-            "hasChild":false,
+            "hasChild":true,
             "frames":[
                 {
                     "type":1,
@@ -57,36 +38,35 @@
                 }],
             "compId":19,
             "child":[
-                ],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "props":{"y":6,"x":17,"var":"hostTag","skin":"assets/ui.room/img_AvatarFrame1.png"},
-            "nodeParent":1,
-            "label":"Image(hostTag)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "frames":[
                 {
-                    "type":1,
-                    "props":{"skin":"assets/ui.room/img_AvatarFrame1.png"},
-                    "frame":0,
-                    "__InPool":false
+                    "x":30,
+                    "type":"Image",
+                    "props":{"y":-1,"x":1,"width":106,"skin":"assets/ui.room/img_head_mask.png","renderType":"mask","height":106},
+                    "nodeParent":19,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/ui.room/img_head_mask.png"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":58,
+                    "child":[
+                        ]
                 }],
-            "compId":17,
-            "child":[
-                ],
             "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Image",
-            "props":{"y":6,"x":17,"skin":"assets/ui.room/img_AvatarFrame.png"},
+            "props":{"y":6,"x":37,"width":111,"skin":"assets/ui.room/img_head.png","height":110},
             "nodeParent":1,
             "label":"Image",
+            "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -105,33 +85,13 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":1,"x":13,"visible":false,"var":"timeBar","skin":"assets/ui.room/ani_Countdown.png"},
+            "props":{"y":50,"x":44,"width":104,"visible":false,"var":"readyIcon","skin":"assets/ui.room/img_0002.png","height":35},
             "nodeParent":1,
-            "label":"Image(timeBar)",
-            "isDirectory":false,
+            "label":"Image(readyIcon)",
+            "isOpen":false,
+            "isDirectory":true,
             "isAniNode":true,
-            "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"skin":"assets/ui.room/ani_Countdown.png"},
-                    "frame":0,
-                    "__InPool":false
-                }],
-            "compId":13,
-            "child":[
-                ],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "props":{"y":98,"x":21,"skin":"assets/ui.room/img_0002.png"},
-            "nodeParent":1,
-            "label":"Image",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
+            "hasChild":true,
             "frames":[
                 {
                     "type":1,
@@ -141,19 +101,59 @@
                 }],
             "compId":14,
             "child":[
-                ],
+                {
+                    "type":"Image",
+                    "props":{"y":2.999999999999943,"x":26,"skin":"assets/ui.room/img_Ready.png"},
+                    "nodeParent":14,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/ui.room/img_Ready.png"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":43,
+                    "child":[
+                        ]
+                }],
             "$LOCKED":false,
             "$HIDDEN":false
         },
         {
             "x":15,
-            "type":"Image",
-            "props":{"y":125,"x":26,"skin":"assets/ui.room/img_0002.png"},
+            "type":"Label",
+            "props":{"y":42.99999999999999,"x":64,"width":0,"var":"goldLab","height":0,"fontSize":25,"font":"Microsoft YaHei"},
             "nodeParent":1,
-            "label":"Image",
+            "label":"Label(goldLab)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"text":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":26,
+            "child":[
+                ],
+            "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":103,"x":33,"width":126,"skin":"assets/ui.room/img_0002.png","height":43},
+            "nodeParent":1,
+            "label":"Image",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
             "frames":[
                 {
                     "type":1,
@@ -161,55 +161,133 @@
                     "frame":0,
                     "__InPool":false
                 }],
-            "compId":15,
+            "compId":44,
             "child":[
-                ],
+                {
+                    "type":"Label",
+                    "props":{"y":0,"x":-4,"width":134,"var":"nameLab","text":"名字是七个字的","height":25,"fontSize":17,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
+                    "nodeParent":44,
+                    "label":"Label(nameLab)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"label"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":8,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "props":{"y":19,"x":1,"width":118,"var":"balanceLab","text":"10000","height":21,"fontSize":18,"font":"Microsoft YaHei","color":"#f8c373","align":"center"},
+                    "nodeParent":44,
+                    "label":"Label(balanceLab)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"label"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":9,
+                    "child":[
+                        ]
+                }],
+            "$LOCKED":false,
             "$HIDDEN":false
         },
         {
             "x":15,
-            "type":"Label",
-            "props":{"y":101,"x":49,"width":120,"var":"nameLab","text":"名字是七个字的","height":17,"fontSize":13,"color":"#ffffff","align":"center"},
+            "type":"Image",
+            "props":{"y":25,"x":148,"visible":false,"var":"bidRate","skin":"assets/ui.room/img_RateBase.png"},
             "nodeParent":1,
-            "label":"Label(nameLab)",
-            "isDirectory":false,
+            "label":"Image(bidRate)",
+            "isOpen":false,
+            "isDirectory":true,
             "isAniNode":true,
-            "hasChild":false,
+            "hasChild":true,
             "frames":[
                 {
                     "type":1,
-                    "props":{"text":"label"},
+                    "props":{"skin":"assets/ui.room/img_RateBase.png"},
                     "frame":0,
                     "__InPool":false
                 }],
-            "compId":8,
+            "compId":46,
             "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Label",
-            "props":{"y":130,"x":41,"width":118,"var":"balanceLab","text":"0000","height":16,"fontSize":13,"color":"#ffffff","align":"center"},
-            "nodeParent":1,
-            "label":"Label(balanceLab)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "frames":[
                 {
-                    "type":1,
-                    "props":{"text":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
-            "compId":9,
-            "child":[
-                ]
+                    "type":"Label",
+                    "props":{"y":1,"x":-6,"wordWrap":true,"width":66,"var":"bidRateLab","text":"x4","height":27,"fontSize":18,"font":"Microsoft YaHei","color":"#fcfc7a","bold":false,"align":"center"},
+                    "nodeParent":46,
+                    "label":"Label(bidRateLab)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"text":"label"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":25,
+                    "child":[
+                        ],
+                    "$HIDDEN":false
+                }]
         },
         {
             "x":15,
             "type":"Box",
-            "props":{"y":96,"x":0,"width":59,"var":"pokerBox","height":56},
+            "props":{"y":70,"x":-120,"width":163,"var":"positivePokerBox","height":110},
+            "nodeParent":1,
+            "label":"Box(positivePokerBox)",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":24,
+            "child":[
+                {
+                    "type":"Image",
+                    "props":{"visible":false,"var":"selfShowPokerBg","skin":"assets/ui.room/img_Settlement_4.png"},
+                    "nodeParent":24,
+                    "label":"Image(selfShowPokerBg)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "frames":[
+                        {
+                            "type":1,
+                            "props":{"skin":"assets/ui.room/img_Settlement_4.png"},
+                            "frame":0,
+                            "__InPool":false
+                        }],
+                    "compId":47,
+                    "child":[
+                        ]
+                }],
+            "$HIDDEN":true
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "props":{"y":92,"x":-23,"width":59,"var":"pokerBox","height":56},
             "nodeParent":1,
             "label":"Box(pokerBox)",
             "isOpen":true,
@@ -230,10 +308,9 @@
         {
             "x":15,
             "type":"Box",
-            "props":{"y":85,"x":-21,"width":92,"var":"positivePokerBox","height":71},
+            "props":{"y":18,"x":32,"width":125,"var":"showPokerNode","height":76},
             "nodeParent":1,
-            "label":"Box(positivePokerBox)",
-            "isOpen":true,
+            "label":"Box(showPokerNode)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -244,10 +321,130 @@
                     "frame":0,
                     "__InPool":false
                 }],
-            "compId":24,
+            "compId":50,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "props":{"y":27,"x":150,"name":"labPosLeft"},
+            "nodeParent":1,
+            "label":"Sprite(labPosLeft)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":52,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "props":{"y":146,"x":68,"name":"labPosBottom"},
+            "nodeParent":1,
+            "label":"Sprite(labPosBottom)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":53,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "props":{"y":-20,"x":81,"name":"labPosTop"},
+            "nodeParent":1,
+            "label":"Sprite(labPosTop)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":54,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "props":{"y":26,"x":-26,"name":"labPosRight"},
+            "nodeParent":1,
+            "label":"Sprite(labPosRight)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":55,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "props":{"y":108,"x":-28,"name":"labPosBottomRight"},
+            "nodeParent":1,
+            "label":"Sprite(labPosBottomRight)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":56,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "props":{"y":108,"x":162,"name":"labPosBottomLeft"},
+            "nodeParent":1,
+            "label":"Sprite(labPosBottomLeft)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":57,
             "child":[
                 ],
-            "$HIDDEN":false
+            "$LOCKED":false
         }],
     "animations":[
         {

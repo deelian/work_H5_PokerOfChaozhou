@@ -1,0 +1,29 @@
+{
+    "production":{
+        "gate": [
+            {"id": "gate-server-1", "host": "172.18.185.94", "port": 6001, "clientHost": "39.108.5.167", "clientPort": 8000, "frontend": true}
+        ],
+
+        "connector": [
+            {"id": "connector-server-1", "host": "172.18.185.94", "port": 6100, "clientHost": "39.108.5.167", "clientPort": 8001, "frontend": true},
+            {"id": "connector-server-2", "host": "172.18.185.94", "port": 6101, "clientHost": "39.108.5.167", "clientPort": 8002, "frontend": true},
+            {"id": "connector-server-3", "host": "172.18.185.94", "port": 6102, "clientHost": "39.108.5.167", "clientPort": 8003, "frontend": true}
+        ],
+
+        "chat": [
+            {"id": "chat-server-1", "host": "172.18.185.94", "port": 6200, "clientHost": "39.108.5.167"}
+        ],
+
+        "auth": [
+            {"id": "auth-server-1", "host": "172.18.185.94", "port": 6300, "clientHost": "39.108.5.167"}
+        ],
+
+        "lobby": [
+            {"id": "lobby-server-1", "host": "172.18.185.94", "port": 6400, "clientHost": "39.108.5.167"}
+        ],
+
+        "room": [
+            {"id": "room-server-1", "host": "172.18.185.94", "port": 6500, "clientHost": "39.108.5.167"}
+        ]
+    }
+}

@@ -11,6 +11,7 @@ var NetManager = (function(_super) {
 
         // 游戏服务器连接
         this.socket            = new Pomelo();
+        this.connected         = false;
 
         // 服务器唯一标识
         this.uuid              = null;
@@ -24,180 +25,98 @@ var NetManager = (function(_super) {
     NetManager.prototype.init = function(callback) {
         var self = this;
 
-        this.socket.init({
-            host: this.host,
-            port: this.port
-        }, function(socket) {
-            var complete = function(err, data) {
-                self.socket.disconnect();
+        var host = self.host;
+        var port = self.port;
+        async.series([
+            function(asyncCallback) {
+                asyncCallback(null);
+            }
+        ], function(err) {
+            if (err != null) {
+                console.log("NetManager inited error...", err);
+                callback && callback(err);
+                return;
+            }
 
-                if (err != null) {
-                    console.log("network connection error");
-                    return;
-                }
+            console.log("NetManager inited...");
 
-                self.host    = data.host;
-                self.port    = data.port;
-                self.socket.init({
-                    host:    data.host,
-                    port:    data.port
-                }, function(socket) {
-                    self.send(
-                        "connector.handler.entry",
-                        {},
-                        Laya.Handler.create(null, function(err, data) {
-                            if (err != null) {
-                                console.log("network connection error");
-                                return;
-                            }
-
-                            console.log("NetManager inited...");
-
-                            self.socket.on("message", self, self.processMessage);
-                            
-                            callback && callback();
-                        })
-                    )
-                });
-            };
-
-            self.send(
-                "gate.handler.getEntry",
-                {},
-                Laya.Handler.create(null, complete)
-            );
+            callback && callback(null);
         });
     };
 
-    NetManager.prototype.encode = function() {
-        var key;
-        var keys = [];
-        for (key in params) {
-            if (key == 'signature') {
-                continue;
-            }
-
-            keys.push(key);
-        }
-
-        keys.sort();
-
-        var url = '';
-        for (var i = 0, size = keys.length; i < size; i++) {
-            key = keys[i];
-            url += key + '=' + encodeURIComponent(params[key]);
-            if (i < keys.length - 1) {
-                url += '&';
-            }
-        }
-
-        return CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(url, App.config.appKey + 'papaya&'));
-    };
-
-    NetManager.prototype.formatURL = function(uri, params) {
-        params = params || {};
-
-        params.appID        = App.config.appID;
-        params.udid         = App.storageManager.getDeviceId();
-        //params.signature    = this.encode(params);
-
-        var url = uri + '?';
-
-        for (var key in params) {
-            url += key + '=' + encodeURIComponent(params[key]) + '&';
-        }
-
-        return url.substring(0, url.length-1);
-    };
-
-    NetManager.prototype.resolve = function(path) {
-        if (path.charAt(path.length - 1) == "/") {
-            return path.substr(0, path.length - 1);
-        }
-
-        return path;
-    };
-
-    NetManager.prototype.get = function(url, handler) {
-        var hr = new Laya.HttpRequest();
-
-        var onHttpRequestComplete = function() {
-            if (hr.data.code == CODE.OK) {
-                handler.runWith([null, hr.data.data]);
-            }
-            else {
-                var error = {
-                    number: hr.data.err,
-                    message: hr.data.msg
-                };
-                handler.runWith(error);
-            }
-        };
-
-        var onHttpRequestError = function(e) {
-            var error = {
-                number: CODE.INTERNAL.HTTP_ERROR,
-                message: e
-            };
-            handler.runWith(error, {});
-        };
-
-        // var onHttpRequestProgress = function(e) {
-        //     if (progress) {
-        //         progress.runWith(e);
-        //     }
-        // };
-
-        // 设置认证token
-        var headers = null;
-        if (this.token) {
-            headers = ["Authorization", "Bearer " + this.token];
-        }
-
-        //http.on(Laya.Event.PROGRESS, null, onHttpRequestProgress);
-        hr.once(Laya.Event.ERROR, null, onHttpRequestError);
-        hr.once(Laya.Event.COMPLETE, null, onHttpRequestComplete);
-        hr.send(url, null, 'get', 'json', headers);
-    };
-
-    NetManager.prototype.post = function() {
-
-    };
-
-    NetManager.prototype.request = function(api, params, handler) {
-        params = params || {};
+    NetManager.prototype.connect = function(host, port, callback) {
+        console.log("socket-connecting: " + host + ":" + port);
 
         var self = this;
-        var url = this.formatURL(this.service + api, params);
+        if (this.connected) {
+            this.disconnect();
+        }
 
-        var complete = function(err, data) {
-            // 这里可以先拦截需要统一处理的错误
-            if (err != null) {
+        // var onerror = function(event) {
+        //     self.clear();
+        //     callback && callback(event);
+        // };
+        var onclose = function(event) {
+            console.log("socket-close-on-connect", event);
 
-            }
-
-            // 这里统一同步账户余额
-            // var player = App.player;
-            // if (data.balance) {
-            //     player && player.setBalance(data.balance);
-            // }
-
-            if (handler) {
-                handler.runWith([err, data]);
-            }
+            self.socket.off('handshake', null, onhandshake);
+            self.socket.off('open', self, self.onOpen);
+            self.socket.off('error', self, self.onError);
+            self.socket.off('close', self, self.onClose);
+            self.socket.off('message', self, self.processMessage);
+            self.socket.off('timeout', self, self.onTimeout);
+            self.socket.off('kick', self, self.onKick);
+            callback && callback(event);
         };
-        this.get(url, Laya.Handler.create(null, complete));
+        var onhandshake = function(socket) {
+            console.log("socket-handshake: ", socket);
+
+            //self.socket.off('error', null, onerror);
+            self.socket.off('close', null, onclose);
+
+            callback && callback();
+        };
+
+        this.socket.connect(host, port);
+
+        this.socket.once('handshake', null, onhandshake);
+        this.socket.once('close', null, onclose);
+        //this.socket.once('error', null, onerror);
+
+        this.socket.on('open', this, this.onOpen);
+        this.socket.on('error', this, this.onError);
+        this.socket.on('close', this, this.onClose);
+        this.socket.on('message', this, this.processMessage);
+        this.socket.on('timeout', this, this.onTimeout);
+        this.socket.on('kick', this, this.onKick);
+    };
+
+    NetManager.prototype.disconnect = function() {
+        console.log("socket-disconnecting: ", this.connected);
+
+        if (this.connected) {
+            this.socket.disconnect();
+
+            this.clear();
+        }
     };
 
     NetManager.prototype.send = function(route, msg, handler) {
         msg = msg || {};
         msg.udid = App.storageManager.getDeviceId();
-        this.socket.request(route, msg, function(body) {
+
+        this.startWaiting();
+
+        var self = this;
+        self.socket.request(route, msg, function(body) {
+            self.stopWaiting();
+
             var err = null;
             var data = null;
 
             if (body.code === CODE.OK) {
                 data = body.data;
+
             } else {
                 err = {
                     err: body.err,
@@ -212,13 +131,19 @@ var NetManager = (function(_super) {
     };
 
     NetManager.prototype.processMessage = function(msg) {
-        console.log("recv socket message: ", msg.route, msg.body);
+        console.log("socket-message: ", msg.route, msg.body);
+
+        var roomId = App.getRoomId();
+        if (roomId && !App.uiManager.getGameRoom()) {
+            App.enterRoom(roomId);
+        }
+
         var route   = msg.route;
         var info    = msg.body;
         switch (route) {
             case Game.ROUTE.ROOM.ENTER:
             {
-                App.uiManager.gameRoomView.joinPlayer(info);
+                App.tableManager.joinPlayer(info);
                 break;
             }
 
@@ -227,11 +152,166 @@ var NetManager = (function(_super) {
                 break;
             }
 
+            case Game.ROUTE.ROOM.READY: {
+                //*准备完毕
+                App.tableManager.allReadyFinish(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.ROB: {
+                //*抢庄完毕
+                App.tableManager.robFinish(info);
+                break;
+            }
+
             case Game.ROUTE.ROOM.DEAL: {
                 App.tableManager.dealPoker(info);
                 break;
             }
+
+            case Game.ROUTE.ROOM.BID: {
+                //*下注完毕
+                App.tableManager.showHandPoker(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.DRAW: {
+                //*补牌操作
+                App.tableManager.saveDrawPokerCommand(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.BANKER_DRAW: {
+                //*庄家操作结束
+                App.tableManager.bankerOptionEnd(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.PAY: {
+                //*结算
+                App.tableManager.bankerPay(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.LEAVE: {
+                //*离开房间
+                App.tableManager.leaveRoom(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.CLOSE: {
+                //*解散房间
+                App.tableManager.closeAndRemoveRoom(info);
+                break;
+            }
+
+            case Game.ROUTE.CHAT.SEND: {
+                //*发送和接受信息
+                App.tableManager.sandChat(info);
+                break;
+            }
+
+            case Game.ROUTE.CHAT.FORBID:{
+                //*禁言，解除禁言
+                App.tableManager.forbidPlayer(info);
+                break;
+            }
+
+            case Game.ROUTE.CHAT.FORBID_CANCEL:{
+                //*禁言，解除禁言
+                App.tableManager.forbidCancelPlayer(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.KICK: {
+                //*踢出房间
+                App.tableManager.kickUser(info);
+                break;
+            }
+
+            case Game.ROUTE.CHAIR.LET_STAND_UP: {
+                //*强制站起
+                App.tableManager.letStandUp(info);
+                break;
+            }
+
+            case Game.ROUTE.CHAIR.SIT_DOWN: {
+                //*坐下
+                App.tableManager.sitDown(info);
+                break;
+            }
+
+            case Game.ROUTE.CHAIR.STAND_UP: {
+                //*站起
+                App.tableManager.standUp(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.DISMISS_APPLY: {
+                //*申请解散,info是userID
+                App.tableManager.disMissRoom(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.DISMISS_CONFIRM: {
+                //*申请关房确认
+                App.tableManager.disMissConfirm(info);
+                break;
+            }
+
+            case Game.ROUTE.ROOM.DISMISS_RESULT: {
+                //*申请关房结果
+                App.tableManager.disMissResult(info);
+                break;
+            }
         }
+    };
+
+    NetManager.prototype.clear = function() {
+        this.connected = false;
+        this.socket.offAll();
+    };
+
+    NetManager.prototype.onOpen = function(event) {
+        console.log("socket-opened: ", event);
+
+        this.connected = true;
+    };
+
+    NetManager.prototype.onClose = function(event) {
+        console.log("socket-closed: ", event);
+        this.stopWaiting();
+        this.clear();
+
+        App.socketClosed();
+    };
+
+    NetManager.prototype.onKick = function(event) {
+        console.log("socket-kick: ", event);
+    };
+
+    NetManager.prototype.onError = function(event) {
+        console.log("socket-error: ", event);
+    };
+
+    NetManager.prototype.onTimeout = function(event) {
+        console.log("socket-timeout: ", event);
+    };
+
+    NetManager.prototype.startWaiting = function() {
+        if (App.state != Application.STATE_RUNNING) {
+            return;
+        }
+
+        if (this.waitingDlg == null) {
+            this.waitingDlg = new LoadingAniDialog();
+        }
+
+        this.waitingDlg.start();
+    };
+
+    NetManager.prototype.stopWaiting = function() {
+        this.waitingDlg && this.waitingDlg.stop();
     };
 
     return NetManager;

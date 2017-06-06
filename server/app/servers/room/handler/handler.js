@@ -12,7 +12,7 @@ var logger = pomelo.logger.getLogger('application', __filename);
  * Game Dependencies
  */
 
-var Game = require('../../../../../Game');
+var Game = require('../../../../../game');
 var Code = Game.Code;
 
 module.exports = function(app) {
@@ -46,6 +46,7 @@ proto.create = function(msg, session, next) {
     
     var opts = {
         host:     session.uid,
+        members:  [session.uid],
         type:     msg.type,
         settings: msg.settings
     };
@@ -66,7 +67,7 @@ proto.create = function(msg, session, next) {
 proto.enter = function(msg, session, next) {
     var self = this;
 
-    this.service.enterRoom(session, msg.roomID, function(err, data) {
+    this.service.enterRoom(session.uid, session.frontendId, msg.roomID, function(err, data) {
         if (err != null) {
             next(null, Game.wrapMsg(err));
             return;
@@ -87,7 +88,7 @@ proto.enter = function(msg, session, next) {
 proto.leave = function(msg, session, next) {
     var self = this;
 
-    this.service.leaveRoom(session, function(err, roomID) {
+    this.service.leaveRoom(session.uid, function(err, roomID) {
         if (err != null) {
             next(null, Game.wrapMsg(err));
             return;
@@ -110,3 +111,136 @@ proto.command = function(msg, session, next) {
     });
 };
 
+proto.destroy = function(msg, session, next) {
+    var self = this;
+
+    this.service.makeDestroy(session.uid, msg, function(err) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, {}));
+    });
+};
+
+proto.dismiss_confirm = function(msg, session, next) {
+    var self = this;
+
+    this.service.dismissConfirm(session.uid, msg, function(err) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, {}));
+    });
+};
+
+//--------------------chat begin-----------------------
+proto.chat = function(msg, session, next) {
+    var self = this;
+
+    this.service.chat(session.uid, msg, function(err) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, {}));
+    });
+};
+
+proto.get_forbidden = function(msg, session, next) {
+    var self = this;
+
+    this.service.get_forbidden(session.uid, msg, function(err, result) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, result));
+    });
+};
+
+proto.add_forbidden = function(msg, session, next) {
+    var self = this;
+
+    this.service.add_forbidden(session.uid, msg, function(err) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, {}));
+    });
+};
+
+proto.del_forbidden = function(msg, session, next) {
+    var self = this;
+
+    this.service.del_forbidden(session.uid, msg, function(err) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, {}));
+    });
+};
+//--------------------chat end-------------------------
+
+//--------------------chair begin----------------------
+proto.sit_down = function(msg, session, next) {
+    var self = this;
+
+    this.service.sit_down(session.uid, msg, function(err) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, {}));
+    });
+};
+
+proto.stand_up = function(msg, session, next) {
+    var self = this;
+
+    this.service.stand_up(session.uid, msg, function(err) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, {}));
+    });
+};
+
+proto.let_stand_up = function(msg, session, next) {
+    var self = this;
+
+    this.service.let_stand_up(session.uid, msg, function(err) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, {}));
+    });
+};
+//--------------------chair end------------------------
+
+proto.kick = function(msg, session, next) {
+    var self = this;
+
+    this.service.kick(session.uid, msg, function(err) {
+        if (err != null) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, {}));
+    });
+};

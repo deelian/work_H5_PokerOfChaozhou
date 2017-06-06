@@ -41,5 +41,7 @@ Component.prototype.afterStart = function(cb)
 
 Component.prototype.stop = function(force, cb)
 {
-    process.nextTick(cb);
+    this.service.saveRooms(function(done){
+        process.nextTick(cb);
+    });
 };

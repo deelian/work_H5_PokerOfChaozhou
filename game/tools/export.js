@@ -22,8 +22,10 @@ prioritys.push({path:"utils/random.js",p:7});
 prioritys.push({path:"entities/player.js",p:8});
 prioritys.push({path:"entities/poker.js", p:9});
 prioritys.push({path:"entities/deck.js", p:10});
-prioritys.push({path:"entities/table.js", p:11});
-prioritys.push({path:"entities/room.js", p:12});
+prioritys.push({path:"entities/staticGamble.js", p:21});
+prioritys.push({path:"entities/customizedGamble.js", p:22});
+prioritys.push({path:"entities/table.js", p:100});
+prioritys.push({path:"entities/room.js", p:101});
 
 // prioritys.push({path:"entities/stage.js", p:999});
 // prioritys.push({path:"entities/player.js", p:1000});
