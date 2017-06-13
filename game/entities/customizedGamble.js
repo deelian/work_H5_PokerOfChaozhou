@@ -96,27 +96,44 @@
                 results.type = Game.POKER_MODELS.THREES;
                 results.multiple = this.data.settings.pokerModels[results.type];
                 results.score = results.multiple;
-
-                results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
                 return results;
             }
+
+            // 顺子判断
+            var flushDecide = function (v1, v2, v3) {
+                if (v1 == null || v2 == null) {
+                    return false;
+                }
+                
+                // 正常的 1 2 3
+                if (v1 === v2 - 1 && v2 === v3 - 1) {
+                    return true;
+                }
+                // Q K A
+                if (v1 === Poker.POKER_A_VALUE && v2 === Poker.POKER_Q_VALUE && v3 === Poker.POKER_K_VALUE) {
+                    return true;
+                }
+                // K A 2
+                if (v1 === Poker.POKER_A_VALUE && v2 === Poker.POKER_2_VALUE && v3 === Poker.POKER_K_VALUE) {
+                    return true;
+                }
+
+                return false;
+            };
+            
             // 顺子
-            if (analyse[0].value === analyse[1].value - 1 && analyse[1].value === analyse[2].value - 1) {
+            if (flushDecide(analyse[0].value, analyse[1].value, analyse[2].value)) {
                 // 同花顺
                 if (analyse[0].type === analyse[1].type && analyse[1].type === analyse[2].type) {
                     results.type = Game.POKER_MODELS.STRAIGHT_FLUSH;
                     results.multiple = this.data.settings.pokerModels[results.type];
                     results.score = results.multiple;
-
-                    results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
                     return results;
                 }
                 // 普通顺子
                 results.type = Game.POKER_MODELS.STRAIGHT;
                 results.multiple = this.data.settings.pokerModels[results.type];
                 results.score = results.multiple;
-
-                results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
                 return results;
             }
 
@@ -130,8 +147,6 @@
                 results.multiple = this.data.settings.pokerPoint[point % 10] || 1;
             }
             results.score = results.multiple;
-
-            results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
             return results;
         }
     });

@@ -42,6 +42,7 @@ var FinalDialog = (function(_super) {
         var roundsLength = rounds.length;
         for (var index = roundsLength - 1; index >= 0; index --) {
             var roundSingle = rounds[index].clients || {};
+            var ghostPokers = rounds[index].ghostPokers || [];
             //*每一局的统计
             for (var i in roundSingle) {
                 var gold        = user[i].total;
@@ -69,7 +70,8 @@ var FinalDialog = (function(_super) {
                         gold : gold,
                         godNum : 0,
                         name: name,
-                        avatar: avatar
+                        avatar: avatar,
+                        ghostPokers: ghostPokers
                     };
                 }
             }
@@ -137,7 +139,7 @@ var FinalDialog = (function(_super) {
     };
 
     FinalDialog.prototype.close = function() {
-        App.tableManager.quitRoom();
+        //App.tableManager.quitRoom();
         _super.prototype.close.call(this);
         App.uiManager.removeUiLayer(this);
     };

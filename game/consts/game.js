@@ -3,6 +3,12 @@
           
     };
 
+    Game.ORIGIN = {
+        WeChat: 0,
+        WebApp: 1,
+        APP:    2
+    };
+
     Game.GENDER = {
         MALE:       0,          //男
         FEMALE:     1,          //女
@@ -162,7 +168,7 @@
     Game.Chat = {
         normal:[
             "快点吧，我等到花儿都谢了",
-            "有天公，赢定了",
+            "又天公，赢定了",
             "玩太小，没意思",
             "风水不好，换个位置",
             "哇，你抢钱啊",
@@ -201,6 +207,31 @@
 
     Game.NOTICE_TEXT = "    所有玩家数据、运算均由服务器端下发，任何人都不可通过外挂破解客户端等手段前提获知其他玩家手牌或公共牌。";
     Game.PHONE_NUMBER = "18922217616";
-    Game.WECHAT_NUMBER = "欢乐木虱互动娱乐";
+    Game.WECHAT_NUMBER = "橄榄欢乐木虱";
+
+    //3颗钻6元，15颗钻30元，30颗50元
+    Game.DIAMOND_TYPE = {
+        10001: {
+            id: 10001,
+            name: "3颗钻石",
+            price: 6,
+            diamonds: 3,
+            SKU: "cn.glfun.dejupoker.product001"
+        },
+        10002: {
+            id: 10002,
+            name: "15颗钻石",
+            price: 30,
+            diamonds: 15,
+            SKU: "cn.glfun.dejupoker.product002"
+        },
+        10003: {
+            id: 10003,
+            name: "30颗钻石",
+            price: 50,
+            diamonds: 30,
+            SKU: "cn.glfun.dejupoker.product003"
+        }
+    };
 
 }(DejuPoker));

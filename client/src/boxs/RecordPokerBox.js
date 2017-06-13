@@ -39,7 +39,7 @@ var RecordPokerBox = (function(_super) {
         var modelNames = Game.Game.POKER_MODEL_NAMES;
         var txt = modelNames[type];
         if (type == "point") {
-            txt += (" " + this._data.roundInfo.point % 10 + "点");
+            txt = ("" + this._data.roundInfo.point % 10 + "点");
         }
 
         this.typeLab.text = txt;
@@ -57,10 +57,14 @@ var RecordPokerBox = (function(_super) {
             poker.scaleX = 0.2;
             poker.scaleY = 0.2;
             poker.x = pokerNum * 40;
+            poker.y = 7;
             this.pokerBox.addChild(poker);
             this._pokerList.push(poker);
             pokerNum ++;
         }
+
+        var bidRate = this._data.roundInfo.bidRate || 1;
+        this.bidRateLab.text = "×" + bidRate;
 
         if (this._data.roundInfo.isBanker) {
             this.bankerTag.visible = true;

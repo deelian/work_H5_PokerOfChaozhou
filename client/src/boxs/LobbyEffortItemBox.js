@@ -25,8 +25,6 @@ var LobbyEffortItemBox = (function(_super) {
         this.roomIdLab.text = roomId;
 
         var roundData = this._data.data;
-        var users = roundData.users;
-        var selfId = App.player.getId();
 
         //*模式
         var roomInfo = roundData.info;

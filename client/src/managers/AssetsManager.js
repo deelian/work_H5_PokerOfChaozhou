@@ -39,6 +39,21 @@ var AssetsManager = (function(_super) {
         {
             url: "unpack.json",
             type: Laya.Loader.JSON
+        },
+
+        {
+            url: "assets/ui.agreement/img_yhxy.png",
+            type: Laya.Loader.IMAGE
+        },
+
+        {
+            url: "assets/ui.agreement/bg_01.png",
+            type: Laya.Loader.IMAGE
+        },
+
+        {
+            url: "assets/ui.agreement/bg_jiemian.png",
+            type: Laya.Loader.IMAGE
         }
     ];
 
@@ -160,6 +175,10 @@ var AssetsManager = (function(_super) {
         {
             url: "assets/atlas/assets/pokers/rubbedPoker.json",
             type: Laya.Loader.ATLAS
+        },
+        {
+            url: "assets/atlas/assets/ui.news.json",
+            type: Laya.Loader.ATLAS
         }
     ];
     
@@ -199,7 +218,6 @@ var AssetsManager = (function(_super) {
     __proto.init = function(cb) {
         var i, size, obj, url, start, len, name;
 
-        // ע�������ļ�����
         for (i = 0, size = preloadSounds.length; i < size; i++) {
             obj = preloadSounds[i];
             url = obj.url;
@@ -212,7 +230,6 @@ var AssetsManager = (function(_super) {
             this.sounds[name] = url;
         }
 
-        // ע�������ļ�����
         for (i = 0, size = preloadFonts.length; i < size; i++) {
             obj = preloadFonts[i];
             url = obj.url;
@@ -225,7 +242,6 @@ var AssetsManager = (function(_super) {
             this.fonts[name] = url;
         }
 
-        // ע�������ļ�
         var self = this;
         var keys = Object.keys(this.fonts);
         async.eachSeries(keys, function(name, callback) {
@@ -299,6 +315,10 @@ var AssetsManager = (function(_super) {
         return this.fonts[name] || "";
     };
 
+    __proto.getProduct = function(id) {
+        return Game.Game.DIAMOND_TYPE[id];
+    };
+
     __proto.playMusic = function(name) {
         var url = this.getSound(name);
         url && Laya.SoundManager.playMusic(url);
@@ -309,5 +329,6 @@ var AssetsManager = (function(_super) {
         var url = this.getSound(name);
         url && Laya.SoundManager.playSound(url);
     };
+
     return AssetsManager;
 }(laya.events.EventDispatcher));

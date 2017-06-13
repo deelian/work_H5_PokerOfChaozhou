@@ -93,6 +93,25 @@ proto.leaveRoom = function(userID, callback) {
     callback(null, roomID);
 };
 
+// 离线了
+proto.afk = function(userID, callback) {
+    var roomID = this.users[userID];
+    if (roomID == null) {
+        callback(null, 0);
+        return
+    }
+
+    var room = this.getRoom(roomID);
+    if (room == null) {
+        delete this.users[userID];
+        callback(null, 0);
+        return;
+    }
+
+    room.afk(userID);
+    callback(null, roomID);
+};
+
 proto.createRoom = function(opts, callback) {
     opts = opts || {};
     opts.settings = opts.settings || {};
@@ -124,11 +143,11 @@ proto.createRoom = function(opts, callback) {
         default: {
             if (times <= 10) {
                 times = 10;
-                cost = 1;
+                cost = 3;
             }
             else {
                 times = 20;
-                cost = 2;
+                cost = 6;
             }
         }
     }
@@ -577,11 +596,20 @@ proto.kick = function(userID, msg, cb) {
         return;
     }
 
-    var result = room.letStandUp(userID, msg.data);
+    var self = this;
+    var kickedUserID = msg.data;
+    var result = room.kick(userID, kickedUserID);
 
     if (result != false) {
-        this.broadcast(roomID, ROUTE.ROOM.KICK, {userID: msg.data}, null);
+        this.send(roomID, kickedUserID, ROUTE.ROOM.KICK, {userID: msg.data}, null, function () {
+            delete self.users[kickedUserID];
+
+            self.app.get('channelService')
+                .getChannel(roomID, true)
+                .leave(kickedUserID);
+        });
     }
+
     cb && cb(null, result);
 };
 

@@ -1,6 +1,6 @@
 {
     "renderMode": 0,
-    "showFPS": false,
+    "showFPS": true,
     "frameRate": true,
     "version": "1.0.0",
     "host": "39.108.5.167",

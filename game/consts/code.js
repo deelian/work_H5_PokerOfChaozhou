@@ -34,6 +34,7 @@
             DISMISS_APPLY:      "room.dismiss.apply",       // 申请关房
             DISMISS_CONFIRM:    "room.dismiss.confirm",     // 申请关房确认
             DISMISS_RESULT:     "room.dismiss.result",      // 申请关房结果
+            AFK:                "room.afk",                 // 离线
         },
 
         CHAT: {
@@ -87,7 +88,7 @@
 
         // 1500~1599
         LOBBY: {
-
+            NOT_PRODUCT:        1500
         },
 
         // 1600~1699
@@ -114,7 +115,16 @@
         ACCESS_DENIED:                  "1008",
         INVALID_REQUEST:                "1009",
         INVALID_AUTHORIZE_CODE:         "1010",
-        REMOTE_SERVER_ERROR:            "1011"
+        REMOTE_SERVER_ERROR:            "1011",
+        ALREADY_BIND:                   "1012",
+        ALREADY_FREEZE:                 '1013',
+        ALREADY_REMOVE:                 '1014',
+        ARGUMENT_FORMAT_ERROR:          '1015',
+        NULL_VALUE:                     '1016',
+        ERROR_VALUE:                    '1017',
+        OBJECT_HAVING_NULL_VALUE:       '1018',
+        NOT_EQUAL_PASSWORD:             '1019',
+        ERROR_PASSWORD:                 '1010'
     };
 
     var Message = root.MESSAGE = {
@@ -129,6 +139,30 @@
         "1008": [ 400, "AccessDenied" ],
         "1009": [ 400, "InvalidRequest" ],
         "1010": [ 400, "InvalidAuthorizeCode" ],
-        "1011": [ 500, "RemoteServerError" ]
+        "1011": [ 500, "RemoteServerError" ],
+        "1012": [ 400, "AlreadyBind" ],
+        "1013": [ 400, "AlreadyFreeze" ],
+        "1014": [ 400, "AlreadyRemove" ],
+        "1015": [ 400, "ArgumentFormatError" ],
+        "1016": [ 400, "NullValue" ],
+        "1017": [ 400, "ErrorValue" ],
+        "1018": [ 400, "ObjectHavingNullValue" ],
+        "1019": [ 400, "NotEqualPassword" ],
+        "1020": [ 400, "ErrorPassword" ]
+    };
+
+    var OrderType = root.ORDER_TYPE = {
+        IOS:      1,
+        ANDROID:  2,
+        H5:       3,
+        WEB:      4
+    };
+
+    var OrderStatus = root.ORDER_STATUS = {
+        PROCESSING:    0,
+        SUCCESS:       1,
+        FAILURE:       2,
+        EXPIRED:       3,
+        PROCESSED:     4
     };
 }(DejuPoker));

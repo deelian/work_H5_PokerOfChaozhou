@@ -2,7 +2,7 @@
     "x":0,
     "type":"Dialog",
     "selectedBox":1,
-    "selecteID":12,
+    "selecteID":9,
     "props":{"width":1136,"sceneColor":"#000000","height":640},
     "nodeParent":-1,
     "label":"Dialog",
@@ -10,13 +10,6 @@
     "isDirectory":true,
     "isAniNode":true,
     "hasChild":true,
-    "frames":[
-        {
-            "type":1,
-            "props":{"width":1136,"sceneColor":"#000000","height":640},
-            "frame":0,
-            "__InPool":false
-        }],
     "compId":1,
     "child":[
         {
@@ -29,13 +22,6 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"skin":"assets/ui.room/disband/img_jiemian.png"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":7,
             "child":[
                 ],
@@ -50,13 +36,6 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"skin":"assets/ui.room/disband/img_01.png"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":11,
             "child":[
                 ]
@@ -70,13 +49,6 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"skin":"assets/ui.room/disband/img_jieshan.png"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":8,
             "child":[
                 ]
@@ -91,13 +63,6 @@
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"y":408,"x":840,"skin":"assets/ui.button/btn_green.png","label":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":3,
             "child":[
                 {
@@ -109,13 +74,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"skin":"assets/ui.room/disband/img_jujue.png"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":5,
                     "child":[
                         ]
@@ -131,13 +89,6 @@
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"y":400,"x":484,"skin":"assets/ui.button/btn_bule.png","label":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":2,
             "child":[
                 {
@@ -149,13 +100,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"skin":"assets/ui.room/disband/img_tongyi.png"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":6,
                     "child":[
                         ]
@@ -164,19 +108,12 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":420,"x":375,"text":"超过三分钟未作出选择，默认同意","fontSize":20,"font":"Microsoft YaHei","color":"#d72321"},
+            "props":{"y":420,"x":375,"text":"超过两分钟未作出选择，默认同意","fontSize":20,"font":"Microsoft YaHei","color":"#d72321"},
             "nodeParent":1,
             "label":"Label",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"text":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":9,
             "child":[
                 ]
@@ -190,13 +127,6 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"text":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":10,
             "child":[
                 ]
@@ -210,13 +140,6 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"text":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":12,
             "child":[
                 ]
@@ -231,13 +154,6 @@
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":13,
             "child":[
                 {
@@ -250,13 +166,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":14,
                     "child":[
                         {
@@ -268,13 +177,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":15,
                             "child":[
                                 ]
@@ -290,13 +192,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":16,
                     "child":[
                         {
@@ -308,13 +203,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":17,
                             "child":[
                                 ]
@@ -331,13 +219,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":18,
                     "child":[
                         {
@@ -349,13 +230,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":20,
                             "child":[
                                 ]
@@ -371,13 +245,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":19,
                     "child":[
                         {
@@ -389,13 +256,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":21,
                             "child":[
                                 ]
@@ -412,13 +272,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":22,
                     "child":[
                         {
@@ -430,13 +283,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":24,
                             "child":[
                                 ]
@@ -452,13 +298,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":23,
                     "child":[
                         {
@@ -470,13 +309,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":25,
                             "child":[
                                 ]
@@ -493,13 +325,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":26,
                     "child":[
                         {
@@ -511,13 +336,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":28,
                             "child":[
                                 ]
@@ -533,13 +351,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":27,
                     "child":[
                         {
@@ -551,13 +362,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":29,
                             "child":[
                                 ]
@@ -574,13 +378,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":30,
                     "child":[
                         {
@@ -592,13 +389,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":32,
                             "child":[
                                 ]
@@ -614,13 +404,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"text":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":31,
                     "child":[
                         {
@@ -632,13 +415,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"text":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":33,
                             "child":[
                                 ]
@@ -655,13 +431,6 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"text":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":34,
             "child":[
                 ]

@@ -1,4 +1,4 @@
-/*!  2017-05-27 */
+/*!  2017-06-12 */
 //! moment.js
 //! version : 2.11.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -4571,6 +4571,7 @@
             DISMISS_APPLY:      "room.dismiss.apply",       // 申请关房
             DISMISS_CONFIRM:    "room.dismiss.confirm",     // 申请关房确认
             DISMISS_RESULT:     "room.dismiss.result",      // 申请关房结果
+            AFK:                "room.afk",                 // 离线
         },
 
         CHAT: {
@@ -4624,7 +4625,7 @@
 
         // 1500~1599
         LOBBY: {
-
+            NOT_PRODUCT:        1500
         },
 
         // 1600~1699
@@ -4651,7 +4652,16 @@
         ACCESS_DENIED:                  "1008",
         INVALID_REQUEST:                "1009",
         INVALID_AUTHORIZE_CODE:         "1010",
-        REMOTE_SERVER_ERROR:            "1011"
+        REMOTE_SERVER_ERROR:            "1011",
+        ALREADY_BIND:                   "1012",
+        ALREADY_FREEZE:                 '1013',
+        ALREADY_REMOVE:                 '1014',
+        ARGUMENT_FORMAT_ERROR:          '1015',
+        NULL_VALUE:                     '1016',
+        ERROR_VALUE:                    '1017',
+        OBJECT_HAVING_NULL_VALUE:       '1018',
+        NOT_EQUAL_PASSWORD:             '1019',
+        ERROR_PASSWORD:                 '1010'
     };
 
     var Message = root.MESSAGE = {
@@ -4666,12 +4676,42 @@
         "1008": [ 400, "AccessDenied" ],
         "1009": [ 400, "InvalidRequest" ],
         "1010": [ 400, "InvalidAuthorizeCode" ],
-        "1011": [ 500, "RemoteServerError" ]
+        "1011": [ 500, "RemoteServerError" ],
+        "1012": [ 400, "AlreadyBind" ],
+        "1013": [ 400, "AlreadyFreeze" ],
+        "1014": [ 400, "AlreadyRemove" ],
+        "1015": [ 400, "ArgumentFormatError" ],
+        "1016": [ 400, "NullValue" ],
+        "1017": [ 400, "ErrorValue" ],
+        "1018": [ 400, "ObjectHavingNullValue" ],
+        "1019": [ 400, "NotEqualPassword" ],
+        "1020": [ 400, "ErrorPassword" ]
+    };
+
+    var OrderType = root.ORDER_TYPE = {
+        IOS:      1,
+        ANDROID:  2,
+        H5:       3,
+        WEB:      4
+    };
+
+    var OrderStatus = root.ORDER_STATUS = {
+        PROCESSING:    0,
+        SUCCESS:       1,
+        FAILURE:       2,
+        EXPIRED:       3,
+        PROCESSED:     4
     };
 }(DejuPoker));
 (function(root) {
     var Game = root.Game = function() {
           
+    };
+
+    Game.ORIGIN = {
+        WeChat: 0,
+        WebApp: 1,
+        APP:    2
     };
 
     Game.GENDER = {
@@ -4833,7 +4873,7 @@
     Game.Chat = {
         normal:[
             "快点吧，我等到花儿都谢了",
-            "有天公，赢定了",
+            "又天公，赢定了",
             "玩太小，没意思",
             "风水不好，换个位置",
             "哇，你抢钱啊",
@@ -4872,7 +4912,32 @@
 
     Game.NOTICE_TEXT = "    所有玩家数据、运算均由服务器端下发，任何人都不可通过外挂破解客户端等手段前提获知其他玩家手牌或公共牌。";
     Game.PHONE_NUMBER = "18922217616";
-    Game.WECHAT_NUMBER = "欢乐木虱互动娱乐";
+    Game.WECHAT_NUMBER = "橄榄欢乐木虱";
+
+    //3颗钻6元，15颗钻30元，30颗50元
+    Game.DIAMOND_TYPE = {
+        10001: {
+            id: 10001,
+            name: "3颗钻石",
+            price: 6,
+            diamonds: 3,
+            SKU: "cn.glfun.dejupoker.product001"
+        },
+        10002: {
+            id: 10002,
+            name: "15颗钻石",
+            price: 30,
+            diamonds: 15,
+            SKU: "cn.glfun.dejupoker.product002"
+        },
+        10003: {
+            id: 10003,
+            name: "30颗钻石",
+            price: 50,
+            diamonds: 30,
+            SKU: "cn.glfun.dejupoker.product003"
+        }
+    };
 
 }(DejuPoker));
 (function(root) {
@@ -5795,27 +5860,44 @@
                 results.type = Game.POKER_MODELS.THREES;
                 results.multiple = this.data.settings.pokerModels[results.type];
                 results.score = results.multiple;
-
-                results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
                 return results;
             }
+
+            // 顺子判断
+            var flushDecide = function (v1, v2, v3) {
+                if (v1 == null || v2 == null) {
+                    return false;
+                }
+                
+                // 正常的 1 2 3
+                if (v1 === v2 - 1 && v2 === v3 - 1) {
+                    return true;
+                }
+                // Q K A
+                if (v1 === Poker.POKER_A_VALUE && v2 === Poker.POKER_Q_VALUE && v3 === Poker.POKER_K_VALUE) {
+                    return true;
+                }
+                // K A 2
+                if (v1 === Poker.POKER_A_VALUE && v2 === Poker.POKER_2_VALUE && v3 === Poker.POKER_K_VALUE) {
+                    return true;
+                }
+
+                return false;
+            };
+            
             // 顺子
-            if (analyse[0].value === analyse[1].value - 1 && analyse[1].value === analyse[2].value - 1) {
+            if (flushDecide(analyse[0].value, analyse[1].value, analyse[2].value)) {
                 // 同花顺
                 if (analyse[0].type === analyse[1].type && analyse[1].type === analyse[2].type) {
                     results.type = Game.POKER_MODELS.STRAIGHT_FLUSH;
                     results.multiple = this.data.settings.pokerModels[results.type];
                     results.score = results.multiple;
-
-                    results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
                     return results;
                 }
                 // 普通顺子
                 results.type = Game.POKER_MODELS.STRAIGHT;
                 results.multiple = this.data.settings.pokerModels[results.type];
                 results.score = results.multiple;
-
-                results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
                 return results;
             }
 
@@ -5829,8 +5911,6 @@
                 results.multiple = this.data.settings.pokerPoint[point % 10] || 1;
             }
             results.score = results.multiple;
-
-            results.multiple *= Game.FANCY_MULTIPLE[results.fancy];
             return results;
         }
     });
@@ -5948,6 +6028,7 @@
     var Game = root.Game;
     var StaticGamble = root.StaticGamble;
     var CustomizedGamble = root.CustomizedGamble;
+    var FancyPayTypes = [Game.POKER_MODELS.GOD_NINE, Game.POKER_MODELS.GOD_EIGHT, Game.POKER_MODELS.POINT];
 
     var Utils = root.Utils;
 
@@ -5969,6 +6050,7 @@
         this.notBank       = opts.notBank || false;     // 不坐庄 true就不做
         this.isRubbing     = opts.isRubbing || false;   // 是否在搓牌
         this.showResult    = opts.showResult || false;  // 是否需要展示牌局结果 这个在reset的时候不能重置
+        this.isAfk         = opts.isAfk || false;       // 是否离线
 
         this.handPokers    = [];                        // 手牌
         if (opts.handPokers) {
@@ -6150,6 +6232,13 @@
 
         getClient: function(userID) {
             return this.clients[userID];
+        },
+
+        setAwk: function(userID, state) {
+            var client = this.getClient(userID);
+            if (client) {
+                client.isAfk = state;
+            }
         },
 
         //是否全部客人都做了某操作
@@ -6818,7 +6907,8 @@
                 this.roundLog.clients[this.banker] = {
                     gold:       0,    // 需要初始化一个gold
                     fightTimes: 0,
-                    winTimes:   0
+                    winTimes:   0,
+                    bidRate:    bankerObj.bidRate
                 };
             }
 
@@ -6859,7 +6949,8 @@
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
                         fightTimes: 0,
-                        winTimes:   0
+                        winTimes:   0,
+                        bidRate:    client.bidRate
                     };
                 }
 
@@ -6882,11 +6973,13 @@
                     playerScore.result = "draw";            //平局
                     // 比牌算花式
                     if (this.settings.fancyWin && bankerScore.type === playerScore.type) {
-                        if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
-                            playerScore.result = "win";             //闲家胜利
-                        }
-                        else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
-                            playerScore.result = "lose";            //输牌
+                        if (FancyPayTypes.indexOf(bankerScore.type) != -1) {
+                            if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                                playerScore.result = "win";             //闲家胜利
+                            }
+                            else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                                playerScore.result = "lose";            //输牌
+                            }
                         }
                     }
                 }
@@ -7015,7 +7108,8 @@
                 this.roundLog.clients[this.banker] = {
                     gold:       0,    // 需要初始化一个gold
                     fightTimes: 0,
-                    winTimes:   0
+                    winTimes:   0,
+                    bidRate:    bankerObj.bidRate
                 };
             }
 
@@ -7127,7 +7221,8 @@
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
                         fightTimes: 0,
-                        winTimes:   0
+                        winTimes:   0,
+                        bidRate:    client.bidRate
                     };
                 }
 
@@ -7150,11 +7245,13 @@
                     playerScore.result = "draw";            //平局
                     // 比牌算花式
                     if (this.settings.fancyWin && bankerScore.type === playerScore.type) {
-                        if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
-                            playerScore.result = "win";             //闲家胜利
-                        }
-                        else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
-                            playerScore.result = "lose";            //输牌
+                        if (FancyPayTypes.indexOf(bankerScore.type) != -1) {
+                            if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                                playerScore.result = "win";             //闲家胜利
+                            }
+                            else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                                playerScore.result = "lose";            //输牌
+                            }
                         }
                     }
                 }
@@ -7305,7 +7402,8 @@
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
                         fightTimes: 0,
-                        winTimes:   0
+                        winTimes:   0,
+                        bidRate:    client.bidRate
                     };
                 }
 
@@ -7337,11 +7435,13 @@
                         gambleResult[userID][pId] = "draw";            //平局
                         // 比牌算花式
                         if (this.settings.fancyWin && baseScore.type === playerScore.type) {
-                            if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[baseScore.fancy]) {
-                                gambleResult[userID][pId] = "lose";            //userID失败
-                            }
-                            else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[baseScore.fancy]) {
-                                gambleResult[userID][pId] = "win";             //userID胜利
+                            if (FancyPayTypes.indexOf(baseScore.type) != -1) {
+                                if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[baseScore.fancy]) {
+                                    gambleResult[userID][pId] = "lose";            //userID失败
+                                }
+                                else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[baseScore.fancy]) {
+                                    gambleResult[userID][pId] = "win";             //userID胜利
+                                }
                             }
                         }
                     }
@@ -7471,7 +7571,8 @@
                 this.roundLog.clients[this.banker] = {
                     gold:       0,    // 需要初始化一个gold
                     fightTimes: 0,
-                    winTimes:   0
+                    winTimes:   0,
+                    bidRate:    bankerObj.bidRate
                 };
             }
 
@@ -7512,7 +7613,8 @@
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
                         fightTimes: 0,
-                        winTimes:   0
+                        winTimes:   0,
+                        bidRate:    client.bidRate
                     };
                 }
 
@@ -7636,6 +7738,7 @@
                 client.notBank      = c.notBank;
                 client.isRubbing    = c.isRubbing;
                 client.showResult   = c.showResult;
+                client.isAfk        = c.isAfk;
 
                 client.handPokers = [];                        // 手牌
                 var showRight = Poker.SHOW_TARGET.ALL;
@@ -7934,11 +8037,6 @@
         },
 
         enter: function(player) {
-            // 已经锁住房间就不能进入
-            if (this.locked) {
-                return false;
-            }
-
             var userID = player.id;
 
             if (this.roomLog.users[userID] == null) {
@@ -7958,15 +8056,24 @@
                 var pos = this.sitDown(userID);
                 this.sendInfoToEveryOne(ROUTE.ROOM.ENTER, {userID: userID, pos: pos});
             }
+            else {
+                this.table.setAwk(userID, false);
+                this.sendInfoToEveryOne(ROUTE.ROOM.AFK, {userID: userID, isAwk: false});
+            }
         },
 
-        leave: function(userID) {
-            // 已经锁住房间就不能离开
-            if (this.locked) {
+        leave: function(userID, isKick) {
+            // 已经锁住房间就不能自由离开
+            if (this.locked && !isKick) {
                 return;
             }
 
             if (userID == this.host) {
+                return;
+            }
+
+            // 发牌之后不能被踢出
+            if (this.state >= Room.STATE_START) {
                 return;
             }
 
@@ -7976,6 +8083,7 @@
             if (index != -1) {
                 this.members.splice(index, 1);
             }
+
             this.sendInfoToEveryOne(ROUTE.ROOM.LEAVE, {userID: userID});
         },
 
@@ -7984,8 +8092,13 @@
                 return false;
             }
 
-            this.leave(targetID);
+            this.leave(targetID, true);
             return true;
+        },
+
+        afk: function(userID) {
+            this.table.setAwk(userID, true);
+            this.sendInfoToEveryOne(ROUTE.ROOM.AFK, {userID: userID, isAwk: true});
         },
 
         ready: function() {
@@ -8090,8 +8203,7 @@
                 return false;
             }
 
-            if (fn == "rejectBanker"
-            ) {
+            if (fn == "rejectBanker") {
                 return true;
             }
 
@@ -8165,7 +8277,7 @@
                 var agreeCnt = 0;
                 var notSelect = 0;
                 var memberCnt = this.members.length;
-                var duration = 3*60;
+                var duration = 2*60;
 
                 var nowTime = Number(root.moment().format('X'));
                 for (i = 0; i < memberCnt; i++) {

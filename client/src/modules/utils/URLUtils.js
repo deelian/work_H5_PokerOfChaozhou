@@ -30,7 +30,7 @@ var URLUtils = {
         if(results) {
             return decodeURIComponent(results[1]);
         }
-        return false;
+        return null;
     },
     getParams: function() {
     	var regex = /[?&]([^=#]+)=([^&#]*)/g,

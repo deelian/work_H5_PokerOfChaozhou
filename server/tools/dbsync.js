@@ -17,57 +17,45 @@ function parseDB(val) {
 }
 
 function syncDB(db, table, init) {
-    var iterator = function(name, callback) {
-        var Model = db.models[name];
+
+    if (table != null) {
+        var Model = db.models[table];
 
         Model.sync({ force: program.force }).then(function() {
-            console.log("Model %s synced...", name);
+            console.log("Model %s synced...", table);
             callback();
         }).catch(function(e) {
-            console.log("Model %s sync failed", name, e);
+            console.log("Model %s sync failed", table, e);
             callback(e);
         })
-    };
-
-    var keys = [];
-    if (table != null) {
-        keys = [ table ];
     }
     else {
-        keys = Object.keys(db.models);
+        db.sequelize.sync({ force: program.force }).then(function () {
+            console.log("Database synced...")
+        }).catch(function (e) {
+            console.log("Database sync failed...", e);
+        })
     }
 
-    async.eachSeries(keys, iterator, function(err) {
-        if (err != null) {
-            console.error("models init error", err);
-            process.exit(-1);
-        }
-
-        console.log("models init success!");
+    if (init) {
         console.log(init);
-
-        if (init) {
-            console.log(init);
-            db.models.user.create({
-                account: "admin",
-                password: "admin",
-                data:     "{}"
-            }).then(function(record) {
-                if (record == null) {
-                    console.log("insert users failed...");
-                    process.exit(-1);
-                }
-
-                console.log("insert record to Model %j", record.toJSON());
-                process.exit(0);
-            }).catch(function(e) {
-                console.log("system error", e);
+        db.models.user.create({
+            account: "admin",
+            password: "admin",
+            data:     "{}"
+        }).then(function(record) {
+            if (record == null) {
+                console.log("insert users failed...");
                 process.exit(-1);
-            });
-        } else {
+            }
+
+            console.log("insert record to Model %j", record.toJSON());
             process.exit(0);
-        }
-    });
+        }).catch(function(e) {
+            console.log("system error", e);
+            process.exit(-1);
+        });
+    }
 }
 
 if (process.env.NODE_ENV == "production") {

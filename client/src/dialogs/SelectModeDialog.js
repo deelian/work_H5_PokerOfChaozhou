@@ -651,8 +651,11 @@ var SelectModeDialog = (function(_super) {
         }
     };
 
-    SelectModeDialog.prototype.touchModeBtn = function (modeIndex) {
-        App.soundManager.playSound("btnSound");
+    SelectModeDialog.prototype.touchModeBtn = function (modeIndex, isNotPlayBtnSound) {
+        isNotPlayBtnSound = isNotPlayBtnSound ? true : false;
+        if (!isNotPlayBtnSound) {
+            App.soundManager.playSound("btnSound");
+        }
         //*储存之前模式的设置
         this.setModeSettings();
         //*切换按钮显示
@@ -789,10 +792,10 @@ var SelectModeDialog = (function(_super) {
         this.createRoomBtn.on (Laya.Event.CLICK, this, this.touchCreateRoom);
         //*模式按钮
         var modeBtnList = [
-            {btn:this.classicalBtn, parameter: [this._gameModeList.CLASSICAL]},
-            {btn:this.staticBtn, parameter: [this._gameModeList.STATIC]},
-            {btn:this.chaosBtn, parameter: [this._gameModeList.CHAOS]},
-            {btn:this.customizedBtn, parameter: [this._gameModeList.CUSTOMIZED]}
+            {btn:this.classicalBtn, parameter: [this._gameModeList.CLASSICAL, false]},
+            {btn:this.staticBtn, parameter: [this._gameModeList.STATIC, false]},
+            {btn:this.chaosBtn, parameter: [this._gameModeList.CHAOS, false]},
+            {btn:this.customizedBtn, parameter: [this._gameModeList.CUSTOMIZED, false]}
         ];
         for (var i = 0; i < modeBtnList.length; i++) {
             var btn = modeBtnList[i].btn;
@@ -902,7 +905,7 @@ var SelectModeDialog = (function(_super) {
         this.initEvent();
         this.initMultipleTouch();
         this.changeModeSetDisplay();//*设置的显示初始化，要恢复到这个模式最后一次的有效设置
-        this.touchModeBtn(this._gameModeList.CLASSICAL);
+        this.touchModeBtn(this._gameModeList.CLASSICAL, true);
         this.changeIntroduction();
     };
 

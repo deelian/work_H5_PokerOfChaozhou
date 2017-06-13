@@ -39,3 +39,13 @@ proto.userLeave = function(uid, callback) {
         callback && callback(err, roomID);
     });
 };
+
+proto.userAfk = function(uid, callback) {
+    var userID = uid;
+    var service = this.app.get('roomService');
+
+    logger.info("room-user-leave", uid);
+    service.afk(userID, function(err, roomID) {
+        callback && callback(err, roomID);
+    });
+};

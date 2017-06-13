@@ -2,10 +2,10 @@
  * 游戏大厅总战绩
  */
 var LobbyEffortDialog = (function(_super) {
-    function LobbyEffortDialog() {
+    function LobbyEffortDialog(data) {
         LobbyEffortDialog.super(this);
 
-        this._effortList = [];
+        this._effortList = data || [];
 
         this.init();
     }
@@ -37,28 +37,8 @@ var LobbyEffortDialog = (function(_super) {
         this.effortBox.addChild(list);
     };
 
-    LobbyEffortDialog.prototype.getLogs = function () {
-        var self = this;
-        var complete = function (err, data) {
-            if (err) {
-                console.log(err);
-            }
-            else {
-                self._effortList = data;
-                self.initList();
-            }
-        };
-        App.netManager.send(
-            "lobby.handler.get_logs",
-            {
-                data: {}
-            },
-            Laya.Handler.create(null, complete)
-        );
-    };
-
     LobbyEffortDialog.prototype.init = function () {
-        this.getLogs();
+        this.initList();
     };
 
     LobbyEffortDialog.prototype.close = function() {

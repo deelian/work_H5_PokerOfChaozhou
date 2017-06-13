@@ -1,62 +1,790 @@
 /**
  * 游戏房间界面
  */
+
+//
+//    Laya.class(GameRoomView, "GameRoomView", _super);
+//
+
+//
+//    GameRoomView.prototype.showFinalBtn = function () {
+//        this.finalBtn.visible = true;
+//        this.setStartBoxVisible(false);
+//    };
+//
+
+//
+//    //*进行下一轮
+//    GameRoomView.prototype.nextRound = function (roomInfo) {
+//        //*清除显示
+//        this.clearGhostPokers();
+//
+//        //*是否有切换庄家
+//        var isChangeBanker = false;
+//        if (this._roomBanker != roomInfo.banker) {
+//            isChangeBanker = true;
+//        }
+//
+//        this._room       = roomInfo;
+//        this._roomId     = roomInfo.id;
+//        this._roomBanker = roomInfo.banker;
+//        this._chairs     = roomInfo.chairs;
+//
+//        this.setReadyBtnState();
+//
+//        //*下注按钮，操作按钮不显示
+//        this.bankerOperationBox.visible = false;
+//        this.operationBox.visible = false;
+//        this.bidBox.visible = false;
+//
+//        //*有切换庄家
+//        if (isChangeBanker && this._roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) {
+//            this.bankerTagFly();
+//        }
+//
+//        if (this._roomType == Game.Game.ROOM_TYPE.CUSTOMIZED) {
+//            if (this._bankerTagImg) {
+//                this._bankerTagImg.removeSelf();
+//                this._bankerTagImg = null;
+//            }
+//        }
+//
+//        //*更新局数
+//        this.updateRoundNumLab();
+//
+//        //*清除灯光
+//        this.unShowAllLight();
+//    };
+//
+//    //*更新局数显示
+//    GameRoomView.prototype.updateRoundNumLab = function () {
+//        var roundText = App.tableManager.getRoundText();
+//        this.roundLab.text = roundText;
+//    };
+//
+//    //*关闭操作按钮显示
+//    GameRoomView.prototype.closeOptionBoxs = function () {
+//        this.bankerOperationBox.visible = false;
+//        this.operationBox.visible = false;
+//    };
+//
+//    GameRoomView.prototype.showNextRoundBtn = function () {
+//        this.closeOptionBoxs();
+//        this._isReady = false;
+//
+//        var selfId = App.player.getId();
+//        var clients = App.tableManager.getTableClients();
+//        if (clients[selfId]) {
+//            this.setStartBoxVisible(true);
+//        }
+//        else {
+//            this.setStartBoxVisible(false);
+//        }
+//    };
+//
+//    //*清除poker结果显示
+//    GameRoomView.prototype.clearResultPokers = function () {
+//        this.nextRoundBtn.visible = false;
+//    };
+//
+
+//
+//
+//
+
+//
+
+//
+//    GameRoomView.prototype.endRound = function () {
+//        App.soundManager.playSound("btnSound");
+//        var self = this;
+//        var complete = function (err, data) {
+//            if (err) {
+//                //*错误提示
+//            }
+//            else {
+//                self.clearResultPokers();
+//            }
+//        };
+//        App.netManager.send(
+//            "room.handler.command",
+//            {
+//                fn: "end",
+//                data: {}
+//            },
+//            Laya.Handler.create(null, complete)
+//        );
+//    };
+//
+
+//
+//    GameRoomView.prototype.showGameStartedGhostPoker = function (isShowResult) {
+//        isShowResult = isShowResult? true: false;
+//
+//        var ghostPokers;
+//        var gameRoomInfo = App.tableManager.getRoom();
+//        var roomLog = gameRoomInfo.roomLog || {};
+//        var round = gameRoomInfo.round - 1;
+//        //*显示鬼牌
+//        if (isShowResult) {
+//            //*比完牌刷新上来的时候显示，用roomLog里面的鬼牌信息
+//            var rounds = roomLog.rounds || [];
+//            var lastRound = rounds[round] || {};
+//            ghostPokers = lastRound["ghostPokers"] || [];
+//        }
+//        else {
+//            var table = gameRoomInfo.table;
+//            ghostPokers = table.ghostPokers;
+//        }
+//
+//        for (var index in ghostPokers) {
+//            var pokerInfo = ghostPokers[index];
+//            var showPoker = new Poker(pokerInfo, ghostPokers);
+//            showPoker.scaleX = 0.3;
+//            showPoker.scaleY = 0.3;
+//            showPoker.x += 80 * Number(index);
+//            this._showGhostList.push(showPoker);
+//            this._ghostBoxShow.addChild(showPoker);
+//        }
+//    };
+//
+//    GameRoomView.prototype.gameWasStarted = function () {
+//        this.setStartBoxVisible(false);
+//        this.showGameStartedGhostPoker();
+//        this.showNoDoBankerBtn();
+//    };
+
+//
+//
+//    //*清除鬼牌显示
+//    GameRoomView.prototype.clearGhostPokers = function () {
+//        for (var ghostIndex = 0; ghostIndex < this._ghostList.length; ghostIndex++) {
+//            this._ghostList[ghostIndex].dispose();
+//        }
+//        this._ghostList = [];
+//
+//        for (var showGhostIndex = 0; showGhostIndex < this._showGhostList.length; showGhostIndex ++) {
+//            this._showGhostList[showGhostIndex].dispose();
+//        }
+//        this._showGhostList = [];
+//    };
+//
+//    //*显示鬼牌
+//    GameRoomView.prototype.showGhostPoker = function () {
+//        if (this._showGhostList[this._ghostIndex]) {
+//            this._showGhostList[this._ghostIndex].visible = true;
+//        }
+//        this._ghostIndex++;
+//        if (this._ghostIndex >= this._showGhostList.length) {
+//            //*鬼牌表现做完
+//            App.tableManager.ghostFinish();
+//        }
+//    };
+//
+//    //*飞出来的鬼牌动作
+//    GameRoomView.prototype.ghostPokersAction = function (ghostPoker) {
+//        ghostPoker = ghostPoker || [];
+//        if (ghostPoker.length <= 0) {
+//            App.tableManager.ghostFinish();
+//        }
+//        var index;
+//        var pokerInfo;
+//        this._ghostList     = [];
+//        this._showGhostList = [];
+//        this._ghostIndex    = 0;
+//        for (index in ghostPoker) {
+//            pokerInfo = ghostPoker[index];
+//
+//            var poker = new Poker(pokerInfo, ghostPoker);
+//            poker.scaleX = 0.5;
+//            poker.scaleY = 0.5;
+//            poker.x = this._deckNodeShow.x + 100 * Number(index);
+//            this._clientShowBox.addChild(poker);
+//            this._ghostList.push(poker);
+//
+//            var showPoker = new Poker(pokerInfo, ghostPoker);
+//            showPoker.scaleX = 0.3;
+//            showPoker.scaleY = 0.3;
+//            showPoker.x += 80 * Number(index);
+//            showPoker.visible = false;
+//            this._ghostBoxShow.addChild(showPoker);
+//            this._showGhostList.push(showPoker);
+//        }
+//
+//        //*fly
+//        for (var i = 0; i < this._ghostList.length; i++) {
+//            var ghost       = this._ghostList[i];
+//            var moveTo      = MoveTo.create(0.5, this._ghostBoxShow.x, this._ghostBoxShow.y);
+//            var scaleTo     = ScaleTo.create(0.5, 0, 0);
+//            var spawn       = Spawn.create(moveTo, scaleTo);
+//            var self        = this;
+//            var callBack    = CallFunc.create(Laya.Handler.create(null, function () {
+//                    self.showGhostPoker();
+//            }));
+//            var seq         = Sequence.create(spawn, callBack);
+//            App.actionManager.addAction(seq, ghost);
+//        }
+//    };
+//
+//    GameRoomView.prototype.setStartBoxVisible = function (visible) {
+//        visible = visible ? true : false;
+//        this.readyBtn.visible = visible;
+//        this.setReadyBtnState();
+//    };
+//
+//    //*房间中游戏开始
+//    GameRoomView.prototype.gameStart = function () {
+//        this.setStartBoxVisible(false);
+//        //*start animation
+//
+//        //*通知可以给每个人做发牌的表现
+//        App.tableManager.dealPlayerPokerAction();
+//    };
+//
+//    //*抢庄结束
+//    GameRoomView.prototype.robFinish = function (banker) {
+//        this._roomBanker = banker;
+//        //*关闭抢庄按钮
+//        this.grabBankerBtn.visible = false;
+//        //*创建庄家标记
+//        if (!this._bankerTagImg) {
+//            this.createBankerTagImg();
+//        }
+//        else {
+//            this.bankerTagFly();
+//        }
+//    };
+//
+//    //*抢庄的倒计时
+//    GameRoomView.prototype.readyGrabBanker = function () {
+//        this._grabBankerTime --;
+//        if (this._grabBankerTime <= 0) {
+//            Laya.timer.clear(this, this.readyGrabBanker);
+//            this.countdownLab.visible = false;
+//            //*显示抢庄按钮
+//            this.showGrabBanker();
+//        }
+//        else {
+//            this.countdownImg.skin = "assets/ui.room/img_Count_down" + this._grabBankerTime + ".png";
+//        }
+//    };
+//
+//    GameRoomView.prototype.showGrabBanker = function () {
+//        //*显示抢庄按钮
+//        this.grabBankerBtn.visible = true;
+//    };
+//
+//    //*全部准备完成之后，定制模式，需要显示抢庄，显示倒计时
+//    GameRoomView.prototype.readyFinish = function () {
+//        if (this._roomType == Game.Game.ROOM_TYPE.CUSTOMIZED) {
+//            this.setStartBoxVisible(false);
+//            this.countdownLab.visible = true;
+//            this._grabBankerTime = 3;
+//            this.countdownImg.skin = "assets/ui.room/img_Count_down" + this._grabBankerTime + ".png";
+//            //*开始三秒倒计时
+//            Laya.timer.loop(1000, this, this.readyGrabBanker);
+//        }
+//    };
+//
+//    //*按下抢庄
+//    GameRoomView.prototype.onGrabBanker = function () {
+//        var self = this;
+//        App.soundManager.playSound("btnSound");
+//        var complete = function (err, data) {
+//            if (err) {
+//                console.log(err);
+//            }
+//        };
+//        App.netManager.send(
+//            "room.handler.command",
+//            {
+//                fn: "rob",
+//                data: {}
+//            },
+//            Laya.Handler.create(null, complete)
+//        );
+//    };
+//
+//    //*设置准备按钮的状态
+//    GameRoomView.prototype.setReadyBtnState = function () {
+//        var skin = "assets/ui.room/img_GetReady.png";
+//        var btnSkin  = "assets/ui.room/btn_yellow.png";
+//        if (this._isReady) {
+//            skin = "assets/ui.room/img_cancel.png";
+//            btnSkin = "assets/ui.room/btn_blue.png";
+//        }
+//        else {
+//            var roomBanker = App.tableManager.getRoomBanker();
+//            var selfId = App.player.getId();
+//            var isRoomHost = App.tableManager.isRoomHost();
+//            if ( (roomBanker == selfId && this._roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) ||
+//                (this._roomType == Game.Game.ROOM_TYPE.CUSTOMIZED && isRoomHost)) {
+//                skin = "assets/ui.room/img_Go.png";
+//                btnSkin = "assets/ui.room/btn_blue.png";
+//            }
+//        }
+//        this.readyBtnImg.skin = skin;
+//        this.readyBtn.skin = btnSkin;
+//    };
+//
+//    GameRoomView.prototype.touchReadyBtn = function () {
+//        //*清除桌面上的东西
+//        var room = App.tableManager.getRoom();
+//        this.nextRound(room);
+//        App.tableManager.startNextRound();
+//
+//        var self = this;
+//        var complete = function (err, data) {
+//            if (err) {
+//
+//            }
+//            else {
+//                self.setReadyValue();
+//            }
+//        };
+//        App.soundManager.playSound("btnSound");
+//        var ready = !this._isReady;
+//
+//        //*点击准备
+//        App.netManager.send(
+//            "room.handler.command",
+//            {
+//                fn: "ready",
+//                data: ready
+//            },
+//            Laya.Handler.create(null, complete)
+//        );
+//    };
+//
+//    GameRoomView.prototype.setOpenOutBtnDisabled = function () {
+//        this.openOutsBtn.disabled = true;
+//    };
+//
+//    //*不做庄，勾选显示
+//    GameRoomView.prototype.setNoDoBankerTick = function () {
+//        var selfId = App.player.getId();
+//        var notBanker = App.tableManager.checkNotBanker(selfId) ? true : false;
+//        this.bankerTick.visible = notBanker;
+//    };
+//
+//    //*显示不做庄家操作
+//    GameRoomView.prototype.showNoDoBankerBtn = function () {
+//        var roomType = this._room.type;
+//        if (roomType == Game.Game.ROOM_TYPE.CLASSICAL) {
+//            this.noDoBanker.visible = true;
+//        }
+//        else {
+//            this.noDoBanker.visible = false;
+//        }
+//
+//        var selfId = App.player.getId();
+//        var notBanker = App.tableManager.checkNotBanker(selfId);
+//        this.setNoDoBankerTick(notBanker);
+//    };
+//
+//
+//
+//    //*更换桌布
+//    GameRoomView.prototype.changeTableShow = function () {
+//        var tableColor = App.storageManager.getItem("TABLE_COLOR");
+//        var isYellowTable = false;
+//        if (tableColor != undefined) {
+//            if (tableColor == SettingDialog.TABLE_TYPE.GREEN) {
+//                isYellowTable = false;
+//            }
+//            else if (tableColor == SettingDialog.TABLE_TYPE.YELLOW) {
+//                isYellowTable = true;
+//            }
+//        }
+//        else {
+//            App.storageManager.setItem("TABLE_COLOR", SettingDialog.TABLE_TYPE.GREEN);
+//        }
+//
+//        this.yellowTable.visible = isYellowTable;
+//    };
+//
+//
+//
+//
+//    //*点击站起
+//    GameRoomView.prototype.touchStandUp = function () {
+//        var roomState = App.tableManager.getRoomState();
+//        if (roomState != Game.Room.STATE_READY) {
+//            return;
+//        }
+//        App.soundManager.playSound("btnSound");
+//        var self = this;
+//        var complete = function (err, data) {
+//            if (err) {
+//
+//            }
+//        };
+//        App.netManager.send(
+//            "room.handler.stand_up",
+//            {
+//                data: {}
+//            },
+//            Laya.Handler.create(null, complete)
+//        );
+//    };
+//
+//    //*点击坐下
+//    GameRoomView.prototype.touchSitBtn = function (sitId) {
+//        //*不是准备状态不能坐下或者换位置
+//        var roomState = App.tableManager.getRoomState();
+//
+//        var self = this;
+//        var selfChairId = App.tableManager.getCharis().indexOf(App.player.getId());
+//        var maxChair = this._roomMaxChairs;
+//
+//        if (sitId < 0 || sitId >= maxChair) {
+//            sitId = 0;
+//        }
+//
+//        var pos = sitId + selfChairId;
+//        if (pos >= maxChair) {
+//            pos -= maxChair;
+//        }
+//
+//        var complete = function (err, data) {
+//            if (err) {
+//
+//            }
+//        };
+//        App.netManager.send(
+//            "room.handler.sit_down",
+//            {
+//                data: pos
+//            },
+//            Laya.Handler.create(null, complete)
+//        );
+//    };
+//
+//    //*庄家标记飞行
+//    GameRoomView.prototype.bankerTagFly = function () {
+//        var bankerId = this._roomBanker;
+//        if (bankerId) {
+//            var sitSprite = this.getTableIndexByUserId(bankerId);
+//            var posX = sitSprite.x - 40;
+//            var posY = sitSprite.y - 50;
+//            var moveTo = MoveTo.create(0.5, posX, posY);
+//            App.actionManager.addAction(moveTo, this._bankerTagImg);
+//            this._bankerTagImg.zOrder = 100;
+//        }
+//    };
+//
+//    //*创建庄家标记
+//    GameRoomView.prototype.createBankerTagImg = function () {
+//        var bankerId = App.tableManager.getRoomBanker();
+//        //*找到庄家的位置
+//        var sitSprite = this.getTableIndexByUserId(bankerId);
+//        if (!this._bankerTagImg && sitSprite) {
+//            var img = new Laya.Image("assets/ui.room/icon_banker.png");
+//            this._clientShowBox.addChild(img);
+//            img.zOrder = 100;
+//            img.scaleX = 1.5;
+//            img.scaleY = 1.5;
+//            img.x = sitSprite.x - 50;
+//            img.y = sitSprite.y - 70;
+//            this._bankerTagImg = img;
+//        }
+//    };
+//
+//    GameRoomView.prototype.clearTableIconById = function (userId) {
+//        var index = this._userPosInTable.indexOf(userId);
+//        if (index != -1) {
+//            this._userPosInTable[index] = null;
+//            //*站起显示坐下的标志
+//            this._sitTagList[index].visible = true;
+//        }
+//
+//        if (userId == App.player.getId()) {
+//            this.setStartBoxVisible(false);
+//        }
+//
+//        //*如果是庄家删除增加标志
+//        if (App.tableManager.getRoomBanker() == userId && this._bankerTagImg) {
+//            this._bankerTagImg.removeSelf();
+//            this._bankerTagImg = null;
+//        }
+//    };
+//
+//    //*站起
+//    GameRoomView.prototype.playerStand = function (userId) {
+//        this._isReady = false;
+//        var isSelf = this.isSelf(userId);
+//        if (isSelf) {
+//            //*清除桌面上东西
+//            var room = App.tableManager.getRoom();
+//            this.nextRound(room);
+//            App.tableManager.startNextRound();
+//        }
+//
+//        this.clearTableIconById(userId);
+//    };
+//
+//    //*坐下
+//    GameRoomView.prototype.playerSitDown = function (info) {
+//        var userId = info.userID;
+//        //*如果是自己换位，重新刷新一下坐下的标志
+//        if (userId == App.player.getId()) {
+//            for (var index in this._sitTagList) {
+//                this._sitTagList[index].visible = true;
+//            }
+//        }
+//        //*刷新头像显示
+//        var chairs = App.tableManager.getCharis();
+//        for (var i = 0; i < chairs.length; i++) {
+//            if (chairs[i]) {
+//                this.clearTableIconById(chairs[i]);
+//                this.joinPlayer({userID: chairs[i]});
+//                var roomState = App.tableManager.getRoomState();
+//                if (roomState == Game.Room.STATE_READY) {
+//                    this.setStartBoxVisible(true);
+//                }
+//            }
+//        }
+//    };
+//
+//    //*有玩家加入
+//    GameRoomView.prototype.joinPlayer = function (playerInfo) {
+//        var pos    = playerInfo.pos; //*位置
+//        var userId = playerInfo.userID;
+//        if (pos < 0) {
+//            //*站起的状态
+//            return;
+//        }
+//
+//        //*加入新玩家
+//        this.createPlayerIcon(userId, pos);
+//    };
+//
+//    GameRoomView.prototype.createPlayerIcon = function (playerUserId, pos) {
+//        var roomBanker = App.tableManager.getRoomBanker();
+//        //*判断自己是不是站起的状态，没有在椅子上
+//        var selfUserID = App.player.getId();
+//        var chairs = App.tableManager.getCharis();
+//        //*自己的位置
+//        var selfIndexInChair = chairs.indexOf(selfUserID);
+//        //*加进来的人的位置
+//        var playerIndexInChair = pos || chairs.indexOf(playerUserId);
+//
+//        var playerIcon;
+//        var posInTable;
+//        var canCreate = false;
+//        if (selfIndexInChair == -1) {
+//            //*自己没有坐下就按chairs的位置显示
+//            if (this._userPosInTable.indexOf(playerUserId) == -1) {
+//                posInTable = playerIndexInChair;
+//                canCreate = true;
+//            }
+//        }
+//        else {
+//            //*自己坐下根据自己的位置显示别人的座位
+//            if (this._userPosInTable.indexOf(playerUserId) == -1) {
+//                var indexDiff = playerIndexInChair - selfIndexInChair;
+//                if (indexDiff < 0) {
+//                    indexDiff = this._roomMaxChairs + indexDiff;
+//                }
+//                posInTable = indexDiff;
+//                canCreate = true;
+//            }
+//        }
+//
+//        if (canCreate) {
+//            var playerBoxList = App.tableManager.getRoomPlayerBox();
+//            if (playerBoxList[playerUserId]) {
+//                playerIcon = playerBoxList[playerUserId];
+//            }
+//            else {
+//                playerIcon = new RoomPlayerBox({userID: playerUserId});
+//            }
+//
+//            playerIcon.y = this._playerBoxs[posInTable].y - 70;
+//            playerIcon.x = this._playerBoxs[posInTable].x - 70;
+//            playerIcon.zOrder = -10;
+//            playerIcon.changeBetLabPos(posInTable);
+//            this._clientShowBox.addChild(playerIcon);
+//            this._sitTagList[posInTable].visible = false;
+//            this._userPosInTable[posInTable] = playerUserId;
+//
+//            App.tableManager.addPlayerBox(playerUserId, playerIcon);
+//
+//            //*恢复庄家标识
+//            if (roomBanker && this._roomType != Game.Game.ROOM_TYPE.CHAOS && roomBanker == playerUserId) {
+//                if (this._bankerTagImg) {
+//                    this.bankerTagFly();
+//                }
+//                else {
+//                    this.createBankerTagImg();
+//                }
+//            }
+//        }
+//    };
+//    //*返回大厅
+//    GameRoomView.prototype.backToLobby = function () {
+//        if (this._isLockRoom) {
+//            return;
+//        }
+//
+//        var roomHost = this._room.host;
+//        var selfId = App.player.getId();
+//        if (selfId == roomHost) {
+//            this.dispose();
+//        }
+//        else {
+//            this.leaveRoom();
+//        }
+//    };
+//
+
+//    GameRoomView.prototype.refurbishTableShow = function (room) {
+//        this._userPosInTable = [];
+//
+//        this._room = room;
+//        this._chairs = this._room.chairs;
+//
+//        this.clearGhostPokers();
+//        //*更新局数
+//        this.updateRoundNumLab();
+//        //*清除灯光
+//        this.unShowAllLight();
+//
+//        this.showChairsInRoom();
+//
+//        //*下注按钮，操作按钮不显示
+//        this.bankerOperationBox.visible = false;
+//        this.operationBox.visible = false;
+//        this.bidBox.visible = false;
+//    };
+//    GameRoomView.prototype.getDeckNode = function () {
+//        return this._deckNodeShow;
+//    };
+//
+//    GameRoomView.prototype.getPlayersBox = function () {
+//        return this._clientShowBox;
+//    };
+//
+//    GameRoomView.prototype.leaveRoom = function () {
+//        var self = this;
+//        var complete = function (err, data) {
+//            if (err) {
+//                return;
+//            }
+//
+//            self.dispose();
+//            App.tableManager.quitRoom();
+//        };
+//        //*退出房间
+//        App.netManager.send(
+//            "room.handler.leave",
+//            {
+//                //fn: "leave",
+//                data: {}
+//            },
+//            Laya.Handler.create(null, complete)
+//        );
+//
+//    };
+//
+//    GameRoomView.prototype.dispose = function () {
+//        App.soundManager.playSound("btnSound");
+//        App.soundManager.playMusic("lobbyMusic");
+//        Laya.timer.clearAll(this);
+//        App.uiManager.removeGameRoomView();
+//        App.lobbyView.updateView();
+//    };
+//
+//    GameRoomView.SHOW_POKER_TYPE = {
+//        BANKER: 1,
+//        PLYER: 2
+//    };
+//
+//    GameRoomView.POINT_NAME = [
+//        "bung",
+//        "one",
+//        "two",
+//        "three",
+//        "four",
+//        "five",
+//        "six",
+//        "seven",
+//        "eight",
+//        "nine"
+//    ];
+//
+//    return GameRoomView;
+//}(GameRoomViewUI));
+
+
+    //*庄家显示，换庄，不做庄，混战模式，定制模式（抢庄操作），返回房间，房间上锁，离开房间，站起锁定，战绩锁定，显示鬼牌，解散房间锁定，解散房间操作，声音播放，灯光优化
+    //*站起坐下
+
 var GameRoomView = (function(_super) {
     function GameRoomView(roomData) {
         GameRoomView.super(this);
         console.log(roomData);
-        this._clientShowBox         = null; //*显示的容器
         this._deckNodeShow          = null;
         this._ghostBoxShow          = null;
         this._lightBoxShow          = null;
 
-        this._room                  = roomData;
-        this._roomId                = roomData.id;
-        this._roomType              = roomData.type;
-        this._chairs                = roomData.chairs;
-        this._roomBanker            = roomData.banker;
-        this._roomMaxChairs         = roomData.maxChairs;
-
-        this._playerBoxs            = []; //*玩家信息显示的位置
+        this._playerSpriteList      = []; //*玩家信息显示的位置
         this._userPosInTable        = []; //*玩家在桌子上的位置
         this._sitTagList            = []; //*坐下标志
         this._betBtnList            = []; //*下注按钮
         this._lightList             = []; //*灯光
+        this._playerBoxList         = [];
         this._ghostList             = [];
         this._showGhostList         = [];
 
         this._canShowEffort         = false; //*是否能显示房间，上一局战绩
-        this._isReady               = false; //*是否准备了，用于准备按钮的切换
         this._bankerTagImg          = null;
 
         this._isLockRoom            = false;
 
-        App.tableManager.saveGameRoom(this);
+        this._pokerImgList          = [];
+        this._dealUser              = 0;
+        this._dealRound             = 1;
 
         this.init();
+        this.initEvent();
     }
 
     Laya.class(GameRoomView, "GameRoomView", _super);
 
+    var __proto = GameRoomView.prototype;
+
+    __proto.clearRoomShow = function () {
+        this._dealUser  = 0;
+        this._dealRound = 1;
+
+        for (var i in this._pokerImgList) {
+            if (this._pokerImgList[i]) {
+                this._pokerImgList[i].dispose();
+            }
+        }
+
+        this.clearGhostPokers();
+    };
+
     //*弹出结算界面
-    GameRoomView.prototype.showFinalPanel = function () {
-        var room = App.tableManager.getRoom();
-        var roomLog = room.roomLog;
+    __proto.showFinalPanel = function () {
+        var roomInfo    = App.tableManager.getRoomInfo();
+        var roomLog     = roomInfo.roomLog || {};
         //*弹出结算窗口
-        var finalView = new FinalDialog(roomLog);
+        var finalView   = new FinalDialog(roomLog);
         App.uiManager.addUiLayer(finalView, {isAddShield:true,alpha:0.5,isDispose:false});
     };
 
-    GameRoomView.prototype.showFinalBtn = function () {
-        this.finalBtn.visible = true;
-    };
-
-    GameRoomView.prototype.changeStandUpState = function () {
-        //*庄家不能站起
-        var banker = App.tableManager.getRoomBanker();
-        var selfId = App.player.getId();
-        var roomState = App.tableManager.getRoomState();
-        if (banker == selfId || roomState != Game.Room.STATE_READY) {
+    //*站起按钮状态
+    __proto.changeStandUpState = function () {
+        var roomInfo    = App.tableManager.getRoomInfo();
+        var selfId      = App.player.getId();
+        var roomBanker  = roomInfo.banker;
+        var roomState   = roomInfo.state;
+        var roomType    = roomInfo.type;
+        //*庄家不能站起,混战模式没有庄家
+        if ((roomBanker == selfId || roomType != Game.ROOM_TYPE.CHAOS) || roomState != Game.Room.STATE_READY) {
             this.standUpGray.visible = true;
             this.standUpBtn.visible = false;
         }
@@ -66,7 +794,36 @@ var GameRoomView = (function(_super) {
         }
     };
 
-    GameRoomView.prototype.changeLockRoomState = function (isLock) {
+    //*解散房间按钮状态
+    __proto.changeDisbandBtnState = function () {
+        var selfId              = App.player.getId();
+        var roomInfo            = App.tableManager.getRoomInfo();
+        var dismissNeedConfirm  = roomInfo.dismissNeedConfirm ? true : false;
+        var roomHost            = roomInfo.host;
+        var whoCandisband       = dismissNeedConfirm ? "all" : "host";
+        var selfIsHost          = (selfId == roomHost);
+
+        if (whoCandisband == "host") {
+            if (selfIsHost) {
+                this.disbandGray.visible = false;
+                this.disbandBtn.visible = true;
+            }
+            else {
+                this.disbandGray.visible = true;
+                this.disbandBtn.visible = false;
+            }
+        }
+        else if (whoCandisband == "all") {
+            this.disbandGray.visible = false;
+            this.disbandBtn.visible = true;
+        }
+    };
+
+    // 房间是不是上锁
+    __proto.changeLockRoomState = function () {
+        var roomInfo    = App.tableManager.getRoomInfo();
+        var isLock      = roomInfo.locked ? true : false;
+
         if (isLock) {
             this.lobbyGray.visible = true;
             this.lobbyBtn.visible = false;
@@ -79,8 +836,75 @@ var GameRoomView = (function(_super) {
         }
     };
 
+    // 改变房间战绩按钮的显示
+    __proto.changeEffortBtnState = function () {
+        var roomInfo        = App.tableManager.getRoomInfo();
+        var roomLog         = roomInfo.roomLog || {};
+        var rounds          = roomLog.rounds || {};
+        var effortLength    = Object.keys(rounds).length;
+
+        var canShowEffort = false;
+        if (effortLength >= 1) {
+            canShowEffort = true;
+        }
+
+        var skin = "";
+        var stateNum = 2;
+        if (canShowEffort) {
+            skin = "assets/ui.room/icon_Record.png";
+        }
+        else {
+            skin = "assets/ui.room/icon_Record_j.png";
+            stateNum = 1;
+        }
+
+        this._canShowEffort     = canShowEffort;
+        this.recordbtn.skin     = skin;
+        this.recordbtn.stateNum = stateNum;
+    };
+
+    //*房间结束，显示查看战绩按钮
+    __proto.showCloseRoom = function () {
+        this.finalBtn.visible = true;
+    };
+
+    //*清除鬼牌显示
+    __proto.clearGhostPokers = function () {
+        for (var ghostIndex = 0; ghostIndex < this._ghostList.length; ghostIndex++) {
+            this._ghostList[ghostIndex].dispose();
+        }
+        this._ghostList = [];
+        for (var showGhostIndex = 0; showGhostIndex < this._showGhostList.length; showGhostIndex ++) {
+            this._showGhostList[showGhostIndex].dispose();
+        }
+        this._showGhostList = [];
+    };
+
+    __proto.touchReadyBtn = function () {
+        var self = this;
+        var complete = function (err, data) {
+            if (err) {
+
+            }
+        };
+        App.soundManager.playSound("btnSound");
+        var clients = App.tableManager.getClients();
+        var selfId = this.getSelfId();
+        var ready = ! (clients[selfId].ready);
+
+        //*点击准备
+        App.netManager.send(
+            "room.handler.command",
+            {
+                fn: "ready",
+                data: ready
+            },
+            Laya.Handler.create(null, complete)
+        );
+    };
+
     //*发送信息显示，聊天信息显示
-    GameRoomView.prototype.showSendChat = function (info) {
+    __proto.showSendChat = function (info) {
         //var userID = info.userID; //*谁发送的
         //var msg = info.msg;
         //this._chatShowList.addItem({userID: userID, msg: msg});
@@ -139,7 +963,6 @@ var GameRoomView = (function(_super) {
         barrageItem.addChild(nameLab);
 
         barrageItem.x = this.width + barrageItem.width;
-        //barrageItem.y = Math.random() * ;
         barrageItem.y = DejuPoker.Utils.range_value(barrageItem.height,this.height/2);
 
         this.addChild(barrageItem);
@@ -152,121 +975,12 @@ var GameRoomView = (function(_super) {
         ]);
 
         App.actionManager.addAction(seq,barrageItem);
-
     };
 
-    //*进行下一轮
-    GameRoomView.prototype.nextRound = function (roomInfo) {
-        //*清除显示
-        this.clearGhostPokers();
-
-        //*是否有切换庄家
-        var isChangeBanker = false;
-        if (this._roomBanker != roomInfo.banker) {
-            isChangeBanker = true;
-        }
-
-        this._room       = roomInfo;
-        this._roomId     = roomInfo.id;
-        this._roomBanker = roomInfo.banker;
-        this._chairs     = roomInfo.chairs;
-
-        this.setReadyBtnState();
-
-        //*下注按钮，操作按钮不显示
-        this.bankerOperationBox.visible = false;
-        this.operationBox.visible = false;
-        this.bidBox.visible = false;
-
-        //*有切换庄家
-        if (isChangeBanker && this._roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) {
-            this.bankerTagFly();
-        }
-
-        if (this._roomType == Game.Game.ROOM_TYPE.CUSTOMIZED) {
-            if (this._bankerTagImg) {
-                this._bankerTagImg.removeSelf();
-                this._bankerTagImg = null;
-            }
-        }
-
-        //*更新局数
-        this.updateRoundNumLab();
-
-        //*清除灯光
-        this.unShowAllLight();
-    };
-
-    //*更新局数显示
-    GameRoomView.prototype.updateRoundNumLab = function () {
-        var roundText = App.tableManager.getRoundText();
-        this.roundLab.text = roundText;
-    };
-
-    //*关闭操作按钮显示
-    GameRoomView.prototype.closeOptionBoxs = function () {
-        this.bankerOperationBox.visible = false;
-        this.operationBox.visible = false;
-    };
-
-    GameRoomView.prototype.showNextRoundBtn = function () {
-        this.closeOptionBoxs();
-        this._isReady = false;
-
-        var selfId = App.player.getId();
-        var clients = App.tableManager.getTableClients();
-        if (clients[selfId]) {
-            this.setStartBoxVisible(true);
-        }
-        else {
-            this.setStartBoxVisible(false);
-        }
-    };
-
-    //*清除poker结果显示
-    GameRoomView.prototype.clearResultPokers = function () {
-        this.nextRoundBtn.visible = false;
-    };
-
-    GameRoomView.prototype.changeEffortBtnState = function (effortLength) {
-        var canShowEffort = false;
-        if (effortLength >= 1) {
-            canShowEffort = true;
-        }
-
-        var skin = "";
-        var stateNum = 2;
-        if (canShowEffort) {
-            skin = "assets/ui.room/icon_Record.png";
-        }
-        else {
-            skin = "assets/ui.room/icon_Record_j.png";
-            stateNum = 1;
-        }
-
-        this._canShowEffort = canShowEffort;
-        this.recordbtn.skin = skin;
-        this.recordbtn.stateNum = stateNum;
-    };
-
-    //*显示战绩
-    GameRoomView.prototype.onShowEffort = function () {
-        if (!this._canShowEffort) {
-            return;
-        }
-
-        App.soundManager.playSound("btnSound");
-        var func = function (rounds) {
-            var view = new EffortOfRoomDialog(rounds);
-            App.uiManager.addUiLayer(view);
-        };
-        App.tableManager.showRoundEffort(func);
-    };
-
-    GameRoomView.prototype.checkCanCloseRoom = function () {
-        var roomState = App.tableManager.getRoomState();
-        var room = App.tableManager.getRoom();
-        var firstPay = room.firstPay;
+    __proto.checkCanCloseRoom = function () {
+        var roomInfo = App.tableManager.getRoomInfo();
+        var roomState = roomInfo.state;
+        var firstPay = roomInfo.firstPay;
         if (roomState == Game.Room.STATE_READY && !firstPay) {
             //*第一局没开始的时候有弹框
             var self = this;
@@ -283,14 +997,11 @@ var GameRoomView = (function(_super) {
     };
 
     //*解散房间
-    GameRoomView.prototype.closeRoomOfBanker = function () {
+    __proto.closeRoomOfBanker = function () {
         App.soundManager.playSound("btnSound");
+
         var self = this;
-        var complete = function (err, data) {
-            if (err) {
-                //*错误提示
-            }
-        };
+        var complete = function (err, data) {};
         App.netManager.send(
             "room.handler.destroy",
             {
@@ -301,21 +1012,68 @@ var GameRoomView = (function(_super) {
         );
     };
 
-    GameRoomView.prototype.endRound = function () {
+    //*显示战绩
+    __proto.onShowEffort = function () {
+        if (!this._canShowEffort) {
+            // 灰色按钮不能点击
+            return;
+        }
+
         App.soundManager.playSound("btnSound");
+
+        var roomInfo    = App.tableManager.getRoomInfo();
+        var roomLog     = roomInfo.roomLog || {};
+        var rounds      = roomLog.rounds || {};
+        var view        = new EffortOfRoomDialog(rounds);
+
+        App.uiManager.addUiLayer(view);
+    };
+
+    //*聊天
+    __proto.onShowChatPanel = function () {
+        App.soundManager.playSound("btnSound");
+        var chatView = new ChatViewDialog();
+        App.uiManager.addUiLayer(chatView, {isAddShield:true,alpha:0,isDispose:true});
+    };
+
+    //*设置界面
+    __proto.onSetting = function () {
+        App.soundManager.playSound("btnSound");
+        var settingPanel = new SettingDialog();
+        App.uiManager.addUiLayer(settingPanel);
+        settingPanel.on(SettingDialog.Events.CHANGE_TABLE, this, this.changeTableShow);
+    };
+
+    //*规则查看
+    __proto.onShowRulePanel = function () {
+        App.soundManager.playSound("btnSound");
+
+        var roomInfo    = App.tableManager.getRoomInfo();
+        var setting     = roomInfo.settings || {};
+        var type        = roomInfo.type;
+        var info        = {};
+        for (var index in setting) {
+            info[index] = setting[index];
+        }
+        info.type = type;
+        var rulePanel = new ShowRuleDialog(info);
+        App.uiManager.addUiLayer(rulePanel);
+    };
+
+    //*牌型
+    __proto.onPokerType = function () {
+        var showPokerType = new ShowPokerTypeDialog();
+        this.addChild(showPokerType);
+    };
+
+    //*点击不做庄家
+    __proto.onNoDoBanker = function () {
         var self = this;
-        var complete = function (err, data) {
-            if (err) {
-                //*错误提示
-            }
-            else {
-                self.clearResultPokers();
-            }
-        };
+        var complete = function (err, data) {};
         App.netManager.send(
             "room.handler.command",
             {
-                fn: "end",
+                fn: "rejectBanker",
                 data: {}
             },
             Laya.Handler.create(null, complete)
@@ -323,14 +1081,10 @@ var GameRoomView = (function(_super) {
     };
 
     //*过牌
-    GameRoomView.prototype.onPass = function () {
+    __proto.onPass = function () {
         App.soundManager.playSound("btnSound");
         var self = this;
-        var complete = function (err, data) {
-            if (err) {
-                //*错误提示
-            }
-        };
+        var complete = function (err, data) {};
         App.netManager.send(
             "room.handler.command",
             {
@@ -342,16 +1096,14 @@ var GameRoomView = (function(_super) {
     };
 
     //*搓牌
-    GameRoomView.prototype.outsActionShow = function () {
+    __proto.outsActionShow = function () {
         App.soundManager.playSound("btnSound");
-        var self = this;
-        var isBanker = this.selfIsBanker();
-        var complete = function (err, data) {
-            if (err) {
-                //*错误提示
-            }
 
-        };
+        var self        = this;
+        var selfId      = App.player.getId();
+        var roomBanker  = App.tableManager.getRoomInfo().banker;
+        var isBanker    = (selfId == roomBanker);
+        var complete    = function (err, data) {};
 
         var fn = "draw";
         if (isBanker && this._roomType != Game.Game.ROOM_TYPE.CHAOS && this._roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) {
@@ -368,21 +1120,58 @@ var GameRoomView = (function(_super) {
         );
     };
 
+    //*补牌动作
+    __proto.playerDrawPoker = function (userId) {
+        if (!userId) {
+            App.tableManager.continueUpdateState();
+            return;
+        }
+
+        var roomInfo = App.tableManager.getRoomInfo();
+        var roomType = roomInfo.type;
+
+        if (roomType == Game.Game.ROOM_TYPE.CUSTOMIZED) {
+            //*定制模式是的话就是直接明牌
+            this.showPokerToPlayerAction(userId);
+        }
+        else {
+            //*飞牌的动作
+            var deckNode = this._deckNodeShow;
+            var playerBox = this._playerBoxList;
+            var pokers = new Poker();
+            pokers.setPokerPosition({x:deckNode.x, y:deckNode.y});
+            pokers.setPokerScale();
+            this.playersBox.addChild(pokers);
+            this._pokerImgList.push(pokers);
+            var pos = playerBox[userId];
+            var moveTo = MoveTo.create(0.5, pos.x, pos.y);
+            var scaleTo = ScaleTo.create(0.5, 0, 0);
+            var spa = Spawn.create(moveTo, scaleTo);
+            var self = this;
+            var callBack = CallFunc.create(Laya.Handler.create(null,
+                function () {
+                    playerBox[userId].showOutsPoker();
+                    App.tableManager.continueUpdateState();
+                }
+            ));
+            var seq = Sequence.create(spa, callBack);
+            App.actionManager.addAction(seq, pokers);
+        }
+    };
+
     //*普通补牌
-    GameRoomView.prototype.outsPoker = function () {
+    __proto.outsPoker = function () {
         App.soundManager.playSound("btnSound");
-        var isBanker = this.selfIsBanker();
-        var self = this;
+
+        var roomInfo    = App.tableManager.getRoomInfo();
+        var banker      = roomInfo.banker;
+        var selfId      = App.player.getId();
+        var isBanker    = (banker == selfId);
+        var roomType    = roomInfo.type;
+        var self        = this;
         var complete;
-        if (isBanker && this._roomType != Game.Game.ROOM_TYPE.CHAOS && this._roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) {
-            complete = function (err, data) {
-                if (err) {
-                    //*错误提示
-                }
-                else {
-                    self.openOutsBtn.disabled = true;
-                }
-            };
+        if (isBanker && roomInfo != Game.Game.ROOM_TYPE.CHAOS && roomInfo != Game.Game.ROOM_TYPE.CUSTOMIZED) {
+            complete = function (err, data) {};
             App.netManager.send(
                 "room.handler.command",
                 {
@@ -393,11 +1182,7 @@ var GameRoomView = (function(_super) {
             );
         }
         else {
-            complete = function (err, data) {
-                if (err) {
-                    //*错误提示
-                }
-            };
+            complete = function (err, data) {};
             App.netManager.send(
                 "room.handler.command",
                 {
@@ -409,16 +1194,29 @@ var GameRoomView = (function(_super) {
         }
     };
 
+    //*明牌的动作
+    __proto.showPokerToPlayerAction = function (userId) {
+        if (!userId) {
+            App.tableManager.continueUpdateState();
+            return;
+        }
+
+        var playerBox = this._playerBoxList[userId];
+        if (playerBox) {
+            playerBox.showAllPokers();
+            App.tableManager.continueUpdateState();
+        }
+    };
+
     //*明牌
-    GameRoomView.prototype.showPokerToPlayer = function () {
+    __proto.showPokerToPlayer = function () {
         App.soundManager.playSound("btnSound");
-        var self = this;
-        var complete = function (err, data) {
-            if (err) {
-                //*错误提示
-            }
-        };
-        if (this._roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) {
+
+        var self        = this;
+        var roomInfo    = App.tableManager.getRoomInfo();
+        var roomType    = roomInfo.type;
+        var complete    = function (err, data) {};
+        if (roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) {
             App.netManager.send(
                 "room.handler.command",
                 {
@@ -442,16 +1240,15 @@ var GameRoomView = (function(_super) {
     };
 
     //*庄家开补
-    GameRoomView.prototype.openOutsPlayerPoker = function () {
+    __proto.openOutsPlayerPoker = function () {
         App.soundManager.playSound("btnSound");
-        var isBanker = this.selfIsBanker();
+        var roomInfo    = App.tableManager.getRoomInfo();
+        var banker      = roomInfo.banker;
+        var selfId      = App.player.getId();
+        var isBanker    = (banker == selfId);
         if (isBanker) {
             var self = this;
-            var complete = function (err, data) {
-                if (err) {
-                    //*错误提示
-                }
-            };
+            var complete = function (err, data) {};
 
             App.netManager.send(
                 "room.handler.command",
@@ -465,20 +1262,15 @@ var GameRoomView = (function(_super) {
     };
 
     //*庄家全开
-    GameRoomView.prototype.allPlayerPokerOpen = function () {
+    __proto.allPlayerPokerOpen = function () {
         App.soundManager.playSound("btnSound");
-        var isBanker = this.selfIsBanker();
+        var roomInfo = App.tableManager.getRoomInfo();
+        var banker = roomInfo.banker;
+        var selfId = App.player.getId();
+        var isBanker = (banker == selfId);
         if (isBanker) {
             var self = this;
-            var complete = function (err, data) {
-                if (err) {
-                    //*错误提示
-                }
-                else {
-
-                }
-            };
-
+            var complete = function (err, data) {};
             App.netManager.send(
                 "room.handler.command",
                 {
@@ -490,38 +1282,72 @@ var GameRoomView = (function(_super) {
         }
     };
 
-    GameRoomView.prototype.gameWasStarted = function () {
-        this.setStartBoxVisible(false);
-        //*显示鬼牌
-        var table = App.tableManager.getRoom().table;
-        var ghostPokers = table.ghostPokers;
-        for (var index in ghostPokers) {
-            var pokerInfo = ghostPokers[index];
-            var showPoker = new Poker(pokerInfo, ghostPokers);
-            showPoker.scaleX = 0.3;
-            showPoker.scaleY = 0.3;
-            showPoker.x += 80 * Number(index);
-            this._showGhostList.push(showPoker);
-            this._ghostBoxShow.addChild(showPoker);
+    __proto.touchBetBtn = function (betNum) {
+        var selfId = this.getSelfId();
+        var clients = App.tableManager.getClients();
+        if (clients[selfId] && clients[selfId].bid && clients[selfId].bidRate > 0) {
+            return;
         }
 
-        this.showNoDoBankerBtn();
+        betNum = betNum || 1;
+        var self = this;
+        var complete = function (err, data) {};
+        //*下注
+        App.netManager.send(
+            "room.handler.command",
+            {
+                fn: "bid",
+                data: betNum
+            },
+            Laya.Handler.create(null, complete)
+        );
     };
 
-    //*开始补牌的操作
-    GameRoomView.prototype.playerDrawPoker = function (opt) {
-        var userId = opt.userId;
-        var handPokers = opt.handPokers;
-        this.showLightByUserId(userId);
-        var isSelf = this.isSelf(userId);
-        if (!isSelf) {
+    //*关闭所有的操作选项按钮
+    __proto.unShowDrawOption = function () {
+        this.bankerOperationBox.visible = false;
+        this.operationBox.visible = false;
+    };
+
+    //*关闭所有灯光
+    __proto.unShowAllLight = function () {
+        for (var index in this._lightList) {
+            this._lightList[index].visible = false;
+        }
+    };
+
+    //*显示操作灯光
+    __proto.showLightByUserId = function (userId) {
+        this.unShowAllLight();
+        if (this._userPosInTable.indexOf(userId) != -1) {
+            var index = this._userPosInTable.indexOf(userId);
+            this._lightList[index].visible = true;
+        }
+    };
+
+    __proto.showDrawOption = function () {
+        //*开始补牌的操作
+        var roomInfo        = App.tableManager.getRoomInfo();
+        var table           = roomInfo.table || {};
+        var clients         = table.clients || {};
+        var drawList        = table.drawList || [];
+        var drawer          = drawList[0] || roomInfo.banker;
+        var ghostPokers     = roomInfo.ghostPokers || [];
+        var roomType        = roomInfo.type;
+        var roomSettings    = roomInfo.settings || {};
+
+        this.showLightByUserId(drawer);//光柱
+        var selfId = App.player.getId();
+        var handPokers = clients[selfId] ? clients[selfId].handPokers : [];
+        var isSelfOption = (selfId == drawer);
+        if (!isSelfOption) {
             this.bankerOperationBox.visible = false;
             this.operationBox.visible = false;
             return;
         }
+
         App.soundManager.playSound("optionSound");
         var ghostArray = [];
-        var ghostPokers = App.tableManager.getGhostPokers();
         for (i in ghostPokers) {
             poker = ghostPokers[i];
             if (poker && poker.type != Game.Poker.TYPE.JOKER) {
@@ -555,7 +1381,6 @@ var GameRoomView = (function(_super) {
         totalValue = totalValue % 10;
 
         var isOuts = false;
-        var clients = App.tableManager.getTableClients();
         var index;
         var clientHandPokers;
         for (index in clients) {
@@ -575,13 +1400,13 @@ var GameRoomView = (function(_super) {
         var cantBetAll = false;
         var cantBetDraw = false;
 
-        switch (this._roomType) {
+        switch (roomType) {
             // 长庄
             case Game.Game.ROOM_TYPE.STATIC: {
                 // 一只鬼的时候
                 if (ghostCnt === 1) {
                     // 鬼牌万能 只能补牌
-                    if (this._room.settings.universalGhost == true) {
+                    if (roomSettings.universalGhost == true) {
                         cantOpen = true;
                         cantPass = true;
 
@@ -600,7 +1425,7 @@ var GameRoomView = (function(_super) {
                 // 一只鬼的时候
                 if (ghostCnt === 1) {
                     // 鬼牌万能 只能补牌
-                    if (this._room.settings.universalGhost == true) {
+                    if (roomSettings.universalGhost == true) {
                         cantOpen = true;
                         cantPass = true;
 
@@ -619,7 +1444,7 @@ var GameRoomView = (function(_super) {
                 // 一只鬼的时候
                 if (ghostCnt === 1) {
                     // 鬼牌万能 只能补牌
-                    if (this._room.settings.universalGhost == true) {
+                    if (roomSettings.universalGhost == true) {
                         cantOpen = true;
                         cantPass = true;
 
@@ -638,17 +1463,18 @@ var GameRoomView = (function(_super) {
             }
         }
 
-        if (this._roomType == Game.Game.ROOM_TYPE.CUSTOMIZED || this._roomType == Game.Game.ROOM_TYPE.CHAOS) {
+        if (roomType == Game.Game.ROOM_TYPE.CUSTOMIZED || roomType == Game.Game.ROOM_TYPE.CHAOS) {
             this.bankerOperationBox.visible = false;
             this.operationBox.visible = true;
         }
         else {
-            var isBanker = this.selfIsBanker();
+            var roomBanker = roomInfo.banker;
+            var isBanker = (selfId == roomBanker);
             if (isBanker) {
                 this.bankerOperationBox.visible = true;
                 this.operationBox.visible = false;
 
-                if (this._roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) {
+                if (roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) {
                     cantPass = true;
                     cantOpen = true;
                     if (this._roomType == Game.Game.ROOM_TYPE.CHAOS) {
@@ -676,153 +1502,108 @@ var GameRoomView = (function(_super) {
             }
         }
 
-        this.showToOtherBtn.disabled = cantOpen;
-        this.passBtn.disabled = cantPass;
-        this.outsBtn.disabled = cantDraw;
-        this.bankerOutsBtn.disabled = cantDraw;
-        this.outsActionBtn.disabled = cantRubbed;
-        this.bankerOutsActionBtn.disabled = cantRubbed;
+        this.showToOtherBtn.disabled        = cantOpen;
+        this.passBtn.disabled               = cantPass;
+        this.outsBtn.disabled               = cantDraw;
+        this.bankerOutsBtn.disabled         = cantDraw;
+        this.outsActionBtn.disabled         = cantRubbed;
+        this.bankerOutsActionBtn.disabled   = cantRubbed;
 
-        this.allOpenBtn.disabled = cantBetAll;
-        this.openOutsBtn.disabled = cantBetDraw;
+        this.allOpenBtn.disabled            = cantBetAll;
+        this.openOutsBtn.disabled           = cantBetDraw;
     };
 
-    //*下注结束
-    GameRoomView.prototype.bidEnd = function () {
+    //*关闭下注显示
+    __proto.unShowBidOption = function () {
         this.bidBox.visible = false;
     };
 
-    GameRoomView.prototype.touchBetBtn = function (betNum) {
-        var selfId = App.player.getId();
-        var clients = App.tableManager.getTableClients();
-        if (clients[selfId] && clients[selfId].bid && clients[selfId].bidRate > 0) {
-            return;
+    //* 显示下注操作
+    __proto.showBidOption = function () {
+        var userID      = this.getSelfId();
+        var roomInfo    = App.tableManager.getRoomInfo();
+        var table       = roomInfo.table || {};
+        var clients     = table.clients || {};
+        var roomBanker  = roomInfo.banker;
+        var roomType    = roomInfo.type;
+        var roomSetting = roomInfo.settings || {};
+
+        var selfIsBanker = !!(userID == roomBanker);
+
+        var selfIsInClients = false;
+        if (clients[userID]) {
+            selfIsInClients = true;
         }
 
-        betNum = betNum || 1;
-        var self = this;
-        var complete = function (err, data) {
-            if (err) {
-                //*错误提示
-            }
-        };
-        //*下注
-        App.netManager.send(
-            "room.handler.command",
-            {
-                fn: "bid",
-                data: betNum
-            },
-            Laya.Handler.create(null, complete)
-        );
-    };
-
-    //*恢复房间状态的时候显示下注按钮
-    GameRoomView.prototype.showBidOptionOnInitRoom = function (opt) {
-        var userId = App.player.getId();
-        var clients = App.tableManager.getTableClients();
-        var roomSetting = this._room.settings;
-        var chaosBet = roomSetting.chaosBet;
-
-        if (this._room.type == Game.Game.ROOM_TYPE.CUSTOMIZED) {
-            //*定制模式自动下注
-            this.touchBetBtn();
-        }
-        else if (this._room.type == Game.Game.ROOM_TYPE.CHAOS) {
-            //*混战模式，是不是自由下注
-            if (chaosBet) {
-                this.showBidOption(opt);
-            }
-            else {
+        var canShowBidBtnBox = false;
+        if (selfIsInClients) {
+            if (roomType == Game.Game.ROOM_TYPE.CUSTOMIZED) {
+                //*定制模式自动下注
                 this.touchBetBtn();
             }
-        }
-        else if (App.tableManager.getRoomBanker() == userId) {
-            this.touchBetBtn();
+            else if (roomType == Game.Game.ROOM_TYPE.CHAOS){
+                //*混战模式有两种，一种是默认下注一种的是自由下注
+                var isChaosBet = roomSetting.chaosBet;
+                if (isChaosBet) {
+                    canShowBidBtnBox = true;
+                }
+                else {
+                    //*自动
+                    this.touchBetBtn();
+                    return;
+                }
+            }
+            else if (selfIsBanker) {
+                //*自动
+                this.touchBetBtn();
+                return;
+            }
+            else {
+                canShowBidBtnBox = true;
+            }
         }
         else {
-            this.showBidOption(opt);
-        }
-    };
-
-    GameRoomView.prototype.showBidOption = function (opt) {
-        var userId = opt.userID;
-        var lastBidRate = opt.lastBidRate;
-
-        //*恢复下注按钮的可点击
-        var length = this._betBtnList.length;
-        for (var index = 0; index < length; index ++) {
-            this._betBtnList[index].disable = false;
+            canShowBidBtnBox = false;
         }
 
-        //*是否是一肛到底
-        var isMoreThenMore = false;
-        if (this._room.settings["betType"] == Game.Game.BET_TYPE.MORE_THEN_MORE) {
-            isMoreThenMore = true;
-        }
+        var lastBidRate = clients[userID].lastBidRate;
+        if (canShowBidBtnBox) {
+            var length = this._betBtnList.length;
+            for (var index = 0; index < length; index ++) {
+                this._betBtnList[index].disable = false;
+            }
 
-        var isSelf = this.isSelf(userId);
-        var isShowBidBox = false;
-        if (isSelf) {
-            isShowBidBox = true;
+            var isMoreThenMore = false;
+            if (roomSetting.betType == Game.Game.BET_TYPE.MORE_THEN_MORE) {
+                isMoreThenMore = true;
+            }
 
             if (isMoreThenMore && lastBidRate > 0) {
                 for (var i = 0; i < lastBidRate - 1; i++) {
                     this._betBtnList[i].disabled = true;
                 }
             }
-            else {
-                for (var index = 0; index < this._betBtnList.length; index++) {
-                    this._betBtnList[index].disabled = false;
-                }
-            }
 
+            this.bidBox.visible = true;
         }
-
-        this.bidBox.visible = isShowBidBox;
-    };
-
-    //*开始下注
-    GameRoomView.prototype.pokerBid = function (opt) {
-        this.showBidOptionOnInitRoom(opt);
-    };
-
-    //*清除鬼牌显示
-    GameRoomView.prototype.clearGhostPokers = function () {
-        for (var ghostIndex = 0; ghostIndex < this._ghostList.length; ghostIndex++) {
-            this._ghostList[ghostIndex].dispose();
-        }
-        this._ghostList = [];
-
-        for (var showGhostIndex = 0; showGhostIndex < this._showGhostList.length; showGhostIndex ++) {
-            this._showGhostList[showGhostIndex].dispose();
-        }
-        this._showGhostList = [];
-    };
-
-    //*显示鬼牌
-    GameRoomView.prototype.showGhostPoker = function () {
-        if (this._showGhostList[this._ghostIndex]) {
-            this._showGhostList[this._ghostIndex].visible = true;
-        }
-        this._ghostIndex++;
-        if (this._ghostIndex >= this._showGhostList.length) {
-            //*鬼牌表现做完
-            App.tableManager.ghostFinish();
+        else {
+            this.bidBox.visible = false;
         }
     };
 
-    //*飞出来的鬼牌动作
-    GameRoomView.prototype.ghostPokersAction = function (ghostPoker) {
-        ghostPoker = ghostPoker || [];
+    //* 鬼牌移动
+    __proto.ghostPokersMove = function () {
+        var roomInfo = App.tableManager.getRoomInfo();
+        var ghostPoker = roomInfo.ghostPokers || []; //*鬼牌
         if (ghostPoker.length <= 0) {
-            App.tableManager.ghostFinish();
+            App.tableManager.continueUpdateState();
+            return;
         }
         var index;
         var pokerInfo;
-        this._ghostList     = [];
+        this._ghostList = [];
         this._showGhostList = [];
-        this._ghostIndex    = 0;
+        this._ghostIndex = 0;
         for (index in ghostPoker) {
             pokerInfo = ghostPoker[index];
 
@@ -830,7 +1611,7 @@ var GameRoomView = (function(_super) {
             poker.scaleX = 0.5;
             poker.scaleY = 0.5;
             poker.x = this._deckNodeShow.x + 100 * Number(index);
-            this._clientShowBox.addChild(poker);
+            this.playersBox.addChild(poker);
             this._ghostList.push(poker);
 
             var showPoker = new Poker(pokerInfo, ghostPoker);
@@ -841,468 +1622,121 @@ var GameRoomView = (function(_super) {
             this._ghostBoxShow.addChild(showPoker);
             this._showGhostList.push(showPoker);
         }
-
-        //*fly
-        for (var i = 0; i < this._ghostList.length; i++) {
-            var ghost       = this._ghostList[i];
-            var moveTo      = MoveTo.create(0.5, this._ghostBoxShow.x, this._ghostBoxShow.y);
-            var scaleTo     = ScaleTo.create(0.5, 0, 0);
-            var spawn       = Spawn.create(moveTo, scaleTo);
-            var self        = this;
-            var callBack    = CallFunc.create(Laya.Handler.create(null, function () {
-                    self.showGhostPoker();
-            }));
-            var seq         = Sequence.create(spawn, callBack);
-            App.actionManager.addAction(seq, ghost);
-        }
     };
 
-    GameRoomView.prototype.setStartBoxVisible = function (visible) {
-        visible = visible ? true : false;
-        this.readyBtn.visible = visible;
-        this.setReadyBtnState();
-    };
-
-    //*房间中游戏开始
-    GameRoomView.prototype.gameStart = function () {
-        this.setStartBoxVisible(false);
-        //*start animation
-
-        //*通知可以给每个人做发牌的表现
-        App.tableManager.dealPlayerPokerAction();
-    };
-
-    //*抢庄结束
-    GameRoomView.prototype.robFinish = function (banker) {
-        this._roomBanker = banker;
-        //*关闭抢庄按钮
-        this.grabBankerBtn.visible = false;
-        //*创建庄家标记
-        if (!this._bankerTagImg) {
-            this.createBankerTagImg();
+    __proto.pokerFlyIsDown = function () {
+        if (this._dealRound > this._dealCount) {
+            //*发牌完毕就发鬼牌
+            this.ghostPokersMove();
         }
         else {
-            this.bankerTagFly();
+            this.checkPokerFlyRound();
         }
     };
 
-    //*抢庄的倒计时
-    GameRoomView.prototype.readyGrabBanker = function () {
-        this._grabBankerTime --;
-        if (this._grabBankerTime <= 0) {
-            Laya.timer.clear(this, this.readyGrabBanker);
-            this.countdownLab.visible = false;
-            //*显示抢庄按钮
-            this.showGrabBanker();
-        }
-        else {
-            this.countdownImg.skin = "assets/ui.room/img_Count_down" + this._grabBankerTime + ".png";
-        }
-    };
-
-    GameRoomView.prototype.showGrabBanker = function () {
-        //*显示抢庄按钮
-        this.grabBankerBtn.visible = true;
-    };
-
-    //*全部准备完成之后，定制模式，需要显示抢庄，显示倒计时
-    GameRoomView.prototype.readyFinish = function () {
-        if (this._roomType == Game.Game.ROOM_TYPE.CUSTOMIZED) {
-            this.setStartBoxVisible(false);
-            this.countdownLab.visible = true;
-            this._grabBankerTime = 3;
-            this.countdownImg.skin = "assets/ui.room/img_Count_down" + this._grabBankerTime + ".png";
-            //*开始三秒倒计时
-            Laya.timer.loop(1000, this, this.readyGrabBanker);
-        }
-    };
-
-    //*按下抢庄
-    GameRoomView.prototype.onGrabBanker = function () {
-        var self = this;
-        App.soundManager.playSound("btnSound");
-        var complete = function (err, data) {
-            if (err) {
-                console.log(err);
-            }
-        };
-        App.netManager.send(
-            "room.handler.command",
-            {
-                fn: "rob",
-                data: {}
-            },
-            Laya.Handler.create(null, complete)
-        );
-    };
-
-    //*设置准备按钮的状态
-    GameRoomView.prototype.setReadyBtnState = function () {
-        var skin = "assets/ui.room/img_GetReady.png";
-        var btnSkin  = "assets/ui.room/btn_yellow.png";
-        if (this._isReady) {
-            skin = "assets/ui.room/img_cancel.png";
-            btnSkin = "assets/ui.room/btn_blue.png";
+    //*是否已经结束发牌
+    __proto.checkPokerFlyRound = function () {
+        var roomInfo = App.tableManager.getRoomInfo();
+        var table = roomInfo.table || {}
+        var dealPokerList = table.dealSequence || []; //*发牌列表
+        var length = dealPokerList.length;
+        var userId;
+        if (this._dealUser >= length) {
+            this._dealUser = 0;
+            //*轮数加一
+            this._dealRound ++;
+            this.pokerFlyIsDown();
         }
         else {
-            var roomBanker = App.tableManager.getRoomBanker();
-            var selfId = App.player.getId();
-            var isRoomHost = App.tableManager.isRoomHost();
-            if ( (roomBanker == selfId && this._roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) ||
-                (this._roomType == Game.Game.ROOM_TYPE.CUSTOMIZED && isRoomHost)) {
-                skin = "assets/ui.room/img_Go.png";
-                btnSkin = "assets/ui.room/btn_blue.png";
-            }
-        }
-        this.readyBtnImg.skin = skin;
-        this.readyBtn.skin = btnSkin;
-    };
-
-    GameRoomView.prototype.setReadyValue = function () {
-        var selfId = App.player.getId();
-        var clients = App.tableManager.getTableClients();
-        if (clients[selfId]) {
-            this._isReady = !this._isReady;
-            this.setReadyBtnState();
+            userId = dealPokerList[this._dealUser];
+            this._dealUser ++;
+            this.pokerFlying(userId);
         }
     };
 
-    GameRoomView.prototype.touchReadyBtn = function () {
-        //*清除桌面上的东西
-        var room = App.tableManager.getRoom();
-        this.nextRound(room);
-        App.tableManager.startNextRound();
-
-        var self = this;
-        var complete = function (err, data) {
-            if (err) {
-
-            }
-            else {
-                self.setReadyValue();
-            }
-        };
-        App.soundManager.playSound("btnSound");
-        var ready = !this._isReady;
-
-        //*点击准备
-        App.netManager.send(
-            "room.handler.command",
-            {
-                fn: "ready",
-                data: ready
-            },
-            Laya.Handler.create(null, complete)
-        );
-    };
-
-    GameRoomView.prototype.setOpenOutBtnDisabled = function () {
-        this.openOutsBtn.disabled = true;
-    };
-
-    //*不做庄，勾选显示
-    GameRoomView.prototype.setNoDoBankerTick = function () {
-        var selfId = App.player.getId();
-        var notBanker = App.tableManager.checkNotBanker(selfId) ? true : false;
-        this.bankerTick.visible = notBanker;
-    };
-
-    //*显示不做庄家操作
-    GameRoomView.prototype.showNoDoBankerBtn = function () {
-        var roomType = this._room.type;
-        if (roomType == Game.Game.ROOM_TYPE.CLASSICAL) {
-            this.noDoBanker.visible = true;
-        }
-        else {
-            this.noDoBanker.visible = false;
-        }
-
-        var selfId = App.player.getId();
-        var notBanker = App.tableManager.checkNotBanker(selfId);
-        this.setNoDoBankerTick(notBanker);
-    };
-
-    //*点击不做庄家
-    GameRoomView.prototype.onNoDoBanker = function () {
-        var self = this;
-        var complete = function (err, data) {
-            if (err) {
-
-            }
-        };
-        App.netManager.send(
-            "room.handler.command",
-            {
-                fn: "rejectBanker",
-                data: {}
-            },
-            Laya.Handler.create(null, complete)
-        );
-    };
-
-    //*更换桌布
-    GameRoomView.prototype.changeTableShow = function () {
-        var tableColor = App.storageManager.getItem("TABLE_COLOR");
-        var isYellowTable = false;
-        if (tableColor != undefined) {
-            if (tableColor == SettingDialog.TABLE_TYPE.GREEN) {
-                isYellowTable = false;
-            }
-            else if (tableColor == SettingDialog.TABLE_TYPE.YELLOW) {
-                isYellowTable = true;
-            }
-        }
-        else {
-            App.storageManager.setItem("TABLE_COLOR", SettingDialog.TABLE_TYPE.GREEN);
-        }
-
-        this.yellowTable.visible = isYellowTable;
-    };
-
-    //*设置界面
-    GameRoomView.prototype.onSetting = function () {
-        App.soundManager.playSound("btnSound");
-        var settingPanel = new SettingDialog();
-        App.uiManager.addUiLayer(settingPanel);
-        settingPanel.on(SettingDialog.Events.CHANGE_TABLE, this, this.changeTableShow);
-    };
-
-    GameRoomView.prototype.onPokerType = function () {
-        var showPokerType = new ShowPokerTypeDialog();
-        this.addChild(showPokerType);
-    };
-
-    //*规则查看
-    GameRoomView.prototype.onShowRulePanel = function () {
-        App.soundManager.playSound("btnSound");
-        var setting = this._room.settings;
-        var type = this._room.type;
-        var info = {};
-        for (var index in setting) {
-            info[index] = setting[index];
-        }
-        info.type = type;
-        var rulePanel = new ShowRuleDialog(info);
-        App.uiManager.addUiLayer(rulePanel);
-    };
-
-    //*聊天
-    GameRoomView.prototype.onShowChatPanel = function () {
-        App.soundManager.playSound("btnSound");
-        this.chatView = new ChatViewDialog();
-        App.uiManager.addUiLayer(this.chatView, {isAddShield:true,alpha:0,isDispose:true});
-    };
-
-    //*点击站起
-    GameRoomView.prototype.touchStandUp = function () {
-        var roomState = App.tableManager.getRoomState();
-        if (roomState != Game.Room.STATE_READY) {
+    __proto.pokerFlying = function (userId) {
+        if (!userId) {
+            this.pokerFlyIsDown();
             return;
         }
-        App.soundManager.playSound("btnSound");
-        var self = this;
-        var complete = function (err, data) {
-            if (err) {
 
-            }
-        };
-        App.netManager.send(
-            "room.handler.stand_up",
-            {
-                data: {}
-            },
-            Laya.Handler.create(null, complete)
-        );
-    };
+        var dealPokerNode = this._deckNodeShow;
+        var poker = new Poker();
+        poker.setPokerPosition({x:dealPokerNode.x, y:dealPokerNode.y});
+        poker.setPokerScale({x: 0.5, y: 0.5});
+        this.playersBox.addChild(poker);
+        this._pokerImgList.push(poker);
 
-    //*点击坐下
-    GameRoomView.prototype.touchSitBtn = function (sitId) {
-        //*不是准备状态不能坐下或者换位置
-        var roomState = App.tableManager.getRoomState();
-
-        var self = this;
-        var selfChairId = App.tableManager.getCharis().indexOf(App.player.getId());
-        var maxChair = this._roomMaxChairs;
-
-        if (sitId < 0 || sitId >= maxChair) {
-            sitId = 0;
-        }
-
-        var pos = sitId + selfChairId;
-        if (pos >= maxChair) {
-            pos -= maxChair;
-        }
-
-        var complete = function (err, data) {
-            if (err) {
-
-            }
-        };
-        App.netManager.send(
-            "room.handler.sit_down",
-            {
-                data: pos
-            },
-            Laya.Handler.create(null, complete)
-        );
-    };
-
-    //*庄家标记飞行
-    GameRoomView.prototype.bankerTagFly = function () {
-        var bankerId = this._roomBanker;
-        if (bankerId) {
-            var sitSprite = this.getTableIndexByUserId(bankerId);
-            var posX = sitSprite.x - 40;
-            var posY = sitSprite.y - 50;
-            var moveTo = MoveTo.create(0.5, posX, posY);
-            App.actionManager.addAction(moveTo, this._bankerTagImg);
-            this._bankerTagImg.zOrder = 100;
+        var pos = this._playerBoxList[userId];
+        if (pos) {
+            var moveTo = MoveTo.create(0.5, pos.x, pos.y);
+            var scaleTo = ScaleTo.create(0.5, 0, 0);
+            var spa = Spawn.create(moveTo, scaleTo);
+            var self = this;
+            var callBack = CallFunc.create(Laya.Handler.create(null, function () {
+                if (self._playerBoxList && self._playerBoxList[userId]) {
+                    self._playerBoxList[userId].showDealPoker();
+                    self.pokerFlyIsDown();
+                }
+            }));
+            var seq = Sequence.create(spa, callBack);
+            App.actionManager.addAction(seq, poker);
         }
     };
 
-    //*创建庄家标记
-    GameRoomView.prototype.createBankerTagImg = function () {
-        var bankerId = App.tableManager.getRoomBanker();
-        //*找到庄家的位置
-        var sitSprite = this.getTableIndexByUserId(bankerId);
-        if (!this._bankerTagImg && sitSprite) {
-            var img = new Laya.Image("assets/ui.room/icon_banker.png");
-            this._clientShowBox.addChild(img);
-            img.zOrder = 100;
-            img.scaleX = 1.5;
-            img.scaleY = 1.5;
-            img.x = sitSprite.x - 50;
-            img.y = sitSprite.y - 70;
-            this._bankerTagImg = img;
+    //*发牌表演
+    __proto.dealPokerAction = function () {
+        var roomInfo = App.tableManager.getRoomInfo();
+        var table = roomInfo.table || {}
+        var dealPokerList = table.dealSequence ||[]; //*发牌列表
+        var roomType = roomInfo.type;
+
+        this._dealCount = 2;
+        if (roomType == Game.Game.ROOM_TYPE.CUSTOMIZED) {
+            this._dealCount = 3;
         }
-    };
 
-    //*解散房间按钮状态
-    GameRoomView.prototype.changeDisbandBtnState = function (whoCanDisband) {
-        whoCanDisband = whoCanDisband || "banker";
-        var roomHost = this._room.host;
-        var selfId = App.player.getId();
+        this.pokerFlying();
+    }
 
-        switch (whoCanDisband) {
-            case "banker" : {
-                if (roomHost == selfId) {
-                    this.disbandGray.visible = false;
-                    this.disbandBtn.visible = true;
+    __proto.updatePlayerSitPos = function () {
+        var roomInfo = App.tableManager.getRoomInfo();
+        var chairs = roomInfo.chairs || [];
+        var playerBoxList = this._playerBoxList;
+        for (var chairsId = 0; chairsId < chairs.length; chairsId++) {
+            var userID = chairs[chairsId];
+            if (userID) {
+                if (playerBoxList[userID]) {
+
                 }
                 else {
-                    this.disbandGray.visible = true;
-                    this.disbandBtn.visible = false;
-                }
-                break;
-            }
-
-            case "all" : {
-                this.disbandGray.visible = false;
-                this.disbandBtn.visible = true;
-                break;
-            }
-        }
-    };
-
-    GameRoomView.prototype.updateViewShow = function () {
-        this.roomIdLab.text = this._roomId;
-        //*恢复状态
-        App.tableManager.stateRestore();
-
-        //*混战模式不显示庄家，自定模式一开始不显示庄家
-        if (this._roomType != Game.Game.ROOM_TYPE.CHAOS && this._roomType != Game.Game.ROOM_TYPE.CUSTOMIZED) {
-            this.createBankerTagImg();
-        }
-
-        this.setReadyBtnState();
-
-        this.updateRoundNumLab();
-
-        this.changeTableShow();
-
-        this.showNoDoBankerBtn();
-    };
-
-    GameRoomView.prototype.clearTableIconById = function (userId) {
-        var index = this._userPosInTable.indexOf(userId);
-        if (index != -1) {
-            this._userPosInTable[index] = null;
-            //*站起显示坐下的标志
-            this._sitTagList[index].visible = true;
-        }
-
-        if (userId == App.player.getId()) {
-            this.setStartBoxVisible(false);
-        }
-
-        //*如果是庄家删除增加标志
-        if (App.tableManager.getRoomBanker() == userId && this._bankerTagImg) {
-            this._bankerTagImg.removeSelf();
-            this._bankerTagImg = null;
-        }
-    };
-
-    //*站起
-    GameRoomView.prototype.playerStand = function (userId) {
-        this._isReady = false;
-        var isSelf = this.isSelf(userId);
-        if (isSelf) {
-            //*清除桌面上东西
-            var room = App.tableManager.getRoom();
-            this.nextRound(room);
-            App.tableManager.startNextRound();
-        }
-
-        this.clearTableIconById(userId);
-    };
-
-    //*坐下
-    GameRoomView.prototype.playerSitDown = function (info) {
-        var userId = info.userID;
-        //*如果是自己换位，重新刷新一下坐下的标志
-        if (userId == App.player.getId()) {
-            for (var index in this._sitTagList) {
-                this._sitTagList[index].visible = true;
-            }
-        }
-        //*刷新头像显示
-        var chairs = App.tableManager.getCharis();
-        for (var i = 0; i < chairs.length; i++) {
-            if (chairs[i]) {
-                this.clearTableIconById(chairs[i]);
-                this.joinPlayer({userID: chairs[i]});
-                var roomState = App.tableManager.getRoomState();
-                if (roomState == Game.Room.STATE_READY) {
-                    this.setStartBoxVisible(true);
+                    this.createPlayerIcon(userID);
                 }
             }
         }
     };
 
-    //*有人退出
-    GameRoomView.prototype.playerExit = function () {
-
-    };
-
-    //*有玩家加入
-    GameRoomView.prototype.joinPlayer = function (playerInfo) {
-        var pos    = playerInfo.pos; //*位置
-        var userId = playerInfo.userID;
-        console.log(playerInfo);
-        if (pos < 0) {
-            //*站起的状态
-            return;
+    __proto.showReadyBtn = function (isShow) {
+        var clients = App.tableManager.getClients();
+        var selfId = App.player.getId();
+        if (clients[selfId]) {
+            isShow = isShow ? true : false;
+        }
+        else {
+            //*站起来的时候就不能显示
+            isShow = false;
         }
 
-        //*加入新玩家
-        this.createPlayerIcon(userId, pos);
-    };
+        this.readyBtn.visible = isShow;
+    }
 
-    GameRoomView.prototype.createPlayerIcon = function (playerUserId, pos) {
-        var roomBanker = App.tableManager.getRoomBanker();
+    __proto.createPlayerIcon = function (playerUserId, pos) {
+        var roomInfo = App.tableManager.getRoomInfo();
+        var roomBanker = roomInfo.banker;
+        var maxChairs = roomInfo.maxChairs;
         //*判断自己是不是站起的状态，没有在椅子上
-        var selfUserID = App.player.getId();
-        var chairs = App.tableManager.getCharis();
+        var selfUserID = this.getSelfId();
+        var chairs = roomInfo.chairs;
         //*自己的位置
         var selfIndexInChair = chairs.indexOf(selfUserID);
         //*加进来的人的位置
@@ -1323,7 +1757,7 @@ var GameRoomView = (function(_super) {
             if (this._userPosInTable.indexOf(playerUserId) == -1) {
                 var indexDiff = playerIndexInChair - selfIndexInChair;
                 if (indexDiff < 0) {
-                    indexDiff = this._roomMaxChairs + indexDiff;
+                    indexDiff = maxChairs + indexDiff;
                 }
                 posInTable = indexDiff;
                 canCreate = true;
@@ -1331,135 +1765,67 @@ var GameRoomView = (function(_super) {
         }
 
         if (canCreate) {
-            var playerBoxList = App.tableManager.getRoomPlayerBox();
-            if (playerBoxList[playerUserId]) {
-                playerIcon = playerBoxList[playerUserId];
+            if (this._playerBoxList[playerUserId]) {
+                playerIcon = this._playerBoxList[playerUserId];
             }
             else {
                 playerIcon = new RoomPlayerBox({userID: playerUserId});
+                this._playerBoxList[playerUserId] = playerIcon;
             }
 
-            playerIcon.y = this._playerBoxs[posInTable].y - 70;
-            playerIcon.x = this._playerBoxs[posInTable].x - 70;
+            playerIcon.y = this._playerSpriteList[posInTable].y - 70;
+            playerIcon.x = this._playerSpriteList[posInTable].x - 70;
             playerIcon.zOrder = -10;
             playerIcon.changeBetLabPos(posInTable);
-            this._clientShowBox.addChild(playerIcon);
+            this.playersBox.addChild(playerIcon);
             this._sitTagList[posInTable].visible = false;
             this._userPosInTable[posInTable] = playerUserId;
 
-            App.tableManager.addPlayerBox(playerUserId, playerIcon);
+            // App.tableManager.addPlayerBox(playerUserId, playerIcon);
 
             //*恢复庄家标识
-            if (roomBanker && this._roomType != Game.Game.ROOM_TYPE.CHAOS && roomBanker == playerUserId) {
-                if (this._bankerTagImg) {
-                    this.bankerTagFly();
-                }
-                else {
-                    this.createBankerTagImg();
-                }
-            }
+            // if (roomBanker && this._roomType != Game.Game.ROOM_TYPE.CHAOS && roomBanker == playerUserId) {
+            //     if (this._bankerTagImg) {
+            //         this.bankerTagFly();
+            //     }
+            //     else {
+            //         this.createBankerTagImg();
+            //     }
+            // }
         }
     };
 
-    GameRoomView.prototype.showChairsInRoom = function () {
-        //*显示房间头像
-        var selfId  = App.player.getId();
-        var selfPos = this._chairs.indexOf(selfId);
-        for (var index = 0; index < this._roomMaxChairs; index++) {
+    //*设置玩家座位
+    __proto.setPlayerPos = function () {
+        var roomInfo = App.tableManager.getRoomInfo();
+        var table = roomInfo.table || {};
+        var clients = table.clients || {};
+        var chairs = roomInfo.chairs || [];
+        var maxChairs = roomInfo.maxChairs;
+
+        var selfId  = this.getSelfId();
+        var selfPos = chairs.indexOf(selfId);
+        for (var index = 0; index < maxChairs; index++) {
             var sitId = selfPos + index;
-            if (sitId >= this._roomMaxChairs) {
-                sitId = sitId - this._roomMaxChairs;
+            if (sitId >= maxChairs) {
+                sitId = sitId - maxChairs;
             }
-            var userID = this._chairs[sitId];
+            var userID = chairs[sitId];
             if (userID) {
                 this.createPlayerIcon(userID);
             }
         }
     };
 
-    GameRoomView.prototype.unShowAllLight = function () {
-        for (var index in this._lightList) {
-            this._lightList[index].visible = false;
-        }
-    };
-
-    //*显示操作灯光
-    GameRoomView.prototype.showLightByUserId = function (userId) {
-        this.unShowAllLight();
-        if (this._userPosInTable.indexOf(userId) != -1) {
-            var index = this._userPosInTable.indexOf(userId);
-            this._lightList[index].visible = true;
-        }
-    };
-
-    //*初始化房间玩家头像信息
-    GameRoomView.prototype.initPlayerInfoIconShow = function () {
-        this._clientShowBox = this.playersBox_eight;
-        this.playersBox.visible = false;
-
-        this._deckNodeShow = this._clientShowBox.getChildByName("deckNode"); //* 发牌的位置
-        this._ghostBoxShow = this._clientShowBox.getChildByName("ghostBox"); //* 鬼牌的位置
-        this._lightBoxShow = this._clientShowBox.getChildByName("lightBox"); //* 灯光的box
-        //*获取位置
-        var playersBox = this._clientShowBox;
-
-        for (var i = 0; i < this._room.maxChairs; i++) {
-            var playerSprite = playersBox.getChildByName("player_" + i);
-            //*注册坐下的按钮
-            if (playerSprite) {
-                //*创建坐下的标志
-                var sitBg = new Laya.Image("assets/ui.room/img_Sitdown_1.png");
-                sitBg.anchorX = 0.5;
-                sitBg.anchorY = 0.5;
-                var sitTag = new Laya.Image("assets/ui.room/img_Sitdown.png");
-                sitTag.anchorX = 0.5;
-                sitTag.anchorY = 0.5;
-                sitTag.x = 54.5;
-                sitTag.y = 54.5;
-                sitBg.addChild(sitTag);
-                sitBg.on(Laya.Event.CLICK, this, this.touchSitBtn, [i]);
-                playerSprite.addChild(sitBg);
-
-                this._sitTagList.push(sitBg);
-
-                this._playerBoxs.push(playerSprite);
-            }
-
-            //*储存显示灯光
-            var light = this._lightBoxShow.getChildByName("light_" + i);
-            light.visible = false;
-            this._lightList.push(light);
-        }
-
-        //*进入房间时候，显示坐下的人
-        this.showChairsInRoom();
-    };
-
-    //*返回大厅
-    GameRoomView.prototype.backToLobby = function () {
-        if (this._isLockRoom) {
-            return;
-        }
-
-        var roomHost = this._room.host;
-        var selfId = App.player.getId();
-        if (selfId == roomHost) {
-            this.dispose();
-        }
-        else {
-            this.leaveRoom();
-        }
-    };
-
-    GameRoomView.prototype.initEvent = function () {
+    __proto.initEvent = function () {
         var viewBtn = [
-            {"btn": this.lobbyBtn, "btnFuc": this.backToLobby},
+            //{"btn": this.lobbyBtn, "btnFuc": this.backToLobby},
             {"btn": this.readyBtn, "btnFuc": this.touchReadyBtn},
-            {"btn": this.grabBankerBtn, "btnFuc": this.onGrabBanker},
+            //{"btn": this.grabBankerBtn, "btnFuc": this.onGrabBanker},
             //*解散房间
             {"btn": this.disbandBtn, "btnFuc": this.checkCanCloseRoom},
             //*站起
-            {"btn": this.standUpBtn, "btnFuc": this.touchStandUp},
+            //{"btn": this.standUpBtn, "btnFuc": this.touchStandUp},
             //*战绩
             {"btn": this.recordbtn, "btnFuc": this.onShowEffort},
             //*聊天按钮
@@ -1501,153 +1867,79 @@ var GameRoomView = (function(_super) {
             var func = btnInfo["btnFuc"];
             btn.on(Laya.Event.CLICK, this, func);
         }
-
-        var tableEvent = [
-            {"eventName":RoomTableMgr.EVENT.JOIN_PLYER, "eventFunc":this.joinPlayer},
-            {"eventName":RoomTableMgr.EVENT.GAME_START, "eventFunc":this.gameStart},
-            {"eventName":RoomTableMgr.EVENT.ROOM_STATE_ROB, "eventFunc":this.showGrabBanker},
-            {"eventName":RoomTableMgr.EVENT.READY_FINISH, "eventFunc":this.readyFinish},
-            {"eventName":RoomTableMgr.EVENT.ROB_FINISH, "eventFunc":this.robFinish},
-            {"eventName":RoomTableMgr.EVENT.GHOST_POKER, "eventFunc":this.ghostPokersAction},
-            {"eventName":RoomTableMgr.EVENT.BID, "eventFunc":this.pokerBid},
-            {"eventName":RoomTableMgr.EVENT.BID_END, "eventFunc":this.bidEnd},
-            {"eventName":RoomTableMgr.EVENT.DRAW_POKERS, "eventFunc":this.playerDrawPoker},
-            {"eventName":RoomTableMgr.EVENT.GAME_WAS_STRATED, "eventFunc":this.gameWasStarted},
-            {"eventName":RoomTableMgr.EVENT.SHOW_BID_OPTION, "eventFunc":this.showBidOptionOnInitRoom},
-            {"eventName":RoomTableMgr.EVENT.DO_PAY, "eventFunc":this.closeOptionBoxs},
-            {"eventName":RoomTableMgr.EVENT.COMPARISON_END, "eventFunc":this.showNextRoundBtn},
-            {"eventName":RoomTableMgr.EVENT.NEXT_ROUND, "eventFunc":this.nextRound},
-            {"eventName":RoomTableMgr.EVENT.STAND, "eventFunc":this.playerStand},
-            {"eventName":RoomTableMgr.EVENT.SITDOWN, "eventFunc":this.playerSitDown},
-            {"eventName":RoomTableMgr.EVENT.CLOSE_ROOM, "eventFunc":this.dispose},
-            {"eventName":RoomTableMgr.EVENT.LOCKED_ROOM, "eventFunc":this.changeLockRoomState},
-            {"eventName":RoomTableMgr.EVENT.CHANGE_EFFORT_BTN, "eventFunc":this.changeEffortBtnState},
-            {"eventName":RoomTableMgr.EVENT.REJECT_BANKER, "eventFunc":this.setNoDoBankerTick},
-            {"eventName":RoomTableMgr.EVENT.CANT_OPEN_OUTS, "eventFunc":this.setOpenOutBtnDisabled},
-            {"eventName":RoomTableMgr.EVENT.CHANGE_DISBAND_STATE, "eventFunc":this.changeDisbandBtnState},
-        ];
-
-        for (var eventIndex in tableEvent) {
-            var eventInfo = tableEvent[eventIndex];
-            var eventName = eventInfo["eventName"];
-            var eventFunc = eventInfo["eventFunc"];
-            App.tableManager.on(eventName, this, eventFunc);
-        }
     };
 
-    GameRoomView.prototype.init = function() {
-        App.tableManager.setRoomInfo(this._room);
-        this.initEvent();
-        this.initPlayerInfoIconShow();
-        this.updateViewShow();
+    // 点击座位
+    __proto.touchSitBtn = function (sitTagIndex) {
+
+    };
+
+    __proto.createSitTag = function (index) {
+        var sitBg = new Laya.Image("assets/ui.room/img_Sitdown_1.png");
+        sitBg.anchorX = 0.5;
+        sitBg.anchorY = 0.5;
+        var sitTag = new Laya.Image("assets/ui.room/img_Sitdown.png");
+        sitTag.anchorX = 0.5;
+        sitTag.anchorY = 0.5;
+        sitTag.x = 54.5;
+        sitTag.y = 54.5;
+        sitBg.addChild(sitTag);
+        sitBg.on(Laya.Event.CLICK, this, this.touchSitBtn, [index]);
+
+        return sitBg;
+    };
+
+    __proto.initViewShow = function () {
+        this._deckNodeShow = this.playersBox.getChildByName("deckNode"); //* 发牌的位置
+        this._ghostBoxShow = this.playersBox.getChildByName("ghostBox"); //* 鬼牌的位置
+        this._lightBoxShow = this.playersBox.getChildByName("lightBox"); //* 灯光的box
+
+        var playersBox = this.playersBox;
+        var roomInfo = App.tableManager.getRoomInfo();
+        var maxChairs = roomInfo.maxChairs;
+        for (var i = 0; i < maxChairs; i++) {
+            var spriteOfPlayer = playersBox.getChildByName("player_" + i); //*桌面显示精灵
+            if (spriteOfPlayer) {
+                // 坐下的标志
+                var sitTag = this.createSitTag(i);
+                spriteOfPlayer.addChild(sitTag);
+
+                this._sitTagList.push(sitTag);
+                this._playerSpriteList.push(spriteOfPlayer);
+            }
+
+            // 灯光光柱
+            var light = this._lightBoxShow.getChildByName("light_" + i);
+            light.visible = false;
+            this._lightList.push(light);
+        }
+
+        this.setPlayerPos();
+
+        var roomId = roomInfo.id;
+        this.roomIdLab.text = roomId;
+    };
+
+    __proto.init = function() {
+        this.initViewShow();
         App.soundManager.playMusic("roomMusic");
     };
 
-    //*检查自己是不是房主
-    GameRoomView.prototype.selfIsBanker = function () {
-        var isBanker = false;
-        var selfId = App.player.getId();
-        var roomBanker = App.tableManager.getRoomBanker();
-        if (selfId == roomBanker) {
-            isBanker = true;
-        }
-
-        return isBanker;
+    __proto.getSelfId = function () {
+        return App.player.getId();
     };
 
-    //*检查是否是自己
-    GameRoomView.prototype.isSelf = function (userId) {
-        var isSelfId = true;
-        var selfId = App.player.getId();
-        if (selfId != userId) {
-            isSelfId = false;
-        }
-
-        return isSelfId;
+    __proto.getPlayerBoxs = function () {
+        return this._playerBoxList;
     };
 
-    GameRoomView.prototype.refurbishTableShow = function (room) {
-        this._userPosInTable = [];
-
-        this._room = room;
-        this._chairs = this._room.chairs;
-
-        this.clearGhostPokers();
-        //*更新局数
-        this.updateRoundNumLab();
-        //*清除灯光
-        this.unShowAllLight();
-
-        this.showChairsInRoom();
-
-        //*下注按钮，操作按钮不显示
-        this.bankerOperationBox.visible = false;
-        this.operationBox.visible = false;
-        this.bidBox.visible = false;
-    };
-
-    GameRoomView.prototype.getTableIndexByUserId = function (userId) {
-        if (this._userPosInTable.indexOf(userId) != -1) {
-            var index = this._userPosInTable.indexOf(userId);
-            return this._playerBoxs[index];
+    __proto.getPlayerBoxByUserId = function (userID) {
+        console.log(this._userPosInTable);
+        if (this._userPosInTable.indexOf(userID) != -1) {
+            var index = this._userPosInTable.indexOf(userID);
+            return this._playerBoxList[index];
         }
     };
-
-    GameRoomView.prototype.getDeckNode = function () {
-        return this._deckNodeShow;
-    };
-
-    GameRoomView.prototype.getPlayersBox = function () {
-        return this._clientShowBox;
-    };
-
-    GameRoomView.prototype.leaveRoom = function () {
-        var self = this;
-        var complete = function (err, data) {
-            if (err) {
-                return;
-            }
-
-            self.dispose();
-            App.tableManager.quitRoom();
-        };
-        //*退出房间
-        App.netManager.send(
-            "room.handler.leave",
-            {
-                //fn: "leave",
-                data: {}
-            },
-            Laya.Handler.create(null, complete)
-        );
-
-    };
-
-    GameRoomView.prototype.dispose = function () {
-        App.soundManager.playSound("btnSound");
-        App.soundManager.playMusic("lobbyMusic");
-        Laya.timer.clearAll(this);
-        App.uiManager.removeGameRoomView();
-        App.lobbyView.updateView();
-    };
-
-    GameRoomView.SHOW_POKER_TYPE = {
-        BANKER: 1,
-        PLYER: 2
-    };
-
-    GameRoomView.POINT_NAME = [
-        "bung",
-        "one",
-        "two",
-        "three",
-        "four",
-        "five",
-        "six",
-        "seven",
-        "eight",
-        "nine"
-    ];
 
     return GameRoomView;
 }(GameRoomViewUI));

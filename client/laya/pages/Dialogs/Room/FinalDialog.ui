@@ -2,7 +2,7 @@
     "x":0,
     "type":"Dialog",
     "selectedBox":1,
-    "selecteID":23,
+    "selecteID":4,
     "props":{"width":1136,"sceneColor":"#000000","height":640},
     "nodeParent":-1,
     "label":"Dialog",
@@ -10,13 +10,6 @@
     "isDirectory":true,
     "isAniNode":true,
     "hasChild":true,
-    "frames":[
-        {
-            "type":1,
-            "props":{"width":1136,"sceneColor":"#000000","height":640},
-            "frame":0,
-            "__InPool":false
-        }],
     "compId":1,
     "child":[
         {
@@ -28,13 +21,6 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"skin":"assets/ui.room/final/bg_jiemian.png"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":3,
             "child":[
                 ]
@@ -42,19 +28,25 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":32,"x":508,"skin":"assets/ui.room/final/img_fangjianjiesuan.png"},
+            "props":{"y":20,"x":435,"skin":"assets/ui.room/final/img_bg1.png"},
             "nodeParent":1,
             "label":"Image",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"skin":"assets/ui.room/final/img_fangjianjiesuan.png"},
-                    "frame":0,
-                    "__InPool":false
-                }],
+            "compId":23,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":28,"x":518,"skin":"assets/ui.room/final/img_fangjianjiesuan.png"},
+            "nodeParent":1,
+            "label":"Image",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
             "compId":4,
             "child":[
                 ]
@@ -69,13 +61,6 @@
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"skin":"assets/ui.button/btn_bule.png","label":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":6,
             "child":[
                 {
@@ -86,13 +71,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"skin":"assets/ui.room/final/img_fanhuidating.png"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":7,
                     "child":[
                         ]
@@ -108,13 +86,6 @@
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"skin":"assets/ui.button/btn_yellow.png","label":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":8,
             "child":[
                 {
@@ -125,13 +96,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"skin":"assets/ui.room/final/img_zhanjixiangqing.png"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":9,
                     "child":[
                         ]
@@ -147,13 +111,6 @@
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"skin":"assets/ui.button/btn_green.png","label":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":10,
             "child":[
                 {
@@ -164,13 +121,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"skin":"assets/ui.room/final/img_share.png"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":11,
                     "child":[
                         ]
@@ -185,13 +135,6 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":22,
             "child":[
                 ]

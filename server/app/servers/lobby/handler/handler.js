@@ -83,7 +83,27 @@ Handler.prototype.buy_user_tokens = function(msg, session, next) {
         return;
     }
 
-    this.service.buyUserTokens(uid, function(err, tokens) {
+    var productID = msg.productID;
+    if (!productID) {
+        next(null, Game.wrapMsg(Code.LOBBY.NOT_PRODUCT));
+        return;
+    }
+
+    var diamondType = Game.Game.DIAMOND_TYPE;
+    var productDiamond = diamondType[productID];
+    if (!productDiamond) {
+        next(null, Game.wrapMsg(Code.LOBBY.NOT_PRODUCT));
+        return;
+    }
+
+    var diamonds = productDiamond.diamonds;
+    var price = productDiamond.price;
+    var productInfo = {
+        diamonds: diamonds,
+        price: price
+    };
+
+    this.service.buyUserTokens(uid, productInfo, function(err, tokens) {
         if (err) {
             next(null, Game.wrapMsg(err));
             return;
@@ -150,5 +170,44 @@ Handler.prototype.get_bulletins = function(msg, session, next) {
         }
 
         next(null, Game.wrapMsg(null, player));
+    });
+};
+
+Handler.prototype.get_orderid = function(msg, session, next) {
+    var uid = session.uid;
+    if (!uid) {
+        next(null, Game.wrapMsg(Code.ROUTE.UNAUTHORIZED));
+        return;
+    }
+
+    var productId = msg.productID;
+    var env       = msg.env;
+
+    logger.info("generating order: %d %j", uid, msg);
+
+    this.service.getOrderID(uid, productId, env, function(err, orderId) {
+        if (err) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, orderId));
+    });
+};
+
+Handler.prototype.query_order = function(msg, session, next) {
+    var uid = session.uid;
+    if (!uid) {
+        next(null, Game.wrapMsg(Code.ROUTE.UNAUTHORIZED));
+        return;
+    }
+    
+    this.service.queryOrder(uid, function(err, data) {
+        if (err) {
+            next(null, Game.wrapMsg(err));
+            return;
+        }
+
+        next(null, Game.wrapMsg(null, data));
     });
 };

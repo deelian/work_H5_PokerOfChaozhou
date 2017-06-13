@@ -42,9 +42,9 @@ Handler.prototype.entry = function(msg, session, next) {
         self.app.rpc.lobby.remote.userLeave(session, session.uid, function(err) {
 
         });
-        // self.app.rpc.room.remote.userLeave(session, session.uid, function(err) {
-        //
-        // });
+        self.app.rpc.room.remote.userAfk(session, session.uid, function(err) {
+        
+        });
     });
     session.pushAll(function(err) {
         if (err != null) {

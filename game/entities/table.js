@@ -9,6 +9,7 @@
     var Game = root.Game;
     var StaticGamble = root.StaticGamble;
     var CustomizedGamble = root.CustomizedGamble;
+    var FancyPayTypes = [Game.POKER_MODELS.GOD_NINE, Game.POKER_MODELS.GOD_EIGHT, Game.POKER_MODELS.POINT];
 
     var Utils = root.Utils;
 
@@ -30,6 +31,7 @@
         this.notBank       = opts.notBank || false;     // 不坐庄 true就不做
         this.isRubbing     = opts.isRubbing || false;   // 是否在搓牌
         this.showResult    = opts.showResult || false;  // 是否需要展示牌局结果 这个在reset的时候不能重置
+        this.isAfk         = opts.isAfk || false;       // 是否离线
 
         this.handPokers    = [];                        // 手牌
         if (opts.handPokers) {
@@ -211,6 +213,13 @@
 
         getClient: function(userID) {
             return this.clients[userID];
+        },
+
+        setAwk: function(userID, state) {
+            var client = this.getClient(userID);
+            if (client) {
+                client.isAfk = state;
+            }
         },
 
         //是否全部客人都做了某操作
@@ -879,7 +888,8 @@
                 this.roundLog.clients[this.banker] = {
                     gold:       0,    // 需要初始化一个gold
                     fightTimes: 0,
-                    winTimes:   0
+                    winTimes:   0,
+                    bidRate:    bankerObj.bidRate
                 };
             }
 
@@ -920,7 +930,8 @@
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
                         fightTimes: 0,
-                        winTimes:   0
+                        winTimes:   0,
+                        bidRate:    client.bidRate
                     };
                 }
 
@@ -943,11 +954,13 @@
                     playerScore.result = "draw";            //平局
                     // 比牌算花式
                     if (this.settings.fancyWin && bankerScore.type === playerScore.type) {
-                        if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
-                            playerScore.result = "win";             //闲家胜利
-                        }
-                        else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
-                            playerScore.result = "lose";            //输牌
+                        if (FancyPayTypes.indexOf(bankerScore.type) != -1) {
+                            if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                                playerScore.result = "win";             //闲家胜利
+                            }
+                            else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                                playerScore.result = "lose";            //输牌
+                            }
                         }
                     }
                 }
@@ -1076,7 +1089,8 @@
                 this.roundLog.clients[this.banker] = {
                     gold:       0,    // 需要初始化一个gold
                     fightTimes: 0,
-                    winTimes:   0
+                    winTimes:   0,
+                    bidRate:    bankerObj.bidRate
                 };
             }
 
@@ -1188,7 +1202,8 @@
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
                         fightTimes: 0,
-                        winTimes:   0
+                        winTimes:   0,
+                        bidRate:    client.bidRate
                     };
                 }
 
@@ -1211,11 +1226,13 @@
                     playerScore.result = "draw";            //平局
                     // 比牌算花式
                     if (this.settings.fancyWin && bankerScore.type === playerScore.type) {
-                        if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
-                            playerScore.result = "win";             //闲家胜利
-                        }
-                        else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
-                            playerScore.result = "lose";            //输牌
+                        if (FancyPayTypes.indexOf(bankerScore.type) != -1) {
+                            if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                                playerScore.result = "win";             //闲家胜利
+                            }
+                            else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[bankerScore.fancy]) {
+                                playerScore.result = "lose";            //输牌
+                            }
                         }
                     }
                 }
@@ -1366,7 +1383,8 @@
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
                         fightTimes: 0,
-                        winTimes:   0
+                        winTimes:   0,
+                        bidRate:    client.bidRate
                     };
                 }
 
@@ -1398,11 +1416,13 @@
                         gambleResult[userID][pId] = "draw";            //平局
                         // 比牌算花式
                         if (this.settings.fancyWin && baseScore.type === playerScore.type) {
-                            if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[baseScore.fancy]) {
-                                gambleResult[userID][pId] = "lose";            //userID失败
-                            }
-                            else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[baseScore.fancy]) {
-                                gambleResult[userID][pId] = "win";             //userID胜利
+                            if (FancyPayTypes.indexOf(baseScore.type) != -1) {
+                                if (Game.FANCY_MULTIPLE[playerScore.fancy] > Game.FANCY_MULTIPLE[baseScore.fancy]) {
+                                    gambleResult[userID][pId] = "lose";            //userID失败
+                                }
+                                else if (Game.FANCY_MULTIPLE[playerScore.fancy] < Game.FANCY_MULTIPLE[baseScore.fancy]) {
+                                    gambleResult[userID][pId] = "win";             //userID胜利
+                                }
                             }
                         }
                     }
@@ -1532,7 +1552,8 @@
                 this.roundLog.clients[this.banker] = {
                     gold:       0,    // 需要初始化一个gold
                     fightTimes: 0,
-                    winTimes:   0
+                    winTimes:   0,
+                    bidRate:    bankerObj.bidRate
                 };
             }
 
@@ -1573,7 +1594,8 @@
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
                         fightTimes: 0,
-                        winTimes:   0
+                        winTimes:   0,
+                        bidRate:    client.bidRate
                     };
                 }
 
@@ -1697,6 +1719,7 @@
                 client.notBank      = c.notBank;
                 client.isRubbing    = c.isRubbing;
                 client.showResult   = c.showResult;
+                client.isAfk        = c.isAfk;
 
                 client.handPokers = [];                        // 手牌
                 var showRight = Poker.SHOW_TARGET.ALL;

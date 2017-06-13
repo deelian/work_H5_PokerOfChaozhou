@@ -104,6 +104,7 @@ var NetManager = (function(_super) {
     NetManager.prototype.send = function(route, msg, handler) {
         msg = msg || {};
         msg.udid = App.storageManager.getDeviceId();
+        msg.origin = App.config.origin;
 
         this.startWaiting();
 
@@ -140,131 +141,138 @@ var NetManager = (function(_super) {
 
         var route   = msg.route;
         var info    = msg.body;
-        switch (route) {
-            case Game.ROUTE.ROOM.ENTER:
-            {
-                App.tableManager.joinPlayer(info);
-                break;
-            }
 
-            case Game.ROUTE.ROOM.COMMAND: {
-                App.tableManager.commandHandler(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.READY: {
-                //*准备完毕
-                App.tableManager.allReadyFinish(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.ROB: {
-                //*抢庄完毕
-                App.tableManager.robFinish(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.DEAL: {
-                App.tableManager.dealPoker(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.BID: {
-                //*下注完毕
-                App.tableManager.showHandPoker(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.DRAW: {
-                //*补牌操作
-                App.tableManager.saveDrawPokerCommand(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.BANKER_DRAW: {
-                //*庄家操作结束
-                App.tableManager.bankerOptionEnd(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.PAY: {
-                //*结算
-                App.tableManager.bankerPay(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.LEAVE: {
-                //*离开房间
-                App.tableManager.leaveRoom(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.CLOSE: {
-                //*解散房间
-                App.tableManager.closeAndRemoveRoom(info);
-                break;
-            }
-
-            case Game.ROUTE.CHAT.SEND: {
-                //*发送和接受信息
-                App.tableManager.sandChat(info);
-                break;
-            }
-
-            case Game.ROUTE.CHAT.FORBID:{
-                //*禁言，解除禁言
-                App.tableManager.forbidPlayer(info);
-                break;
-            }
-
-            case Game.ROUTE.CHAT.FORBID_CANCEL:{
-                //*禁言，解除禁言
-                App.tableManager.forbidCancelPlayer(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.KICK: {
-                //*踢出房间
-                App.tableManager.kickUser(info);
-                break;
-            }
-
-            case Game.ROUTE.CHAIR.LET_STAND_UP: {
-                //*强制站起
-                App.tableManager.letStandUp(info);
-                break;
-            }
-
-            case Game.ROUTE.CHAIR.SIT_DOWN: {
-                //*坐下
-                App.tableManager.sitDown(info);
-                break;
-            }
-
-            case Game.ROUTE.CHAIR.STAND_UP: {
-                //*站起
-                App.tableManager.standUp(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.DISMISS_APPLY: {
-                //*申请解散,info是userID
-                App.tableManager.disMissRoom(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.DISMISS_CONFIRM: {
-                //*申请关房确认
-                App.tableManager.disMissConfirm(info);
-                break;
-            }
-
-            case Game.ROUTE.ROOM.DISMISS_RESULT: {
-                //*申请关房结果
-                App.tableManager.disMissResult(info);
-                break;
-            }
-        }
+        App.tableManager.processMsg(route, info);
+        //switch (route) {
+        //    case Game.ROUTE.ROOM.ENTER:
+        //    {
+        //        App.tableManager.joinPlayer(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.COMMAND: {
+        //        App.tableManager.commandHandler(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.READY: {
+        //        //*准备完毕
+        //        App.tableManager.allReadyFinish(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.ROB: {
+        //        //*抢庄完毕
+        //        App.tableManager.robFinish(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.DEAL: {
+        //        App.tableManager.dealPoker(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.BID: {
+        //        //*下注完毕
+        //        App.tableManager.showHandPoker(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.DRAW: {
+        //        //*补牌操作
+        //        App.tableManager.saveDrawPokerCommand(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.BANKER_DRAW: {
+        //        //*庄家操作结束
+        //        App.tableManager.bankerOptionEnd(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.PAY: {
+        //        //*结算
+        //        App.tableManager.bankerPay(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.LEAVE: {
+        //        //*离开房间
+        //        App.tableManager.leaveRoom(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.CLOSE: {
+        //        //*解散房间
+        //        App.tableManager.closeAndRemoveRoom(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.CHAT.SEND: {
+        //        //*发送和接受信息
+        //        App.tableManager.sandChat(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.CHAT.FORBID:{
+        //        //*禁言，解除禁言
+        //        App.tableManager.forbidPlayer(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.CHAT.FORBID_CANCEL:{
+        //        //*禁言，解除禁言
+        //        App.tableManager.forbidCancelPlayer(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.KICK: {
+        //        //*踢出房间
+        //        App.tableManager.kickUser(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.CHAIR.LET_STAND_UP: {
+        //        //*强制站起
+        //        App.tableManager.letStandUp(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.CHAIR.SIT_DOWN: {
+        //        //*坐下
+        //        App.tableManager.sitDown(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.CHAIR.STAND_UP: {
+        //        //*站起
+        //        App.tableManager.standUp(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.DISMISS_APPLY: {
+        //        //*申请解散,info是userID
+        //        App.tableManager.disMissRoom(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.DISMISS_CONFIRM: {
+        //        //*申请关房确认
+        //        App.tableManager.disMissConfirm(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.DISMISS_RESULT: {
+        //        //*申请关房结果
+        //        App.tableManager.disMissResult(info);
+        //        break;
+        //    }
+        //
+        //    case Game.ROUTE.ROOM.AFK: {
+        //        App.tableManager.userAfk(info);
+        //        break;
+        //    }
+        //}
     };
 
     NetManager.prototype.clear = function() {

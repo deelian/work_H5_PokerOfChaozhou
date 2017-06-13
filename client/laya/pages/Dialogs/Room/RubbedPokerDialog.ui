@@ -2,7 +2,7 @@
     "x":0,
     "type":"Dialog",
     "selectedBox":1,
-    "selecteID":13,
+    "selecteID":3,
     "props":{"width":1136,"sceneColor":"#000000","height":640},
     "nodeParent":-1,
     "label":"Dialog",
@@ -10,32 +10,18 @@
     "isDirectory":true,
     "isAniNode":true,
     "hasChild":true,
-    "frames":[
-        {
-            "type":1,
-            "props":{"width":1136,"sceneColor":"#000000","height":640},
-            "frame":0,
-            "__InPool":false
-        }],
     "compId":1,
     "child":[
         {
             "x":15,
             "type":"Panel",
-            "props":{"y":79,"x":568,"width":346,"visible":false,"var":"verticalPanel","rotation":0,"height":483,"anchorY":0,"anchorX":0.5},
+            "props":{"y":60,"x":568,"width":346,"visible":false,"var":"verticalPanel","rotation":0,"height":483,"anchorY":0,"anchorX":0.5},
             "nodeParent":1,
             "label":"Panel(verticalPanel)",
             "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":7,
             "child":[
                 {
@@ -47,13 +33,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":8,
                     "child":[
                         ]
@@ -67,13 +46,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":9,
                     "child":[
                         ]
@@ -87,13 +59,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":10,
                     "child":[
                         ],
@@ -108,36 +73,22 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":12,
                     "child":[
                         ]
                 }],
-            "$HIDDEN":false
+            "$HIDDEN":true
         },
         {
             "x":15,
             "type":"Panel",
-            "props":{"y":173,"x":568,"width":584,"visible":false,"var":"horizontalPanel","rotation":0,"height":346,"anchorX":0.5},
+            "props":{"y":150,"x":568,"width":584,"visible":false,"var":"horizontalPanel","rotation":0,"height":346,"anchorX":0.5},
             "nodeParent":1,
             "label":"Panel(horizontalPanel)",
             "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":3,
             "child":[
                 {
@@ -150,13 +101,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":4,
                     "child":[
                         ]
@@ -167,16 +111,10 @@
                     "props":{"y":346,"x":534,"skin":"assets/pokers/rubbedPoker/club_1.png","rotation":90,"name":"rubbedPoker"},
                     "nodeParent":3,
                     "label":"Image(rubbedPoker)",
+                    "isOpen":true,
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":5,
                     "child":[
                         ],
@@ -191,13 +129,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":6,
                     "child":[
                         ],
@@ -212,13 +143,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":11,
                     "child":[
                         ],
@@ -229,22 +153,16 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"y":320,"x":568,"var":"changeDirectionBtn","stateNum":"1","skin":"assets/pokers/rubbedPoker/btn_rotate.png","anchorY":0.5,"anchorX":0.5},
+            "props":{"y":300,"x":568,"var":"changeDirectionBtn","stateNum":"1","skin":"assets/pokers/rubbedPoker/btn_rotate.png","anchorY":0.5,"anchorX":0.5},
             "nodeParent":1,
             "label":"Button(changeDirectionBtn)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"label":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":13,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         }],
     "animations":[
         {

@@ -4,7 +4,7 @@ var LoadingAniDialog = (function(_super) {
 
         this.size(1136, 640);
 
-        this.anim       = App.animManager.get("loadingAni");
+        this.anim       = App.animManager.get("ani.loading");
         this.anim.x     = this.width / 2;
         this.anim.y     = this.height/ 2;
         this.anim.pivot(32, 32);

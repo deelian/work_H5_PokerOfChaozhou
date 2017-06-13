@@ -11,100 +11,100 @@ var RoomEffortBox = (function(_super) {
 
     RoomEffortBox.prototype.onRender = function(data){
         this._data = data || {};
-        var dataRound = this._data.round;
-        if (typeof (dataRound) != "number") {
-            dataRound = -1;
+
+        var gameRound = this._data.round;
+        if (typeof (gameRound) != "number") {
+            gameRound = -1;
         }
 
-        var pokerBoxList = [];
-        var nameLabList = [];
-        var scoreLabList = [];
-        var handIconList = [];
-
-        for (var j = 0; j < 2; j ++) {
-            var pokerBox = this.line.getChildByName("pokerBox_" + j);
-            pokerBox.visible = false;
-            pokerBoxList.push(pokerBox);
-            var nameLab = this.line.getChildByName("nameLab_" + j);
-            nameLab.visible = false;
-            nameLabList.push(nameLab);
-            var scoreLab = this.line.getChildByName("scroeLab_" + j);
-            scoreLab.visible = false;
-            scoreLabList.push(scoreLab);
-            var handIcon = this.line.getChildByName("handIcon_" + j);
-            handIcon.visible = false;
-            handIconList.push(handIcon);
+        if (gameRound >= 0) {
+            //*只显示第几局
+            var roundNum = Number(gameRound) + 1;
+            this.roundLab.text = "第" + roundNum + "局";
+            this.roundLab.visible = true;
+            this.line.visible = false;
         }
-
-        if (dataRound <= -1) {
-            //*内容的显示
+        else {
             this.roundLab.visible = false;
             this.line.visible = true;
 
             this._ghostPokers = this._data.ghostPokers || [];
 
-            var playerInfo;
+            var roomLogUser = App.tableManager.getRoomLogUsers();
 
-            for (var pokerIndex in this._pokerList) {
+            for (var pokerIndex = 0; pokerIndex < this._pokerList.length; pokerIndex ++) {
                 this._pokerList[pokerIndex].dispose();
             }
 
-            var dataObj = Object.keys(this._data);
-            var dataObjLength = dataObj.length;
-            var num = 0;
-            var roomLogUser = App.tableManager.getRoomLogUsers();
-            for (var index = 0; index < dataObjLength; index ++) {
-                var userId = dataObj[index];
-
-                if (userId != "unName" && userId != "ghostPokers") {
-                    playerInfo = this._data[userId];
-                    handIconList[num].visible = true;
-                    nameLabList[num].visible = true;
-                    var name = roomLogUser[userId].name || "游客";
-                    nameLabList[num].text = name;
-                    var avatar = roomLogUser[userId].avatar || "";
-                    handIconList[num].skin = avatar;
-                    var gold = Number(playerInfo.gold);
-                    if (gold > 0) {
-                        scoreLabList[num].text = "+" + gold;
-                        scoreLabList[num].color = RoomEffortBox.COLOR_LAB.GREED;
-                    }
-                    else if (gold < 0) {
-                        scoreLabList[num].text = playerInfo.gold + "";
-                        scoreLabList[num].color = RoomEffortBox.COLOR_LAB.RED;
-                    }
-                    else {
-                        scoreLabList[num].text = "0";
-                    }
-                    scoreLabList[num].visible = true;
-
-                    var handPokers = playerInfo.handPokers;
-                    var tempNum = 0;
-                    for (var pokerIndex in handPokers) {
-                        var pokerInfo = handPokers[pokerIndex];
-                        var poker = new Poker(pokerInfo, this._ghostPokers);
-                        poker.scaleX = 0.18;
-                        poker.scaleY = 0.18;
-                        poker.x = tempNum * 40;
-                        poker.y = 5;
-                        pokerBoxList[num].visible = true;
-                        pokerBoxList[num].addChild(poker);
-                        this._pokerList.push(poker);
-                        tempNum ++;
-                    }
-
-                    num ++;
+            //*要显示多少个
+            var showUserNum = 0;
+            var userIndexList = [];
+            for (var dataIndex in this._data) {
+                if (dataIndex == "unName" || dataIndex == "ghostPokers") {
+                    continue;
                 }
 
+                if (userIndexList.indexOf(dataIndex) == -1) {
+                    userIndexList.push(dataIndex);
+                }
+                showUserNum ++;
             }
-        }
-        else {
-            //*只显示第几局
-            var roundNum = Number(dataRound) + 1;
-            this.roundLab.text = "第" + roundNum + "局";
 
-            this.roundLab.visible = true;
-            this.line.visible = false;
+            for (var showIndex = 0; showIndex < showUserNum; showIndex ++) {
+                var userId          = userIndexList[showIndex];
+                var userInfo        = this._data[userId];
+
+                var showBox         = this.line.getChildByName("userBox_" + showIndex);
+                showBox.visible     = true;
+
+                var handIcon        = showBox.getChildByName("handIcon");
+                var nameLab         = showBox.getChildByName("nameLab");
+                var pokerBox        = showBox.getChildByName("pokerBox");
+                var bidRateLab      = showBox.getChildByName("bidRateLab");
+                var scoreLab        = showBox.getChildByName("scoreLab");
+                var bankerTag       = showBox.getChildByName("bankerTag");
+
+                var name            = roomLogUser[userId].name || "游客";
+                var avatar          = roomLogUser[userId].avatar || "";
+                var gold            = Number(userInfo.gold);
+                var bidRate         = userInfo.bidRate;
+                var isBanker        = userInfo.isBanker;
+                var handPokers      = userInfo.handPokers || [];
+
+                nameLab.text        = name;
+                handIcon.skin       = avatar;
+                bidRateLab.text     = "×" + bidRate;
+                bankerTag.visible   = !!isBanker;
+
+                var goldStr         = "";
+                var goldColor       = RoomEffortBox.COLOR_LAB.GREED;
+                if (gold > 0) {
+                    goldStr = "+" + gold;
+                }
+                else if (gold < 0) {
+                    goldStr = gold + "";
+                    goldColor = RoomEffortBox.COLOR_LAB.RED;
+                }
+                else {
+                    goldStr = "0";
+                }
+
+                scoreLab.text      = goldStr;
+                scoreLab.color     = goldColor;
+
+                var tempNum = 0;
+                for (var handPokerIndex in handPokers) {
+                    var pokerInfo = handPokers[handPokerIndex];
+                    var poker = new Poker(pokerInfo, this._ghostPokers);
+                    poker.scaleX = 0.18;
+                    poker.scaleY = 0.18;
+                    poker.x = tempNum * 40;
+                    poker.y = 5;
+                    pokerBox.addChild(poker);
+                    this._pokerList.push(poker);
+                    tempNum ++;
+                }
+            }
         }
     };
 

@@ -46,6 +46,11 @@ module.exports = {
     },
 
     putAvatar: function(uuid, url, callback) {
+        if (url == null || url == '') {
+            callback(null);
+            return;
+        }
+
         var req = http.get(url);
         var object = "/users/" + uuid + "/avatar";
 

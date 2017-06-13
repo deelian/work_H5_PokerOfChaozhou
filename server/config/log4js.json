@@ -102,6 +102,16 @@
                 "type": "basic"
             },
             "backups": 5,
+            "category":"database"
+        },
+        {
+            "type": "file",
+            "filename": "${opts:base}/logs/${opts:serverId}.log",
+            "maxLogSize": 1048576,
+            "layout": {
+                "type": "basic"
+            },
+            "backups": 5,
             "category":"application"
         }
     ],

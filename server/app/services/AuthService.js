@@ -33,11 +33,13 @@ module.exports = AuthService;
 AuthService.prototype.verifyUser = function(msg, callback) {
     var udid = msg.udid;
     var code = msg.code;
+    var origin = msg.origin;
 
     var host = "http://api.glfun.cn";
     var api  = "/wx/user_info";
     var params = {
-        code: code
+        code: code,
+        origin: origin
     };
     var url = URLUtils.formatURL(host + api, params);
     request(url, function(error, response, body) {

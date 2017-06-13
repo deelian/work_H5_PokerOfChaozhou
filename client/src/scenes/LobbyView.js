@@ -46,6 +46,12 @@ var LobbyView = (function(_super) {
         this.balanceLab.text = this.balance + "";
     };
 
+    LobbyView.prototype.addBalance = function (tokens) {
+        tokens = tokens || 0;
+        this.balance += tokens;
+        this.balanceLab.text = this.balance + "";
+    };
+
     LobbyView.prototype.checkSelfIsInRoom = function () {
         var skin = LobbyView.BTN_SKIN.CREATE;
         var roomId = App.getRoomId();
@@ -63,10 +69,31 @@ var LobbyView = (function(_super) {
         this.getPlayerTokens();
     };
 
-    LobbyView.prototype.touchEffort = function () {
+    LobbyView.prototype.touchNews = function () {
         App.soundManager.playSound("btnSound");
-        var effortView = new LobbyEffortDialog();
-        App.uiManager.addUiLayer(effortView);
+        var newsPanel = new NewsDialog();
+        App.uiManager.addUiLayer(newsPanel);
+    };
+
+    LobbyView.prototype.touchEffort = function () {
+        var self = this;
+        var complete = function (err, data) {
+            if (err) {
+
+            }
+            else {
+                App.soundManager.playSound("btnSound");
+                var effortView = new LobbyEffortDialog(data);
+                App.uiManager.addUiLayer(effortView);
+            }
+        };
+        App.netManager.send(
+            "lobby.handler.get_logs",
+            {
+                data: {}
+            },
+            Laya.Handler.create(null, complete)
+        );
     };
 
     LobbyView.prototype.touchExplain = function () {
@@ -134,30 +161,42 @@ var LobbyView = (function(_super) {
         }
     };
 
-    LobbyView.prototype.updateMove = function () {
-        var labLength = this._labList.length;
-        for (var i = 0; i < labLength; i++) {
-            var lab = this._labList[i];
-            lab.x -= 1;
-            if (lab.x <= - lab.width) {
-                lab.x = this._widthCount //- lab.width;
-            }
+    LobbyView.prototype.updateMove = function (labInfo) {
+        labInfo = labInfo || {};
+        var initialX = labInfo.initialX || 416;
+        var widthCount = labInfo.widthCount || 416;
+        var lab = this; //*因为这个定时器是lab调用的，所以这个的this指的是lab
+        var targetPos = - widthCount + (initialX - 416);
+        if (lab.x <= targetPos) {
+            lab.x = initialX;
+        }
+        else {
+            lab.x -= 1.5;
         }
     };
 
-    LobbyView.prototype.showBulletins = function () {
-        var length = this._bulletins.length;
+    LobbyView.prototype.showBulletins = function (data) {
+        this._bulletins = data || [];
+
+        var showTextList = [];
+        for (var bulletinsIndex = 0; bulletinsIndex < this._bulletins.length; bulletinsIndex ++) {
+            var info = this._bulletins[bulletinsIndex];
+            if (info.type == 1) {
+                showTextList.push(info);
+            }
+        }
+
+        var length = showTextList.length;
         this._widthCount = 0;
         if (length > 0) {
             this.bulletinShow.visible = true;
-
             var lastWidth = 0;
             for (var i = 0; i < length; i ++) {
                 var lab = new Laya.Label();
                 lab.text = this._bulletins[i].content;
                 lab.color = "#ffffff";
                 lab.fontSize = 20;
-                lab.x = lastWidth + 20 * i;
+                lab.x = this.bulletinNode.width + lastWidth + 20 * i;
                 lab.y = 8;
                 this.bulletinNode.addChild(lab);
                 lastWidth += lab.width;
@@ -167,10 +206,14 @@ var LobbyView = (function(_super) {
             if (this._widthCount < this.bulletinNode.width) {
                 this._widthCount = this.bulletinNode.width;
             }
-            Laya.timer.frameLoop(1, this, this.updateMove);
+
+            for (var index in this._labList) {
+                var showLab = this._labList[index];
+                Laya.timer.frameLoop(1, showLab, this.updateMove, [{initialX: showLab.x, widthCount: this._widthCount}]);
+            }
         }
         else {
-            this.bulletinShow.visble = false;
+            this.bulletinShow.visible = false;
         }
     };
 
@@ -182,8 +225,7 @@ var LobbyView = (function(_super) {
                 //*错误提示
             }
             else {
-                self._bulletins = data;
-                self.showBulletins();
+                self.showBulletins(data);
             }
         };
         App.netManager.send(
@@ -197,6 +239,13 @@ var LobbyView = (function(_super) {
     };
 
     LobbyView.prototype.updateShow = function () {
+        var reviewing = App.reviewing();
+        if (reviewing) {
+            //*不显示
+            this.wechatLab.visible = false;
+        }
+        this.phoneLab.visible = false;
+
         var notify = Game.Game.NOTICE_TEXT;
         var wechat = Game.Game.WECHAT_NUMBER;
         var phone = Game.Game.PHONE_NUMBER;
@@ -219,6 +268,7 @@ var LobbyView = (function(_super) {
             {"btn": this.shareBtn, "func": this.touchShare},//*分享
             {"btn": this.explanBtn, "func": this.touchExplain},//*玩法说明
             {"btn": this.effortBtn, "func": this.touchEffort},//*战绩
+            {"btn": this.newBtn, "func": this.touchNews},//*消息
         ];
 
         var btn;
@@ -228,7 +278,7 @@ var LobbyView = (function(_super) {
             btn.on(Laya.Event.CLICK, this, func);
         }
 
-        App.tableManager.on(RoomTableMgr.EVENT.CLOSE_ROOM, this, this.updateView);
+        //App.tableManager.on(RoomTableMgr.EVENT.CLOSE_ROOM, this, this.updateView);
 
         this.on(Laya.Event.REMOVED, this, this.removed);
     };

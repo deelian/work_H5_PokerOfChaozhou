@@ -66,8 +66,12 @@ proto.broadcast = function(route, msg, opts, cb) {
         .broadcast(route, msg, opts, cb);
 };
 
-proto.buyUserTokens = function(uid, cb) {
+proto.buyUserTokens = function(uid, productInfo, cb) {
     var User = GameDB.models.user;
+
+    productInfo = productInfo || {};
+    var diamonds = productInfo.diamonds || 3;
+    var price = productInfo.price || 6;
 
     User.findOne({
         where: { id: uid }
@@ -78,7 +82,7 @@ proto.buyUserTokens = function(uid, cb) {
         }
 
         var tokens = record.tokens || 0;
-        tokens += 5;
+        tokens += diamonds;
         record.tokens = tokens;
         
         record.save().then(function() {
@@ -183,6 +187,123 @@ proto.getBulletins = function(uid, cb) {
         
         cb(null, data);
     }).catch(function(e) {
+        logger.error(e);
+        cb(Code.SYSTEM.MySQL_ERROR);
+    });
+};
+
+proto.getOrderID = function(uid, productId, env, cb) {
+    var product = Game.Game.DIAMOND_TYPE[productId];
+    if (product == null) {
+        cb(Code.ROUTE.INVALID_PARAMS);
+        return;
+    }
+
+    var type = 0;
+    if (env == "ios") {
+        type = Game.ORDER_TYPE.IOS;
+    } else if (env == "android") {
+        type = Game.ORDER_TYPE.ANDROID;
+    } else if (env == "h5") {
+        type = Game.ORDER_TYPE.H5;
+    } else {
+        cb(Code.ROUTE.INVALID_PARAMS);
+        return;
+    }
+
+    var Order = GameDB.models.order;
+    Order.create({
+        offerId:        0,
+        userId:         uid,
+        productId:      product.id,
+        productName:    product.name,
+        productPrice:   product.price * 100,
+        tokens:         product.diamonds,
+        env:            env,
+        type:           type
+    }).then(function (record) {
+        cb(null, record.orderId);
+    }).catch(function (e) {
+        logger.error(e);
+        cb(Code.SYSTEM.MySQL_ERROR);
+    });
+};
+
+proto.queryOrder = function(uid, cb) {
+    var User = GameDB.models.user;
+    var Order = GameDB.models.order;
+    var sequelize = GameDB.sequelize;
+
+    Order.findAndCountAll({
+        where: {
+            userId: uid,
+            status: Game.ORDER_STATUS.SUCCESS,
+            env: {
+                $in: [ "ios", "android", "h5" ]
+            }
+        }
+    }).then(function (results) {
+        var count = results.count;
+        var records = results.rows;
+
+        var idArray = [];
+        var data = [];
+        var tokens = 0;
+        records.forEach(function (record) {
+            tokens += record.tokens;
+
+            data.push({
+                orderId:     record.orderId,
+                productName: record.productName,
+                tokens:      record.tokens
+            });
+
+            idArray.push(record.id);
+        });
+
+        sequelize.transaction(function (t) {
+
+            return User.findOne(
+                {
+                    where: { id: uid }
+                },
+                {
+                    transaction: t
+                }
+            ).then(function (record) {
+                if (record == null) {
+                    throw new Error("invalid session");
+                }
+
+                record.tokens += tokens;
+
+                return record.save();
+            }).then(function (result) {
+                return Order.update(
+                    {
+                        status: Game.ORDER_STATUS.PROCESSED
+                    },
+                    {
+                        where: {
+                            id: {
+                                $in: idArray
+                            }
+                        }
+                    },
+                    {
+                        transaction: t
+                    }
+                );
+            });
+        }).then(function (result) {
+            logger.info("query results uid:%d orders:%j", uid, data);
+
+            cb(null, data);
+        }).catch(function (e) {
+            logger.error(e);
+            cb(Code.SYSTEM.MySQL_ERROR);
+        });
+    }).catch(function (e) {
         logger.error(e);
         cb(Code.SYSTEM.MySQL_ERROR);
     });

@@ -37,13 +37,15 @@ var Application = (function (_super) {
         this.uiLayer = new Laya.Sprite();
         this.uiLayer.zOrder = 2;
         Laya.stage.addChild(this.uiLayer);
-
-        Laya.Dialog.manager.zOrder = 100;
-
+        
         // Views
         this.lobbyView = null; //*大厅界面
         this.loaderView = null;//*加载界面
         this.loginView = null; //*登录界面
+
+        this.reConnectTimes = 0; //*断线自动重连的次数
+
+        Laya.stage.on(Laya.Event.VISIBILITY_CHANGE, this, this.visibilityChanged);
 
         this.state = Application.STATE_INITED;
         console.log('application inited...');
@@ -56,16 +58,27 @@ var Application = (function (_super) {
 
         async.series([
             function (callback) {
-                // self.loaderView.setText("正在初始化网络......");
-                // self.netManager.init(function(err) {
-                //     if (err != null) {
-                //         callback(err);
-                //         return;
-                //     }
-
+                // if (App.config.env != "ios") {
                 //     callback(null);
-                // });
-                callback(null);
+                // }
+
+                var complete = function(review) {
+                    App.config.review = review && review.version || "";
+
+                    callback(null);
+                };
+
+                // 加载审核文件
+                Laya.loader.load(                               // Laya.LoadManager.load - 加载资源
+                    "review/review.json",                       // url:* — 单个资源地址，或者资源地址数组(简单数组：["a.png","b.png"]，复杂数组[{url:"a.png",type:Loader.IMAGE,size:100,priority:1},{url:"b.json",type:Loader.JSON,size:50,priority:1}])。
+                    Laya.Handler.create(null, complete),        // complete:Handler (default = null) — 结束回调，如果加载失败，则返回 null 。
+                    null,                                       // progress:Handler (default = null) — 进度回调，回调参数为当前文件加载的进度信息(0-1)。
+                    null,                                       // type:String (default = null) — 资源类型。比如：Loader.IMAGE
+                    1,                                          // priority:int (default = 1) — 优先级，0-4，5个优先级，0优先级最高，默认为1。
+                    false,                                      // cache:Boolean (default = true) — 是否缓存加载结果。
+                    null,                                       // group:String (default = null) — 分组，方便对资源进行管理。
+                    true                                        // ignoreCache:Boolean (default = false) — 是否忽略缓存，强制重新加载
+                );
             }
 
         ], function(err, results) {
@@ -87,8 +100,6 @@ var Application = (function (_super) {
         var port = App.config.port;
         // 弹出连接界面
         var netDlg = new ConnectDialog();
-
-        //netDlg.popup();
         this.uiManager.addUiLayer(netDlg, {isAddShield:true,alpha:0.5,isDispose:false});
 
         async.series([
@@ -96,17 +107,14 @@ var Application = (function (_super) {
             function(callback) {
                 netDlg.setText("正在初始化网络......");
 
-                // 营造良好的既视感
-                Laya.timer.once(1000, null, function() {
-                    self.netManager.connect(host, port, function(err) {
-                        if (err != null) {
-                            netDlg.setText("网络初始化失败！");
-                            callback(err);
-                            return;
-                        }
-                        netDlg.setText("初始化成功!");
-                        callback(null);
-                    });
+                self.netManager.connect(host, port, function(err) {
+                    if (err != null) {
+                        netDlg.setText("网络初始化失败！");
+                        callback(err);
+                        return;
+                    }
+                    netDlg.setText("初始化成功!");
+                    callback(null);
                 });
             },
 
@@ -200,7 +208,7 @@ var Application = (function (_super) {
                 var route;
                 var params;
                 // 微信授权码认证
-                if (self._code != false) {
+                if (self._code != null) {
                     route = "auth.handler.verify";
                     params = {
                         code: self._code
@@ -272,12 +280,224 @@ var Application = (function (_super) {
         });
     };
 
-    // 点击【微信登录】后调用
-    Application.wxAuthorize = function() {
-        window.location = "http://api.glfun.cn/wx/authorize?state=" + this.config.state;
+    Application.wxAuthResp = function(code) {
+        this._code = code;
+        this.login();
     };
 
-    Application.login = function(guest) {
+    // 点击【微信登录】后调用
+    Application.wxAuthorize = function() {
+        // Natvive
+        if (window.conch) {
+            var os = window.conch.config.getOS();
+
+            if (os == "Conch-ios") {
+
+                var AppDelegate = Laya.PlatformClass.createClass("AppDelegate");
+                AppDelegate.call("sendAuthRequest:", this.config.state);
+
+            } else if (os == "Conch-android") {
+
+                var MainActivity = Laya.PlatformClass.createClass("cn.glfun.deju_poker.main.MainActivity");
+                MainActivity.call("sendAuthRequest", this.config.state);
+
+            } else {
+                alert("Unknown os version")
+            }
+        }
+        // 微信内
+        else if (Laya.Browser.onWeiXin) {
+            window.location = "http://api.glfun.cn/wx/authorize?state=" + this.config.state;
+        }
+        // 普通网站
+        else {
+            window.location = "http://api.glfun.cn/wx/qrconnect?state=" + this.config.state;
+        }
+    };
+
+    Application.getOrderId = function(product, callback) {
+        App.netManager.send(
+            "lobby.handler.get_orderid",
+            {
+                productID: product.id,
+                env: App.config.env
+            },
+            Laya.Handler.create(null, callback)
+        );
+    };
+
+    Application.queryOrder = function(callback) {
+        var self = this;
+        var complete = function(err, data) {
+            if (err  != null) {
+                callback(err);
+                return;
+            }
+
+            data.forEach(function (order) {
+                // 可以考虑增加弹窗提示
+                // {"orderId":"c09d3537-4342-455b-9e6b-c5f42fa7d931","productName":"3颗钻石","tokens":3}
+                console.log(JSON.stringify(order));
+                self.lobbyView.addBalance(order.tokens);
+            });
+
+            callback(null);
+        };
+
+        App.netManager.send(
+            "lobby.handler.query_order",
+            {
+            },
+            Laya.Handler.create(null, complete)
+        );
+    };
+
+    Application.iOSPurchase = function(product) {
+        var self = this;
+
+        var dlg = new ConnectDialog();
+        var orderId = "";
+
+        dlg.popup();
+        async.series([
+            // 申请订单号
+            function (callback) {
+
+                dlg.setText("正在获取交易订单号......");
+                self.getOrderId(product, function(err, data) {
+                    if (err != null) {
+                        dlg.setText("获取订单号失败！系统当前繁忙，请稍后再试...");
+                        callback(err);
+                        return;
+                    }
+
+                    dlg.setText("订单号获取成功！");
+                    orderId = data;
+                    callback(null);
+                });
+            },
+            
+            // 拉起IAP内购
+            function (callback) {
+                dlg.setText("交易进行中......");
+
+                var json = {
+                    "order_id":     orderId,
+                    "amount":       1,
+                    "product_id":   product.SKU,
+                    "callback_uri": "http://api.glfun.cn/notice/apple"
+                };
+                conchMarket.recharge(JSON.stringify(json), function(jsonString) {
+                    var pJson = JSON.parse(jsonString);
+
+                    // console.log("code:" + pJson.code);
+                    // console.log("product_id:" + pJson.product_id);
+                    // console.log("amount:" + pJson.amount);
+                    // console.log("order_id:" + pJson.order_id);
+                    // console.log("desc:" + pJson.desc);
+
+                    if (pJson.code != 0) {
+                        dlg.setText("交易失败！错误代码：" + pJson.code);
+                        callback(pJson.code);
+                        return;
+                    }
+
+                    dlg.setText("交易成功！");
+                    callback(null);
+                });
+            },
+            
+            // 查询订单结果
+            function (callback) {
+                dlg.setText("正在校验订单凭证......");
+                self.queryOrder(function(err) {
+                    if (err != null) {
+                        dlg.setText("订单校验失败，请联系系统管理员！交单号：" + orderId);
+                        callback(err);
+                        return;
+                    }
+
+                    dlg.setText("订单校验成功，交易已完成！");
+                    callback(null);
+                });
+            }
+        ], function(err) {
+            var delay = (err != null) ? 5000 : 1000;
+            Laya.timer.once(delay, null, function () {
+                dlg.close();
+            });
+        });
+    };
+
+    Application.wxPurchase = function(product) {
+        var dlg = new MessageDialog({
+            msg: "请关注微信公众号或联系推广员！"
+        });
+
+        dlg.popup();
+    };
+
+    Application.h5Purchase = function(product) {
+        var dlg = new MessageDialog({
+            msg: "请关注微信公众号或联系推广员！"
+        });
+
+        dlg.popup();
+        // var self = this;
+        // var dlg = new ConnectDialog();
+        //
+        // dlg.popup();
+        // dlg.setText("正在获取交易订单号......");
+        // this.getOrderId(product, function(err, data) {
+        //     if (err != null) {
+        //         dlg.setText("获取订单号失败！系统当前繁忙，请稍后再试...");
+        //     } else {
+        //         dlg.setText("订单号获取成功！" + data);
+        //     }
+        //
+        //     Laya.timer.once(1000, null, function () {
+        //         dlg.close();
+        //     });
+        // });
+    };
+
+    Application.purchase = function(productId) {
+        var product = this.assetsManager.getProduct(productId);
+        if (product == null) {
+            return;
+        }
+        
+        switch (App.config.env) {
+            case "ios":
+                this.iOSPurchase(product);
+                break;
+            case "android":
+                this.wxPurchase(product);
+                break;
+            case "h5":
+                this.h5Purchase(product);
+                break;
+            case "wp8":
+            default:
+                break;
+        }
+    };
+
+    // 审核中(用于屏蔽某些敏感信息应付审核：AppStore...)
+    Application.reviewing = function() {
+        if (App.config.env == 'ios') {
+            var localVersion = window.conch.config.getAppLocalVersion();
+
+            // iOS的审核版本
+            if (App.config.review == localVersion) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    Application.login = function() {
         var self = this;
 
         this.state = Application.STATE_AUTHORIZING;
@@ -437,6 +657,7 @@ var Application = (function (_super) {
                     }
                 }
                 else {
+                    self.tableManager.setRoomInfo(data);
                     self.uiManager.runGameRoomView(data);
                 }
             })
@@ -460,6 +681,8 @@ var Application = (function (_super) {
     };
 
     Application.checkIsInRoom = function () {
+        this.state = Application.STATE_RUNNING;
+        this.loginView.unblock();
         if (this.roomID) {
             //*有房间的，就先进入房间，先显示房间，之后在添加大厅
             this.enterRoom(this.roomID);
@@ -468,8 +691,6 @@ var Application = (function (_super) {
             //*没有房间就直接显示大厅
             this.runLobbyView();
         }
-
-        this.state = Application.STATE_RUNNING;
     };
 
     Application.runLobbyView = function() {
@@ -492,6 +713,9 @@ var Application = (function (_super) {
 
     //*断线重连成功，恢复各种状态,游戏正常继续
     Application.reconnectSuccess = function () {
+        //*自动重连次数累计清零
+        this.reConnectTimes = 0;
+
         if (this.roomID) {
             this.enterRoom(this.roomID);
         }
@@ -508,6 +732,7 @@ var Application = (function (_super) {
         var self = this;
         var confirm = function() {
             console.log("app-reconnect: started...");
+            self.reConnectTimes ++;
             self.state = Application.STATE_RECONNECTING;
             self.launch(function(err) {
                 self._dlgReconnect.close();
@@ -528,10 +753,17 @@ var Application = (function (_super) {
             self._dlgReconnect = new MessageDialog({msg:msg, cb:confirm});
         }
 
-        console.log("App state changed %d -> %d", self.state, Application.STATE_RUNNING_RECONNECT);
+        console.log("App state changed " + self.state + " -> " + Application.STATE_RUNNING_RECONNECT);
 
         self.state = Application.STATE_RUNNING_RECONNECT;
-        self._dlgReconnect.popup(true);
+
+        //*自动重连3次，3次之后就手动
+        if (this.reConnectTimes >= Application.RECONNECT_TIMES) {
+            self._dlgReconnect.popup(true);
+        }
+        else {
+            confirm();
+        }
     };
 
     Application.socketClosed = function() {
@@ -545,8 +777,16 @@ var Application = (function (_super) {
             return;
         }
 
-        console.log("App state changed %d -> %d", this.state, Application.STATE_SOCKET_CLOSED);
+        console.log("App state changed " + this.state + " -> " + Application.STATE_SOCKET_CLOSED);
         this.state = Application.STATE_SOCKET_CLOSED;
+    };
+
+    Application.visibilityChanged = function() {
+        if (Laya.stage.isVisibility) {
+            console.log("前台显示......");
+        }  else {
+            console.log("后台显示......");
+        }
     };
 
     Application.start = function() {
@@ -651,5 +891,6 @@ var Application = (function (_super) {
 
     Application.Event                  = {};
 
+    Application.RECONNECT_TIMES        = 3;
     return Application;
 }());

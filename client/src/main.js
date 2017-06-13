@@ -40,9 +40,7 @@ var window = window || global;
         // 通过传参的方式改变project.json的默认配置
         var params = URLUtils.getParams();
         Object.keys(params).forEach(function(key) {
-            console.log(key);
             if (config.hasOwnProperty(key)) {
-                console.log(key);
                 app.config[key] = params[key];
             }
         });
@@ -56,12 +54,44 @@ var window = window || global;
         if (config.frameRate) {
             Laya.stage.frameRate = "mouse";
         }
+        
+        // LayaNative
+        var progress = function (v) {
+            var percent = Math.ceil((v * 100).toFixed(2));
+            window.loadingView && window.loadingView.loading(percent);
+        };
 
+        if (Laya.Browser.onWeiXin) {
+            config.origin = DejuPoker.Game.ORIGIN.WeChat;
+        } else if (window.conch) {
+            config.origin = DejuPoker.Game.ORIGIN.APP;
+        } else {
+            config.origin = DejuPoker.Game.ORIGIN.WebApp;
+        }
+
+        if (window.conch) {
+            var os = window.conch.config.getOS();
+            
+            if (os == "Conch-ios") {
+                config.env = "ios";
+            } else if (os == "Conch-android") {
+                config.env = "android";
+            } else {
+                config.env = "wp8";
+            }
+        } else {
+            config.env = "h5";
+        }
+        
         // 初始化应用
         app.init();
 
         // 预先加载加载画面的资源
-        Laya.loader.load(app.assetsManager.getLoaderRes(), Laya.Handler.create(app, app.start));
+        Laya.loader.load(
+            app.assetsManager.getLoaderRes(),
+            Laya.Handler.create(app, app.start),
+            Laya.Handler.create(null, progress, null, false)
+        );
     }
 } ());
 

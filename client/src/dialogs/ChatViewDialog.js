@@ -103,6 +103,7 @@ var ChatViewDialog = (function(_super) {
         this.sandBtn.on(Laya.Event.CLICK,this,this.sendChat);
 
         App.tableManager.on(RoomTableMgr.EVENT.SAND_CHAT_DATA, this, this.showSendChat);
+        App.tableManager.on(RoomTableMgr.EVENT.CLOSE_ROOM, this, this.close);
     };
 
     ChatViewDialog.prototype.initStatementsList = function() {

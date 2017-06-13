@@ -95,10 +95,10 @@ var DisbandDialog = (function(_super) {
         if (this._dismissStamp) {
             var nowTime = Number(Game.moment().format("x")) / 1000;
             var diff = Math.floor(nowTime) - this._dismissStamp;
-            this._coolDownTime = 180 - Math.floor(diff);
+            this._coolDownTime = 120 - Math.floor(diff);
         }
         else {
-            this._coolDownTime = 180;
+            this._coolDownTime = 120;
         }
 
         if (this._dismissConfirmList) {
@@ -126,7 +126,7 @@ var DisbandDialog = (function(_super) {
 
     DisbandDialog.prototype.initPanelShow = function () {
         var selfId = App.player.getId();
-        var str = this._firstDisbandUserName + "申请解散房间，请问是否同意？（超过3分钟未做选择，则默认同意）";
+        var str = this._firstDisbandUserName + "申请解散房间，请问是否同意？（超过2分钟未做选择，则默认同意）";
         this.titleLab.text = str;
 
         var playerBox = this.playerBox;

@@ -25,12 +25,19 @@ var AuthService = require('./app/services/AuthService');
 var Game = require('../game');
 var Code = Game.Code;
 
+app.configure('all', 'all', function() {
+    var logger = pomelo.logger.getLogger('database', __filename);
+    var db = require('../models/game');
+
+    db.setLogger(logger.info.bind(logger));
+});
+
 // app configuration
 app.configure('all', 'connector|gate', function(){
     app.set('connectorConfig',
         {
             connector : pomelo.connectors.hybridconnector,
-            heartbeat : 3,
+            heartbeat : 30,
             useDict : true,
             useProtobuf : true
         }

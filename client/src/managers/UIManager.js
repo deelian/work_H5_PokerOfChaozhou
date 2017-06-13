@@ -17,7 +17,7 @@ var UIManager = (function(_super) {
         //*创建和显示游戏房间界面
         if (this.gameRoomView) {
             //*刷新房间的界面
-            App.tableManager.reconnectRestore(data);
+            //App.tableManager.reconnectRestore(data);
         }
         else {
             this.gameRoomView = new GameRoomView(data);
@@ -117,8 +117,8 @@ var UIManager = (function(_super) {
 
         var alpha = 0;
         var isDispose = false;
-        addShieldObj = addShieldObj || {isAddShield:true,alpha:0.5,isDispose:true};
-        if(layer.show){
+        addShieldObj = addShieldObj || { isAddShield:true, alpha: 0.5, isDispose: true};
+        if (layer.show) {
             //Dialog
             layer.show();
             if (!(layer instanceof Laya.Dialog)) {

@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"Dialog",
-    "selectedBox":137,
-    "selecteID":31,
+    "selectedBox":26,
+    "selecteID":50,
     "props":{"width":1136,"sceneColor":"#000000","mouseThrough":false,"mouseEnabled":true,"height":640},
     "nodeParent":-1,
     "label":"Dialog",
@@ -44,13 +44,25 @@
                     "props":{"y":-34,"x":34,"width":163,"var":"avatarImage","skin":"assets/ui.room/img_head_icon.png","height":163},
                     "nodeParent":26,
                     "label":"Image(avatarImage)",
-                    "isOpen":true,
-                    "isDirectory":false,
+                    "isOpen":false,
+                    "isDirectory":true,
                     "isAniNode":true,
-                    "hasChild":false,
+                    "hasChild":true,
                     "compId":50,
                     "child":[
-                        ],
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "props":{"y":-3,"x":-2,"width":166,"skin":"assets/ui.room/img_head_mask.png","renderType":"mask","height":166},
+                            "nodeParent":50,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":139,
+                            "child":[
+                                ]
+                        }],
                     "$LOCKED":false,
                     "$HIDDEN":false
                 },
@@ -449,7 +461,7 @@
                                 ]
                         }],
                     "$LOCKED":true,
-                    "$HIDDEN":false
+                    "$HIDDEN":true
                 },
                 {
                     "x":30,
@@ -457,13 +469,14 @@
                     "props":{"y":-28.00000000000003,"x":-21.00000000000003,"width":814,"var":"otherInfoBox","height":445},
                     "nodeParent":26,
                     "label":"Box(otherInfoBox)",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":138,
                     "child":[
                         {
+                            "x":45,
                             "type":"Button",
                             "props":{"y":352.0000000000001,"x":117.00000000000003,"var":"kickBtn","stateNum":"2","skin":"assets/ui.button/btn_bule.png"},
                             "nodeParent":138,
@@ -488,6 +501,7 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Button",
                             "props":{"y":352.0000000000001,"x":335.9999999999999,"var":"standBtn","stateNum":"2","skin":"assets/ui.button/btn_bule.png"},
                             "nodeParent":138,
@@ -512,11 +526,12 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Button",
                             "props":{"y":352.0000000000001,"x":548.9999999999999,"var":"banned","stateNum":"2","skin":"assets/ui.button/btn_bule.png"},
                             "nodeParent":138,
                             "label":"Button(banned)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,

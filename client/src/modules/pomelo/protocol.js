@@ -65,28 +65,28 @@ var Protocol = (function () {
      * return Message Object
      */
     Protocol.strdecode = function(buffer) {
-        //console.log(new Laya.Byte(buffer).readUTFBytes());
-        //return new Laya.Byte(buffer).readUTFBytes();
-        var bytes = new ByteArray(buffer);
-        var array = [];
-        var offset = 0;
-        var charCode = 0;
-        var end = bytes.length;
-        while(offset < end){
-            if(bytes[offset] < 128){
-                charCode = bytes[offset];
-                offset += 1;
-            }else if(bytes[offset] < 224){
-                charCode = ((bytes[offset] & 0x3f)<<6) + (bytes[offset+1] & 0x3f);
-                offset += 2;
-            }else{
-                charCode = ((bytes[offset] & 0x0f)<<12) + ((bytes[offset+1] & 0x3f)<<6) + (bytes[offset+2] & 0x3f);
-                offset += 3;
-            }
-            array.push(charCode);
-        }
+        // var bytes = new ByteArray(buffer);
+        // var array = [];
+        // var offset = 0;
+        // var charCode = 0;
+        // var end = bytes.length;
+        // while(offset < end){
+        //     if(bytes[offset] < 128){
+        //         charCode = bytes[offset];
+        //         offset += 1;
+        //     }else if(bytes[offset] < 224){
+        //         charCode = ((bytes[offset] & 0x3f)<<6) + (bytes[offset+1] & 0x3f);
+        //         offset += 2;
+        //     }else{
+        //         charCode = ((bytes[offset] & 0x0f)<<12) + ((bytes[offset+1] & 0x3f)<<6) + (bytes[offset+2] & 0x3f);
+        //         offset += 3;
+        //     }
+        //     array.push(charCode);
+        // }
+        //
+        // return String.fromCharCode.apply(null, array);
 
-        return String.fromCharCode.apply(null, array);
+        return new Laya.Byte(buffer).readUTFBytes();
     };
 
     /**

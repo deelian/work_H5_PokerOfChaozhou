@@ -19,12 +19,24 @@
             "nodeParent":1,
             "label":"Image(handIcon)",
             "isOpen":true,
-            "isDirectory":false,
+            "isDirectory":true,
             "isAniNode":true,
-            "hasChild":false,
+            "hasChild":true,
             "compId":2,
             "child":[
-                ]
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"y":-1,"x":0,"width":50,"skin":"assets/ui.room/img_head_mask.png","renderType":"mask","height":50},
+                    "nodeParent":2,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":5,
+                    "child":[
+                        ]
+                }]
         },
         {
             "x":15,

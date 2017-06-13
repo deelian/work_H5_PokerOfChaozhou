@@ -159,7 +159,15 @@ var SettingDialog = (function(_super) {
 
     //*退出登录按钮
     SettingDialog.prototype.quitGame = function () {
+        App.storageManager.removeToken();
+        //*在房间里面，关掉房间
+        var gameRoomView = App.uiManager.getGameRoom();
+        if (gameRoomView) {
+            App.tableManager.quitRoom();
+        }
 
+        this.close();
+        App.runLoginView();
     };
 
     //*更换桌布
@@ -195,7 +203,7 @@ var SettingDialog = (function(_super) {
         this.green.on(Laya.Event.CLICK, this, this.touchTable, [SettingDialog.TABLE_TYPE.GREEN]);
         this.yellow.on(Laya.Event.CLICK, this, this.touchTable, [SettingDialog.TABLE_TYPE.YELLOW]);
 
-        this.quitBtn.on(Laya.Event.CLICK, this, this.touchQuit, this.quitGame);
+        this.quitBtn.on(Laya.Event.CLICK, this, this.quitGame);
     };
 
     SettingDialog.prototype.init = function() {

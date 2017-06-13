@@ -19,4 +19,5 @@
    <item name="assets/ui.setting/hslider.png" type="HSlider" compress="0" pack="1" quality="80" props="" picType="0"/>
    <item name="assets/ui.setting/bg_03.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
    <item name="assets/ui.setting/bg_04.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="assets/ui.agreement/img_yhxy.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
 </res>

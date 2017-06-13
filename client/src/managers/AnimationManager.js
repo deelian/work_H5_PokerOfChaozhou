@@ -1,8 +1,8 @@
 
 var AnimationManager = (function(_super) {
     var Animations = {
-        loadingAni:{
-            urls:[
+        "ani.loading": {
+            urls: [
                 "assets/ui.animation/loading/loading0001.png",
                 "assets/ui.animation/loading/loading0002.png",
                 "assets/ui.animation/loading/loading0003.png",
@@ -10,7 +10,7 @@ var AnimationManager = (function(_super) {
                 "assets/ui.animation/loading/loading0005.png",
                 "assets/ui.animation/loading/loading0006.png",
                 "assets/ui.animation/loading/loading0007.png",
-                "assets/ui.animation/loading/loading0008.png",
+                "assets/ui.animation/loading/loading0008.png"
             ],
             interval:100
         }

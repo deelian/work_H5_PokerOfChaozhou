@@ -15,6 +15,8 @@ var FinalItemBox = (function(_super){
             this.playerInfo_1.visible = false;
         }
 
+        var room = App.tableManager.getRoom();
+        var roomHost = room.host;
         var boxList = [this.playerInfo_0, this.playerInfo_1];
         var tempNum = 0;
         for (var index in this._data) {
@@ -44,6 +46,13 @@ var FinalItemBox = (function(_super){
                 poker.x = pokerNum * 40;
                 box.getChildByName("pokerBox_" + tempNum).addChild(poker);
                 pokerNum ++;
+            }
+
+            if (roomHost == Number(index)) {
+                box.getChildByName("hostTag").visible = true;
+            }
+            else {
+                box.getChildByName("hostTag").visible = false;
             }
             tempNum++;
         }

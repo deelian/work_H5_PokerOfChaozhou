@@ -269,11 +269,6 @@
         },
 
         enter: function(player) {
-            // 已经锁住房间就不能进入
-            if (this.locked) {
-                return false;
-            }
-
             var userID = player.id;
 
             if (this.roomLog.users[userID] == null) {
@@ -293,15 +288,24 @@
                 var pos = this.sitDown(userID);
                 this.sendInfoToEveryOne(ROUTE.ROOM.ENTER, {userID: userID, pos: pos});
             }
+            else {
+                this.table.setAwk(userID, false);
+                this.sendInfoToEveryOne(ROUTE.ROOM.AFK, {userID: userID, isAwk: false});
+            }
         },
 
-        leave: function(userID) {
-            // 已经锁住房间就不能离开
-            if (this.locked) {
+        leave: function(userID, isKick) {
+            // 已经锁住房间就不能自由离开
+            if (this.locked && !isKick) {
                 return;
             }
 
             if (userID == this.host) {
+                return;
+            }
+
+            // 发牌之后不能被踢出
+            if (this.state >= Room.STATE_START) {
                 return;
             }
 
@@ -311,6 +315,7 @@
             if (index != -1) {
                 this.members.splice(index, 1);
             }
+
             this.sendInfoToEveryOne(ROUTE.ROOM.LEAVE, {userID: userID});
         },
 
@@ -319,8 +324,13 @@
                 return false;
             }
 
-            this.leave(targetID);
+            this.leave(targetID, true);
             return true;
+        },
+
+        afk: function(userID) {
+            this.table.setAwk(userID, true);
+            this.sendInfoToEveryOne(ROUTE.ROOM.AFK, {userID: userID, isAwk: true});
         },
 
         ready: function() {
@@ -425,8 +435,7 @@
                 return false;
             }
 
-            if (fn == "rejectBanker"
-            ) {
+            if (fn == "rejectBanker") {
                 return true;
             }
 
@@ -500,7 +509,7 @@
                 var agreeCnt = 0;
                 var notSelect = 0;
                 var memberCnt = this.members.length;
-                var duration = 3*60;
+                var duration = 2*60;
 
                 var nowTime = Number(root.moment().format('X'));
                 for (i = 0; i < memberCnt; i++) {

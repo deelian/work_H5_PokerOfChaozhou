@@ -8,7 +8,7 @@ var PlayerInfoDialog = (function(_super) {
 
         this._userId = opts.userID;//*这个人的id
         this._isHost = opts.isHost;//*是不是房主打开了这个信息面板
-
+        console.log(this._isHost);
         this.init(opts);
     }
 
@@ -210,6 +210,11 @@ var PlayerInfoDialog = (function(_super) {
         //*是否是房主查询
         if (this._isHost) {
             this.transformTalkState();
+            this.setBtnState(); //*设置踢人和强制站起按钮
+        }
+        else {
+            this.otherInfoBox.visible = false;
+            this.imgBg.height = 367;
         }
     };
 
@@ -294,6 +299,25 @@ var PlayerInfoDialog = (function(_super) {
         var roomCarView = new BuyItemDialog();
         roomCarView.on(LobbyView.Event.UPDATE_BALANCE, this, this.setBalance);
         App.uiManager.addUiLayer(roomCarView);
+    };
+
+    PlayerInfoDialog.prototype.setBtnState = function () {
+        //对派牌前坐下状态的玩家使用，派牌后按钮灰掉不能使用
+        var roomInfo = App.tableManager.getRoom();
+        var table = roomInfo.table || {};
+        var clients = table.clients || {};
+        var roomState = roomInfo.state;
+
+        if (clients[this._userId]) {
+            if (roomState >= Game.Room.STATE_START) {
+                this.kickBtn.disabled = true;
+                this.standBtn.disabled = true;
+            }
+            else {
+                this.kickBtn.disabled = false;
+                this.standBtn.disabled = false;
+            }
+        }
     };
 
     PlayerInfoDialog.prototype.transformTalkState = function() {
