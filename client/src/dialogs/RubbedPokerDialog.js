@@ -1,9 +1,13 @@
 var RubbedPokerDialog = (function(_super) {
 
-    function RubbedPokerDialog(info) {
+    function RubbedPokerDialog(opts) {
+        opts = opts || {};
+
         RubbedPokerDialog.super(this);
 
-        this.info = info;
+        this.type  = opts.type  || 0;
+        this.value = opts.value || 0;
+        this.state = 0;
 
         this.init();
     }
@@ -101,35 +105,29 @@ var RubbedPokerDialog = (function(_super) {
         var movePercent = 0;
         var maskVisible = false;
         var guideImgVisible = true;
-        if(this._showPanel)
-        {
+        if (this._showPanel) {
             movePercent = this._distance/this._showPanel.height;
             maskVisible = this._showPanel.getChildByName("maskPoker").visible;
             guideImgVisible = this._showPanel.getChildByName("guideImg").visible;
         }
 
-        if(!this._valueMaskPoker)
-        {
+        if (!this._valueMaskPoker) {
             this._valueMaskPoker = new Laya.Image();
             this._valueMaskPoker.skin = "assets/pokers/rubbedPoker/img_zpzcc.png";
         }
-        else
-        {
-            this._valueMaskPoker.parent = null;
+        else {
+            this._valueMaskPoker.removeSelf();
         }
 
-        if(this._showPanel == this.verticalPanel)
-        {
+        if (this._showPanel == this.verticalPanel) {
             this._showPanel = this.horizontalPanel;
             this._panelHeight = this._showPanel.height * (1/2);
         }
-        else if(this._showPanel == this.horizontalPanel)
-        {
+        else if (this._showPanel == this.horizontalPanel) {
             this._showPanel = this.verticalPanel;
             this._panelHeight = this._showPanel.height * (3/5);
         }
-        else
-        {
+        else {
             this._showPanel = this.horizontalPanel;
             this._panelHeight = this._showPanel.height * (1/2);
         }
@@ -151,7 +149,28 @@ var RubbedPokerDialog = (function(_super) {
         ( this._distance !=0 ) && (this._rubbedPoker.y -= (this._showPanel.height*movePercent));
         this._distance = 0;
 
-        this._rubbedPoker.skin = "assets/pokers/rubbedPoker/" + this.getSkinName(this.info.type,this.info.value) + ".png";
+        this._rubbedPoker.skin = "assets/pokers/rubbedPoker/" + this.getSkinName(this.type, this.value) + ".png";
+    };
+
+    __proto.notify = function() {
+        var self = this;
+        var complete = function (err, data) {
+            if (err) {
+                Laya.timer.once(800, self, self.notify);
+                return;
+            }
+
+            self.close();
+
+        };
+        App.netManager.send(
+            "room.handler.command",
+            {
+                fn: "rubDone",
+                data: {}
+            },
+            Laya.Handler.create(null, complete)
+        );
     };
 
     __proto.rubbedPokerEnd = function() {
@@ -160,34 +179,17 @@ var RubbedPokerDialog = (function(_super) {
         this.off(Laya.Event.MOUSE_MOVE, this, this.touchRubbedPoker);
         this.off(Laya.Event.MOUSE_OUT, this, this.touchRubbedPoker);
 
-        var self = this;
-
         this._rubbedPoker.y = 0;
         this._showPanel.height += this._panelDistance;
         this._maskPoker.visible = false;
 
-        if(this._valueMaskPoker)
-        {
+        if (this._valueMaskPoker) {
             this._valueMaskPoker.removeSelf();
             this._valueMaskPoker = null;
         }
 
-        setTimeout(function(){
-            var complete = function (err, data) {
-                if (err) {
-                }
-
-            };
-            App.netManager.send(
-                "room.handler.command",
-                {
-                    fn: "rubDone",
-                    data: {}
-                },
-                Laya.Handler.create(null, complete)
-            );
-        },800);
-
+        this.state = 1;
+        Laya.timer.once(1600, this, this.notify);
     };
 
     __proto.getSkinName = function (type,value) {
@@ -222,8 +224,10 @@ var RubbedPokerDialog = (function(_super) {
         return skinName;
     };
 
-    __proto.dispose = function() {
-        this.removeSelf();
+    __proto.wakeUp = function () {
+        if (this.state) {
+            this.notify();
+        }
     };
 
     return RubbedPokerDialog;

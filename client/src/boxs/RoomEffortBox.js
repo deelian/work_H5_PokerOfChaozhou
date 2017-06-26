@@ -50,6 +50,11 @@ var RoomEffortBox = (function(_super) {
                 showUserNum ++;
             }
 
+            var userBox0 = this.line.getChildByName("userBox_0");
+            userBox0.visible = false;
+            var userBox1 = this.line.getChildByName("userBox_1");
+            userBox1.visible = false;
+
             for (var showIndex = 0; showIndex < showUserNum; showIndex ++) {
                 var userId          = userIndexList[showIndex];
                 var userInfo        = this._data[userId];

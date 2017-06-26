@@ -63,7 +63,7 @@ proto.leave = function(uid, callback) {
 proto.broadcast = function(route, msg, opts, cb) {
     this.app.get('channelService')
         .getChannel('lobby', true)
-        .broadcast(route, msg, opts, cb);
+        .spread(route, msg, opts, cb);
 };
 
 proto.buyUserTokens = function(uid, productInfo, cb) {
@@ -84,7 +84,7 @@ proto.buyUserTokens = function(uid, productInfo, cb) {
         var tokens = record.tokens || 0;
         tokens += diamonds;
         record.tokens = tokens;
-        
+
         record.save().then(function() {
             cb(null, tokens);
         }).catch(function(e) {
@@ -135,12 +135,21 @@ proto.getUserInfo = function(uid, cb) {
     });
 };
 
-proto.getLogs = function(logIDs, cb) {
-    logIDs = logIDs || [];
+proto.getLogs = function(uid, page, cb) {
     var data = [];
+    var searchUid = "%u" + uid + "#%";
+    var leastDay = Moment().subtract(3, 'days').format("YYYY-MM-DD HH:mm:ss");
+    var offset = Number(page) * 10;
 
+    // 三天内 userInfo包含searchUid 时间倒序 100条以内
     GameDB.models.record.findAll({
-        where: { id: {$in: logIDs} }
+        where: {
+            userInfo: {$like: searchUid},
+            createdAt: {$gt: leastDay}
+        },
+        order: 'createdAt DESC',
+        offset: offset,
+        limit: 10
     }).then(function(records) {
         if (records == null) {
             cb(Code.ROUTE.INVALID_SESSION);
@@ -150,10 +159,39 @@ proto.getLogs = function(logIDs, cb) {
         records.forEach(function(record) {
             var d = record.toJSON();
             if (d.data) {
-                d.data = JSON.parse(d.data);
+                var roomData = JSON.parse(d.data);
+                var sendData = {info: roomData.info, users: roomData.users};
+                sendData.info.times = roomData.rounds.length;
+                sendData.id = d.id;
+
+                data.push(sendData);
             }
-            data.unshift(d);
         });
+
+        cb(null, data);
+    }).catch(function(e) {
+        logger.error(e);
+        cb(Code.SYSTEM.MySQL_ERROR);
+    });
+};
+
+// 单个房间的具体战绩获取
+proto.getRecord = function(uid, recordId, cb) {
+    GameDB.models.record.findOne({
+        where: {
+            id: recordId
+        }
+    }).then(function(record) {
+        if (record == null) {
+            cb(Code.ROUTE.INVALID_SESSION);
+            return;
+        }
+
+        var data = {};
+        var d = record.toJSON();
+        if (d.data) {
+            data = JSON.parse(d.data);
+        }
 
         cb(null, data);
     }).catch(function(e) {
@@ -179,12 +217,12 @@ proto.getBulletins = function(uid, cb) {
         }
 
         var data = [];
-        
+
         records.forEach(function(record) {
             var d = record.toJSON();
             data.push(d);
         });
-        
+
         cb(null, data);
     }).catch(function(e) {
         logger.error(e);

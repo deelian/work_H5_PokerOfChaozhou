@@ -2,16 +2,16 @@
  * 申请解散房间界面
  */
 var DisbandDialog = (function(_super) {
-    function DisbandDialog(userID, disMissInfo, name) {
+    function DisbandDialog(opts) {
         DisbandDialog.super(this);
 
-        this._firstDisbandUser = userID;
-        this._firstDisbandUserName = name;
+        this._firstDisbandUser = opts.userID;
+        this._firstDisbandUserName = opts.name;
 
         //*这两个用于恢复状态时候
-        if (disMissInfo) {
-            this._dismissConfirmList = disMissInfo.dismissConfirmList;
-            this._dismissStamp = disMissInfo.dismissStamp;
+        if (opts.disMissInfo) {
+            this._dismissConfirmList = opts.disMissInfo.dismissConfirmList;
+            this._dismissStamp = opts.disMissInfo.dismissStamp;
         }
 
         this._coolDownTime = 0;
@@ -22,6 +22,18 @@ var DisbandDialog = (function(_super) {
     }
 
     Laya.class(DisbandDialog, "DisbandDialog", _super);
+
+    DisbandDialog.prototype.updateInfo = function (opts) {
+        this._firstDisbandUser = opts.userID;
+        this._firstDisbandUserName = opts.name;
+
+        //*这两个用于恢复状态时候
+        if (opts.disMissInfo) {
+            this._dismissConfirmList = opts.disMissInfo.dismissConfirmList;
+            this._dismissStamp = opts.disMissInfo.dismissStamp;
+        }
+        this.initCoolDownTime();
+    };
 
     DisbandDialog.prototype.changePanelShow = function (userId, confirm) {
         var selfId = App.player.getId();
@@ -76,7 +88,8 @@ var DisbandDialog = (function(_super) {
     };
 
     DisbandDialog.prototype.updateCoolDown = function () {
-        this._coolDownTime --;
+        this.syncCoolDown();
+        
         if (this._coolDownTime <= 0) {
             Laya.timer.clear(this, this.updateCoolDown);
             this._coolDownTime = 0;
@@ -85,21 +98,32 @@ var DisbandDialog = (function(_super) {
         this.setCoolDownLabText();
     };
 
+    DisbandDialog.prototype.unregEvent = function () {
+        this.yesBtn.off(Laya.Event.CLICK, this, this.canDisBand);
+        this.closeBtn.off(Laya.Event.CLICK, this, this.canDisBand);
+    };
+
     DisbandDialog.prototype.initEvent = function () {
         this.yesBtn.on(Laya.Event.CLICK, this, this.canDisBand, [true]);
         this.closeBtn.on(Laya.Event.CLICK, this, this.canDisBand, [false]);
         Laya.timer.loop(1000, this, this.updateCoolDown);
+
+        //App.tableManager.on(RoomTableMgr.Event.CLOSE_ROOM, this, this.onClose);
     };
 
-    DisbandDialog.prototype.initCoolDownTime = function () {
+    DisbandDialog.prototype.syncCoolDown = function() {
         if (this._dismissStamp) {
-            var nowTime = Number(Game.moment().format("x")) / 1000;
+            var nowTime = App.getTime();
             var diff = Math.floor(nowTime) - this._dismissStamp;
             this._coolDownTime = 120 - Math.floor(diff);
         }
         else {
             this._coolDownTime = 120;
         }
+    };
+
+    DisbandDialog.prototype.initCoolDownTime = function () {
+        this.syncCoolDown();
 
         if (this._dismissConfirmList) {
             for (var i in this._dismissConfirmList) {
@@ -171,10 +195,9 @@ var DisbandDialog = (function(_super) {
         this.initEvent();
     };
 
-    DisbandDialog.prototype.close = function () {
+    DisbandDialog.prototype.onClosed = function () {
         Laya.timer.clearAll(this);
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
+        this.unregEvent();
     };
 
     DisbandDialog.LAB_COLOR = {

@@ -11,13 +11,18 @@ var RoomEffortDialog = (function(_super) {
 
     Laya.class(RoomEffortDialog, "RoomEffortDialog", _super);
 
+    RoomEffortDialog.prototype.init = function () {
+        this.initList();
+    };
+
     RoomEffortDialog.prototype.initList = function () {
         var array = [];
         var list = new laya.ui.List();
         var render = EffortBox || new laya.ui.Box() ;
 
-        var rounds = this._info.data.rounds;
-        var users = this._info.data.users;
+        var rounds = this._info.rounds || [];
+        var users = this._info.users || {};
+
         for (var index in rounds) {
             var roundsClients = rounds[index].clients || {};
             var ghostPokers = rounds[index].ghostPokers || [];
@@ -45,16 +50,6 @@ var RoomEffortDialog = (function(_super) {
 
         this.effortBox.addChild(list);
     };
-
-    RoomEffortDialog.prototype.init = function () {
-        this.initList();
-    };
-
-    RoomEffortDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
-    };
-
 
     return RoomEffortDialog;
 }(RoomEffortUI));

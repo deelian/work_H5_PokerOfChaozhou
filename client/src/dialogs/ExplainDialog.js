@@ -26,11 +26,11 @@ var ExplainDialog = (function(_super) {
         label.leading = 10;
         label.name = name;
         return label;
-    };
+    }
 
     function ExplainItem() {
         ExplainItem.super(this);
-        this.size(730, 455);
+        this.size(730, 1746);
 
         this.setData = function(cellSrc)
         {
@@ -64,11 +64,8 @@ var ExplainDialog = (function(_super) {
         this.viewList.renderHandler = new Laya.Handler(this, this.updateItem);
         this.viewList.selectEnable = true;
 
-        var pagesData = [[],[],[],[]];
+        var pagesData = [[]];
         pagesData[0].push(this.page1);
-        pagesData[1].push(this.page2);
-        pagesData[2].push(this.page3);
-        pagesData[3].push(this.page4);
 
         this.viewList.array = pagesData;
     };
@@ -206,9 +203,12 @@ var ExplainDialog = (function(_super) {
     };
 
 
-    ExplainDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
+    ExplainDialog.prototype.onClosed = function() {
+        var keys = Object.keys(this);
+        //console.log(keys);
+
+        //this.viewList.destroy(true);
+        //console.log(this.viewList.destroyed);
     };
 
     return ExplainDialog;

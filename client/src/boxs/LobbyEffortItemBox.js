@@ -13,34 +13,60 @@ var LobbyEffortItemBox = (function(_super) {
 
     LobbyEffortItemBox.prototype.touchRound = function () {
         App.soundManager.playSound("btnSound");
-        var roomEffortDialog = new RoomEffortDialog(this._data);
-        App.uiManager.addUiLayer(roomEffortDialog);
+        var self = this;
+        var id = this._id;
+        var complete = function (err, data) {
+            if (!err) {
+                App.uiManager.addUiLayer(RoomEffortDialog, data);
+            }
+        };
+        App.netManager.send(
+            "lobby.handler.get_record",
+            {
+                id: id
+            },
+            Laya.Handler.create(null, complete)
+        );
     };
 
     LobbyEffortItemBox.prototype.onRender = function(data){
         this._data = data;
 
-        //*房间号
-        var roomId = this._data.roomID;
-        this.roomIdLab.text = roomId;
+        this._id = this._data.id || 0;
+        this._info = this._data.info || {};
+        this._users = this._data.users || {};
 
-        var roundData = this._data.data;
+        //*房间号
+        this.roomIdLab.text = this._info.id;
 
         //*模式
-        var roomInfo = roundData.info;
-        var roomType = roomInfo.type;
+        var roomType = this._info.type;
         this.modeType.skin = LobbyEffortItemBox.ROOM_TYPE_SKIN[roomType];
 
+        //*局数
+        var times = this._info.times;
+        var maxRound = this._info.maxRound || Math.ceil(times/10) * 10;
+        this.roundLab.text = times + "/" + maxRound + "局";
+
+        //*时间
+        var updatedAt = this._info.createTime;
+        var moment = Game.moment(updatedAt);
+        var day = moment.format("YYYY-MM-DD");
+        this.dayLab.text = day;
+        var clock = moment.format("HH:mm:ss");
+        this.clockLab.text = clock;
+
         for (var iconIndex in this._iconList) {
-            this._iconList[iconIndex].dispose();
+            if (this._iconList[iconIndex]) {
+                this._iconList[iconIndex].dispose();
+            }
         }
 
         var playerNum = 0;
-        var roundInfo = roundData.users;
-        for (var index in roundInfo) {
-            var playerGold = roundInfo[index].total;
-            var name = roundInfo[index].name || "游客";
-            var avatar = roundInfo[index].avatar || "";
+        for (var index in this._users) {
+            var playerGold = this._users[index].total;
+            var name = this._users[index].name || "游客";
+            var avatar = this._users[index].avatar || "";
             var info = {
                 id: index,
                 gold: playerGold,
@@ -54,13 +80,6 @@ var LobbyEffortItemBox = (function(_super) {
             this._iconList.push(icon);
             playerNum ++;
         }
-
-        var updatedAt = this._data.updatedAt;
-        var moment = Game.moment(updatedAt);
-        var day = moment.format("YYYY-MM-DD");
-        this.dayLab.text = day;
-        var clock = moment.format("HH:mm:ss");
-        this.clockLab.text = clock;
     };
 
     LobbyEffortItemBox.renderHandler = function(cell, index) {

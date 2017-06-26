@@ -85,7 +85,7 @@ var SelectMultipleDialog = (function(_super) {
         var multiple = this.multipleList.getItem(index)[0];
         //var multipleLab = cell.multipleLab.text.replace("倍","");
         this.event("multipleChange",[multiple]);
-        this.removeSelf();
+        this.close();
     };
 
     __proto.showAllItem = function() {
@@ -174,6 +174,10 @@ var SelectMultipleDialog = (function(_super) {
         }
         return values;
     };
+
+    //__proto.onClose = function() {
+    //    App.uiManager.removeUiLayer(this);
+    //};
 
     return SelectMultipleDialog;
 }(SelectMultipleDialogUI));

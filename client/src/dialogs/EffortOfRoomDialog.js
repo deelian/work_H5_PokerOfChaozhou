@@ -83,10 +83,10 @@ var EffortOfRoomDialog = (function(_super) {
         this.initEffortBox();
     };
 
-    EffortOfRoomDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
-    };
+    //EffortOfRoomDialog.prototype.onClose = function() {
+    //    //_super.prototype.close.call(this);
+    //    App.uiManager.removeUiLayer(this);
+    //};
 
     return EffortOfRoomDialog;
 }(EffortOfRoomDialogUI));

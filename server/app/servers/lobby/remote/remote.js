@@ -34,5 +34,10 @@ proto.getUser = function(args, callback) {
 
 proto.userLeave = function(uid, callback) {
     logger.info("lobby-user-leave", uid);
+
+    this.app.get('channelService')
+        .getChannel('lobby', true)
+        .leave(uid);
+
     callback && callback(null);
 };

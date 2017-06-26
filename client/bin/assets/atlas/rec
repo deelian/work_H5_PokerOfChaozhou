@@ -72,7 +72,7 @@ G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\heart_8.png:149266031
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\heart_9.png:1492660316
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\joker_14.png:1492660194
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\joker_15.png:1492660190
-G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\joker_16.png:1494319268
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\joker_16.png:1497843362
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\joker_title.png:1494838938
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\poker_back.png:1493966725
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\btn_rotate.png:1495183284
@@ -120,7 +120,7 @@ G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\img_02.pn
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\img_zpzcc.png:1496484055
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\joker_14.png:1495161480
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\joker_15.png:1495161480
-G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\joker_16.png:1495161480
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\joker_16.png:1497843194
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\poker_back.png:1495161480
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\spade_1.png:1495161480
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\pokers\rubbedPoker\spade_10.png:1495161480
@@ -240,7 +240,7 @@ G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.main\img_0002.png:1493872
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.main\img_0003.png:1493872566
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.main\img_0004.png:1494241974
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.main\img_0005.png:1492077836
-G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.main\img_0006.png:1492077836
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.main\img_0006.png:1497948738
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.main\img_0007.png:1493975656
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.main\img_AvatarFrame.png:1492077836
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.main\img_BulletinBoard.png:1493872566
@@ -292,6 +292,7 @@ G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\btn_03.png:149439718
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\btn_04.png:1494397156
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\btn_blue.png:1494398364
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\btn_yellow.png:1494397132
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\cha.png:1498299922
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\chat\bg.png:1494241973
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\chat\btn_0001.png:1494241973
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\chat\btn_0002.png:1494241973
@@ -342,7 +343,7 @@ G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\final\img_zhanjixian
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_banker.png:1493274126
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_Battery.png:1494397120
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_Battery2.png:1494397118
-G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_CardType.png:1494857333
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_CardType.png:1494857334
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_chat.png:1494037202
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_dissolution.png:1494857364
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_dissolution_j.png:1494856986
@@ -354,7 +355,7 @@ G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_Return.png:1494
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_Return_j.png:1494856984
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_setup.png:1494857284
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_Standup.png:1494857396
-G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_Standup_j.png:1494856985
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_Standup_j.png:1494856986
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_Voice.png:1493966725
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_Voice2.png:1494037466
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\icon_VoiceBottom.png:1493966725
@@ -366,6 +367,7 @@ G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_AvatarFrame1.png
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_banker.png:1493966725
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_bet.png:1496461471
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_cancel.png:1494843276
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_chat bg.png:1498444122
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_ChatBox.png:1492134476
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Count down.png:1493966725
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Count down1.png:1493980244
@@ -394,6 +396,7 @@ G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_num_X.png:149439
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Open.png:1494397150
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_opendeal.png:1494397138
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Openup.png:1494397148
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_px bg.png:1498443800
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_RateBase.png:1493966725
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Ready.png:1493966725
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_rob.png:1494397126
@@ -402,15 +405,30 @@ G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Settlement_2.png
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Settlement_3.png:1493966725
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Settlement_4.png:1493966725
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Shuffling2.png:1494397142
-G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Sitdown.png:1493966725
-G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Sitdown_1.png:1493373104
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Sitdown_1.png:1498458964
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_skip.png:1494397136
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_supplement2.png:1494397146
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_Tick.png:1493966725
-G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_upper.png:1494856997
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\img_upper2.png:1494856996
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\ing_0001.png:1492134477
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\label_GetReady_dibu.png:1493949866
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\bung.png:1498443798
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\double_ghost.png:1498443778
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\eight.png:1498443786
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\five.png:1498443790
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\four.png:1498443792
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\god_eight.png:1498443774
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\god_nine.png:1498443776
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\nine.png:1498443784
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\one.png:1498443798
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\seven.png:1498443788
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\six.png:1498443788
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\straight.png:1498443770
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\straight_flush.png:1498443782
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\three.png:1498443794
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\threes.png:1498443772
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\three_ghost.png:1498443780
+G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\resultLab\two.png:1498443796
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\showPokerType\img_01.png:1494241973
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\showPokerType\img_fengexian.png:1494241973
 G:/diuojiuPoker\DejuPoker\client\laya\assets\assets\ui.room\showPokerType\img_jiemian.png:1494241973

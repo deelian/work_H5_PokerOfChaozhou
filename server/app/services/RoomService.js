@@ -56,6 +56,11 @@ proto.enterRoom = function(userID, serverID, roomID, callback) {
         room.enter(record.player);
         self.users[userID] = roomID;
 
+        // 离开房间频道
+        self.app.get('channelService')
+            .getChannel(roomID, true)
+            .leave(userID);
+
         // 加入房间频道
         self.app.get('channelService')
             .getChannel(roomID, true)
@@ -109,6 +114,12 @@ proto.afk = function(userID, callback) {
     }
 
     room.afk(userID);
+
+    // 离开房间频道
+    this.app.get('channelService')
+        .getChannel(roomID, true)
+        .leave(userID);
+    
     callback(null, roomID);
 };
 
@@ -253,12 +264,13 @@ proto.destroyRoom = function(roomID) {
     var i;
     var size;
     var self = this;
+    var userID;
 
     // 删除用户索引
     var room = this.getRoom(roomID);
     if (room != null) {
         for (i = 0, size = room.members.length; i < size; i++) {
-            var userID = room.members[i];
+            userID = room.members[i];
             if (userID && this.users[userID] == roomID) {
                 delete this.users[userID];
             }
@@ -269,8 +281,11 @@ proto.destroyRoom = function(roomID) {
     this.app.get('channelService').destroyChannel(roomID);
     var roomLog = room.roomLog || {};
     var userLog = roomLog.users || {};
-    var recordID = null;
-    var userID;
+    
+    var userString = "";
+    for (userID in userLog) {
+        userString += ("u" + userID + "#");
+    }
 
     async.series([
         function(callback) {
@@ -282,12 +297,9 @@ proto.destroyRoom = function(roomID) {
 
             GameDB.models.record.create({
                 roomID:    roomID,
+                userInfo:  userString,
                 data:      JSON.stringify(roomLog)
             }).then(function(record) {
-                if (record) {
-                    recordID = record.id || null;
-                }
-
                 callback(null);
             }).catch(function(e) {
                 logger.error(e);
@@ -337,9 +349,6 @@ proto.destroyRoom = function(roomID) {
 
                     var log = userLog[uid];
                     var player = new Player(record.player);
-                    if (recordID != null) {
-                        player.addLog(recordID);
-                    }
                     player.addPlayTimes(log.playTimes);
                     player.addWinTimes(log.winTimes);
                     player.addFightTimes(log.fightTimes);
@@ -439,7 +448,7 @@ proto.loadRooms = function(callback) {
 proto.broadcast = function(roomID, route, msg, opts, cb) {
     this.app.get('channelService')
         .getChannel(roomID, true)
-        .broadcast(route, msg, opts, cb);
+        .spread(route, msg, opts, cb);
 };
 
 proto.send = function(roomID, userID, route, msg, opts, cb) {
@@ -550,7 +559,17 @@ proto.sit_down = function(userID, msg, cb) {
 
     if (result != -1) {
         var chairs = room.getChairs();
-        this.broadcast(roomID, ROUTE.CHAIR.SIT_DOWN, {userID: userID, pos: result, chairs: chairs}, null);
+        var roomSend = {
+            table: {
+                clients: {}
+            }
+        };
+
+        var client = room.table.getClient(userID);
+        if (client) {
+            roomSend.table.clients[userID] = client;
+        }
+        this.broadcast(roomID, ROUTE.CHAIR.SIT_DOWN, {userID: userID, pos: result, chairs: chairs, room: roomSend}, null);
     }
     cb && cb(null, result);
 };
@@ -566,7 +585,7 @@ proto.stand_up = function(userID, msg, cb) {
     var result = room.standUp(userID, msg);
 
     if (result != false) {
-        this.broadcast(roomID, ROUTE.CHAIR.STAND_UP, {userID: userID}, null);
+        this.broadcast(roomID, ROUTE.CHAIR.STAND_UP, {userID: userID, room: {table: {deleteClient: [userID]}}}, null);
     }
     cb && cb(null, result);
 };
@@ -582,7 +601,7 @@ proto.let_stand_up = function(userID, msg, cb) {
     var result = room.letStandUp(userID, msg.data);
 
     if (result != false) {
-        this.broadcast(roomID, ROUTE.CHAIR.LET_STAND_UP, {userID: msg.data}, null);
+        this.broadcast(roomID, ROUTE.CHAIR.LET_STAND_UP, {userID: msg.data, room: {table: {deleteClient: [msg.data]}}}, null);
     }
     cb && cb(null, result);
 };

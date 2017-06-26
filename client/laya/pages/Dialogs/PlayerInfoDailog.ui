@@ -2,7 +2,7 @@
     "x":0,
     "type":"Dialog",
     "selectedBox":26,
-    "selecteID":50,
+    "selecteID":25,
     "props":{"width":1136,"sceneColor":"#000000","mouseThrough":false,"mouseEnabled":true,"height":640},
     "nodeParent":-1,
     "label":"Dialog",
@@ -51,7 +51,6 @@
                     "compId":50,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":-3,"x":-2,"width":166,"skin":"assets/ui.room/img_head_mask.png","renderType":"mask","height":166},
                             "nodeParent":50,
@@ -363,14 +362,13 @@
                     "props":{"y":-28.00000000000003,"x":-21.00000000000003,"width":814,"var":"selfInfoBox","height":367},
                     "nodeParent":26,
                     "label":"Box(selfInfoBox)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":137,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":135.99999999999997,"x":238.99999999999997,"skin":"assets/ui.playerInfo/img_fangkadi.png"},
                             "nodeParent":137,
@@ -383,7 +381,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "props":{"y":137.99999999999997,"x":285,"var":"tokenLab","text":"200000","fontSize":23,"font":"Microsoft YaHei","color":"#ffc35a"},
                             "nodeParent":137,
@@ -396,7 +393,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Button",
                             "props":{"y":137.00000000000003,"x":383,"var":"btnIncrease","stateNum":"2","skin":"assets/ui.button/gtn_increase.png"},
                             "nodeParent":137,
@@ -409,7 +405,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":141,"x":242,"skin":"assets/ui.main/icon_roomcard.png"},
                             "nodeParent":137,
@@ -422,7 +417,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "props":{"y":137.99999999999997,"x":535.0000000000001,"text":"邀请码 :","fontSize":23,"font":"Microsoft YaHei","color":"#c39bf5"},
                             "nodeParent":137,
@@ -435,7 +429,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "props":{"y":139.99999999999997,"x":626,"text":"123456789","name":"inviteLab","fontSize":23,"font":"Microsoft YaHei","color":"#c39bf5"},
                             "nodeParent":137,
@@ -448,7 +441,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":127.00000000000003,"x":73.00000000000003,"skin":"assets/ui.playerInfo/img_edit.png"},
                             "nodeParent":137,
@@ -555,9 +547,9 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":-19.000000000000014,"x":735,"var":"btnClose","stateNum":"2","skin":"assets/ui.button/btn_Close.png"},
+                    "props":{"y":-19.000000000000014,"x":735,"stateNum":"2","skin":"assets/ui.button/btn_Close.png","name":"close"},
                     "nodeParent":26,
-                    "label":"Button(btnClose)",
+                    "label":"Button(close)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,

@@ -1,6 +1,71 @@
 /**
  * 选择游戏模式界面
  */
+function staticPage() {
+    staticPage.super(this);
+    this.size(209, 1303);
+
+    this.setData = function(cellSrc)
+    {
+        var data;
+        for(var i = 0 ; i < cellSrc.length ; i++)
+        {
+            data = cellSrc[i];
+            this.addChild(data);
+        }
+    }
+}
+
+Laya.class(staticPage, "staticPage", Laya.Box);
+
+function classicalPage() {
+    classicalPage.super(this);
+    this.size(209, 1460);
+
+    this.setData = function(cellSrc)
+    {
+        var data;
+        for(var i = 0 ; i < cellSrc.length ; i++)
+        {
+            data = cellSrc[i];
+            this.addChild(data);
+        }
+    }
+}
+Laya.class(classicalPage, "classicalPage", Laya.Box);
+
+function chaosPage() {
+    chaosPage.super(this);
+    this.size(209, 1120);
+
+    this.setData = function(cellSrc)
+    {
+        var data;
+        for(var i = 0 ; i < cellSrc.length ; i++)
+        {
+            data = cellSrc[i];
+            this.addChild(data);
+        }
+    }
+}
+Laya.class(chaosPage, "chaosPage", Laya.Box);
+
+function customizedPage() {
+    customizedPage.super(this);
+    this.size(209, 280);
+
+    this.setData = function(cellSrc)
+    {
+        var data;
+        for(var i = 0 ; i < cellSrc.length ; i++)
+        {
+            data = cellSrc[i];
+            this.addChild(data);
+        }
+    }
+}
+Laya.class(customizedPage, "customizedPage", Laya.Box);
+
 var SelectModeDialog = (function(_super) {
 
     var introduction = {
@@ -190,6 +255,7 @@ var SelectModeDialog = (function(_super) {
 
 
     SelectModeDialog.prototype.setFormationType = function () {
+        this.nineGhostCheck.selected = !this._nineGhost;
         this._nineGhost = this.nineGhostCheck.selected;
         if(this.nineGhostCheck.selected)
         {
@@ -279,6 +345,7 @@ var SelectModeDialog = (function(_super) {
     SelectModeDialog.prototype.selectTwoGhost = function() {
         //*设置两张鬼牌
         if (this._ghostCounts != 0) {
+            this.twoMoreCheck.selected = !this.twoMoreCheck.selected;
             if(this.twoMoreCheck.selected)
             {
                 this._ghostCounts = 2;
@@ -286,7 +353,7 @@ var SelectModeDialog = (function(_super) {
             }
             else
             {
-                if(this._ghostCounts == 1)
+                if(this._ghostCounts >= 1)
                 {
                     this._ghostCounts = 1;
                 }
@@ -380,10 +447,11 @@ var SelectModeDialog = (function(_super) {
                 this.jokerFormationCheak.selected = false;
                 this.nineGhostCheck.selected = false;
                 this.nineGhostCheck.mouseEnabled = false;
-
+                this._nineGhost = false;
+                this.changeTitleColor(this.nineGhostCheck);
                 this.changeTitleColor(this.jokerAnyCheck,"#ffb16c");
                 this.changeTitleColor(this.jokerFormationCheak);
-                this.setFormationType();
+                //this.setFormationType();
                 break;
             }
 
@@ -409,6 +477,7 @@ var SelectModeDialog = (function(_super) {
 
     SelectModeDialog.prototype.setDoubleDeal = function () {
         //*设置翻倍牌
+        this.doubleCheck.selected = !this._isDouble;
         this._isDouble = this.doubleCheck.selected;
         if(this.doubleCheck.selected)
         {
@@ -510,6 +579,7 @@ var SelectModeDialog = (function(_super) {
             }
 
             App.roomID = data;
+            self.setRoomSettings();
             App.enterRoom(App.roomID, function() {
                 self.close();
             })
@@ -745,45 +815,95 @@ var SelectModeDialog = (function(_super) {
         var jokerType = SelectModeDialog.JOKER_FUNC_TYPE;
         var roundType = SelectModeDialog.NORMAL_ROUND_TYPE;
 
-        var checkBoxList = [
-            {name:this.doubleCheck, func:this.setDoubleDeal, parameter:null},
+        var checkBoxTouchList = [
+            {name:this.tenRoundTouchBox, func:this.setGameRound, parameter:[roundType.TEN]},
+            {name:this.twentyRoundTouchBox, func:this.setGameRound, parameter:[roundType.TWENTY]},
 
-            {name:this.jokerAnyCheck, func:this.setJokerEffect, parameter:[jokerType.ANY]},
-            {name:this.jokerFormationCheak, func:this.setJokerEffect, parameter:[jokerType.FORMATION]},
+            {name:this.bigThenGodTouch, func:this.setCondition, parameter:[SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_GOD]},
+            {name:this.bigThenStraightTouch, func:this.setCondition, parameter:[SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_STRAIGHT]},
 
-            {name:this.tenRoundCheck, func:this.setGameRound, parameter:[roundType.TEN]},
-            {name:this.twentyRoundCheck, func:this.setGameRound, parameter:[roundType.TWENTY]},
+            {name:this.noMoreJokerTouch, func:this.setJokerTurn, parameter:[0]},
+            {name:this.oneMoreTouch, func:this.setJokerTurn, parameter:[1]},
+            {name:this.twoMoreTouch, func:this.selectTwoGhost, parameter:null},
 
-            {name:this.customizedTen, func:this.setGameRoundOfCustomized, parameter:[roundType.TEN]},
-            {name:this.customizedTwenty, func:this.setGameRoundOfCustomized, parameter:[roundType.TWENTY]},
-            {name:this.customizedThirty, func:this.setGameRoundOfCustomized, parameter:[roundType.THIRTY]},
+            {name:this.jokerAnyTouch, func:this.setJokerEffect, parameter:[jokerType.ANY]},
+            {name:this.jokerFormationTouch, func:this.setJokerEffect, parameter:[jokerType.FORMATION]},
+            {name:this.nineGhostTouch, func:this.setFormationType},
 
-            {name:this.noMoreJokerCheck, func:this.setJokerTurn, parameter:[0]},
-            {name:this.oneMoreCheck, func:this.setJokerTurn, parameter:[1]},
-            {name:this.twoMoreCheck, func:this.selectTwoGhost, parameter:null},
+            {name:this.anyBetTouch, func:this.setBetType, parameter:[SelectModeDialog.BET_TYPE.ANY]},
+            {name:this.moreBetTouch, func:this.setBetType, parameter:[SelectModeDialog.BET_TYPE.MORE_THEN_MORE]},
+            {name:this.autoBetTouch, func:this.setBetType, parameter:[SelectModeDialog.BET_TYPE.AUTO]},
 
-            {name:this.anyBetCheck, func:this.setBetType, parameter:[SelectModeDialog.BET_TYPE.ANY]},
-            {name:this.moreBetCheck, func:this.setBetType, parameter:[SelectModeDialog.BET_TYPE.MORE_THEN_MORE]},
-            {name:this.autoBetCheck, func:this.setBetType, parameter:[SelectModeDialog.BET_TYPE.AUTO]},
+            {name:this.winDoubleGhostTouch, func:this.setZeroPoint, parameter:[SelectModeDialog.BEAT_DBL_GHOST.ALL_BEAT]},
+            {name:this.tripleWinDoubleGhostTouch, func:this.setZeroPoint, parameter:[SelectModeDialog.BEAT_DBL_GHOST.FLUSH_THREE_BEAT]},
+            {name:this.tripleWinTripleGhostTouch, func:this.setTripleWinGhost, parameter:null},
 
-            {name:this.nineGhostCheck, func:this.setFormationType},
+            {name:this.fancyWinTouch, func:this.setfancyWin, parameter:null},
 
-            {name:this.bigThenGodCheck, func:this.setCondition, parameter:[SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_GOD]},
-            {name:this.bigThenStraightCheck, func:this.setCondition, parameter:[SelectModeDialog.CONDITION_CLASSICAL.BIG_THEN_STRAIGHT]},
+            {name:this.doubleTouch, func:this.setDoubleDeal, parameter:null},
 
-            {name:this.winDoubleGhostCheck, func:this.setZeroPoint, parameter:[SelectModeDialog.BEAT_DBL_GHOST.ALL_BEAT]},
-            {name:this.tripleWinDoubleGhostCheck, func:this.setZeroPoint, parameter:[SelectModeDialog.BEAT_DBL_GHOST.FLUSH_THREE_BEAT]},
-
-            {name:this.tripleWinTripleGhostCheck, func:this.setTripleWinGhost, parameter:null},
-
-            {name:this.fancyWinCheck, func:this.setfancyWin, parameter:null}
+            {name:this.customizedTenTouch, func:this.setGameRoundOfCustomized, parameter:[roundType.TEN]},
+            {name:this.customizedTwentyTouch, func:this.setGameRoundOfCustomized, parameter:[roundType.TWENTY]},
+            {name:this.customizedThirtyTouch, func:this.setGameRoundOfCustomized, parameter:[roundType.THIRTY]}
         ];
 
-        for (var index = 0; index < checkBoxList.length; index ++) {
-            var component = checkBoxList[index].name;
-            var func = checkBoxList[index].func;
-            var parameter = checkBoxList[index].parameter;
-            component.clickHandler = Laya.Handler.create(this, func, parameter, false);
+        for (var index = 0; index < checkBoxTouchList.length; index ++) {
+            var component = checkBoxTouchList[index].name;
+            var func = checkBoxTouchList[index].func;
+            var parameter = checkBoxTouchList[index].parameter;
+            component.on(Laya.Event.CLICK, this, func, parameter);
+        }
+    };
+
+    SelectModeDialog.prototype.unregEvent = function () {
+        this.createRoomBtn.off (Laya.Event.CLICK, this, this.touchCreateRoom);
+        var modeBtnList = [
+            {btn:this.classicalBtn},
+            {btn:this.staticBtn},
+            {btn:this.chaosBtn},
+            {btn:this.customizedBtn}
+        ];
+        for (var i = 0; i < modeBtnList.length; i++) {
+            var btn = modeBtnList[i].btn;
+            btn.off(Laya.Event.CLICK, this, this.touchModeBtn);
+        }
+
+        var checkBoxTouchList = [
+            {name:this.tenRoundTouchBox, func:this.setGameRound},
+            {name:this.twentyRoundTouchBox, func:this.setGameRound},
+
+            {name:this.bigThenGodTouch, func:this.setCondition},
+            {name:this.bigThenStraightTouch, func:this.setCondition},
+
+            {name:this.noMoreJokerTouch, func:this.setJokerTurn},
+            {name:this.oneMoreTouch, func:this.setJokerTurn},
+            {name:this.twoMoreTouch, func:this.selectTwoGhost},
+
+            {name:this.jokerAnyTouch, func:this.setJokerEffect},
+            {name:this.jokerFormationTouch, func:this.setJokerEffect},
+            {name:this.nineGhostTouch, func:this.setFormationType},
+
+            {name:this.anyBetTouch, func:this.setBetType},
+            {name:this.moreBetTouch, func:this.setBetType},
+            {name:this.autoBetTouch, func:this.setBetType},
+
+            {name:this.winDoubleGhostTouch, func:this.setZeroPoint},
+            {name:this.tripleWinDoubleGhostTouch, func:this.setZeroPoint},
+            {name:this.tripleWinTripleGhostTouch, func:this.setTripleWinGhost},
+
+            {name:this.fancyWinTouch, func:this.setfancyWin},
+
+            {name:this.doubleTouch, func:this.setDoubleDeal},
+
+            {name:this.customizedTenTouch, func:this.setGameRoundOfCustomized},
+            {name:this.customizedTwentyTouch, func:this.setGameRoundOfCustomized},
+            {name:this.customizedThirtyTouch, func:this.setGameRoundOfCustomized}
+        ];
+
+        for (var index = 0; index < checkBoxTouchList.length; index ++) {
+            var component = checkBoxTouchList[index].name;
+            var func = checkBoxTouchList[index].func;
+            component.off(Laya.Event.CLICK, this, func);
         }
     };
 
@@ -808,7 +928,6 @@ var SelectModeDialog = (function(_super) {
 
         //*初始化选框的点击事件
         this.initCheckBoxHandler();
-
     };
 
     SelectModeDialog.prototype.createAutoSettings = function () {
@@ -871,8 +990,8 @@ var SelectModeDialog = (function(_super) {
             CUSTOMIZED: {
                 gameRound:10,
                 multiples: {
-                    STRAIGHT_FLUSH: 10,
-                    THREES: 10,
+                    STRAIGHT_FLUSH: 13,
+                    THREES: 15,
                     STRAIGHT: 10,
                     DOUBLE_GHOST: 10
                 },
@@ -904,16 +1023,11 @@ var SelectModeDialog = (function(_super) {
         this.getRoomSettings();//*获取储存的设置
         this.initEvent();
         this.initMultipleTouch();
+        this.initDescList();
         this.changeModeSetDisplay();//*设置的显示初始化，要恢复到这个模式最后一次的有效设置
         this.touchModeBtn(this._gameModeList.CLASSICAL, true);
         this.changeIntroduction();
-    };
-
-    SelectModeDialog.prototype.close = function() {
-        //*关闭界面的时候要储存一下所有模式的设置
-        this.setRoomSettings();
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
+        this.changeBetBoxDisplay();
     };
 
     // 改变checkBox旁边文字的颜色
@@ -935,22 +1049,99 @@ var SelectModeDialog = (function(_super) {
         if (this._gameRoomMode == this._gameModeList.CHAOS) {
             this.autoBetCheck.visible = true;
             this.moreBetCheck.visible = false;
+            this.autoBetTouch.visible = true;
+            this.autoBetTouch.disable = true;
+            this.moreBetTouch.visible = false;
         }
         else {
             this.autoBetCheck.visible = false;
             this.moreBetCheck.visible = true;
+            this.autoBetTouch.visible = false;
+            this.autoBetTouch.disable = false;
+            this.moreBetTouch.visible = true;
         }
     };
 
     // 改变描述
     SelectModeDialog.prototype.changeIntroduction = function() {
         this.titleIntroduction.text = introduction[this._gameRoomMode].title;
-        this.detailsIntroduction.text = introduction[this._gameRoomMode].details;
+        //this.detailsIntroduction.text = introduction[this._gameRoomMode].details;
+        //
+        //this.introductionPanel.vScrollBarSkin = "";
+        //this.introductionPanel.vScrollBar.visible = false;
+        //this.introductionPanel.refresh();
+        //this.introductionPanel.scrollTo();
 
-        this.introductionPanel.vScrollBarSkin = "";
-        this.introductionPanel.vScrollBar.visible = false;
-        this.introductionPanel.refresh();
-        this.introductionPanel.scrollTo();
+        switch (this._gameRoomMode) {
+            case this._gameModeList.CLASSICAL: {
+                this.classicalDescList.visible = true;
+                this.staticDescList.visible = false;
+                this.chaosDescList.visible = false;
+                this.customizedDescList.visible = false;
+                break;
+            }
+
+            case this._gameModeList.STATIC: {
+                this.classicalDescList.visible = false;
+                this.staticDescList.visible = true;
+                this.chaosDescList.visible = false;
+                this.customizedDescList.visible = false;
+                break;
+            }
+
+            case this._gameModeList.CHAOS: {
+                this.classicalDescList.visible = false;
+                this.staticDescList.visible = false;
+                this.chaosDescList.visible = true;
+                this.customizedDescList.visible = false;
+                break;
+            }
+
+            case this._gameModeList.CUSTOMIZED: {
+                this.classicalDescList.visible = false;
+                this.staticDescList.visible = false;
+                this.chaosDescList.visible = false;
+                this.customizedDescList.visible = true;
+                break;
+            }
+        }
+    };
+
+    SelectModeDialog.prototype.updateItem = function(cell) {
+        cell.setData(cell.dataSource);
+    };
+
+    SelectModeDialog.prototype.initDescList = function () {
+        var boxList = [
+            {listBox: this.classicalDescList, itemRender: classicalPage},
+            {listBox: this.staticDescList, itemRender: staticPage},
+            {listBox: this.chaosDescList, itemRender: chaosPage},
+            {listBox: this.customizedDescList, itemRender: customizedPage},
+        ];
+
+        for (var i = 0; i < boxList.length; i++) {
+            var boxListSingle = boxList[i].listBox;
+            var itemRender = boxList[i].itemRender;
+            boxListSingle.vScrollBarSkin = "";
+            boxListSingle.itemRender = itemRender;
+            boxListSingle.renderHandler = new Laya.Handler(this, this.updateItem);
+        }
+
+        var classicaPagesData = [[]];
+        classicaPagesData[0].push(this.classicalPage1);
+        this.classicalDescList.array = classicaPagesData;
+
+        var staticPagesData = [[]];
+        staticPagesData[0].push(this.staticPage1);
+        this.staticDescList.array = staticPagesData;
+
+        var chaosPagesData = [[]];
+        chaosPagesData[0].push(this.chaosPage1);
+        this.chaosDescList.array = chaosPagesData;
+
+        var customizedData = [[]];
+        customizedData[0].push(this.customizedPage1);
+        this.customizedDescList.array = customizedData;
     };
 
     // 设置苹果类型的选择特效
@@ -974,9 +1165,10 @@ var SelectModeDialog = (function(_super) {
     };
 
     SelectModeDialog.prototype.onClickMultiple = function(data,type) {
-        var selectMultipleDialog = new SelectMultipleDialog(data);
-        selectMultipleDialog.on("multipleChange",this,this.changeMultiple, [type]);
-        App.uiManager.addUiLayer(selectMultipleDialog,{isAddShield:true,alpha:0.5,isDispose:true});
+        var dlg = App.uiManager.addUiLayer(SelectMultipleDialog, data);
+
+        dlg.on("multipleChange", this, this.changeMultiple, [type]);
+
     };
 
     SelectModeDialog.prototype.changeMultiple = function(type,multiple) {
@@ -990,6 +1182,10 @@ var SelectModeDialog = (function(_super) {
             this._multiple[type] = multiple;
             this.initFormationCombos();
         }
+    };
+
+    SelectModeDialog.prototype.onClosed = function () {
+        this.unregEvent();
     };
 
     //*鬼牌功能类型（万能，牌型）

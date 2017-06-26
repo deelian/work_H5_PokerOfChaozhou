@@ -101,10 +101,10 @@ var InputRoomNumberDialog = (function(_super) {
         this.initEvent();
     };
 
-    InputRoomNumberDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
-    };
+    //InputRoomNumberDialog.prototype.onClose = function() {
+    //    //_super.prototype.close.call(this);
+    //    App.uiManager.removeUiLayer(this);
+    //};
 
 
     return InputRoomNumberDialog;

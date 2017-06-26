@@ -193,6 +193,19 @@ var SettingDialog = (function(_super) {
         this.event(SettingDialog.Events.CHANGE_TABLE);
     };
 
+    SettingDialog.prototype.unregEvent = function () {
+        this.mandarinBtn.off(Laya.Event.CLICK, this, this.touchLanguage);
+        this.teochewBtn.off(Laya.Event.CLICK, this, this.touchLanguage);
+
+        this.manBtn.off(Laya.Event.CLICK, this, this.changeVoice);
+        this.gildBtn.off(Laya.Event.CLICK, this, this.changeVoice);
+
+        this.green.off(Laya.Event.CLICK, this, this.touchTable);
+        this.yellow.off(Laya.Event.CLICK, this, this.touchTable);
+
+        this.quitBtn.off(Laya.Event.CLICK, this, this.quitGame);
+    };
+
     SettingDialog.prototype.initEvent = function () {
         this.mandarinBtn.on(Laya.Event.CLICK, this, this.touchLanguage, [SoundAndMusicMgr.LANGUAG_TYPE.MANDARIN]);
         this.teochewBtn.on(Laya.Event.CLICK, this, this.touchLanguage, [SoundAndMusicMgr.LANGUAG_TYPE.TEOCHEW]);
@@ -212,9 +225,8 @@ var SettingDialog = (function(_super) {
         this.initShow();
     };
 
-    SettingDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
+    SettingDialog.prototype.onClosed = function() {
+        this.unregEvent();
     };
 
     SettingDialog.TABLE_TYPE = {

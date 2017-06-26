@@ -59,6 +59,7 @@
         this.bankerDraw     = opts.bankerDraw || 0;     // 庄家操作情况
         this.settings       = opts.settings || {};
         this.type           = opts.type;                // 牌局类型
+        this.bidList        = opts.bidList || [];       // 下注列表
 
         this.indicator      = opts.indicator || 0;      // 指示器
         this.clients        = {};                       // 客人列表
@@ -199,7 +200,11 @@
             if (client.showResult == true) {
                 client.showResult = false;
             }
-            return {userID: userID, ready: client.ready};
+            
+            var tableChange = {clients: {}};
+            tableChange.clients[userID] = {showResult: client.showResult, ready: client.ready};
+            
+            return {result: {userID: userID, ready: client.ready}, table: tableChange};
         },
 
         isClientReady: function(userID) {
@@ -351,23 +356,75 @@
             }
         },
 
-        bid: function(userID, rate) {
+        getBidOptionType: function () {
+            var bidOptionType = Game.BID_OPTION_TYPE.BANKER_AUTO;
+
+            if (this.type == Game.ROOM_TYPE.STATIC || this.type == Game.ROOM_TYPE.CLASSICAL) {
+                // 长庄模式和经典模式就是庄家自动下注
+                bidOptionType = Game.BID_OPTION_TYPE.BANKER_AUTO;
+            }
+            else if (this.type == Game.ROOM_TYPE.CHAOS) {
+                // 混战模式，任意下注就全部手动，默认下注就全部自动
+                var chaosBet = this.settings.chaosBet;
+                if (chaosBet) {
+                    bidOptionType = Game.BID_OPTION_TYPE.MANUALLY;
+                }
+                else {
+                    bidOptionType = Game.BID_OPTION_TYPE.ALL_AUTO;
+                }
+            }
+            else if (this.type == Game.ROOM_TYPE.CUSTOMIZED) {
+                // 定制模式全部自动下
+                bidOptionType = Game.BID_OPTION_TYPE.ALL_AUTO;
+            }
+
+            return bidOptionType;
+        },
+
+        genBidList: function () {
+            var bidOptionType = this.getBidOptionType();
+            var clientIndex;
+            var clientUserID;
+            this.bidList = [];
+            var bidDoneList = [];
+
+            for (clientIndex in this.clients) {
+                clientUserID = this.clients[clientIndex].userID;
+                switch (bidOptionType) {
+                    case Game.BID_OPTION_TYPE.ALL_AUTO: {
+                        // 全自动
+                        this.doBid(clientUserID, 1);
+                        bidDoneList.push(clientUserID);
+                        break;
+                    }
+
+                    case Game.BID_OPTION_TYPE.MANUALLY: {
+                        // 全手动
+                        this.bidList.push(clientUserID);
+                        break;
+                    }
+
+                    case Game.BID_OPTION_TYPE.BANKER_AUTO: {
+                        // 庄家自动
+                        if (this.banker != clientUserID) {
+                            this.bidList.push(clientUserID);
+                        }
+                        else {
+                            this.doBid(clientUserID, 1);
+                            bidDoneList.push(clientUserID);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            return bidDoneList;
+        },
+
+        doBid: function (userID, rate) {
             var client = this.getClient(userID);
             if (client == null) {
-                return null;
-            }
-
-            if (typeof rate != "number") {
-                rate = 1;
-            }
-
-            // 一杠到底
-            if (this.settings.betType === Game.BET_TYPE.MORE_THEN_MORE) {
-                var lastBidRate = this.lastBidRates[userID] || 1;
-                // 当前倍数 不小于 上一次倍数
-                if (rate < lastBidRate) {
-                    return null;
-                }
+                return false;
             }
 
             client.bid = true;
@@ -382,7 +439,50 @@
                     client.handPokers[i].setShow(Poker.SHOW_TARGET.ME);
                 }
             }
-            return {userID: userID, bidRate: rate};
+
+            return true;
+        },
+
+        bid: function(userID, rate) {
+            var client = this.getClient(userID);
+            if (client == null) {
+                return null;
+            }
+
+            var userIndexInBidList = this.bidList.indexOf(userID);
+            if (typeof rate != "number" || userIndexInBidList == -1) {
+                rate = 1;
+            }
+
+            // 一杠到底
+            if (this.settings.betType === Game.BET_TYPE.MORE_THEN_MORE) {
+                var lastBidRate = this.lastBidRates[userID] || 1;
+                // 当前倍数 不小于 上一次倍数
+                if (rate < lastBidRate) {
+                    return null;
+                }
+            }
+
+            this.doBid(userID, rate);
+
+            var tableChange = {
+                lastBidRates: {},
+                clients: {}
+            };
+
+            tableChange.lastBidRates[userID] = rate;
+            tableChange.clients[userID] = {
+                bid: client.bid,
+                bidRate: client.bidRate,
+                handPokers: Utils.object_clone(client.handPokers)
+            };
+
+            if (userIndexInBidList != -1) {
+                this.bidList.splice(userIndexInBidList, 1);
+            }
+            tableChange.bidList = this.bidList;
+
+            return {result: {userID: userID, bidRate: rate}, table: tableChange};
         },
 
         clearDraw: function() {
@@ -407,7 +507,7 @@
             }
 
             this.banker = userID;
-            return {userID: userID};
+            return {result: {userID: userID}, table: {banker: userID}};
         },
 
         draw: function(userID, type) {
@@ -426,6 +526,12 @@
             var results = {
                 userID: userID
             };
+            var tableChange = {
+                clients: {}
+            };
+            tableChange.clients[userID] = {};
+            
+            var clientSend = tableChange.clients[userID];
 
             var ghostArray = [];
             for (i in this.ghostPokers) {
@@ -528,6 +634,8 @@
                     for (i in client.handPokers) {
                         client.handPokers[i].setShow(Poker.SHOW_TARGET.ALL);
                     }
+                    
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 要一张牌
@@ -542,6 +650,8 @@
                         poker.setShow(Poker.SHOW_TARGET.ALL);
                     }
                     client.handPokers.push(poker);
+                    
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 搓牌 要扣东西的
@@ -559,6 +669,10 @@
                         poker.setShow(Poker.SHOW_TARGET.ALL);
                     }
                     client.handPokers.push(poker);
+
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
+                    clientSend.isRubbing = true;
+                    tableChange.whosRubbing = userID;
                     break;
                 }
                 // 过牌
@@ -573,6 +687,8 @@
             }
 
             this.drawList.shift();
+            
+            tableChange.drawList = Utils.object_clone(this.drawList);
             results.type = type;
             
             if (this.drawList.length <= 0) {
@@ -580,10 +696,11 @@
                     || this.type === Game.ROOM_TYPE.CUSTOMIZED
                 ) {
                     this.doPay();
+                    tableChange.roundLog = Utils.object_clone(this.roundLog);
                 }
             }
 
-            return results;
+            return {result: results, table: tableChange};
         },
 
         doBankerDraw: function(userID, type) {
@@ -602,6 +719,13 @@
             var results = {
                 userID: userID
             };
+
+            var tableChange = {
+                clients: {}
+            };
+            tableChange.clients[userID] = {};
+
+            var clientSend = tableChange.clients[userID];
 
             var ghostArray = [];
             for (i in this.ghostPokers) {
@@ -687,12 +811,15 @@
                         }
                         // 联合补牌和明牌的人
                         gambleList = gambleList.concat(openArr);
-                        results.gamble = this.fight(gambleList);
+                        this.fight(gambleList);
                     }
                     // 其他情况都全部开牌
                     else {
                         this.bankerDraw = 2;
                     }
+
+                    tableChange.bankerDraw = this.bankerDraw;
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 补牌 要一张牌
@@ -705,6 +832,9 @@
                     poker.setShow(Poker.SHOW_TARGET.ME);
                     client.handPokers.push(poker);
                     this.bankerDraw = 2;
+
+                    tableChange.bankerDraw = this.bankerDraw;
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 搓牌 要扣东西的
@@ -720,6 +850,11 @@
                     poker.setShow(Poker.SHOW_TARGET.ME);
                     client.handPokers.push(poker);
                     this.bankerDraw = 2;
+
+                    tableChange.bankerDraw = this.bankerDraw;
+                    tableChange.whosRubbing = this.whosRubbing;
+                    clientSend.isRubbing = client.isRubbing;
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 全开 不补牌直接跟全部人比较
@@ -730,6 +865,8 @@
                     type = Game.DRAW_COMMAND.BET_ALL;
 
                     this.bankerDraw = 2;
+
+                    tableChange.bankerDraw = this.bankerDraw;
                     break;
                 }
             }
@@ -739,21 +876,33 @@
             if (this.bankerDraw == 2) {
                 this.doPay();
             }
+            tableChange.roundLog = Utils.object_clone(this.roundLog);
 
-            return results;
+            return {result: results, table: tableChange};
         },
 
         rubDone: function(userID, data) {
-            if (userID == this.whosRubbing) {
-                this.whosRubbing = 0;
-
-                var client = this.getClient(this.banker);
-                if (client != null) {
-                    client.isRubbing = false;
-                }
+            if (userID != this.whosRubbing) {
+                return null;
             }
 
-            return {userID: userID};
+            var tableChange = { 
+                clients: {} 
+            };
+            tableChange.clients[userID] = {};
+
+            var clientSend = tableChange.clients[userID];
+
+            this.whosRubbing = 0;
+            tableChange.whosRubbing = 0;
+
+            var client = this.getClient(this.banker);
+            if (client != null) {
+                client.isRubbing = false;
+                clientSend.isRubbing = false;
+            }
+
+            return {result: {userID: userID}, table: tableChange};
         },
 
         doPay: function() {
@@ -830,9 +979,19 @@
                 client.notBank = true;
             }
 
-            return {
-                userID: userID,
+            var tableChange = {
+                clients: {}
+            };
+            tableChange.clients[userID] = {
                 notBank: client.notBank
+            };
+
+            return {
+                result: {
+                    userID: userID,
+                    notBank: client.notBank,
+                },
+                table: tableChange
             };
         },
 
@@ -1379,6 +1538,7 @@
                     this.roundLog.clients = {};
                 }
 
+                client = this.getClient(userID);
                 if (this.roundLog.clients[userID] == null) {
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
@@ -1393,7 +1553,7 @@
                 this.roundLog.clients[userID].point = baseScore.point;
                 this.roundLog.clients[userID].fancy = baseScore.fancy;
                 this.roundLog.clients[userID].handPokers = [];
-                client = this.getClient(userID);
+
                 for (var pokerId = 0; pokerId < client.handPokers.length; pokerId++) {
                     if (client.handPokers[pokerId]) {
                         this.roundLog.clients[userID].handPokers.push(client.handPokers[pokerId].clone());
@@ -1637,6 +1797,8 @@
         },
 
         reset: function() {
+            var userID;
+
             switch (this.type) {
                 // 长庄模式
                 case Game.ROOM_TYPE.STATIC: {
@@ -1647,7 +1809,9 @@
                     // 上庄
                     // 如果庄家不同了
                     if (this.banker != this.bankerBak) {
-                        this.lastBidRates = {};
+                        for (userID in this.lastBidRates) {
+                            this.lastBidRates[userID] = 1;
+                        }
                     }
                     this.banker = this.bankerBak;
                     this.scoreBak = 0;
@@ -1673,7 +1837,7 @@
             this.whosRubbing    = 0;        // 搓牌信息刷新
             this.roundLog       = {clients: {}};       // 比牌记录
 
-            for (var userID in this.clients) {
+            for (userID in this.clients) {
                 var client = this.getClient(userID);
                 if (client == null) {
                     continue;
@@ -1695,7 +1859,9 @@
             info.ghostPokers        = Utils.object_clone(this.ghostPokers);
             info.drawList           = Utils.object_clone(this.drawList);
             info.dealSequence       = Utils.object_clone(this.dealSequence);
+            info.bidList            = Utils.object_clone(this.bidList);
             info.roundLog           = Utils.object_clone(this.roundLog);
+            info.lastBidRates       = Utils.object_clone(this.lastBidRates);
             info.banker             = this.banker;
             info.bankerDraw         = this.bankerDraw;
             info.indicator          = this.indicator;
@@ -1744,6 +1910,156 @@
             }
             
             return info;
+        },
+
+        syncTable: function(opts) {
+            var array;
+            var val;
+            var i;
+
+            val = opts.banker;
+            if (val != null) {
+                this.banker = val;
+            }
+
+            val = opts.bankerDraw;
+            if (val != null) {
+                this.bankerDraw = val;
+            }
+
+            val = opts.indicator;
+            if (val != null) {
+                this.indicator = val;
+            }
+
+            val = opts.whosRubbing;
+            if (val != null) {
+                this.whosRubbing = val;
+            }
+
+            array = opts.ghostPokers;
+            if (array != null) {
+                this.ghostPokers = Utils.object_clone(array);
+            }
+
+            array = opts.drawList;
+            if (array != null) {
+                this.drawList = Utils.object_clone(array);
+            }
+
+            array = opts.dealSequence;
+            if (array != null) {
+                this.dealSequence = Utils.object_clone(array);
+            }
+
+            array = opts.bidList;
+            if (array != null) {
+                this.bidList = Utils.object_clone(array);
+            }
+            
+            array = opts.lastBidRates;
+            if (array != null) {
+                Utils.updateObject(this.lastBidRates, array);
+            }
+
+            array = opts.roundLog;
+            if (array != null) {
+                this.roundLog = Utils.object_clone(array);
+            }
+
+            array = opts.clients;
+            if (array != null && typeof array == "object") {
+                for (i in array) {
+                    val = array[i];
+                    this.syncClient(val, i);
+                }
+            }
+
+            array = opts.deleteClient;
+            if (array != null) {
+                for (i in array) {
+                    var userID = array[i];
+
+                    delete this.clients[userID];
+                }
+            }
+        },
+
+        syncClient: function(opts, userID) {
+            var array;
+            var val;
+            var i;
+
+            if (!opts) {
+                return;
+            }
+
+            var client = this.getClient(userID);
+            if (client == null) {
+                this.clients[userID] = new Client(opts);
+                return;
+            }
+
+            val = opts.chairID;
+            if (val != null) {
+                client.chairID = val;
+            }
+            
+            val = opts.gold;
+            if (val != null) {
+                client.gold = val;
+            }
+            
+            val = opts.lastBidRate;
+            if (val != null) {
+                client.lastBidRate = val;
+            }
+            
+            if (typeof opts.ready == "boolean") {
+                client.ready = opts.ready;
+            }
+
+            if (typeof opts.started == "boolean") {
+                client.started = opts.started;
+            }
+
+            if (typeof opts.bid == "boolean") {
+                client.bid = opts.bid;
+            }
+
+            val = opts.bidRate;
+            if (val != null) {
+                client.bidRate = val;
+            }
+
+            if (typeof opts.end == "boolean") {
+                client.end = opts.end;
+            }
+
+            if (typeof opts.compared == "boolean") {
+                client.compared = opts.compared;
+            }
+
+            if (typeof opts.notBank == "boolean") {
+                client.notBank = opts.notBank;
+            }
+
+            if (typeof opts.isRubbing == "boolean") {
+                client.isRubbing = opts.isRubbing;
+            }
+
+            if (typeof opts.showResult == "boolean") {
+                client.showResult = opts.showResult;
+            }
+
+            if (typeof opts.isAfk == "boolean") {
+                client.isAfk = opts.isAfk;
+            }
+            
+            array = opts.handPokers;
+            if (array != null) {
+                client.handPokers = Utils.object_clone(array);
+            }
         }
     });
 }(DejuPoker));

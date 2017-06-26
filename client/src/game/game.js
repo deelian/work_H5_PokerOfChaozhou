@@ -1,4 +1,4 @@
-/*!  2017-06-12 */
+/*!  2017-06-26 */
 //! moment.js
 //! version : 2.11.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -4571,7 +4571,7 @@
             DISMISS_APPLY:      "room.dismiss.apply",       // 申请关房
             DISMISS_CONFIRM:    "room.dismiss.confirm",     // 申请关房确认
             DISMISS_RESULT:     "room.dismiss.result",      // 申请关房结果
-            AFK:                "room.afk",                 // 离线
+            AFK:                "room.afk"                  // 离线
         },
 
         CHAT: {
@@ -4653,15 +4653,54 @@
         INVALID_REQUEST:                "1009",
         INVALID_AUTHORIZE_CODE:         "1010",
         REMOTE_SERVER_ERROR:            "1011",
-        ALREADY_BIND:                   "1012",
-        ALREADY_FREEZE:                 '1013',
-        ALREADY_REMOVE:                 '1014',
-        ARGUMENT_FORMAT_ERROR:          '1015',
-        NULL_VALUE:                     '1016',
-        ERROR_VALUE:                    '1017',
-        OBJECT_HAVING_NULL_VALUE:       '1018',
-        NOT_EQUAL_PASSWORD:             '1019',
-        ERROR_PASSWORD:                 '1010'
+        OBJECT_HAVING_NULL_VALUE:       "1012",
+        NOT_EQUAL_PASSWORD:             '1013',
+        ERROR_PASSWORD:                 '1014',
+        NULL_TABLENAME:                 '1015',
+        ID_NOT_NUMBER:                  '1016',
+        PARENTID_NOT_NUMBER:            '1017',
+        MISSING_ORDERID:                '1018',
+        STATUS_VALUE_ERROR:             '1019',
+        TYPE_VALUE_ERROR:               '1020',
+        PRIORITY_NOT_NUMBER:            '1021',
+        UPSHELF_VALUE_ERROR:            '1022',
+        PRICE_NOT_NUMBER:               '1023',
+        TOKENS_NOT_NUMBER:              '1024',
+        ACCOUNT_NOT_NUMBER:             '1025',
+        NULL_OBJECT:                    '1026',
+        ALREADY_FREEZE:                 '1027',
+        ALREADY_REMOVE:                 '1028',
+        STARTTIME_FORMAT_ERROR:         '1029',
+        ENDTIME_FORMAT_ERROR:           '1030',
+        MISSING_TITLE:                  '1031',
+        MISSING_SUMMARY:                '1032',
+        MISSING_CONTENT:                '1033',
+        MISSING_STARTTIME:              '1034',
+        MISSING_ENDTIME:                '1035',
+        MISSING_PRIORITY:               '1036',
+        MISSING_TYPE:                   '1037',
+        MISSING_NAME:                   '1038',
+        MISSING_DESC:                   '1039',
+        MISSING_PRICE:                  '1040',
+        MISSING_TOKENS:                 '1041',
+        MISSING_UPSHELF:                '1042',
+        MISSING_OLDPASSWORD:            '1043',
+        MISSING_NEWPASSWORD:            '1044',
+        MISSING_CONFIRMNEWPASSWORD:     '1045',
+        INSUFFICIENT_TOKENS:            '1046',
+        LOGINID_NOT_EXISTS:             '1047',
+        MISSING_ID:                     '1048',
+        MISSING_OPERATE:                '1049',
+        MISSING_TABLENAME:              '1050',
+        MISSING_STATUS:                 '1051',
+        CREATE_FAILED:                  '1052',
+        DELETE_FAILED:                  '1053',
+        UPDATE_FAILED:                  '1054',
+        PRIORITY_VALUE_ERROR:           '1055',
+        MISSING_PASSWORD:               '1056',
+        MISSING_CONFIRMPASSWORD:        '1057',
+        MISSING_ACCOUNT:                '1058',
+        ORDERID_NOT_NUMBER:             '1059'
     };
 
     var Message = root.MESSAGE = {
@@ -4677,15 +4716,53 @@
         "1009": [ 400, "InvalidRequest" ],
         "1010": [ 400, "InvalidAuthorizeCode" ],
         "1011": [ 500, "RemoteServerError" ],
-        "1012": [ 400, "AlreadyBind" ],
-        "1013": [ 400, "AlreadyFreeze" ],
-        "1014": [ 400, "AlreadyRemove" ],
-        "1015": [ 400, "ArgumentFormatError" ],
-        "1016": [ 400, "NullValue" ],
-        "1017": [ 400, "ErrorValue" ],
-        "1018": [ 400, "ObjectHavingNullValue" ],
-        "1019": [ 400, "NotEqualPassword" ],
-        "1020": [ 400, "ErrorPassword" ]
+        "1012": [ 400, "ObjectHavingNullValue" ],
+        "1013": [ 400, "NotEqualPassword" ],
+        "1014": [ 400, "ErrorPassword" ],
+        "1015": [ 400, "NullTableName" ],
+        "1016": [ 400, "IDNotNumber" ],
+        "1017": [ 400, "ParentIDNotNumber" ],
+        "1018": [ 400, "MissingOderId" ],
+        "1019": [ 400, "StatusValueError" ],
+        "1020": [ 400, "TypeValueError" ],
+        "1021": [ 400, "PriorityNotNumber" ],
+        "1022": [ 400, "UpShelfValueError" ],
+        "1023": [ 400, "PriceNotNumber" ],
+        "1024": [ 400, "TokensNotNumber" ],
+        "1025": [ 400, "AccountNotNumber" ],
+        "1026": [ 400, "NullObject" ],
+        "1027": [ 400, "AlreadyFreeze" ],
+        "1028": [ 400, "AlreadyRemove" ],
+        "1029": [ 400, "StartTimeFormatError" ],
+        "1030": [ 400, "EndTimeFormatError" ],
+        "1031": [ 400, "MissingTitle" ],
+        "1032": [ 400, "MissingSummary" ],
+        "1033": [ 400, "MissingContent" ],
+        "1034": [ 400, "MissingStarttime" ],
+        "1035": [ 400, "MissingEndtime" ],
+        "1036": [ 400, "MissingPriority" ],
+        "1037": [ 400, "MissingType" ],
+        "1038": [ 400, "MissingName" ],
+        "1039": [ 400, "MissingDESC" ],
+        "1040": [ 400, "MissingPrice" ],
+        "1041": [ 400, "MissingTokens" ],
+        "1042": [ 400, "MissingUpShelf" ],
+        "1043": [ 400, "MissingOldPassword" ],
+        "1044": [ 400, "MissingNewPassword" ],
+        "1045": [ 400, "MissingConfirmPassword" ],
+        "1046": [ 400, "InsufficientTokens" ],
+        "1047": [ 400, "LoginIdNotExists" ],
+        "1048": [ 400, "MissingId" ],
+        "1049": [ 400, "MissingOperate" ],
+        "1050": [ 400, "MissingTableName" ],
+        "1051": [ 400, "MissingStatus" ],
+        "1052": [ 400, "CreateFailed" ],
+        "1053": [ 400, "DeleteFailed" ],
+        "1054": [ 400, "UpdateFailed" ],
+        "1055": [ 400, "PriorityValueError" ],
+        "1056": [ 400, "MissingPassword" ],
+        "1057": [ 400, "MissingConfirmPassword" ],
+        "1058": [ 400, "MissingAccount" ],
     };
 
     var OrderType = root.ORDER_TYPE = {
@@ -4810,6 +4887,14 @@
         BET_ALL:    4,      //全开
         BET_DRAW:   5       //开补
     };
+
+    //下注操作类型
+    Game.BID_OPTION_TYPE = {
+        BANKER_AUTO: 0,     //庄家自动
+        ALL_AUTO: 1,        //全自动
+        MANUALLY: 2         //全手动
+    };
+
     // 玩法说明界面
     Game.Explain = [
         {
@@ -5053,6 +5138,56 @@
             return obj;
         }
         return JSON.parse(JSON.stringify(obj));
+    };
+
+    Utils.updateObject = function(baseObj, obj) {
+        for (var key in obj) {
+            var val = obj[key];
+
+            if (obj.hasOwnProperty(key) == false) {
+                continue;
+            }
+
+            if (key[0] == '_') {
+                continue;
+            }
+
+            if (typeof val != "object") {
+                baseObj[key] = val;
+            }
+            else {
+                if (val instanceof Array) {
+                    if (baseObj[key] == null) {
+                        baseObj[key] = [];
+                    }
+
+                    for (var i in val) {
+                        if (typeof val[i] === 'object') {
+                            if (baseObj[key][i] == null) {
+                                if (val[i] instanceof Array) {
+                                    baseObj[key][i] = [];
+                                }
+                                else {
+                                    baseObj[key][i] = {};
+                                }
+                            }
+
+                            // 递归
+                            Utils.updateObject(baseObj[key][i], val[i]);
+                        } else {
+                            baseObj[key][i] = val[i];
+                        }
+                    }
+                }
+                else {
+                    if (baseObj[key] == null) {
+                        baseObj[key] = {};
+                    }
+                    // 递归
+                    Utils.updateObject(baseObj[key], val);
+                }
+            }
+        }
     };
 }(DejuPoker));
 (function(root) {
@@ -6078,6 +6213,7 @@
         this.bankerDraw     = opts.bankerDraw || 0;     // 庄家操作情况
         this.settings       = opts.settings || {};
         this.type           = opts.type;                // 牌局类型
+        this.bidList        = opts.bidList || [];       // 下注列表
 
         this.indicator      = opts.indicator || 0;      // 指示器
         this.clients        = {};                       // 客人列表
@@ -6218,7 +6354,11 @@
             if (client.showResult == true) {
                 client.showResult = false;
             }
-            return {userID: userID, ready: client.ready};
+            
+            var tableChange = {clients: {}};
+            tableChange.clients[userID] = {showResult: client.showResult, ready: client.ready};
+            
+            return {result: {userID: userID, ready: client.ready}, table: tableChange};
         },
 
         isClientReady: function(userID) {
@@ -6370,23 +6510,75 @@
             }
         },
 
-        bid: function(userID, rate) {
+        getBidOptionType: function () {
+            var bidOptionType = Game.BID_OPTION_TYPE.BANKER_AUTO;
+
+            if (this.type == Game.ROOM_TYPE.STATIC || this.type == Game.ROOM_TYPE.CLASSICAL) {
+                // 长庄模式和经典模式就是庄家自动下注
+                bidOptionType = Game.BID_OPTION_TYPE.BANKER_AUTO;
+            }
+            else if (this.type == Game.ROOM_TYPE.CHAOS) {
+                // 混战模式，任意下注就全部手动，默认下注就全部自动
+                var chaosBet = this.settings.chaosBet;
+                if (chaosBet) {
+                    bidOptionType = Game.BID_OPTION_TYPE.MANUALLY;
+                }
+                else {
+                    bidOptionType = Game.BID_OPTION_TYPE.ALL_AUTO;
+                }
+            }
+            else if (this.type == Game.ROOM_TYPE.CUSTOMIZED) {
+                // 定制模式全部自动下
+                bidOptionType = Game.BID_OPTION_TYPE.ALL_AUTO;
+            }
+
+            return bidOptionType;
+        },
+
+        genBidList: function () {
+            var bidOptionType = this.getBidOptionType();
+            var clientIndex;
+            var clientUserID;
+            this.bidList = [];
+            var bidDoneList = [];
+
+            for (clientIndex in this.clients) {
+                clientUserID = this.clients[clientIndex].userID;
+                switch (bidOptionType) {
+                    case Game.BID_OPTION_TYPE.ALL_AUTO: {
+                        // 全自动
+                        this.doBid(clientUserID, 1);
+                        bidDoneList.push(clientUserID);
+                        break;
+                    }
+
+                    case Game.BID_OPTION_TYPE.MANUALLY: {
+                        // 全手动
+                        this.bidList.push(clientUserID);
+                        break;
+                    }
+
+                    case Game.BID_OPTION_TYPE.BANKER_AUTO: {
+                        // 庄家自动
+                        if (this.banker != clientUserID) {
+                            this.bidList.push(clientUserID);
+                        }
+                        else {
+                            this.doBid(clientUserID, 1);
+                            bidDoneList.push(clientUserID);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            return bidDoneList;
+        },
+
+        doBid: function (userID, rate) {
             var client = this.getClient(userID);
             if (client == null) {
-                return null;
-            }
-
-            if (typeof rate != "number") {
-                rate = 1;
-            }
-
-            // 一杠到底
-            if (this.settings.betType === Game.BET_TYPE.MORE_THEN_MORE) {
-                var lastBidRate = this.lastBidRates[userID] || 1;
-                // 当前倍数 不小于 上一次倍数
-                if (rate < lastBidRate) {
-                    return null;
-                }
+                return false;
             }
 
             client.bid = true;
@@ -6401,7 +6593,50 @@
                     client.handPokers[i].setShow(Poker.SHOW_TARGET.ME);
                 }
             }
-            return {userID: userID, bidRate: rate};
+
+            return true;
+        },
+
+        bid: function(userID, rate) {
+            var client = this.getClient(userID);
+            if (client == null) {
+                return null;
+            }
+
+            var userIndexInBidList = this.bidList.indexOf(userID);
+            if (typeof rate != "number" || userIndexInBidList == -1) {
+                rate = 1;
+            }
+
+            // 一杠到底
+            if (this.settings.betType === Game.BET_TYPE.MORE_THEN_MORE) {
+                var lastBidRate = this.lastBidRates[userID] || 1;
+                // 当前倍数 不小于 上一次倍数
+                if (rate < lastBidRate) {
+                    return null;
+                }
+            }
+
+            this.doBid(userID, rate);
+
+            var tableChange = {
+                lastBidRates: {},
+                clients: {}
+            };
+
+            tableChange.lastBidRates[userID] = rate;
+            tableChange.clients[userID] = {
+                bid: client.bid,
+                bidRate: client.bidRate,
+                handPokers: Utils.object_clone(client.handPokers)
+            };
+
+            if (userIndexInBidList != -1) {
+                this.bidList.splice(userIndexInBidList, 1);
+            }
+            tableChange.bidList = this.bidList;
+
+            return {result: {userID: userID, bidRate: rate}, table: tableChange};
         },
 
         clearDraw: function() {
@@ -6426,7 +6661,7 @@
             }
 
             this.banker = userID;
-            return {userID: userID};
+            return {result: {userID: userID}, table: {banker: userID}};
         },
 
         draw: function(userID, type) {
@@ -6445,6 +6680,12 @@
             var results = {
                 userID: userID
             };
+            var tableChange = {
+                clients: {}
+            };
+            tableChange.clients[userID] = {};
+            
+            var clientSend = tableChange.clients[userID];
 
             var ghostArray = [];
             for (i in this.ghostPokers) {
@@ -6547,6 +6788,8 @@
                     for (i in client.handPokers) {
                         client.handPokers[i].setShow(Poker.SHOW_TARGET.ALL);
                     }
+                    
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 要一张牌
@@ -6561,6 +6804,8 @@
                         poker.setShow(Poker.SHOW_TARGET.ALL);
                     }
                     client.handPokers.push(poker);
+                    
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 搓牌 要扣东西的
@@ -6578,6 +6823,10 @@
                         poker.setShow(Poker.SHOW_TARGET.ALL);
                     }
                     client.handPokers.push(poker);
+
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
+                    clientSend.isRubbing = true;
+                    tableChange.whosRubbing = userID;
                     break;
                 }
                 // 过牌
@@ -6592,6 +6841,8 @@
             }
 
             this.drawList.shift();
+            
+            tableChange.drawList = Utils.object_clone(this.drawList);
             results.type = type;
             
             if (this.drawList.length <= 0) {
@@ -6599,10 +6850,11 @@
                     || this.type === Game.ROOM_TYPE.CUSTOMIZED
                 ) {
                     this.doPay();
+                    tableChange.roundLog = Utils.object_clone(this.roundLog);
                 }
             }
 
-            return results;
+            return {result: results, table: tableChange};
         },
 
         doBankerDraw: function(userID, type) {
@@ -6621,6 +6873,13 @@
             var results = {
                 userID: userID
             };
+
+            var tableChange = {
+                clients: {}
+            };
+            tableChange.clients[userID] = {};
+
+            var clientSend = tableChange.clients[userID];
 
             var ghostArray = [];
             for (i in this.ghostPokers) {
@@ -6706,12 +6965,15 @@
                         }
                         // 联合补牌和明牌的人
                         gambleList = gambleList.concat(openArr);
-                        results.gamble = this.fight(gambleList);
+                        this.fight(gambleList);
                     }
                     // 其他情况都全部开牌
                     else {
                         this.bankerDraw = 2;
                     }
+
+                    tableChange.bankerDraw = this.bankerDraw;
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 补牌 要一张牌
@@ -6724,6 +6986,9 @@
                     poker.setShow(Poker.SHOW_TARGET.ME);
                     client.handPokers.push(poker);
                     this.bankerDraw = 2;
+
+                    tableChange.bankerDraw = this.bankerDraw;
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 搓牌 要扣东西的
@@ -6739,6 +7004,11 @@
                     poker.setShow(Poker.SHOW_TARGET.ME);
                     client.handPokers.push(poker);
                     this.bankerDraw = 2;
+
+                    tableChange.bankerDraw = this.bankerDraw;
+                    tableChange.whosRubbing = this.whosRubbing;
+                    clientSend.isRubbing = client.isRubbing;
+                    clientSend.handPokers = Utils.object_clone(client.handPokers);
                     break;
                 }
                 // 全开 不补牌直接跟全部人比较
@@ -6749,6 +7019,8 @@
                     type = Game.DRAW_COMMAND.BET_ALL;
 
                     this.bankerDraw = 2;
+
+                    tableChange.bankerDraw = this.bankerDraw;
                     break;
                 }
             }
@@ -6758,21 +7030,33 @@
             if (this.bankerDraw == 2) {
                 this.doPay();
             }
+            tableChange.roundLog = Utils.object_clone(this.roundLog);
 
-            return results;
+            return {result: results, table: tableChange};
         },
 
         rubDone: function(userID, data) {
-            if (userID == this.whosRubbing) {
-                this.whosRubbing = 0;
-
-                var client = this.getClient(this.banker);
-                if (client != null) {
-                    client.isRubbing = false;
-                }
+            if (userID != this.whosRubbing) {
+                return null;
             }
 
-            return {userID: userID};
+            var tableChange = { 
+                clients: {} 
+            };
+            tableChange.clients[userID] = {};
+
+            var clientSend = tableChange.clients[userID];
+
+            this.whosRubbing = 0;
+            tableChange.whosRubbing = 0;
+
+            var client = this.getClient(this.banker);
+            if (client != null) {
+                client.isRubbing = false;
+                clientSend.isRubbing = false;
+            }
+
+            return {result: {userID: userID}, table: tableChange};
         },
 
         doPay: function() {
@@ -6849,9 +7133,19 @@
                 client.notBank = true;
             }
 
-            return {
-                userID: userID,
+            var tableChange = {
+                clients: {}
+            };
+            tableChange.clients[userID] = {
                 notBank: client.notBank
+            };
+
+            return {
+                result: {
+                    userID: userID,
+                    notBank: client.notBank,
+                },
+                table: tableChange
             };
         },
 
@@ -7398,6 +7692,7 @@
                     this.roundLog.clients = {};
                 }
 
+                client = this.getClient(userID);
                 if (this.roundLog.clients[userID] == null) {
                     this.roundLog.clients[userID] = {
                         gold:       0,    // 需要初始化一个gold
@@ -7412,7 +7707,7 @@
                 this.roundLog.clients[userID].point = baseScore.point;
                 this.roundLog.clients[userID].fancy = baseScore.fancy;
                 this.roundLog.clients[userID].handPokers = [];
-                client = this.getClient(userID);
+
                 for (var pokerId = 0; pokerId < client.handPokers.length; pokerId++) {
                     if (client.handPokers[pokerId]) {
                         this.roundLog.clients[userID].handPokers.push(client.handPokers[pokerId].clone());
@@ -7656,6 +7951,8 @@
         },
 
         reset: function() {
+            var userID;
+
             switch (this.type) {
                 // 长庄模式
                 case Game.ROOM_TYPE.STATIC: {
@@ -7666,7 +7963,9 @@
                     // 上庄
                     // 如果庄家不同了
                     if (this.banker != this.bankerBak) {
-                        this.lastBidRates = {};
+                        for (userID in this.lastBidRates) {
+                            this.lastBidRates[userID] = 1;
+                        }
                     }
                     this.banker = this.bankerBak;
                     this.scoreBak = 0;
@@ -7692,7 +7991,7 @@
             this.whosRubbing    = 0;        // 搓牌信息刷新
             this.roundLog       = {clients: {}};       // 比牌记录
 
-            for (var userID in this.clients) {
+            for (userID in this.clients) {
                 var client = this.getClient(userID);
                 if (client == null) {
                     continue;
@@ -7714,7 +8013,9 @@
             info.ghostPokers        = Utils.object_clone(this.ghostPokers);
             info.drawList           = Utils.object_clone(this.drawList);
             info.dealSequence       = Utils.object_clone(this.dealSequence);
+            info.bidList            = Utils.object_clone(this.bidList);
             info.roundLog           = Utils.object_clone(this.roundLog);
+            info.lastBidRates       = Utils.object_clone(this.lastBidRates);
             info.banker             = this.banker;
             info.bankerDraw         = this.bankerDraw;
             info.indicator          = this.indicator;
@@ -7763,6 +8064,156 @@
             }
             
             return info;
+        },
+
+        syncTable: function(opts) {
+            var array;
+            var val;
+            var i;
+
+            val = opts.banker;
+            if (val != null) {
+                this.banker = val;
+            }
+
+            val = opts.bankerDraw;
+            if (val != null) {
+                this.bankerDraw = val;
+            }
+
+            val = opts.indicator;
+            if (val != null) {
+                this.indicator = val;
+            }
+
+            val = opts.whosRubbing;
+            if (val != null) {
+                this.whosRubbing = val;
+            }
+
+            array = opts.ghostPokers;
+            if (array != null) {
+                this.ghostPokers = Utils.object_clone(array);
+            }
+
+            array = opts.drawList;
+            if (array != null) {
+                this.drawList = Utils.object_clone(array);
+            }
+
+            array = opts.dealSequence;
+            if (array != null) {
+                this.dealSequence = Utils.object_clone(array);
+            }
+
+            array = opts.bidList;
+            if (array != null) {
+                this.bidList = Utils.object_clone(array);
+            }
+            
+            array = opts.lastBidRates;
+            if (array != null) {
+                Utils.updateObject(this.lastBidRates, array);
+            }
+
+            array = opts.roundLog;
+            if (array != null) {
+                this.roundLog = Utils.object_clone(array);
+            }
+
+            array = opts.clients;
+            if (array != null && typeof array == "object") {
+                for (i in array) {
+                    val = array[i];
+                    this.syncClient(val, i);
+                }
+            }
+
+            array = opts.deleteClient;
+            if (array != null) {
+                for (i in array) {
+                    var userID = array[i];
+
+                    delete this.clients[userID];
+                }
+            }
+        },
+
+        syncClient: function(opts, userID) {
+            var array;
+            var val;
+            var i;
+
+            if (!opts) {
+                return;
+            }
+
+            var client = this.getClient(userID);
+            if (client == null) {
+                this.clients[userID] = new Client(opts);
+                return;
+            }
+
+            val = opts.chairID;
+            if (val != null) {
+                client.chairID = val;
+            }
+            
+            val = opts.gold;
+            if (val != null) {
+                client.gold = val;
+            }
+            
+            val = opts.lastBidRate;
+            if (val != null) {
+                client.lastBidRate = val;
+            }
+            
+            if (typeof opts.ready == "boolean") {
+                client.ready = opts.ready;
+            }
+
+            if (typeof opts.started == "boolean") {
+                client.started = opts.started;
+            }
+
+            if (typeof opts.bid == "boolean") {
+                client.bid = opts.bid;
+            }
+
+            val = opts.bidRate;
+            if (val != null) {
+                client.bidRate = val;
+            }
+
+            if (typeof opts.end == "boolean") {
+                client.end = opts.end;
+            }
+
+            if (typeof opts.compared == "boolean") {
+                client.compared = opts.compared;
+            }
+
+            if (typeof opts.notBank == "boolean") {
+                client.notBank = opts.notBank;
+            }
+
+            if (typeof opts.isRubbing == "boolean") {
+                client.isRubbing = opts.isRubbing;
+            }
+
+            if (typeof opts.showResult == "boolean") {
+                client.showResult = opts.showResult;
+            }
+
+            if (typeof opts.isAfk == "boolean") {
+                client.isAfk = opts.isAfk;
+            }
+            
+            array = opts.handPokers;
+            if (array != null) {
+                client.handPokers = Utils.object_clone(array);
+            }
         }
     });
 }(DejuPoker));
@@ -7829,7 +8280,7 @@
     Room.STATE_DRAW        = 4;             //下注完闲家要牌
     Room.STATE_BANKER      = 5;             //闲家要完牌庄家处理阶段
     Room.STATE_PAY         = 6;             //结算
-    Room.STATE_END         = 7;             //牌局结束 请求下一局
+    
     Room.STATE_CLOSED      = 8;             //所有牌局完成房间解散
     Room.STATE_DISMISS     = 9;             //申请解散房间
 
@@ -7913,7 +8364,8 @@
                 this.roomLog.info = {
                     createTime: Number(root.moment().format('x')),
                     id: this.id,
-                    type: this.type
+                    type: this.type,
+                    maxRound: this.maxRound
                 };
 
                 this.roomLog.users = {};
@@ -7921,9 +8373,11 @@
             }
 
             // start timer 一段时间检查一下房间游戏进程
-            this._timerID = setInterval(function() {
-                self.update();
-            }, 100);
+            if (this._service) {
+                this._timerID = setInterval(function () {
+                    self.update();
+                }, 100);
+            }
         },
 
         getMember: function(userID) {
@@ -7997,8 +8451,8 @@
         },
 
         standUp: function(userID) {
-            //牌局期间不能操作
-            if (this.state != Room.STATE_READY) {
+            // 牌局开始不能操作
+            if (this.state >= Room.STATE_START) {
                 return false;
             }
 
@@ -8008,9 +8462,9 @@
             }
 
             // 已经点击了准备 就不给换位置
-            if (this.table.isClientReady(userID) == true) {
-                return false;
-            }
+            // if (this.table.isClientReady(userID) == true) {
+            //     return false;
+            // }
 
             for (var i = 0, size = this.chairs.length; i < size; i++) {
                 if (this.chairs[i] === userID) {
@@ -8051,14 +8505,24 @@
             if (this.getMember(userID) === false) {
                 this.members.push(userID);
             }
+            
+            var roomResults = {
+                table: {
+                    clients: {}
+                }
+            };
+            roomResults.members = Utils.object_clone(this.members);
+            roomResults.roomLog = Utils.object_clone(this.roomLog);
 
             if (this.table.getClient(userID) == null) {
                 var pos = this.sitDown(userID);
-                this.sendInfoToEveryOne(ROUTE.ROOM.ENTER, {userID: userID, pos: pos});
+                roomResults.table.clients[userID] = this.table.getClient(userID) || null;
+                this.sendInfoExcept(ROUTE.ROOM.ENTER, {userID: userID, pos: pos, room: roomResults}, userID);
             }
             else {
                 this.table.setAwk(userID, false);
-                this.sendInfoToEveryOne(ROUTE.ROOM.AFK, {userID: userID, isAwk: false});
+                roomResults.table.clients[userID] = this.table.getClient(userID) || null;
+                this.sendInfoExcept(ROUTE.ROOM.AFK, {userID: userID, isAwk: false, room: roomResults}, userID);
             }
         },
 
@@ -8083,8 +8547,16 @@
             if (index != -1) {
                 this.members.splice(index, 1);
             }
+            
+            var roomResults = {
+                table: {
+                    deleteClient: [userID]
+                }
+            };
+            roomResults.members = Utils.object_clone(this.members);
+            roomResults.chairs = Utils.object_clone(this.chairs);
 
-            this.sendInfoToEveryOne(ROUTE.ROOM.LEAVE, {userID: userID});
+            this.sendInfoExcept(ROUTE.ROOM.LEAVE, {userID: userID, room: roomResults}, userID);
         },
 
         kick: function(userID, targetID) {
@@ -8098,7 +8570,14 @@
 
         afk: function(userID) {
             this.table.setAwk(userID, true);
-            this.sendInfoToEveryOne(ROUTE.ROOM.AFK, {userID: userID, isAwk: true});
+            var roomResults = {
+                table: {
+                    clients: {}
+                }
+            };
+            roomResults.table.clients[userID] = this.table.getClient(userID);
+
+            this.sendInfoExcept(ROUTE.ROOM.AFK, {userID: userID, isAwk: true, room: roomResults}, userID);
         },
 
         ready: function() {
@@ -8143,37 +8622,27 @@
             this._service && this._service.broadcast(this.id, route, msg, opts, cb);
         },
 
-        sendEachMsg: function(route, opts) {
-            if (!this._service) {
-                return;
-            }
-
-            //转换状态的时候存盘
-            this.save();
-
+        sendInfoExcept: function(route, sendInfo, uid) {
             for (var i in this.members) {
                 var userID = this.members[i];
-                this._service && this._service.send(this.id, userID, route, this.infoToPlayer(userID), opts, null);
-            }
-        },
+                if (userID == uid) {
+                    continue;
+                }
 
-        sendInfoToEveryOne: function(route, sendInfo) {
-            for (var i in this.members) {
-                var userID = this.members[i];
-                sendInfo = sendInfo || {};
-                // 添加每个人不同的room信息
-                sendInfo.room = this.infoToPlayer(userID);
                 this._service && this._service.send(this.id, userID, route, sendInfo, null, null);
             }
         },
 
         process: function() {
             var results = [];
+            var tableChange = {};
+            var i;
+            var userID;
 
             while (this._queue.length) {
                 // 从操作队列中获取第一个操作
                 var command = this._queue.shift();
-                var userID = command.id;
+                userID = command.id;
                 if (userID == null) {
                     continue;
                 }
@@ -8182,9 +8651,11 @@
                 var fn = command.msg.fn;
                 if (fn && typeof this.table[fn] === "function") {
                     var result = this.table[fn](userID, command.msg.data);
-                    if (result != null) {
-                        result.fn = fn;
-                        results.push(result);
+                    if (result != null && result.result != null) {
+                        result.result.fn = fn;
+                        results.push(result.result);
+
+                        Utils.updateObject(tableChange, result.table);
                     }
                 }
             }
@@ -8194,7 +8665,11 @@
                     return;
                 }
 
-                this.sendInfoToEveryOne(ROUTE.ROOM.COMMAND, {queue: results});
+                var sendInfo = {queue: results};
+                sendInfo.room = {};
+                sendInfo.room.table = tableChange;
+
+                this.broadcast(ROUTE.ROOM.COMMAND, sendInfo, null, null);
             }
         },
 
@@ -8246,8 +8721,6 @@
                     }
                     break;
                 case Room.STATE_PAY:
-                    break;
-                case Room.STATE_END:
                     break;
                 case Room.STATE_CLOSED:
                     break;
@@ -8342,6 +8815,12 @@
             //更新前完成积压的所有工作
             this.process();
 
+            var sendInfo = {
+                room: {}
+            };
+            var userID;
+            var client;
+
             switch (this.state) {
                 case Room.STATE_READY:
                     if (this.table.getClientReady()) {
@@ -8353,7 +8832,11 @@
                             this.dismissNeedConfirm = true;
                         }
 
-                        this.sendEachMsg(ROUTE.ROOM.READY, null);
+                        sendInfo.room.state = this.state;
+                        sendInfo.room.locked = this.locked;
+                        sendInfo.room.dismissNeedConfirm = this.dismissNeedConfirm;
+
+                        this.broadcast(ROUTE.ROOM.READY, sendInfo, null, null);
                     }
                     break;
                 case Room.STATE_ROB:
@@ -8366,11 +8849,16 @@
                         if (this.table.banker != 0) {
                             this.banker = this.table.banker;
                             this.state++;
-                            this.sendEachMsg(ROUTE.ROOM.ROB, null);
+
+                            sendInfo.room.state = this.state;
+                            this.broadcast(ROUTE.ROOM.ROB, sendInfo, null, null);
                         }
                     }
                     break;
                 case Room.STATE_START:
+                    var clients = {};
+                    sendInfo.room.table = {};
+
                     // 开始-洗牌-发牌
                     this.table.start(this.type);
                     this.table.shuffle();
@@ -8378,7 +8866,7 @@
                     this.table.clearDraw();
                     this.table.genDealSequence();
                     for (i = 0; i < this.table.dealSequence.length; i++) {
-                        var userID = this.table.dealSequence[i];
+                        userID = this.table.dealSequence[i];
                         if (userID && this.table.getClient(userID)) {
                             //要牌行列
                             // 长庄模式 经典模式 庄家不进入行列
@@ -8391,27 +8879,51 @@
                             this.table.insertDraw(userID);
                         }
                     }
+                    sendInfo.room.table.dealSequence = Utils.object_clone(this.table.dealSequence);
+                    sendInfo.room.table.drawList = Utils.object_clone(this.table.drawList);
+
                     this.table.deal();
                     // 翻鬼牌
                     // 非定制模式才需要翻鬼牌
                     if (this.type != Game.ROOM_TYPE.CUSTOMIZED) {
                         this.table.ghost();
+                        sendInfo.room.table.ghostPokers = Utils.object_clone(this.table.ghostPokers);
                     }
+
+                    // 翻完鬼牌 投注设置
+                    this.table.genBidList();
 
                     this.state++;
 
-                    this.sendEachMsg(ROUTE.ROOM.DEAL, null);
+                    sendInfo.room.state = this.state;
+                    for (userID in this.table.clients) {
+                        client = this.table.getClient(userID);
+                        if (client) {
+                            clients[userID] = {};
+                            clients[userID].handPokers = Utils.object_clone(client.handPokers);
+                            clients[userID].bid = client.bid;
+                            clients[userID].bidRate = client.bidRate;
+                        }
+                    }
+                    sendInfo.room.table.clients = clients;
+                    sendInfo.room.table.bidList = Utils.object_clone(this.table.bidList);
+
+                    this.broadcast(ROUTE.ROOM.DEAL, sendInfo, null, null);
                     break;
                 case Room.STATE_BID:
                     if (this.table.getClientBid()) {
                         this.state++;
-                        this.sendEachMsg(ROUTE.ROOM.BID, null);
+                        sendInfo.room.state = this.state;
+
+                        this.broadcast(ROUTE.ROOM.BID, sendInfo, null, null);
                     }
                     break;
                 case Room.STATE_DRAW:
                     if (this.table.getClientDraw()) {
                         this.state++;
-                        this.sendEachMsg(ROUTE.ROOM.DRAW, null);
+                        sendInfo.room.state = this.state;
+
+                        this.broadcast(ROUTE.ROOM.DRAW, sendInfo, null, null);
                     }
                     break;
                 case Room.STATE_BANKER:
@@ -8419,14 +8931,18 @@
                     if (this.type == Game.ROOM_TYPE.CHAOS || this.type == Game.ROOM_TYPE.CUSTOMIZED) {
                         if (this.table.whosRubbing == 0) {
                             this.state++;
-                            this.sendEachMsg(ROUTE.ROOM.BANKER_DRAW, null);
+                            sendInfo.room.state = this.state;
+
+                            this.broadcast(ROUTE.ROOM.BANKER_DRAW, sendInfo, null, null);
                         }
                     }
                     // 非混战模式 需要庄家操作
                     else {
                         if (this.table.bankerDraw == 2 && this.table.whosRubbing == 0) {
                             this.state++;
-                            this.sendEachMsg(ROUTE.ROOM.BANKER_DRAW, null);
+                            sendInfo.room.state = this.state;
+
+                            this.broadcast(ROUTE.ROOM.BANKER_DRAW, sendInfo, null, null);
                         }
                     }
                     break;
@@ -8459,17 +8975,33 @@
                             if (log.type == Game.POKER_MODELS.DOUBLE_GHOST) {
                                 user.ghostTimes++;
                             }
+                            
+                            var clientHandPokers = log.handPokers;
+                            if (clientHandPokers) {
+                                for (i in clientHandPokers) {
+                                    var p = clientHandPokers[i];
+                                    if (p) {
+                                        delete p.showTarget;
+                                    }
+                                }
+                            }
                         }
+
+                        sendInfo.room.roomLog = Utils.object_clone(this.roomLog);
 
                         //记录是否有进行过第一次结算
                         if (this.firstPay == false) {
                             this.firstPay = true;
+                            sendInfo.room.firstPay = this.firstPay;
                         }
                         this.round++;
+                        sendInfo.room.round = this.round;
 
                         //重整牌局 更换庄家等
                         this.table.reset();
+                        
                         this.banker = this.table.banker;
+                        sendInfo.room.banker = this.banker;
 
                         if (this.round >= this.settings.times) {
                             this.state = Room.STATE_CLOSED;
@@ -8478,30 +9010,20 @@
                             // 房间自身的准备工作
                             this.ready();
                         }
-                        
-                        this.sendEachMsg(ROUTE.ROOM.PAY, null);
-                    }
-                    break;
-                case Room.STATE_END:
-                    if (this.table.getClientEnd()) {
-                        this.round++;
+                        sendInfo.room.state = this.state;
 
-                        //重整牌局 更换庄家等
-                        this.table.reset();
-                        this.banker = this.table.banker;
+                        sendInfo.room.table = Utils.object_clone(this.table);
+                        var sendTable = sendInfo.room.table;
+                        delete sendTable.settings;
+                        delete sendTable.uuid;
+                        delete sendTable.createTime;
+                        delete sendTable.deck;
                         
-                        if (this.round >= this.settings.times) {
-                            this.state = Room.STATE_CLOSED;
-                        } else {
-                            this.state = Room.STATE_READY;
-                            // 房间自身的准备工作
-                            this.ready();
-                        }
-                        this.sendEachMsg(ROUTE.ROOM.END, null);
+                        this.broadcast(ROUTE.ROOM.PAY, sendInfo, null, null);
                     }
                     break;
                 case Room.STATE_CLOSED:
-                    this.sendEachMsg(ROUTE.ROOM.CLOSE, null);
+                    this.broadcast(ROUTE.ROOM.CLOSE, sendInfo, null, null);
                     this.destroy();
                     break;
                 case Room.STATE_DISMISS:
@@ -8521,8 +9043,15 @@
 
                 this.dismissStamp = Number(root.moment().format('X'));
                 this.dismissConfirmList[userID] = true;
-                var name = this.roomLog[userID] == null ? "游客" : this.roomLog[userID].name;
-                this.broadcast(ROUTE.ROOM.DISMISS_APPLY, {userID: userID, name: name}, null, null);
+                var roomLogUsers = this.roomLog.users || {};
+                var name = roomLogUsers[userID] == null ? "游客" : roomLogUsers.name;
+                this.broadcast(ROUTE.ROOM.DISMISS_APPLY,
+                    {
+                        userID: userID,
+                        name: name,
+                        room: {dismissStamp: this.dismissStamp, dismissConfirmList: Utils.object_clone(this.dismissConfirmList)}
+                    },
+                    null, null);
             }
             else {
                 if (userID != this.host) {
@@ -8540,7 +9069,6 @@
 
             confirm = confirm || false;
             this.dismissConfirmList[userID] = confirm;
-            this.sendEachMsg(ROUTE.ROOM.DISMISS_CONFIRM, null);
             this.broadcast(ROUTE.ROOM.DISMISS_CONFIRM, {userID: userID, confirm: confirm}, null, null);
         },
 
@@ -8618,6 +9146,71 @@
             info.table = this.table.infoToPlayer(userID);
 
             return info;
+        },
+
+        syncRoom: function(opts) {
+            var array;
+            var i;
+            var val;
+
+            val = opts.state;
+            if (val != null) {
+                this.state = val;
+            }
+
+            val = opts.banker;
+            if (val != null) {
+                this.banker = val;
+            }
+
+            val = opts.locked;
+            if (val != null) {
+                this.locked = val;
+            }
+
+            val = opts.firstPay;
+            if (val != null) {
+                this.firstPay = val;
+            }
+
+            val = opts.dismissStamp;
+            if (val != null) {
+                this.dismissStamp = val;
+            }
+
+            if (typeof opts.dismissNeedConfirm == "boolean") {
+                this.dismissNeedConfirm = opts.dismissNeedConfirm;
+            }
+
+            val = opts.round;
+            if (val != null) {
+                this.round = val;
+            }
+
+            array = opts.dismissConfirmList;
+            if (array != null) {
+                this.dismissConfirmList = Utils.object_clone(array);
+            }
+
+            array = opts.members;
+            if (array != null) {
+                this.members = Utils.object_clone(array);
+            }
+
+            array = opts.chairs;
+            if (array != null) {
+                this.chairs = Utils.object_clone(array);
+            }
+
+            array = opts.roomLog;
+            if (array != null) {
+                this.roomLog = Utils.object_clone(array);
+            }
+
+            array = opts.table;
+            if (array != null) {
+                this.table.syncTable(array);
+            }
         }
     });
 }(DejuPoker));

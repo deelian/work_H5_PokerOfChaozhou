@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":64,
+    "selectedBox":68,
+    "selecteID":69,
     "props":{"width":180,"sceneColor":"#000000","height":150},
     "nodeParent":-1,
     "label":"View",
@@ -15,19 +15,18 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":8,"x":39,"width":107,"var":"headTouch","skin":"assets/ui.room/img_head_icon.png","height":107},
+            "props":{"y":66,"x":93,"width":107,"var":"headTouch","skin":"assets/ui.room/img_head_icon.png","height":107,"anchorY":0.5,"anchorX":0.5},
             "nodeParent":1,
             "label":"Image(headTouch)",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":19,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
-                    "props":{"y":-1,"x":1,"width":106,"skin":"assets/ui.room/img_head_mask.png","renderType":"mask","height":106},
+                    "props":{"y":0,"x":0,"width":106,"skin":"assets/ui.room/img_head_mask.png","renderType":"mask","height":106,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":19,
                     "label":"Image",
                     "isDirectory":false,
@@ -42,9 +41,9 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":6,"x":37,"width":111,"skin":"assets/ui.room/img_head.png","height":110},
+            "props":{"y":66,"x":92,"width":111,"var":"iconBroder","skin":"assets/ui.room/img_head.png","height":110,"anchorY":0.5,"anchorX":0.5},
             "nodeParent":1,
-            "label":"Image",
+            "label":"Image(iconBroder)",
             "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
@@ -113,14 +112,13 @@
             "props":{"y":25,"x":148,"visible":false,"var":"bidRate","skin":"assets/ui.room/img_RateBase.png"},
             "nodeParent":1,
             "label":"Image(bidRate)",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":46,
             "child":[
                 {
-                    "x":30,
                     "type":"Label",
                     "props":{"y":1,"x":-6,"wordWrap":true,"width":66,"var":"bidRateLab","text":"x4","height":27,"fontSize":18,"font":"Microsoft YaHei","color":"#fcfc7a","bold":false,"align":"center"},
                     "nodeParent":46,
@@ -132,20 +130,8 @@
                     "child":[
                         ],
                     "$HIDDEN":false
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "props":{"y":6,"x":4,"width":45,"visible":false,"var":"bettingLab","skin":"assets/ui.room/img_bet.png","height":16},
-                    "nodeParent":46,
-                    "label":"Image(bettingLab)",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":61,
-                    "child":[
-                        ]
-                }]
+                }],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -171,7 +157,7 @@
                     "child":[
                         ]
                 }],
-            "$HIDDEN":true
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -185,7 +171,8 @@
             "hasChild":false,
             "compId":20,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -207,14 +194,13 @@
             "props":{"y":48,"x":42,"width":104,"visible":false,"var":"readyIcon","skin":"assets/ui.room/img_0002.png","height":35},
             "nodeParent":1,
             "label":"Image(readyIcon)",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":14,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":2.999999999999943,"x":21,"skin":"assets/ui.room/img_Ready.png"},
                     "nodeParent":14,
@@ -240,7 +226,8 @@
             "hasChild":false,
             "compId":52,
             "child":[
-                ]
+                ],
+            "$LOCKED":false
         },
         {
             "x":15,
@@ -337,19 +324,72 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":48,"x":42,"width":104,"visible":false,"var":"afkTag","skin":"assets/ui.room/img_0002.png","height":35},
+            "props":{"y":48,"x":43,"width":104,"visible":false,"var":"rubbedTag","skin":"assets/ui.room/img_0002.png","height":35},
+            "nodeParent":1,
+            "label":"Image(rubbedTag)",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":64,
+            "child":[
+                {
+                    "type":"Image",
+                    "props":{"y":3.999999999999943,"x":11,"skin":"assets/ui.room/img_label_cuopaizhong.png"},
+                    "nodeParent":64,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":65,
+                    "child":[
+                        ]
+                }],
+            "$LOCKED":true,
+            "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":47,"x":43,"width":104,"visible":false,"var":"bettingLab","skin":"assets/ui.room/img_0002.png","height":35},
+            "nodeParent":1,
+            "label":"Image(bettingLab)",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":66,
+            "child":[
+                {
+                    "type":"Image",
+                    "props":{"y":3.999999999999943,"x":11,"skin":"assets/ui.room/img_bet.png"},
+                    "nodeParent":66,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":67,
+                    "child":[
+                        ]
+                }],
+            "$LOCKED":false,
+            "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":25,"x":43,"width":104,"visible":false,"var":"afkTag","skin":"assets/ui.room/img_0002.png","height":35},
             "nodeParent":1,
             "label":"Image(afkTag)",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":62,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
-                    "props":{"y":3.999999999999943,"x":23,"skin":"assets/ui.room/img_leave.png"},
+                    "props":{"y":3.999999999999943,"x":26,"skin":"assets/ui.room/img_leave.png"},
                     "nodeParent":62,
                     "label":"Image",
                     "isDirectory":false,
@@ -365,27 +405,28 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":48,"x":43,"width":104,"visible":false,"var":"rubbedTag","skin":"assets/ui.room/img_0002.png","height":35},
+            "props":{"y":74,"x":42,"width":104,"visible":false,"var":"pokerType","skin":"assets/ui.room/img_0002.png","height":35},
             "nodeParent":1,
-            "label":"Image(rubbedTag)",
+            "label":"Image(pokerType)",
             "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "compId":64,
+            "compId":68,
             "child":[
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":3.999999999999943,"x":11,"skin":"assets/ui.room/img_label_cuopaizhong.png"},
-                    "nodeParent":64,
-                    "label":"Image",
+                    "props":{"y":17,"x":53,"var":"pokerTypeName","skin":"assets/ui.room/resultLab/straight_flush.png","anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":68,
+                    "label":"Image(pokerTypeName)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":65,
+                    "compId":69,
                     "child":[
-                        ]
+                        ],
+                    "$HIDDEN":false
                 }],
             "$LOCKED":false,
             "$HIDDEN":false

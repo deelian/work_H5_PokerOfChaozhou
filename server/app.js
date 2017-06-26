@@ -25,6 +25,11 @@ var AuthService = require('./app/services/AuthService');
 var Game = require('../game');
 var Code = Game.Code;
 
+app.configure(function() {
+    var onlineUser = require('./app/modules/online-users');
+    app.registerAdmin(onlineUser, { app: app });
+});
+
 app.configure('all', 'all', function() {
     var logger = pomelo.logger.getLogger('database', __filename);
     var db = require('../models/game');
@@ -141,6 +146,8 @@ app.before(function(msg, session, next) {
 // });
 // app.globalAfter();
 // app.globalFilter();
+
+app.enable("systemMonitor");
 
 // start app
 app.start();

@@ -23,10 +23,8 @@ function syncDB(db, table, init) {
 
         Model.sync({ force: program.force }).then(function() {
             console.log("Model %s synced...", table);
-            callback();
         }).catch(function(e) {
             console.log("Model %s sync failed", table, e);
-            callback(e);
         })
     }
     else {

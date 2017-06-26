@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"Dialog",
-    "selectedBox":152,
-    "selecteID":159,
+    "selectedBox":1,
+    "selecteID":59,
     "props":{"width":1136,"sceneColor":"#000000","mouseThrough":false,"mouseEnabled":true,"height":640},
     "nodeParent":-1,
     "label":"Dialog",
@@ -36,7 +36,8 @@
             "hasChild":false,
             "compId":3,
             "child":[
-                ]
+                ],
+            "$LOCKED":true
         },
         {
             "x":15,
@@ -57,13 +58,14 @@
             "props":{"y":176,"x":276,"width":585,"visible":"false","var":"customizedBox","mouseEnabled":false,"height":335},
             "nodeParent":1,
             "label":"Box(customizedBox)",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":59,
             "child":[
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":87,"x":16,"text":"牌型倍数 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                     "nodeParent":59,
@@ -76,6 +78,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":163,"x":16,"text":"点数倍数 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                     "nodeParent":59,
@@ -88,8 +91,9 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
-                    "props":{"y":85,"x":131,"width":72,"text":"同花顺","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
+                    "props":{"y":85,"x":347,"width":72,"text":"同花顺","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
                     "label":"Text",
                     "isDirectory":false,
@@ -100,8 +104,9 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
-                    "props":{"y":85,"x":348,"width":72,"text":"顺   子","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
+                    "props":{"y":85,"x":134,"width":72,"text":"顺   子","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
                     "label":"Text",
                     "isDirectory":false,
@@ -112,6 +117,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":115,"x":132,"width":72,"text":"三   条","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -124,6 +130,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":115,"x":348,"width":72,"visible":false,"text":"双   鬼","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -136,6 +143,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":164,"x":348,"width":72,"text":"2   点","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -148,6 +156,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":197,"x":348,"width":72,"text":"4   点","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -160,6 +169,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":234,"x":348,"width":72,"text":"6   点","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -172,6 +182,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":270,"x":348,"width":72,"text":"8   点","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -184,6 +195,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":164,"x":132,"width":72,"text":"1   点","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -196,6 +208,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":197,"x":132,"width":72,"text":"3   点","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -208,6 +221,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":234,"x":132,"width":72,"text":"5   点","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -220,6 +234,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":270,"x":132,"width":72,"text":"7   点","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -232,6 +247,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Text",
                     "props":{"y":304,"x":132,"width":72,"text":"9   点","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -244,8 +260,9 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
-                    "props":{"y":85,"x":264,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
+                    "props":{"y":85,"x":480,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
                     "label":"Label",
                     "isDirectory":false,
@@ -256,6 +273,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":115,"x":264,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -268,6 +286,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":164,"x":478,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -280,6 +299,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":198,"x":478,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -292,6 +312,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":235,"x":478,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -304,6 +325,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":271,"x":478,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -316,8 +338,9 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
-                    "props":{"y":85,"x":478,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
+                    "props":{"y":85,"x":264,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
                     "label":"Label",
                     "isDirectory":false,
@@ -328,6 +351,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":116,"x":478,"visible":false,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -340,6 +364,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":164,"x":264,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -352,6 +377,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":198,"x":264,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -364,6 +390,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":235,"x":264,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -376,6 +403,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":271,"x":264,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -388,6 +416,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":304,"x":264,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                     "nodeParent":59,
@@ -400,8 +429,9 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
-                    "props":{"y":85,"x":208,"skin":"assets/ui.select/img_beishukuang.png"},
+                    "props":{"y":85,"x":424,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
                     "label":"Image",
                     "isDirectory":false,
@@ -412,6 +442,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":119,"x":208,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -424,8 +455,9 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
-                    "props":{"y":85,"x":422,"skin":"assets/ui.select/img_beishukuang.png"},
+                    "props":{"y":85,"x":208,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
                     "label":"Image",
                     "isDirectory":false,
@@ -436,6 +468,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":119,"x":422,"visible":false,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -448,6 +481,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":100,"x":208,"visible":false,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -461,6 +495,7 @@
                     "$HIDDEN":true
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":163,"x":422,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -473,6 +508,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":198,"x":422,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -485,6 +521,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":234,"x":422,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -497,6 +534,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":269,"x":422,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -509,6 +547,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":163,"x":208,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -521,6 +560,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":198,"x":208,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -533,6 +573,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":234,"x":208,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -545,6 +586,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":269,"x":208,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -557,6 +599,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":304,"x":208,"skin":"assets/ui.select/img_beishukuang.png"},
                     "nodeParent":59,
@@ -569,8 +612,9 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
-                    "props":{"y":86,"x":208,"width":46,"valign":"middle","text":"10","name":"straightFlushLab","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
+                    "props":{"y":86,"x":424,"width":46,"valign":"middle","text":"10","name":"straightFlushLab","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
                     "label":"Label(straightFlushLab)",
                     "isDirectory":false,
@@ -582,8 +626,9 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
-                    "props":{"y":86,"x":422,"width":46,"valign":"middle","text":"10","name":"straightLab","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
+                    "props":{"y":86,"x":208,"width":46,"valign":"middle","text":"10","name":"straightLab","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
                     "label":"Label(straightLab)",
                     "isDirectory":false,
@@ -595,6 +640,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":121,"x":208,"width":46,"valign":"middle","text":"10","name":"threesLab","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -608,6 +654,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":121,"x":422,"width":46,"visible":false,"valign":"middle","text":"10","name":"doubleGhostLab","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -621,6 +668,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":99,"x":207,"width":49,"visible":false,"valign":"middle","text":"10","name":"point_0","height":30,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -634,6 +682,7 @@
                     "$HIDDEN":true
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":165,"x":208,"width":46,"valign":"middle","text":"10","name":"point_1","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -647,6 +696,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":165,"x":422,"width":46,"valign":"middle","text":"10","name":"point_2","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -660,6 +710,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":200,"x":208,"width":46,"valign":"middle","text":"10","name":"point_3","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -673,6 +724,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":200,"x":422,"width":46,"valign":"middle","text":"10","name":"point_4","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -686,6 +738,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":236,"x":208,"width":46,"valign":"middle","text":"10","name":"point_5","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -699,6 +752,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":236,"x":422,"width":46,"valign":"middle","text":"10","name":"point_6","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -712,6 +766,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":271,"x":208,"width":46,"valign":"middle","text":"10","name":"point_7","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -725,6 +780,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":271,"x":422,"width":46,"valign":"middle","text":"10","name":"point_8","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -738,6 +794,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":305,"x":208,"width":46,"valign":"middle","text":"10","name":"point_9","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                     "nodeParent":59,
@@ -751,6 +808,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Box",
                     "props":{"y":-5,"x":15,"width":560,"name":"roundSetBox","height":74},
                     "nodeParent":59,
@@ -887,7 +945,7 @@
                     "$LOCKED":false,
                     "$HIDDEN":false
                 }],
-            "$HIDDEN":true
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -908,26 +966,24 @@
             "props":{"y":174,"x":279,"width":568,"var":"roomSetBox","height":374},
             "nodeParent":1,
             "label":"Box(roomSetBox)",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":152,
             "child":[
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":42,"x":4,"width":578,"visible":true,"var":"conditionBox","height":35},
                     "nodeParent":152,
                     "label":"Box(conditionBox)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":153,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"width":110,"text":"上庄条件：","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":153,
@@ -940,7 +996,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":1,"x":115,"var":"bigThenStraightCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":153,
@@ -952,7 +1007,6 @@
                             "compId":155,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":40,"text":"顺子以上","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":155,
@@ -968,7 +1022,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":1,"x":290,"var":"bigThenGodCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":153,
@@ -980,7 +1033,6 @@
                             "compId":157,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":41,"text":"天公以上","fontSize":"23","font":"Microsoft YaHei","color":"#f9f9f9"},
                                     "nodeParent":157,
@@ -996,7 +1048,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":4,"x":4,"width":578,"var":"roundNumSetBox","height":35},
                     "nodeParent":152,
@@ -1008,7 +1059,6 @@
                     "compId":159,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"width":110,"text":"局数选择：","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":159,
@@ -1021,7 +1071,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":0,"x":115,"var":"tenRoundCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":159,
@@ -1033,7 +1082,6 @@
                             "compId":161,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":38,"width":49.9755859375,"text":"10局","height":23,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":161,
@@ -1047,7 +1095,6 @@
                                     "$HIDDEN":false
                                 },
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "props":{"y":8,"x":88,"text":"（钻石x1）","fontSize":15,"font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":161,
@@ -1061,7 +1108,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":0,"x":290,"var":"twentyRoundCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":159,
@@ -1073,7 +1119,6 @@
                             "compId":164,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":42,"text":"20局","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":164,
@@ -1087,7 +1132,6 @@
                                     "$HIDDEN":false
                                 },
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "props":{"y":8,"x":92,"text":"（钻石x2）","fontSize":15,"font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":164,
@@ -1104,7 +1148,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":80,"x":4,"width":578,"var":"turnJokersBox","height":73},
                     "nodeParent":152,
@@ -1116,7 +1159,6 @@
                     "compId":167,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"width":110,"text":"鬼       牌 :","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":167,
@@ -1129,7 +1171,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":1,"x":115,"var":"noMoreJokerCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":167,
@@ -1141,7 +1182,6 @@
                             "compId":169,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":39,"text":"不翻鬼","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":169,
@@ -1155,7 +1195,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":1,"x":290,"var":"oneMoreCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":167,
@@ -1167,7 +1206,6 @@
                             "compId":171,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":45,"text":"翻鬼","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":171,
@@ -1181,7 +1219,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":11,"x":439,"var":"twoMoreCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_S.png","mouseEnabled":false},
                             "nodeParent":167,
@@ -1193,7 +1230,6 @@
                             "compId":173,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":3,"x":25,"text":"翻2张","fontSize":"13","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":173,
@@ -1207,7 +1243,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":40,"x":115,"var":"jokerAnyCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":167,
@@ -1219,7 +1254,6 @@
                             "compId":175,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":39,"text":"鬼牌百变","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":175,
@@ -1233,7 +1267,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":40,"x":290,"var":"jokerFormationCheak","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":167,
@@ -1245,7 +1278,6 @@
                             "compId":177,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":42,"text":"鬼牌成型","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":177,
@@ -1260,7 +1292,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":47,"x":439,"var":"nineGhostCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_S.png","mouseEnabled":false},
                             "nodeParent":167,
@@ -1272,7 +1303,6 @@
                             "compId":179,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":2,"x":23,"text":"带鬼天公双倍","fontSize":"13","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":179,
@@ -1288,7 +1318,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":156,"x":4,"width":578,"var":"betBox","height":35},
                     "nodeParent":152,
@@ -1300,7 +1329,6 @@
                     "compId":181,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"width":110,"text":"下注功能 :","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":181,
@@ -1313,7 +1341,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":1,"x":115,"var":"anyBetCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":181,
@@ -1325,7 +1352,6 @@
                             "compId":183,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":39,"text":"任意下注","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":183,
@@ -1339,7 +1365,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":1,"x":290,"var":"moreBetCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":181,
@@ -1351,7 +1376,6 @@
                             "compId":185,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-3,"x":42,"wordWrap":true,"width":94,"text":"一杠到底","height":29,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":185,
@@ -1365,7 +1389,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":1,"x":290,"visible":false,"var":"autoBetCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":181,
@@ -1377,7 +1400,6 @@
                             "compId":224,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-3,"x":42,"wordWrap":true,"width":94,"text":"默认下注","height":29,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":224,
@@ -1394,7 +1416,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":225,"x":4,"width":578,"var":"zeroSetBox","height":35},
                     "nodeParent":152,
@@ -1406,7 +1427,6 @@
                     "compId":197,
                     "child":[
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":2,"x":115,"var":"winDoubleGhostCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":197,
@@ -1418,7 +1438,6 @@
                             "compId":198,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":38,"text":"赢双鬼","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":198,
@@ -1432,7 +1451,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"width":110,"text":"木       虱 :","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":197,
@@ -1446,7 +1464,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":2,"x":230,"var":"tripleWinDoubleGhostCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":197,
@@ -1458,7 +1475,6 @@
                             "compId":201,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":38,"text":"三倍赢双鬼","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":201,
@@ -1472,7 +1488,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":3,"x":390,"var":"tripleWinTripleGhostCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_L.png","mouseEnabled":false},
                             "nodeParent":197,
@@ -1484,7 +1499,6 @@
                             "compId":203,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":38,"text":"三倍赢三鬼","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":203,
@@ -1500,7 +1514,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":300,"x":4,"width":578,"var":"doubleDealBox","height":35},
                     "nodeParent":152,
@@ -1512,7 +1525,6 @@
                     "compId":205,
                     "child":[
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":1,"x":115,"var":"doubleCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_L.png","mouseThrough":false},
                             "nodeParent":205,
@@ -1524,7 +1536,6 @@
                             "compId":206,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":39,"text":"加入功能牌","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":206,
@@ -1538,7 +1549,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"width":110,"text":"功  能  牌 :","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":205,
@@ -1553,7 +1563,6 @@
                     "$LOCKED":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":263,"x":4,"width":578,"var":"gambleBox","height":37},
                     "nodeParent":152,
@@ -1565,7 +1574,6 @@
                     "compId":209,
                     "child":[
                         {
-                            "x":45,
                             "type":"CheckBox",
                             "props":{"y":2,"x":115,"var":"fancyWinCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_L.png","mouseEnabled":false},
                             "nodeParent":209,
@@ -1577,7 +1585,6 @@
                             "compId":210,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":38,"text":"有倍赢无倍","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":210,
@@ -1591,7 +1598,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"width":110,"text":"比       牌 :","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":209,
@@ -1607,7 +1613,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":188,"x":4,"width":578,"var":"multipeBox","height":38},
                     "nodeParent":152,
@@ -1619,7 +1624,6 @@
                     "compId":41,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"width":110,"text":"牌型倍数 :","height":30,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
@@ -1632,7 +1636,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":4,"x":119,"text":"同花顺","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
@@ -1645,7 +1648,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":4,"x":291,"text":"三   条","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
@@ -1658,7 +1660,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "props":{"y":4,"x":252,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                             "nodeParent":41,
@@ -1671,7 +1672,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "props":{"y":4,"x":423,"valign":"middle","text":"倍","fontSize":23,"font":"Microsoft YaHei","color":"#ffffff","align":"center"},
                             "nodeParent":41,
@@ -1684,7 +1684,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":4,"x":196,"skin":"assets/ui.select/img_beishukuang.png"},
                             "nodeParent":41,
@@ -1697,7 +1696,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":4,"x":367,"skin":"assets/ui.select/img_beishukuang.png"},
                             "nodeParent":41,
@@ -1710,7 +1708,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "props":{"y":5,"x":198,"width":42,"valign":"middle","text":"10","name":"straightFlushLab","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                             "nodeParent":41,
@@ -1723,7 +1720,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Label",
                             "props":{"y":5,"x":370,"width":42,"valign":"middle","text":"10","name":"threesLab","height":26,"fontSize":22,"color":"#ffb16c","align":"center"},
                             "nodeParent":41,
@@ -1738,7 +1734,7 @@
                     "$HIDDEN":false
                 }],
             "$LOCKED":false,
-            "$HIDDEN":false
+            "$HIDDEN":true
         }],
     "animations":[
         {

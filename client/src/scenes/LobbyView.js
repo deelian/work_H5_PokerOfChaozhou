@@ -13,7 +13,6 @@ var LobbyView = (function(_super) {
 
         this.nameLab.text = App.player.name || "";
         this.headIcon.skin = App.player.avatar || "";
-        console.log(App.player);
 
         this.balance = App.player.tokens || 0;
         this.balanceLab.text = this.balance + "";
@@ -71,57 +70,35 @@ var LobbyView = (function(_super) {
 
     LobbyView.prototype.touchNews = function () {
         App.soundManager.playSound("btnSound");
-        var newsPanel = new NewsDialog();
-        App.uiManager.addUiLayer(newsPanel);
+        App.uiManager.addUiLayer(NewsDialog);
     };
 
     LobbyView.prototype.touchEffort = function () {
-        var self = this;
-        var complete = function (err, data) {
-            if (err) {
-
-            }
-            else {
-                App.soundManager.playSound("btnSound");
-                var effortView = new LobbyEffortDialog(data);
-                App.uiManager.addUiLayer(effortView);
-            }
-        };
-        App.netManager.send(
-            "lobby.handler.get_logs",
-            {
-                data: {}
-            },
-            Laya.Handler.create(null, complete)
-        );
+        App.soundManager.playSound("btnSound");
+        App.uiManager.updateLobbyEffort();
     };
 
     LobbyView.prototype.touchExplain = function () {
         App.soundManager.playSound("btnSound");
-        var explainView = new ExplainDialog();
-        App.uiManager.addUiLayer(explainView);
+        App.uiManager.addUiLayer(ExplainDialog);
     };
 
     //*share
     LobbyView.prototype.touchShare = function () {
         App.soundManager.playSound("btnSound");
-        var shareView = new ShareDialog();
-        App.uiManager.addUiLayer(shareView);
+        App.uiManager.addUiLayer(ShareDialog);
     };
 
     //*setting
     LobbyView.prototype.touchSetting = function () {
         App.soundManager.playSound("btnSound");
-        var settingView = new SettingDialog();
-        App.uiManager.addUiLayer(settingView);
+        App.uiManager.addUiLayer(SettingDialog);
     };
 
     //*购买饭卡
     LobbyView.prototype.touchAddRoomCard = function () {
         App.soundManager.playSound("btnSound");
-        var roomCarView = new BuyItemDialog();
-        roomCarView.on(LobbyView.Event.UPDATE_BALANCE, this, this.setBalance);
-        App.uiManager.addUiLayer(roomCarView);
+        App.uiManager.addUiLayer(BuyItemDialog);
     };
 
     LobbyView.prototype.touchHead = function () {
@@ -142,8 +119,7 @@ var LobbyView = (function(_super) {
         }
         else {
             //*输入房间号
-            var inputRoomNumberDialog = new InputRoomNumberDialog();
-            App.uiManager.addUiLayer(inputRoomNumberDialog);
+            App.uiManager.addUiLayer(InputRoomNumberDialog);
         }
     };
 
@@ -156,17 +132,18 @@ var LobbyView = (function(_super) {
         }
         else {
             //*选择游戏模式以及设置
-            var selectModeDialog = new SelectModeDialog();
-            App.uiManager.addUiLayer(selectModeDialog,{isAddShield:true,alpha:0.5,isDispose:false});
+            //var selectModeDialog = new SelectModeDialog();
+            App.uiManager.addUiLayer(SelectModeDialog);
+            //App.uiManager.addUiLayer(selectModeDialog,{isAddShield:true,alpha:0.5,isDispose:false});
         }
     };
 
     LobbyView.prototype.updateMove = function (labInfo) {
         labInfo = labInfo || {};
-        var initialX = labInfo.initialX || 416;
-        var widthCount = labInfo.widthCount || 416;
+        var initialX = labInfo.initialX || 579;
+        var widthCount = labInfo.widthCount || 579;
         var lab = this; //*因为这个定时器是lab调用的，所以这个的this指的是lab
-        var targetPos = - widthCount + (initialX - 416);
+        var targetPos = - widthCount + (initialX - 579);
         if (lab.x <= targetPos) {
             lab.x = initialX;
         }
@@ -177,7 +154,6 @@ var LobbyView = (function(_super) {
 
     LobbyView.prototype.showBulletins = function (data) {
         this._bulletins = data || [];
-
         var showTextList = [];
         for (var bulletinsIndex = 0; bulletinsIndex < this._bulletins.length; bulletinsIndex ++) {
             var info = this._bulletins[bulletinsIndex];
@@ -258,6 +234,31 @@ var LobbyView = (function(_super) {
         Laya.timer.clearAll(this);
     };
 
+    LobbyView.prototype.unregEvent = function () {
+        var btnAndEvent = [
+            {"btn": this.createRoomBtn, "func": this.onCreateRoom},//*创建房间按钮
+            {"btn": this.enterRoomBtn, "func": this.onEnterRoom},//*加入房间按钮
+            {"btn": this.headIconTouch, "func": this.touchHead},//*头像
+            {"btn": this.addBalanceBtn, "func": this.touchAddRoomCard},//*购买房卡
+            {"btn": this.settingsBtn, "func": this.touchSetting},//*设置
+            {"btn": this.shareBtn, "func": this.touchShare},//*分享
+            {"btn": this.explanBtn, "func": this.touchExplain},//*玩法说明
+            {"btn": this.effortBtn, "func": this.touchEffort},//*战绩
+            {"btn": this.newBtn, "func": this.touchNews},//*消息
+        ];
+
+        var btn;
+        for (var i = 0; i < btnAndEvent.length; i ++) {
+            btn = btnAndEvent[i]["btn"];
+            var func = btnAndEvent[i]["func"];
+            btn.off(Laya.Event.CLICK, this, func);
+        }
+
+        App.tableManager.off(RoomTableMgr.Event.CLOSE_ROOM, this, this.updateView);
+
+        this.off(Laya.Event.REMOVED, this, this.removed);
+    };
+
     LobbyView.prototype.initEvent = function () {
         var btnAndEvent = [
             {"btn": this.createRoomBtn, "func": this.onCreateRoom},//*创建房间按钮
@@ -278,7 +279,7 @@ var LobbyView = (function(_super) {
             btn.on(Laya.Event.CLICK, this, func);
         }
 
-        //App.tableManager.on(RoomTableMgr.EVENT.CLOSE_ROOM, this, this.updateView);
+        App.tableManager.on(RoomTableMgr.Event.CLOSE_ROOM, this, this.updateView);
 
         this.on(Laya.Event.REMOVED, this, this.removed);
     };
@@ -292,13 +293,16 @@ var LobbyView = (function(_super) {
         App.soundManager.playMusic("lobbyMusic");
     };
 
+    LobbyView.prototype.onClosed = function () {
+        this.unregEvent();
+    };
+
     LobbyView.BTN_SKIN = {
         CREATE: "assets/ui.main/btn_02.png",
         BACK: "assets/ui.main/btn_04.png"
     };
 
     LobbyView.Event = {
-        UPDATE_BALANCE: "UPDATE_BALANCE"
     };
 
     return LobbyView;

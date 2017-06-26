@@ -54,7 +54,12 @@ var AssetsManager = (function(_super) {
         {
             url: "assets/ui.agreement/bg_jiemian.png",
             type: Laya.Loader.IMAGE
-        }
+        },
+
+        {
+            url: "assets/atlas/assets/ui.inputRoom.json",
+            type: Laya.Loader.ATLAS
+        },
     ];
 
     var unpackRes = [
@@ -179,13 +184,25 @@ var AssetsManager = (function(_super) {
         {
             url: "assets/atlas/assets/ui.news.json",
             type: Laya.Loader.ATLAS
+        },
+        {
+            url: "assets/atlas/assets/ui.room/resultLab.json",
+            type: Laya.Loader.ATLAS
         }
     ];
     
     var preloadSounds = [];
     
     var preloadFonts = [
+        {
+            url:"assets/fonts/lost.fnt",
+            type: Laya.Loader.XML
+        },
 
+        {
+            url:"assets/fonts/win.fnt",
+            type: Laya.Loader.XML
+        }
     ];
 
     var preloadEffects = (function () {

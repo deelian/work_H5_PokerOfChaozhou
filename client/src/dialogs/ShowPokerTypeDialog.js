@@ -159,12 +159,12 @@ var ShowPokerTypeDialog = (function(_super) {
         //this.closeBtn.on(Laya.Event.CLICK,this,this.close);
         var self = this;
         this.viewBox.on(Laya.Event.MOUSE_DOWN,this,function(){
-            self.off(Laya.Event.CLICK,self,self.close);
+            self.off(Laya.Event.CLICK,self,self.onClose);
         });
         this.viewBox.on(Laya.Event.MOUSE_UP,this,function(){
-            self.on(Laya.Event.CLICK,self,self.close);
+            self.on(Laya.Event.CLICK,self,self.onClose);
         });
-        this.on(Laya.Event.CLICK,this,this.close);
+        this.on(Laya.Event.CLICK,this,this.onClose);
         this.initView();
     }
 
@@ -191,17 +191,16 @@ var ShowPokerTypeDialog = (function(_super) {
         cell.setData(cell.dataSource);
     };
 
-    ShowPokerTypeDialog.prototype.close = function() {
-        var touchPos = this.getMousePoint();
-
-        var pos = this.viewBox.globalToLocal(touchPos);
-        if(pos.x < this.viewBox.width && pos.x > this.viewBox.x && pos.y > this.viewBox.y - 30  && pos.y < (this.viewBox.y + this.viewBox.height))
-        {
-            return;
-        }
-
-        _super.prototype.close.call(this);
-        this.removeSelf();
+    ShowPokerTypeDialog.prototype.onClosed = function() {
+        // var touchPos = this.getMousePoint();
+        //
+        // var pos = this.viewBox.globalToLocal(touchPos);
+        // if (pos.x < this.viewBox.width
+        // && pos.x > this.viewBox.x && pos.y > this.viewBox.y - 30
+        // && pos.y < (this.viewBox.y + this.viewBox.height))
+        // {
+        //     return;
+        // }
     };
 
     return ShowPokerTypeDialog;

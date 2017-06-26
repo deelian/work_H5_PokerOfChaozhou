@@ -112,4 +112,54 @@
         }
         return JSON.parse(JSON.stringify(obj));
     };
+
+    Utils.updateObject = function(baseObj, obj) {
+        for (var key in obj) {
+            var val = obj[key];
+
+            if (obj.hasOwnProperty(key) == false) {
+                continue;
+            }
+
+            if (key[0] == '_') {
+                continue;
+            }
+
+            if (typeof val != "object") {
+                baseObj[key] = val;
+            }
+            else {
+                if (val instanceof Array) {
+                    if (baseObj[key] == null) {
+                        baseObj[key] = [];
+                    }
+
+                    for (var i in val) {
+                        if (typeof val[i] === 'object') {
+                            if (baseObj[key][i] == null) {
+                                if (val[i] instanceof Array) {
+                                    baseObj[key][i] = [];
+                                }
+                                else {
+                                    baseObj[key][i] = {};
+                                }
+                            }
+
+                            // 递归
+                            Utils.updateObject(baseObj[key][i], val[i]);
+                        } else {
+                            baseObj[key][i] = val[i];
+                        }
+                    }
+                }
+                else {
+                    if (baseObj[key] == null) {
+                        baseObj[key] = {};
+                    }
+                    // 递归
+                    Utils.updateObject(baseObj[key], val);
+                }
+            }
+        }
+    };
 }(DejuPoker));

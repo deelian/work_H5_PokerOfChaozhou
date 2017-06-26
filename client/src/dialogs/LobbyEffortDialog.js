@@ -6,11 +6,16 @@ var LobbyEffortDialog = (function(_super) {
         LobbyEffortDialog.super(this);
 
         this._effortList = data || [];
-
+        this._effortListBox = null;
+        this._canUpdateEffort = true;
         this.init();
     }
 
     Laya.class(LobbyEffortDialog, "LobbyEffortDialog", _super);
+
+    LobbyEffortDialog.prototype.init = function () {
+        this.initList();
+    };
 
     LobbyEffortDialog.prototype.initList = function () {
         var array = [];
@@ -33,20 +38,29 @@ var LobbyEffortDialog = (function(_super) {
         list.vScrollBarSkin = "";
 
         list.renderHandler = render.renderHandler ? new Laya.Handler(render, render.renderHandler) : null;
+        list.mouseHandler = new Laya.Handler(this, this.listMouseHandler);
 
+        this._effortListBox = list;
         this.effortBox.addChild(list);
     };
 
-    LobbyEffortDialog.prototype.init = function () {
-        this.initList();
+    LobbyEffortDialog.prototype.listMouseHandler = function (e) {
+        var listScrollBar = this._effortListBox.scrollBar;
+        if (listScrollBar.value >= listScrollBar.max && this._canUpdateEffort) {
+            this._canUpdateEffort = false;
+            App.uiManager.updateLobbyEffort();
+        }
+
     };
 
-    LobbyEffortDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
+    LobbyEffortDialog.prototype.updateShowItems = function (data) {
+        this._canUpdateEffort = true;
+        if (data instanceof Array && data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+                this._effortListBox.addItem(data[i]);
+            }
+        }
     };
-
-    LobbyEffortDialog.CLOSE = "close";
 
     return LobbyEffortDialog;
 }(LobbyEffortDialogUI));

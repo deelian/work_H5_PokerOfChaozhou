@@ -6,7 +6,7 @@ var BuyItemDialog = (function(_super) {
         BuyItemDialog.super(this);
 
         this._productID = 10001;
-
+        //this.closeHandler = Laya.Handler.create(this, this.onClose);
         this.initEvent();
         this.init();
     }
@@ -15,13 +15,14 @@ var BuyItemDialog = (function(_super) {
 
     BuyItemDialogUI.prototype.buyTokensSuccess = function (data) {
         var tokens = data || 0;
-        this.event(LobbyView.Event.UPDATE_BALANCE, [tokens]);
         App.uiManager.showMessage({msg:"购买成功！"});
+
+        //this.event(LobbyView.Event.UPDATE_BALANCE, [tokens]);
     };
 
     BuyItemDialog.prototype.onBuyUserTokens = function () {
         //var productID = this._productID || 10001;
-
+        //
         //App.purchase(productID);
 
          var self = this;
@@ -61,6 +62,18 @@ var BuyItemDialog = (function(_super) {
         this.updateDescShow();
     };
 
+    BuyItemDialog.prototype.unregEvent = function () {
+        this.buyBtn.off(Laya.Event.CLICK, this, this.onBuyUserTokens);
+
+        var diamondType = Game.Game.DIAMOND_TYPE;
+        for (var typeIndex in diamondType) {
+            var productInfo = diamondType[typeIndex];
+            var productID = productInfo["id"];
+            var item = this.getChildByName("item_" + productID);
+            item.off(Laya.Event.CLICK, this, this.touchItem);
+        }
+    };
+
     BuyItemDialog.prototype.initEvent = function () {
         this.buyBtn.on(Laya.Event.CLICK, this, this.onBuyUserTokens);
 
@@ -96,9 +109,8 @@ var BuyItemDialog = (function(_super) {
         }
     };
 
-    BuyItemDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
+    BuyItemDialog.prototype.onClosed = function() {
+        this.unregEvent();
     };
 
     return BuyItemDialog;

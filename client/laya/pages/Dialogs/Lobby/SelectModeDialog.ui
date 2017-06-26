@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"Dialog",
-    "selectedBox":77,
-    "selecteID":148,
+    "selectedBox":352,
+    "selecteID":348,
     "props":{"y":0,"x":26,"width":1136,"vScrollBarSkin":"assets/ui.explan/vscroll.png","text":"同花顺","skin":"assets/ui.button/checkbox.png","sceneColor":"#000000","mouseThrough":false,"mouseEnabled":true,"height":640,"color":"#7ffff5c"},
     "nodeParent":-1,
     "label":"Dialog",
@@ -166,26 +166,148 @@
             "props":{"y":113,"x":465,"width":568,"var":"roomSetBox","height":420},
             "nodeParent":1,
             "label":"Box(roomSetBox)",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":22,
             "child":[
                 {
-                    "x":30,
+                    "type":"Box",
+                    "props":{"y":20,"x":4,"width":560,"var":"roundNumSetBox","height":35},
+                    "nodeParent":22,
+                    "label":"Box(roundNumSetBox)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":23,
+                    "child":[
+                        {
+                            "type":"Text",
+                            "props":{"y":0,"x":0,"text":"局数选择：","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":23,
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":28,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"CheckBox",
+                            "props":{"y":0,"x":115,"var":"tenRoundCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "nodeParent":23,
+                            "label":"CheckBox(tenRoundCheck)",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":76,
+                            "child":[
+                                {
+                                    "type":"Text",
+                                    "props":{"y":1,"x":38,"width":49.9755859375,"text":"10局","height":23,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                                    "nodeParent":76,
+                                    "label":"Text",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":26,
+                                    "child":[
+                                        ],
+                                    "$HIDDEN":false
+                                },
+                                {
+                                    "type":"Label",
+                                    "props":{"y":8,"x":88,"text":"（钻石x3）","fontSize":15,"font":"Microsoft YaHei","color":"#ffffff"},
+                                    "nodeParent":76,
+                                    "label":"Label",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":147,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "type":"CheckBox",
+                            "props":{"y":0,"x":290,"var":"twentyRoundCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "nodeParent":23,
+                            "label":"CheckBox(twentyRoundCheck)",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":77,
+                            "child":[
+                                {
+                                    "type":"Text",
+                                    "props":{"y":3,"x":42,"text":"20局","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                                    "nodeParent":77,
+                                    "label":"Text",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":27,
+                                    "child":[
+                                        ],
+                                    "$HIDDEN":false
+                                },
+                                {
+                                    "type":"Label",
+                                    "props":{"y":10,"x":92,"text":"（钻石x6）","fontSize":15,"font":"Microsoft YaHei","color":"#ffffff"},
+                                    "nodeParent":77,
+                                    "label":"Label",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":148,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":-1,"x":115,"width":164,"var":"tenRoundTouchBox","height":34},
+                            "nodeParent":23,
+                            "label":"Box(tenRoundTouchBox)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":374,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":-1,"x":291,"width":164,"var":"twentyRoundTouchBox","height":34},
+                            "nodeParent":23,
+                            "label":"Box(twentyRoundTouchBox)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":375,
+                            "child":[
+                                ]
+                        }],
+                    "$LOCKED":false,
+                    "$HIDDEN":false
+                },
+                {
                     "type":"Box",
                     "props":{"y":62,"x":4,"width":560,"visible":true,"var":"conditionBox","height":35},
                     "nodeParent":22,
                     "label":"Box(conditionBox)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":98,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"text":"上庄条件：","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":98,
@@ -198,19 +320,17 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":0,"x":115,"var":"bigThenStraightCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":0,"x":115,"var":"bigThenStraightCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":98,
                             "label":"CheckBox(bigThenStraightCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":100,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":1,"x":40,"text":"顺子以上","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":100,
@@ -226,19 +346,17 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":0,"x":290,"var":"bigThenGodCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":0,"x":290,"var":"bigThenGodCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":98,
                             "label":"CheckBox(bigThenGodCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":103,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-1,"x":41,"text":"天公以上","fontSize":"23","font":"Microsoft YaHei","color":"#f9f9f9"},
                                     "nodeParent":103,
@@ -250,131 +368,45 @@
                                     "child":[
                                         ]
                                 }]
-                        }],
-                    "$HIDDEN":false
-                },
-                {
-                    "x":30,
-                    "type":"Box",
-                    "props":{"y":20,"x":4,"width":560,"var":"roundNumSetBox","height":35},
-                    "nodeParent":22,
-                    "label":"Box(roundNumSetBox)",
-                    "isOpen":true,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":23,
-                    "child":[
+                        },
                         {
-                            "x":45,
-                            "type":"Text",
-                            "props":{"y":0,"x":0,"text":"局数选择：","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":23,
-                            "label":"Text",
+                            "type":"Box",
+                            "props":{"y":1,"x":116,"width":139,"var":"bigThenStraightTouch","height":31},
+                            "nodeParent":98,
+                            "label":"Box(bigThenStraightTouch)",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "compId":28,
+                            "compId":355,
                             "child":[
                                 ]
                         },
                         {
-                            "x":45,
-                            "type":"CheckBox",
-                            "props":{"y":0,"x":115,"var":"tenRoundCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
-                            "nodeParent":23,
-                            "label":"CheckBox(tenRoundCheck)",
-                            "isOpen":true,
-                            "isDirectory":true,
+                            "type":"Box",
+                            "props":{"y":-2,"x":293,"width":139,"var":"bigThenGodTouch","height":31},
+                            "nodeParent":98,
+                            "label":"Box(bigThenGodTouch)",
+                            "isDirectory":false,
                             "isAniNode":true,
-                            "hasChild":true,
-                            "compId":76,
+                            "hasChild":false,
+                            "compId":356,
                             "child":[
-                                {
-                                    "x":60,
-                                    "type":"Text",
-                                    "props":{"y":1,"x":38,"width":49.9755859375,"text":"10局","height":23,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
-                                    "nodeParent":76,
-                                    "label":"Text",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":26,
-                                    "child":[
-                                        ],
-                                    "$HIDDEN":false
-                                },
-                                {
-                                    "x":60,
-                                    "type":"Label",
-                                    "props":{"y":8,"x":88,"text":"（钻石x3）","fontSize":15,"font":"Microsoft YaHei","color":"#ffffff"},
-                                    "nodeParent":76,
-                                    "label":"Label",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":147,
-                                    "child":[
-                                        ]
-                                }]
-                        },
-                        {
-                            "x":45,
-                            "type":"CheckBox",
-                            "props":{"y":0,"x":290,"var":"twentyRoundCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
-                            "nodeParent":23,
-                            "label":"CheckBox(twentyRoundCheck)",
-                            "isOpen":true,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":77,
-                            "child":[
-                                {
-                                    "x":60,
-                                    "type":"Text",
-                                    "props":{"y":3,"x":42,"text":"20局","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
-                                    "nodeParent":77,
-                                    "label":"Text",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":27,
-                                    "child":[
-                                        ],
-                                    "$HIDDEN":false
-                                },
-                                {
-                                    "x":60,
-                                    "type":"Label",
-                                    "props":{"y":10,"x":92,"text":"（钻石x6）","fontSize":15,"font":"Microsoft YaHei","color":"#ffffff"},
-                                    "nodeParent":77,
-                                    "label":"Label",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":148,
-                                    "child":[
-                                        ]
-                                }]
+                                ]
                         }],
-                    "$LOCKED":false,
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":103,"x":4,"width":560,"var":"turnJokersBox","height":80},
                     "nodeParent":22,
                     "label":"Box(turnJokersBox)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":29,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"text":"鬼       牌 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":29,
@@ -387,19 +419,17 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":0,"x":115,"var":"noMoreJokerCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":0,"x":115,"var":"noMoreJokerCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":29,
                             "label":"CheckBox(noMoreJokerCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":78,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":39,"text":"不翻鬼","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":78,
@@ -413,19 +443,17 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":0,"x":290,"var":"oneMoreCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":0,"x":290,"var":"oneMoreCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":29,
                             "label":"CheckBox(oneMoreCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":79,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":2,"x":45,"text":"翻鬼","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":79,
@@ -439,19 +467,17 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":11,"x":439,"var":"twoMoreCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_S.png"},
+                            "props":{"y":11,"x":439,"var":"twoMoreCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_S.png","mouseEnabled":false},
                             "nodeParent":29,
                             "label":"CheckBox(twoMoreCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":80,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":3,"x":25,"text":"翻2张","fontSize":"13","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":80,
@@ -465,19 +491,17 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":40,"x":115,"var":"jokerAnyCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":40,"x":115,"var":"jokerAnyCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":29,
                             "label":"CheckBox(jokerAnyCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":81,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":39,"text":"鬼牌百变","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":81,
@@ -491,19 +515,17 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":40,"x":290,"var":"jokerFormationCheak","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":40,"x":290,"var":"jokerFormationCheak","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":29,
                             "label":"CheckBox(jokerFormationCheak)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":82,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":0,"x":42,"text":"鬼牌成型","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":82,
@@ -518,19 +540,17 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":47,"x":439,"var":"nineGhostCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_S.png"},
+                            "props":{"y":47,"x":439,"var":"nineGhostCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_S.png","mouseEnabled":false},
                             "nodeParent":29,
                             "label":"CheckBox(nineGhostCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":83,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":2,"x":23,"text":"带鬼天公双倍","fontSize":"13","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":83,
@@ -542,23 +562,93 @@
                                     "child":[
                                         ]
                                 }]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":0,"x":114,"width":116,"var":"noMoreJokerTouch","height":31},
+                            "nodeParent":29,
+                            "label":"Box(noMoreJokerTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":357,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":1,"x":285,"width":116,"var":"oneMoreTouch","height":31},
+                            "nodeParent":29,
+                            "label":"Box(oneMoreTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":358,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":5,"x":435,"width":72,"var":"twoMoreTouch","height":31},
+                            "nodeParent":29,
+                            "label":"Box(twoMoreTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":359,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":39,"x":116,"width":133,"var":"jokerAnyTouch","height":31},
+                            "nodeParent":29,
+                            "label":"Box(jokerAnyTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":360,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":41,"x":290,"width":138,"var":"jokerFormationTouch","height":31},
+                            "nodeParent":29,
+                            "label":"Box(jokerFormationTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":361,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":43,"x":435,"width":111,"var":"nineGhostTouch","height":28},
+                            "nodeParent":29,
+                            "label":"Box(nineGhostTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":362,
+                            "child":[
+                                ]
                         }],
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":190,"x":4,"width":560,"var":"betBox","height":35},
                     "nodeParent":22,
                     "label":"Box(betBox)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":50,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"text":"下注功能 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":50,
@@ -571,19 +661,17 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":0,"x":115,"var":"anyBetCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":0,"x":115,"var":"anyBetCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":50,
                             "label":"CheckBox(anyBetCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":85,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-2,"x":39,"text":"任意下注","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":85,
@@ -597,19 +685,17 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":0,"x":290,"var":"moreBetCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":0,"x":290,"var":"moreBetCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":50,
                             "label":"CheckBox(moreBetCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":86,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-3,"x":42,"wordWrap":true,"width":94,"text":"一杠到底","height":29,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":86,
@@ -623,19 +709,17 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":0,"x":290,"visible":false,"var":"autoBetCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":0,"x":290,"visible":false,"var":"autoBetCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":50,
                             "label":"CheckBox(autoBetCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":307,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":-3,"x":42,"wordWrap":true,"width":94,"text":"默认下注","height":29,"fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":307,
@@ -648,23 +732,57 @@
                                         ]
                                 }],
                             "$HIDDEN":false
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":0,"x":111,"width":143,"var":"anyBetTouch","height":32},
+                            "nodeParent":50,
+                            "label":"Box(anyBetTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":363,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":-1,"x":287,"width":143,"var":"moreBetTouch","height":32},
+                            "nodeParent":50,
+                            "label":"Box(moreBetTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":364,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":-1,"x":288,"width":143,"var":"autoBetTouch","height":32},
+                            "nodeParent":50,
+                            "label":"Box(autoBetTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":365,
+                            "child":[
+                                ]
                         }],
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":232,"x":4,"width":560,"var":"multipeBox","height":39},
                     "nodeParent":22,
                     "label":"Box(multipeBox)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":56,
                     "child":[
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"text":"牌型倍数 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":56,
@@ -677,7 +795,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":117,"text":"同花顺","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":56,
@@ -690,7 +807,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":1,"x":294,"text":"三    条","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":56,
@@ -704,7 +820,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":2,"x":256.00000000000006,"text":"倍","fontSize":"22","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":56,
@@ -717,7 +832,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":2,"x":436,"text":"倍","fontSize":"22","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":56,
@@ -730,7 +844,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":2,"x":200,"var":"straightFlush","skin":"assets/ui.select/img_beishukuang.png","name":"straightFlush"},
                             "nodeParent":56,
@@ -742,7 +855,6 @@
                             "compId":208,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "props":{"y":0,"x":18,"text":"9","name":"title","fontSize":23,"font":"Microsoft YaHei","color":"#ffb16c"},
                                     "nodeParent":208,
@@ -756,7 +868,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":3,"x":379,"var":"threeOfAKind","skin":"assets/ui.select/img_beishukuang.png","name":"threeOfAKind"},
                             "nodeParent":56,
@@ -768,7 +879,6 @@
                             "compId":209,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "props":{"y":0,"x":18,"text":"9","name":"title","fontSize":23,"font":"Microsoft YaHei","color":"#ffb16c"},
                                     "nodeParent":209,
@@ -784,21 +894,32 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":278,"x":4,"width":560,"var":"zeroSetBox","height":35},
                     "nodeParent":22,
                     "label":"Box(zeroSetBox)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":66,
                     "child":[
                         {
-                            "x":45,
+                            "type":"Text",
+                            "props":{"y":0,"x":0,"text":"木       虱 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":66,
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":146,
+                            "child":[
+                                ],
+                            "$HIDDEN":false
+                        },
+                        {
                             "type":"CheckBox",
-                            "props":{"y":2,"x":115,"var":"winDoubleGhostCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":2,"x":115,"var":"winDoubleGhostCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":66,
                             "label":"CheckBox(winDoubleGhostCheck)",
                             "isOpen":false,
@@ -818,26 +939,12 @@
                                     "compId":71,
                                     "child":[
                                         ]
-                                }]
-                        },
-                        {
-                            "x":45,
-                            "type":"Text",
-                            "props":{"y":0,"x":0,"text":"木       虱 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":66,
-                            "label":"Text",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":146,
-                            "child":[
-                                ],
+                                }],
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":2,"x":230,"var":"tripleWinDoubleGhostCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":2,"x":230,"var":"tripleWinDoubleGhostCheck","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":66,
                             "label":"CheckBox(tripleWinDoubleGhostCheck)",
                             "isOpen":false,
@@ -860,19 +967,17 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":3,"x":390,"var":"tripleWinTripleGhostCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_L.png"},
+                            "props":{"y":3,"x":390,"var":"tripleWinTripleGhostCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_L.png","mouseEnabled":false},
                             "nodeParent":66,
                             "label":"CheckBox(tripleWinTripleGhostCheck)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":187,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":0,"x":38,"text":"三倍赢三鬼","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                                     "nodeParent":187,
@@ -883,79 +988,61 @@
                                     "compId":188,
                                     "child":[
                                         ]
-                                }]
+                                }],
+                            "$HIDDEN":false
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":0,"x":114,"width":111,"var":"winDoubleGhostTouch","height":38},
+                            "nodeParent":66,
+                            "label":"Box(winDoubleGhostTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":366,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":-1,"x":230,"width":153,"var":"tripleWinDoubleGhostTouch","height":38},
+                            "nodeParent":66,
+                            "label":"Box(tripleWinDoubleGhostTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":367,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":1,"x":390,"width":157,"var":"tripleWinTripleGhostTouch","height":38},
+                            "nodeParent":66,
+                            "label":"Box(tripleWinTripleGhostTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":368,
+                            "child":[
+                                ]
                         }],
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
-                    "type":"Box",
-                    "props":{"y":363,"x":4,"width":560,"var":"doubleDealBox","height":35},
-                    "nodeParent":22,
-                    "label":"Box(doubleDealBox)",
-                    "isOpen":true,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":72,
-                    "child":[
-                        {
-                            "x":45,
-                            "type":"CheckBox",
-                            "props":{"y":1,"x":115,"var":"doubleCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_L.png"},
-                            "nodeParent":72,
-                            "label":"CheckBox(doubleCheck)",
-                            "isOpen":true,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":91,
-                            "child":[
-                                {
-                                    "x":60,
-                                    "type":"Text",
-                                    "props":{"y":-1,"x":39,"text":"加入功能牌","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
-                                    "nodeParent":91,
-                                    "label":"Text",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":75,
-                                    "child":[
-                                        ]
-                                }]
-                        },
-                        {
-                            "x":45,
-                            "type":"Text",
-                            "props":{"y":0,"x":0,"text":"功  能  牌 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":72,
-                            "label":"Text",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":145,
-                            "child":[
-                                ]
-                        }],
-                    "$LOCKED":false
-                },
-                {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":319,"x":4,"width":560,"var":"gambleBox","height":37},
                     "nodeParent":22,
                     "label":"Box(gambleBox)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":181,
                     "child":[
                         {
-                            "x":45,
                             "type":"CheckBox",
-                            "props":{"y":2,"x":115,"var":"fancyWinCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_L.png"},
+                            "props":{"y":2,"x":115,"var":"fancyWinCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_L.png","mouseEnabled":false},
                             "nodeParent":181,
                             "label":"CheckBox(fancyWinCheck)",
                             "isOpen":false,
@@ -978,7 +1065,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "props":{"y":0,"x":0,"text":"比       牌 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":181,
@@ -990,11 +1076,84 @@
                             "child":[
                                 ],
                             "$HIDDEN":false
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":0,"x":110,"width":169,"var":"fancyWinTouch","height":36},
+                            "nodeParent":181,
+                            "label":"Box(fancyWinTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":369,
+                            "child":[
+                                ]
                         }],
                     "$HIDDEN":false
+                },
+                {
+                    "type":"Box",
+                    "props":{"y":363,"x":4,"width":560,"var":"doubleDealBox","height":35},
+                    "nodeParent":22,
+                    "label":"Box(doubleDealBox)",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":72,
+                    "child":[
+                        {
+                            "type":"CheckBox",
+                            "props":{"y":1,"x":115,"var":"doubleCheck","stateNum":"3","skin":"assets/ui.button/btn_Selected_L.png","mouseEnabled":false},
+                            "nodeParent":72,
+                            "label":"CheckBox(doubleCheck)",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":91,
+                            "child":[
+                                {
+                                    "type":"Text",
+                                    "props":{"y":-1,"x":39,"text":"加入功能牌","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                                    "nodeParent":91,
+                                    "label":"Text",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":75,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "type":"Text",
+                            "props":{"y":0,"x":0,"text":"功  能  牌 :","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":72,
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":145,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":-1,"x":111,"width":167,"var":"doubleTouch","height":38},
+                            "nodeParent":72,
+                            "label":"Box(doubleTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":370,
+                            "child":[
+                                ]
+                        }],
+                    "$LOCKED":false
                 }],
             "$LOCKED":false,
-            "$HIDDEN":false
+            "$HIDDEN":true
         },
         {
             "x":15,
@@ -1034,7 +1193,7 @@
                 },
                 {
                     "type":"Text",
-                    "props":{"y":97,"x":131,"text":"同花顺","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                    "props":{"y":97,"x":344,"text":"同花顺","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                     "nodeParent":107,
                     "label":"Text",
                     "isDirectory":false,
@@ -1046,7 +1205,7 @@
                 },
                 {
                     "type":"Text",
-                    "props":{"y":98,"x":347,"text":"顺   子","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                    "props":{"y":98,"x":134,"text":"顺   子","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                     "nodeParent":107,
                     "label":"Text",
                     "isDirectory":false,
@@ -1216,7 +1375,7 @@
                 },
                 {
                     "type":"Text",
-                    "props":{"y":98,"x":268,"text":"倍","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                    "props":{"y":98,"x":481,"text":"倍","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                     "nodeParent":107,
                     "label":"Text",
                     "isDirectory":false,
@@ -1228,7 +1387,7 @@
                 },
                 {
                     "type":"Text",
-                    "props":{"y":98.00000000000003,"x":481,"text":"倍","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
+                    "props":{"y":98.00000000000003,"x":268,"text":"倍","fontSize":"23","font":"Microsoft YaHei","color":"#ffffff"},
                     "nodeParent":107,
                     "label":"Text",
                     "isDirectory":false,
@@ -1372,7 +1531,7 @@
                 },
                 {
                     "type":"Image",
-                    "props":{"y":99,"x":212,"var":"straightFlushCustomized","skin":"assets/ui.select/img_beishukuang.png","name":"straightFlushCustomized"},
+                    "props":{"y":99,"x":425,"var":"straightFlushCustomized","skin":"assets/ui.select/img_beishukuang.png","name":"straightFlushCustomized"},
                     "nodeParent":107,
                     "label":"Image(straightFlushCustomized)",
                     "isOpen":true,
@@ -1396,7 +1555,7 @@
                 },
                 {
                     "type":"Image",
-                    "props":{"y":99,"x":425,"var":"straightCustomized","skin":"assets/ui.select/img_beishukuang.png","name":"straightCustomized"},
+                    "props":{"y":99,"x":212,"var":"straightCustomized","skin":"assets/ui.select/img_beishukuang.png","name":"straightCustomized"},
                     "nodeParent":107,
                     "label":"Image(straightCustomized)",
                     "isOpen":true,
@@ -1732,10 +1891,10 @@
                         },
                         {
                             "type":"CheckBox",
-                            "props":{"y":0,"x":121,"var":"customizedTen","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":0,"x":121,"var":"customizedTen","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":296,
                             "label":"CheckBox(customizedTen)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
@@ -1769,10 +1928,10 @@
                         },
                         {
                             "type":"CheckBox",
-                            "props":{"y":0,"x":292,"var":"customizedTwenty","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":0,"x":292,"var":"customizedTwenty","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","selected":false},
                             "nodeParent":296,
                             "label":"CheckBox(customizedTwenty)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
@@ -1806,10 +1965,10 @@
                         },
                         {
                             "type":"CheckBox",
-                            "props":{"y":36,"x":121,"var":"customizedThirty","stateNum":"2","skin":"assets/ui.button/btn_Choice.png"},
+                            "props":{"y":36,"x":121,"var":"customizedThirty","stateNum":"2","skin":"assets/ui.button/btn_Choice.png","mouseEnabled":false},
                             "nodeParent":296,
                             "label":"CheckBox(customizedThirty)",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
@@ -1840,6 +1999,42 @@
                                     "child":[
                                         ]
                                 }]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":-1,"x":114,"width":172,"var":"customizedTenTouch","height":33},
+                            "nodeParent":296,
+                            "label":"Box(customizedTenTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":371,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":0,"x":291,"width":172,"var":"customizedTwentyTouch","height":33},
+                            "nodeParent":296,
+                            "label":"Box(customizedTwentyTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":372,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "props":{"y":34,"x":120,"width":172,"var":"customizedThirtyTouch","height":33},
+                            "nodeParent":296,
+                            "label":"Box(customizedThirtyTouch)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":373,
+                            "child":[
+                                ]
                         }],
                     "$LOCKED":false,
                     "$HIDDEN":false
@@ -1852,13 +2047,14 @@
             "props":{"y":115,"x":229,"width":215,"var":"introductionBox","height":429},
             "nodeParent":1,
             "label":"Box(introductionBox)",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":149,
             "child":[
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":27,"x":108,"width":215,"var":"titleIntroduction","valign":"middle","text":"玩法简介","height":50,"fontSize":25,"font":"Microsoft YaHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"},
                     "nodeParent":149,
@@ -1868,9 +2064,11 @@
                     "hasChild":false,
                     "compId":150,
                     "child":[
-                        ]
+                        ],
+                    "$HIDDEN":true
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":55,"x":7,"skin":"assets/ui.select/img_fengexian.png"},
                     "nodeParent":149,
@@ -1883,30 +2081,182 @@
                         ]
                 },
                 {
-                    "type":"Panel",
-                    "props":{"y":55,"x":3,"width":212,"var":"introductionPanel","vScrollBarSkin":"assets/comp/vscroll.png","height":374},
+                    "x":30,
+                    "type":"List",
+                    "props":{"y":61,"x":4,"width":214,"var":"classicalDescList","spaceY":5,"repeatY":1,"repeatX":1,"height":362},
                     "nodeParent":149,
-                    "label":"Panel(introductionPanel)",
-                    "isOpen":true,
+                    "label":"List(classicalDescList)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":310,
+                    "child":[
+                        ],
+                    "$HIDDEN":true
+                },
+                {
+                    "x":30,
+                    "type":"List",
+                    "props":{"y":61,"x":4,"width":214,"var":"staticDescList","repeatY":1,"repeatX":1,"height":362},
+                    "nodeParent":149,
+                    "label":"List(staticDescList)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":311,
+                    "child":[
+                        ],
+                    "$HIDDEN":true
+                },
+                {
+                    "x":30,
+                    "type":"List",
+                    "props":{"y":61,"x":4,"width":214,"var":"chaosDescList","repeatY":1,"repeatX":1,"height":362},
+                    "nodeParent":149,
+                    "label":"List(chaosDescList)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":312,
+                    "child":[
+                        ],
+                    "$HIDDEN":true
+                },
+                {
+                    "x":30,
+                    "type":"List",
+                    "props":{"y":61,"x":2,"width":214,"var":"customizedDescList","repeatY":1,"repeatX":1,"height":362},
+                    "nodeParent":149,
+                    "label":"List(customizedDescList)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":313,
+                    "child":[
+                        ],
+                    "$HIDDEN":true
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "props":{"y":0,"x":0,"width":209,"var":"staticPage1","height":1303},
+                    "nodeParent":149,
+                    "label":"Box(staticPage1)",
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "compId":189,
+                    "compId":316,
                     "child":[
                         {
                             "type":"Label",
-                            "props":{"y":3,"x":1,"wordWrap":true,"width":209,"var":"detailsIntroduction","text":"1.房主坐庄,不能更换庄家。2.每个玩家各派2张牌,下注后才能看牌。3.每个玩家有1次补牌机会,按发牌顺序轮流操作。4.最后庄家决定开牌,进入比牌环节。5.比牌环节,各个闲家跟庄家比牌大小。","padding":"10,5,10,5","leading":10,"height":0,"fontSize":20,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":189,
-                            "label":"Label(detailsIntroduction)",
+                            "props":{"y":8,"x":5,"wordWrap":true,"width":209,"text":"1.房主霸王庄，游戏过程不换庄。\\n2.默认不翻鬼，即只有2张鬼牌(大小王)，最多可翻两张牌做为鬼牌。翻鬼，可选择翻1或2张牌当鬼牌，若翻出的鬼牌为大小王，系统会重新再翻一张牌当鬼牌。\\n3.鬼牌百变：鬼牌可当任意一张牌及花色，首轮牌鬼、8（9）不能算天公，必须补牌。\\n4.鬼牌成型：鬼牌不能拼成特殊牌型(三支、同花顺、顺子)时，仅能当10点，可变花色。首轮牌鬼、8（9）算天公，可不补牌，同时可选择首轮牌鬼、8（9）是否算双倍天公。\\n5.任意下注：每一局可任意选择下注倍数。\\n6.一杠到底：在同一个庄上，下注倍数只能加不能减。换庄后，可重新选择下注倍数。\\n7.木虱：可设置木虱赢双鬼，三倍木虱赢双鬼，三倍木虱赢三鬼。\\n8.比牌：有倍赢无倍，双倍天公9>天公9，双倍天公8>天公8，普通牌点数相同时，倍数大者为大，即三倍>二倍>一倍，倍数相同打平。\\n9.功能牌：游戏中增加一张功能牌，游戏过程中拿到功能牌的玩家，赢牌时，按照手中牌型翻倍计算积分，同时，此牌具备鬼牌功能。","leading":10,"height":1287,"fontSize":20,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":316,
+                            "label":"Label",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
                             "compId":153,
                             "child":[
                                 ]
-                        }]
+                        }],
+                    "$HIDDEN":false
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "props":{"y":0,"x":0,"width":209,"var":"classicalPage1","height":1460},
+                    "nodeParent":149,
+                    "label":"Box(classicalPage1)",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":340,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "props":{"y":8,"x":5,"wordWrap":true,"width":207,"text":"1.首局房主为庄家，过后按照上庄规则，满足条件者上庄，多位玩家满足条件，则牌型倍数最大的上庄，同样牌型则按照发牌顺序，先发牌的玩家上庄。\\n2.默认不翻鬼，即只有2张鬼牌(大小王)，最多可翻两张牌做为鬼牌。翻鬼，可选择翻1或2张牌当鬼牌，若翻出的鬼牌为大小王，系统会重新再翻一张牌当鬼牌。\\n3.鬼牌百变：鬼牌可当任意一张牌及花色，首轮牌鬼、8（9）不能算天公，必须补牌。\\n4.鬼牌成型：鬼牌不能拼成特殊牌型(三支、同花顺、顺子)时，仅能当10点，可变花色。首轮牌鬼、8（9）算天公，可不补牌，同时可选择首轮牌鬼、8（9）是否算双倍天公。\\n5.任意下注：每一局可任意选择下注倍数。\\n6.一杠到底：在同一个庄上，下注倍数只能加不能减。换庄后，可重新选择下注倍数。\\n7.木虱：可设置木虱赢双鬼，三倍木虱赢双鬼，三倍木虱赢三鬼。\\n8.比牌：有倍赢无倍，双倍天公9>天公9，双倍天公8>天公8，普通牌点数相同时，倍数大者为大，即三倍>二倍>一倍，倍数相同打平。\\n9.功能牌：游戏中增加一张功能牌，游戏过程中拿到功能牌的玩家，赢牌时，按照手中牌型翻倍计算积分，同时，此牌具备鬼牌功能。","leading":10,"height":1440,"fontSize":20,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":340,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":331,
+                            "child":[
+                                ]
+                        }],
+                    "$HIDDEN":true
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "props":{"y":0,"x":0,"width":213,"var":"chaosPage1","height":1120},
+                    "nodeParent":149,
+                    "label":"Box(chaosPage1)",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":349,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "props":{"y":8,"x":5,"wordWrap":true,"width":207,"text":"1.木虱鱼，无庄家，各玩家之间相互比牌。\\n2.默认不翻鬼，即只有2张鬼牌(大小王)，最多可翻两张牌做为鬼牌。翻鬼，可选择翻1或2张牌当鬼牌，若翻出的鬼牌为大小王，系统会重新再翻一张牌当鬼牌。\\n3.鬼牌百变：鬼牌可当任意一张牌及花色，首轮牌鬼、8（9）不能算天公，必须补牌。\\n4.鬼牌成型：鬼牌不能拼成特殊牌型(三支、同花顺、顺子)时，仅能当10点，可变花色。首轮牌鬼、8（9）算天公，可不补牌，同时可选择首轮牌鬼、8（9）是否算双倍天公。\\n5.木虱：可设置木虱赢双鬼，三倍木虱赢双鬼，三倍木虱赢三鬼。\\n6.比牌：有倍赢无倍，双倍天公9>天公9，双倍天公8>天公8，普通牌点数相同时，倍数大者为大，即三倍>二倍>一倍，倍数相同打平。\\n7.功能牌：游戏中增加一张功能牌，游戏过程中拿到功能牌的玩家，赢牌时，按照手中牌型翻倍计算积分，同时，此牌具备鬼牌功能","leading":10,"height":1116,"fontSize":20,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":349,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":341,
+                            "child":[
+                                ],
+                            "$HIDDEN":false
+                        }],
+                    "$HIDDEN":true
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "props":{"y":0,"x":0,"width":210,"var":"customizedPage1","height":280},
+                    "nodeParent":149,
+                    "label":"Box(customizedPage1)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":352,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "props":{"y":8,"x":5,"wordWrap":true,"width":209,"text":"1.游戏牌数：一副扑克牌，去掉大小王，共52张牌。\\n2.每一局都要抢庄，确定庄家后，每位玩家各派三张牌，按照牌型，点数比大小。\\n3.可自定义牌型倍数，散牌点数倍数。","leading":10,"height":278,"fontSize":20,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":352,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":348,
+                            "child":[
+                                ],
+                            "$HIDDEN":false
+                        }],
+                    "$HIDDEN":true
                 }],
             "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Label",
+            "props":{"y":554,"x":78,"width":576,"text":"温馨提示：钻石在开始游戏第一局结算后正式扣除，提前解散不扣除钻石","height":26,"fontSize":18,"font":"Microsoft YaHei","color":"#ffb86e"},
+            "nodeParent":1,
+            "label":"Label",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":309,
+            "child":[
+                ]
         }],
     "animations":[
         {

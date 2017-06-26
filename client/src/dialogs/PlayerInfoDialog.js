@@ -8,7 +8,6 @@ var PlayerInfoDialog = (function(_super) {
 
         this._userId = opts.userID;//*这个人的id
         this._isHost = opts.isHost;//*是不是房主打开了这个信息面板
-        console.log(this._isHost);
         this.init(opts);
     }
 
@@ -52,10 +51,7 @@ var PlayerInfoDialog = (function(_super) {
         App.soundManager.playSound("btnSound");
         var self = this;
         var complete = function (err, data) {
-            if (err) {
-
-            }
-            else {
+            if (!err) {
                 self.close();
             }
         };
@@ -70,13 +66,13 @@ var PlayerInfoDialog = (function(_super) {
 
     //*强制站起
     PlayerInfoDialog.prototype.onStandBtn = function () {
+        var self = this;
         var complete = function (err, data) {
-            if (err) {
-
+            if (!err) {
+                self.close();
             }
         };
         App.soundManager.playSound("btnSound");
-        var self = this;
         App.netManager.send(
             "room.handler.let_stand_up",
             {
@@ -176,8 +172,9 @@ var PlayerInfoDialog = (function(_super) {
         }
 
         var tableEvent = [
-            {"eventName":RoomTableMgr.EVENT.CANCEL_FORBIDDEN, "eventFunc":this.forbiddenState},
-            {"eventName":RoomTableMgr.EVENT.FORBIDDEN_PLYAER, "eventFunc":this.forbiddenState}
+            {"eventName":RoomTableMgr.Event.CANCEL_FORBIDDEN, "eventFunc":this.forbiddenState},
+            {"eventName":RoomTableMgr.Event.FORBIDDEN_PLYAER, "eventFunc":this.forbiddenState},
+            //{"eventName":RoomTableMgr.Event.CLOSE_PLAYER_INFO_VIEW, "eventFunc":this.close}
         ];
 
         for (var eventIndex in tableEvent) {
@@ -187,9 +184,39 @@ var PlayerInfoDialog = (function(_super) {
             App.tableManager.on(eventName, this, eventFunc);
         }
 
-        this.btnClose.on(Laya.Event.CLICK,this,this.close);
+        //this.btnClose.on(Laya.Event.CLICK,this,this.onClose);
 
         this.btnIncrease.on(Laya.Event.CLICK, this, this.showBuyTokensPanel);
+    };
+
+    PlayerInfoDialog.prototype.unregEvent = function () {
+        var btnList = [
+            {"btn": this.banned, "func": this.onBannedTalk},
+            {"btn": this.standBtn, "func": this.onStandBtn},
+            {"btn": this.kickBtn, "func": this.onKickBtn}
+        ];
+
+        for (var index in btnList) {
+            var btnInfo = btnList[index];
+            var btn = btnInfo["btn"];
+            var func = btnInfo["func"];
+            btn.off(Laya.Event.CLICK, this, func);
+        }
+
+        var tableEvent = [
+            {"eventName":RoomTableMgr.Event.CANCEL_FORBIDDEN, "eventFunc":this.forbiddenState},
+            {"eventName":RoomTableMgr.Event.FORBIDDEN_PLYAER, "eventFunc":this.forbiddenState},
+            {"eventName":RoomTableMgr.Event.CLOSE_PLAYER_INFO_VIEW, "eventFunc":this.close}
+        ];
+
+        for (var eventIndex in tableEvent) {
+            var eventInfo = tableEvent[eventIndex];
+            var eventName = eventInfo["eventName"];
+            var eventFunc = eventInfo["eventFunc"];
+            App.tableManager.off(eventName, this, eventFunc);
+        }
+
+        this.btnIncrease.off(Laya.Event.CLICK, this, this.showBuyTokensPanel);
     };
 
     PlayerInfoDialog.prototype.initShow = function () {
@@ -296,16 +323,13 @@ var PlayerInfoDialog = (function(_super) {
 
     PlayerInfoDialog.prototype.showBuyTokensPanel = function () {
         App.soundManager.playSound("btnSound");
-        var roomCarView = new BuyItemDialog();
-        roomCarView.on(LobbyView.Event.UPDATE_BALANCE, this, this.setBalance);
-        App.uiManager.addUiLayer(roomCarView);
+        App.uiManager.addUiLayer(BuyItemDialog);
     };
 
     PlayerInfoDialog.prototype.setBtnState = function () {
         //对派牌前坐下状态的玩家使用，派牌后按钮灰掉不能使用
-        var roomInfo = App.tableManager.getRoom();
-        var table = roomInfo.table || {};
-        var clients = table.clients || {};
+        var roomInfo = App.tableManager.getRoomInfo();
+        var clients = App.tableManager.getClients() || {};
         var roomState = roomInfo.state;
 
         if (clients[this._userId]) {
@@ -339,9 +363,9 @@ var PlayerInfoDialog = (function(_super) {
 
     };
 
-    PlayerInfoDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        //App.uiManager.removeUiLayer(this);
+    PlayerInfoDialog.prototype.onClosed = function() {
+        //console.log("PlayerInfoDialog on closed...");
+        this.unregEvent();
     };
 
     return PlayerInfoDialog;

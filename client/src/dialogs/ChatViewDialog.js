@@ -96,14 +96,24 @@ var ChatViewDialog = (function(_super) {
 
     Laya.class(ChatViewDialog, "ChatViewDialog", _super);
 
+    ChatViewDialog.prototype.unregEvent = function () {
+        this.normalBtn.off(Laya.Event.CLICK,this,this.onClick);
+        this.expressionBtn.off(Laya.Event.CLICK,this,this.onClick);
+        this.chatClickBtn.off(Laya.Event.CLICK,this,this.onClick);
+        this.sandBtn.off(Laya.Event.CLICK,this,this.sendChat);
+
+        App.tableManager.off(RoomTableMgr.Event.SAND_CHAT_DATA, this, this.showSendChat);
+        App.tableManager.off(RoomTableMgr.Event.CLOSE_ROOM, this, this.close);
+    };
+
     ChatViewDialog.prototype.initTouchEvent = function() {
         this.normalBtn.on(Laya.Event.CLICK,this,this.onClick,[this.normalInputBox]);
         this.expressionBtn.on(Laya.Event.CLICK,this,this.onClick,[this.expressionBox]);
         this.chatClickBtn.on(Laya.Event.CLICK,this,this.onClick,[this.chatInpuBox]);
         this.sandBtn.on(Laya.Event.CLICK,this,this.sendChat);
 
-        App.tableManager.on(RoomTableMgr.EVENT.SAND_CHAT_DATA, this, this.showSendChat);
-        App.tableManager.on(RoomTableMgr.EVENT.CLOSE_ROOM, this, this.close);
+        App.tableManager.on(RoomTableMgr.Event.SAND_CHAT_DATA, this, this.showSendChat);
+        App.tableManager.on(RoomTableMgr.Event.CLOSE_ROOM, this, this.close);
     };
 
     ChatViewDialog.prototype.initStatementsList = function() {
@@ -317,6 +327,10 @@ var ChatViewDialog = (function(_super) {
                 this.boxContent[i].visible = false;
             }
         }
+    };
+
+    ChatViewDialog.prototype.onClosed = function() {
+        this.unregEvent();
     };
 
     return ChatViewDialog;

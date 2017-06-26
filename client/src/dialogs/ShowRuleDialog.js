@@ -293,10 +293,10 @@ var ShowRuleDialog = (function(_super) {
 
     };
 
-    ShowRuleDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
-    };
+    //ShowRuleDialog.prototype.onClose = function() {
+    //    //_super.prototype.close.call(this);
+    //    App.uiManager.removeUiLayer(this);
+    //};
 
     ShowRuleDialog.TITLE_IMG = [
         "assets/ui.room/showRule/img_zhangzhuang.png",

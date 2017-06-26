@@ -105,6 +105,14 @@
         BET_ALL:    4,      //全开
         BET_DRAW:   5       //开补
     };
+
+    //下注操作类型
+    Game.BID_OPTION_TYPE = {
+        BANKER_AUTO: 0,     //庄家自动
+        ALL_AUTO: 1,        //全自动
+        MANUALLY: 2         //全手动
+    };
+
     // 玩法说明界面
     Game.Explain = [
         {

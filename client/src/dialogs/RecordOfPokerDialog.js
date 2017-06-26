@@ -47,10 +47,10 @@ var RecordOfPokerDialog = (function(_super) {
         this.initList();
     };
 
-    RecordOfPokerDialog.prototype.close = function() {
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
-    };
+    //RecordOfPokerDialog.prototype.onClose = function() {
+    //    //_super.prototype.close.call(this);
+    //    App.uiManager.removeUiLayer(this);
+    //};
 
 
     return RecordOfPokerDialog;

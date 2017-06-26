@@ -16,8 +16,9 @@ var FinalDialog = (function(_super) {
     FinalDialog.prototype.onShowShare = function () {
         App.soundManager.playSound("btnSound");
 
-        var shareView = new ShareDialog();
-        App.uiManager.addUiLayer(shareView);
+        App.uiManager.addUiLayer(ShareDialog);
+        //var shareView = new ShareDialog();
+        //App.uiManager.addUiLayer(shareView);
     };
 
     //*房间战绩显示
@@ -25,8 +26,9 @@ var FinalDialog = (function(_super) {
         App.soundManager.playSound("btnSound");
         //App.tableManager.quitRoom();
 
-        var roomEffortDialog = new RoomEffortDialog({data:this._info});
-        App.uiManager.addUiLayer(roomEffortDialog);
+        //var roomEffortDialog = new RoomEffortDialog({data:this._info});
+        //App.uiManager.addUiLayer(roomEffortDialog);
+        App.uiManager.addUiLayer(RoomEffortDialog,{data:this._info});
     };
 
     //*返回大厅
@@ -117,6 +119,22 @@ var FinalDialog = (function(_super) {
         this.finalBox.addChild(list);
     };
 
+    FinalDialog.prototype.unregEvent = function () {
+        var btnAndEvent = [
+            //*返回大厅按钮
+            {"btn": this.lobbyBtn, "func": this.backLobby},
+            {"btn": this.effortBtn, "func": this.onShowEffortPanel},
+            {"btn": this.shareBtn, "func": this.onShowShare}
+        ];
+
+        var btn;
+        for (var i = 0; i < btnAndEvent.length; i ++) {
+            btn = btnAndEvent[i]["btn"];
+            var func = btnAndEvent[i]["func"];
+            btn.off(Laya.Event.CLICK, this, func);
+        }
+    };
+
     FinalDialog.prototype.initEvent = function () {
         var btnAndEvent = [
             //*返回大厅按钮
@@ -138,10 +156,9 @@ var FinalDialog = (function(_super) {
         this.initShow();
     };
 
-    FinalDialog.prototype.close = function() {
-        //App.tableManager.quitRoom();
-        _super.prototype.close.call(this);
-        App.uiManager.removeUiLayer(this);
+    FinalDialog.prototype.onClosed = function() {
+        App.tableManager.quitRoom();
+        this.unregEvent();
     };
 
     return FinalDialog;

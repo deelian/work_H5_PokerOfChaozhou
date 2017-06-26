@@ -49,6 +49,10 @@ var window = window || global;
         if (config.showFPS) {
             Laya.Stat.show();
             Laya.alertGlobalError = true;
+
+            if( window.conch ) {
+                window.conch.config.setTransparentMode();
+            }
         }
 
         if (config.frameRate) {

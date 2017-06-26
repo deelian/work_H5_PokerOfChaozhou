@@ -15,8 +15,8 @@ var FinalItemBox = (function(_super){
             this.playerInfo_1.visible = false;
         }
 
-        var room = App.tableManager.getRoom();
-        var roomHost = room.host;
+        var roomInfo = App.tableManager.getRoomInfo();
+        var roomHost = roomInfo.host;
         var boxList = [this.playerInfo_0, this.playerInfo_1];
         var tempNum = 0;
         for (var index in this._data) {

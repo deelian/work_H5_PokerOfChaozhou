@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"Dialog",
-    "selectedBox":51,
-    "selecteID":55,
+    "selectedBox":41,
+    "selecteID":65,
     "props":{"width":1136,"text":"1. 特殊牌型：三鬼>双鬼>天公9>天公8>三条,同花顺>顺子，三鬼30倍，双鬼10倍，顺子4倍，其中三条，同花顺可自定义倍数，倍数大者为大，同一牌型中的牌不比较大小。 顺子定义：A-K为闭环关系，任何顺序连在一起的牌都算为顺子，例如9、10、J为顺子，K、A、2亦为顺子，如果花色相同，即为同花顺。","sceneColor":"#000000","mouseThrough":false,"mouseEnabled":true,"height":640},
     "nodeParent":-1,
     "label":"Dialog",
@@ -96,18 +96,19 @@
                 {
                     "x":30,
                     "type":"Box",
-                    "props":{"y":0,"x":-2.842170943040401e-14,"width":730,"var":"page1","height":445},
+                    "props":{"y":0,"x":0,"width":730,"var":"page1","height":1746},
                     "nodeParent":15,
                     "label":"Box(page1)",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":41,
                     "child":[
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":7,"x":17,"text":"一、游戏介绍","fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "props":{"y":7,"x":17,"width":132,"text":"一、游戏介绍","height":30,"fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
@@ -118,8 +119,9 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":41.99999999999997,"x":17.000000000000057,"wordWrap":true,"width":710,"text":"木虱是广东潮汕地区盛行的一种纸牌竞技游戏，以其独特的比牌规则，玩法多样，节奏轻快，挑战玩家的胆识，深受广大玩家欢迎","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "props":{"y":42,"x":17,"wordWrap":true,"width":710,"text":"木虱是广东潮汕地区盛行的一种纸牌竞技游戏，以其独特的比牌规则，玩法多样，节奏轻快，挑战玩家的胆识，深受广大玩家欢迎","leading":10,"height":61,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
@@ -130,8 +132,9 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":109.00000000000003,"x":17.000000000000057,"text":"二、基本规则","fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "props":{"y":109,"x":17,"width":132,"text":"二、基本规则","height":31,"fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
@@ -142,8 +145,9 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":148,"x":17,"text":"1.游戏人数：2-8人","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "props":{"y":148,"x":17,"width":152,"text":"1.游戏人数：2-8人","height":25,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
@@ -154,8 +158,9 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":178,"x":17,"wordWrap":true,"width":710,"text":"2.游戏牌数：一副扑克牌，包括大小王和广告牌，其中广告牌定义为功能牌，功能牌可选择是否加入，共54-55张牌","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "props":{"y":178,"x":17,"wordWrap":true,"width":710,"text":"2.游戏牌数：一副扑克牌，包括大小王和广告牌，其中广告牌定义为功能牌，功能牌可选择是否加入，共54-55张牌","leading":10,"height":56,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
@@ -166,8 +171,9 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":246.00000000000006,"x":17.000000000000057,"text":"三、玩法介绍","fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "props":{"y":246,"x":17,"width":132,"text":"三、玩法介绍","height":31,"fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
@@ -178,8 +184,9 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":285.00000000000006,"x":17,"wordWrap":true,"width":710,"text":"1.游戏模式：经典模式，长庄模式，混战模式，定制模式","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "props":{"y":285,"x":17,"wordWrap":true,"width":710,"text":"1.游戏模式：经典模式，长庄模式，混战模式，定制模式  经典模式：经典抢庄，可选择天公上庄或者顺子以上上庄  长庄模式：房主霸王庄，不可换庄  混战模式：俗称木虱鱼，无庄家，各玩家之间相互比牌  定制模式：私人定制，牌型倍数自定义，玩法更刺激\\n2.发牌：每位玩家首轮牌为两张牌\\n3.补牌：玩家根据首轮牌情况，选择是否补牌，每位玩家有且仅有一次补牌机会\\n4.比牌：玩家根据手中持有牌进行牌型大小比较","leading":10,"height":166,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
@@ -190,107 +197,10 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":317.0000000000001,"x":31.99999999999997,"wordWrap":true,"width":710,"text":"经典模式：经典抢庄，可选择天公上庄或者顺子以上上庄","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "props":{"y":463,"x":17,"width":142,"text":"四、牌型说明","height":31,"fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
                             "nodeParent":41,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":38,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":348.0000000000001,"x":32,"wordWrap":true,"width":710,"text":"长庄模式：房主霸王庄，不可换庄","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":41,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":39,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":378.00000000000006,"x":32,"wordWrap":true,"width":710,"text":"混战模式：俗称木虱鱼，无庄家，各玩家之间相互比牌","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":41,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":40,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":408,"x":32,"wordWrap":true,"width":710,"text":"定制模式：私人定制，牌型倍数自定义，玩法更刺激","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":41,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":42,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":436,"x":17,"text":"2.发牌：每位玩家首轮牌为两张牌","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":41,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":72,
-                            "child":[
-                                ]
-                        }],
-                    "$HIDDEN":true
-                },
-                {
-                    "x":30,
-                    "type":"Box",
-                    "props":{"y":0,"x":-2.842170943040401e-14,"width":720,"var":"page2","height":445},
-                    "nodeParent":15,
-                    "label":"Box(page2)",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":43,
-                    "child":[
-                        {
-                            "type":"Label",
-                            "props":{"y":9,"x":17,"width":720,"text":"3.补牌：玩家根据首轮牌情况，选择是否补牌，每位玩家有且仅有一次补牌机会","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":43,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":46,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":38,"x":17,"width":720,"text":"4.比牌：玩家根据手中持有牌进行牌型大小比较","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":43,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":47,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":73,"x":17,"width":720,"text":"四、牌型说明","fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":43,
                             "label":"Label",
                             "isDirectory":false,
                             "isAniNode":true,
@@ -300,9 +210,10 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Image",
-                            "props":{"y":109,"x":-16,"skin":"assets/ui.explan/img_paixing.png"},
-                            "nodeParent":43,
+                            "props":{"y":499,"x":-16,"width":777,"skin":"assets/ui.explan/img_paixing.png","height":340},
+                            "nodeParent":41,
                             "label":"Image",
                             "isDirectory":false,
                             "isAniNode":true,
@@ -310,26 +221,12 @@
                             "compId":50,
                             "child":[
                                 ]
-                        }],
-                    "$HIDDEN":true
-                },
-                {
-                    "x":30,
-                    "type":"Box",
-                    "props":{"y":0,"x":-2.842170943040401e-14,"width":730,"var":"page3","height":445},
-                    "nodeParent":15,
-                    "label":"Box(page3)",
-                    "isOpen":true,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":51,
-                    "child":[
+                        },
                         {
                             "x":45,
                             "type":"Label",
-                            "props":{"y":7,"x":17,"text":"五、牌型比较","fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":51,
+                            "props":{"y":849,"x":17,"width":132,"text":"五、牌型比较","height":31,"fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
                             "isAniNode":true,
@@ -341,8 +238,8 @@
                         {
                             "x":45,
                             "type":"Label",
-                            "props":{"y":45,"x":17,"wordWrap":true,"width":658,"text":"1.特殊牌型：三鬼>双鬼>天公9>天公8>三条,同花顺>顺子，三鬼30倍，双鬼10倍，顺子4倍，其中三条，同花顺可自定义倍数，倍数大者为大，同一牌型中的牌不比较大小。 顺子定义：A-K为闭环关系，任何顺序连在一起的牌都算为顺子，例如9、10、J为顺子，K、A、2亦为顺子，如果花色相同，即为同花顺。","leading":10,"height":111,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":51,
+                            "props":{"y":887,"x":17,"wordWrap":true,"width":658,"text":"1.特殊牌型：三鬼>双鬼>天公9>天公8>三条,同花顺>顺子，三鬼30倍，双鬼10倍，顺子4倍，其中三条，同花顺可自定义倍数，倍数大者为大，同一牌型中的牌不比较大小。 顺子定义：A-K为闭环关系，任何顺序连在一起的牌都算为顺子，例如9、10、J为顺子，K、A、2亦为顺子，如果花色相同，即为同花顺。\\n2.普通牌型：点数牌>木虱（0点）\\n点数说明：A-9分别为1-9点，10，J，Q，K均按10点算。三张或两张牌点数相加，个位数点数大者为大，若两张花色相同或者对子，则为2倍，三张牌花色相同为3倍\\n3.特殊牌型>普通牌型\\n4.木虱为最小点数牌型，但可以赢双鬼","leading":13,"height":274,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
                             "isAniNode":true,
@@ -354,60 +251,8 @@
                         {
                             "x":45,
                             "type":"Label",
-                            "props":{"y":164,"x":17,"wordWrap":true,"width":710,"text":"2.普通牌型：点数牌>木虱（0点）","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":51,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":54,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "x":45,
-                            "type":"Label",
-                            "props":{"y":196,"x":31,"wordWrap":true,"width":664,"text":"点数说明：A-9分别为1-9点，10，J，Q，K均按10点算。三张或两张牌点数相加，个位数点数大者为大，若两张花色相同或者对子，则为2倍，三张牌花色相同为3倍","leading":10,"height":56,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":51,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":55,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "x":45,
-                            "type":"Label",
-                            "props":{"y":258,"x":17,"wordWrap":true,"width":710,"text":"3.特殊牌型>普通牌型","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":51,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":56,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "x":45,
-                            "type":"Label",
-                            "props":{"y":293,"x":17,"wordWrap":true,"width":710,"text":"4.木虱为最小点数牌型，但可以赢双鬼","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":51,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":57,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "x":45,
-                            "type":"Label",
-                            "props":{"y":329,"x":17,"wordWrap":true,"width":710,"text":"六、大小王（鬼牌）","leading":10,"fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":51,
+                            "props":{"y":1171,"x":17,"wordWrap":true,"width":199,"text":"六、大小王（鬼牌）","leading":10,"height":32,"fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
                             "isAniNode":true,
@@ -419,47 +264,8 @@
                         {
                             "x":45,
                             "type":"Label",
-                            "props":{"y":365,"x":17,"wordWrap":true,"width":710,"text":"游戏可设置鬼牌不同功能","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":51,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":60,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "x":45,
-                            "type":"Label",
-                            "props":{"y":396,"x":17,"wordWrap":true,"width":710,"text":"1.鬼牌跟牌型，能拼出特殊牌型，如鬼牌、7、8为顺子或同花顺，鬼牌、7、7为三条，其他情况鬼牌算10点，如鬼牌、5、8为3点。鬼、8（9）算天公","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":51,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":61,
-                            "child":[
-                                ]
-                        }],
-                    "$HIDDEN":false
-                },
-                {
-                    "x":30,
-                    "type":"Box",
-                    "props":{"y":0,"x":-2.842170943040401e-14,"width":720,"var":"page4","height":445},
-                    "nodeParent":15,
-                    "label":"Box(page4)",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":62,
-                    "child":[
-                        {
-                            "type":"Label",
-                            "props":{"y":7,"x":17,"wordWrap":true,"width":710,"text":"2.鬼牌可当任意一张牌及花色，即是拿到鬼牌若不能拼出特殊牌型，也最少是9点。首轮牌鬼、8（9）不能算天公，必须补牌","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":62,
+                            "props":{"y":1211,"x":17,"wordWrap":true,"width":710,"text":"2.鬼牌可当任意一张牌及花色，即是拿到鬼牌若不能拼出特殊牌型，也最少是9点。首轮牌鬼、8（9）不能算天公，必须补牌","leading":10,"height":58,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
                             "isAniNode":true,
@@ -469,9 +275,10 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":79,"x":17,"wordWrap":true,"width":710,"text":"七、特殊可选规则","leading":10,"fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":62,
+                            "props":{"y":1283,"x":17,"wordWrap":true,"width":187,"text":"七、特殊可选规则","leading":10,"height":32,"fontSize":22,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
                             "isAniNode":true,
@@ -481,9 +288,10 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":116,"x":17,"wordWrap":true,"width":710,"text":"1.鬼牌：默认为不翻鬼，即只有2张鬼牌(大小王)；翻鬼，可选择翻1或2张牌当鬼牌，即牌中最多有8张鬼牌。若翻出的鬼牌为大小王，系统会重新再翻一张牌当鬼牌","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":62,
+                            "props":{"y":1320,"x":17,"wordWrap":true,"width":710,"text":"1.鬼牌：默认为不翻鬼，即只有2张鬼牌(大小王)；翻鬼，可选择翻1或2张牌当鬼牌，即牌中最多有8张鬼牌。若翻出的鬼牌为大小王，系统会重新再翻一张牌当鬼牌\\n2.鬼牌百变：鬼牌可当任意一张牌及花色，首轮牌鬼、8（9）不能算天公，必须补牌\\n3.鬼牌成型：鬼牌不能拼成特殊牌型(三支、同花顺、顺子)时，仅能当10点，可变花色。首轮牌鬼、8（9）算天公，可不补牌，同时可选择首轮牌鬼、8（9）是否算双倍天公\\n4.任意下注：每一局可任意选择下注倍数\\n5.一杠到底：在同一个庄上，开弓没有回头箭，下注倍数只能加不能减。换庄后，可重新选择下注倍数\\n6.功能牌：游戏中增加一张功能牌，游戏过程中拿到功能牌的玩家，赢牌时，按照手中牌型翻倍计算积分，同时，此牌具备鬼牌功能。\\n7.木虱：设置木虱赢双鬼、三鬼的条件游戏\\n可设置鬼牌不同功能\\n1.鬼牌跟牌型，能拼出特殊牌型，如鬼牌、7、8为顺子或同花顺，鬼牌、7、7为三条，其他情况鬼牌算10点，如鬼牌、5、8为3点。鬼、8（9）算天公","leading":12,"height":422,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":41,
                             "label":"Label",
                             "isDirectory":false,
                             "isAniNode":true,
@@ -491,80 +299,8 @@
                             "compId":65,
                             "child":[
                                 ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":178,"x":17,"wordWrap":true,"width":710,"text":"2.鬼牌百变：鬼牌可当任意一张牌及花色，首轮牌鬼、8（9）不能算天公，必须补牌","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":62,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":66,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":213,"x":17,"wordWrap":true,"width":710,"text":"3.鬼牌成型：鬼牌不能拼成特殊牌型(三支、同花顺、顺子)时，仅能当10点，可变花色。首轮牌鬼、8（9）算天公，可不补牌，同时可选择首轮牌鬼、8（9）是否算双倍天公","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":62,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":67,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":274,"x":17,"wordWrap":true,"width":710,"text":"4.任意下注：每一局可任意选择下注倍数","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":62,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":68,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":304,"x":17,"wordWrap":true,"width":710,"text":"5.一杠到底：在同一个庄上，开弓没有回头箭，下注倍数只能加不能减。换庄后，可重新选择下注倍数","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":62,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":69,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":363,"x":17,"wordWrap":true,"width":710,"text":"6.功能牌：游戏中增加一张功能牌，游戏过程中拿到功能牌的玩家，赢牌时，按照手中牌型翻倍计算积分，同时，此牌具备鬼牌功能。","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":62,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":70,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Label",
-                            "props":{"y":425,"x":17,"wordWrap":true,"width":710,"text":"7.木虱：设置木虱赢双鬼、三鬼的条件","leading":10,"fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
-                            "nodeParent":62,
-                            "label":"Label",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":71,
-                            "child":[
-                                ]
                         }],
-                    "$HIDDEN":true
+                    "$HIDDEN":false
                 }]
         }],
     "animations":[

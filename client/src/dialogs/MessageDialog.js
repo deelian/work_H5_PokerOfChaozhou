@@ -29,10 +29,12 @@ var MessageDialog = (function(_super) {
     };
 
     MessageDialog.prototype.onCancel = function () {
+        //_super.prototype.close.call(this);
         this.close();
     };
 
     MessageDialog.prototype.onSure = function(){
+        //_super.prototype.close.call(this);
         this.close();
         if(this.cb)
         {

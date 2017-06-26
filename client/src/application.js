@@ -44,6 +44,8 @@ var Application = (function (_super) {
         this.loginView = null; //*登录界面
 
         this.reConnectTimes = 0; //*断线自动重连的次数
+        
+        this.timeDiff = 0;          //客户端与服务器的时间差(秒)
 
         Laya.stage.on(Laya.Event.VISIBILITY_CHANGE, this, this.visibilityChanged);
 
@@ -99,8 +101,8 @@ var Application = (function (_super) {
         var host = App.config.host;
         var port = App.config.port;
         // 弹出连接界面
-        var netDlg = new ConnectDialog();
-        this.uiManager.addUiLayer(netDlg, {isAddShield:true,alpha:0.5,isDispose:false});
+        //var netDlg = new ConnectDialog();
+        var netDlg = this.uiManager.addUiLayer(ConnectDialog);
 
         async.series([
             // 连接网关服务器
@@ -167,6 +169,8 @@ var Application = (function (_super) {
                         callback(err);
                         return;
                     }
+                    
+                    self.timeDiff = data.timestamp - Number(Game.moment().format("X"));
 
                     netDlg.setText("服务器登入成功！");
                     callback(null);
@@ -279,10 +283,67 @@ var Application = (function (_super) {
 
         });
     };
+    
+    Application.getTime = function() {
+        return this.timeDiff + Number(Game.moment().format("X"));
+    };
+
+    Application.wxMessageResp = function (errCode) {
+        console.log("wxMessageResp code= " + errCode);
+    };
 
     Application.wxAuthResp = function(code) {
         this._code = code;
         this.login();
+    };
+
+    Application.wxSendCaptureMessage = function () {
+        var conch = window.conch;
+
+        if (conch) {
+            var os = window.conch.config.getOS();
+            conch.captureScreen(function (buffer, width, height) {
+                console.log("cachePath: " + conch.getCachePath());
+
+                conch.saveAsPng(buffer, width, height, conch.getCachePath() + "/test.png");
+
+                if (os == "Conch-ios") {
+
+                    var AppDelegate = Laya.PlatformClass.createClass("AppDelegate");
+                    AppDelegate.call("sendWXCaptureMessage");
+
+                }
+
+                if (os == "Conch-android") {
+
+                    var MainActivity = Laya.PlatformClass.createClass("cn.glfun.deju_poker.main.MainActivity");
+                    MainActivity.call("sendWXCaptureMessage");
+
+                }
+            });
+        }
+    };
+
+    // 大厅点击【分享】后调用
+    Application.wxSendLinkMessage = function(address, tile, description, toTimeline) {
+        // Natvive
+        if (window.conch) {
+            var os = window.conch.config.getOS();
+
+            if (os == "Conch-ios") {
+
+                var AppDelegate = Laya.PlatformClass.createClass("AppDelegate");
+                AppDelegate.call("sendWXLinkMessage:withTitle:andDescription:toWXScene:", address, tile, description, toTimeline);
+
+            }
+
+            if (os == "Conch-android") {
+
+                var MainActivity = Laya.PlatformClass.createClass("cn.glfun.deju_poker.main.MainActivity");
+                MainActivity.call("sendWXLinkMessage", address, tile, description, toTimeline);
+
+            }
+        }
     };
 
     // 点击【微信登录】后调用
@@ -337,7 +398,7 @@ var Application = (function (_super) {
             data.forEach(function (order) {
                 // 可以考虑增加弹窗提示
                 // {"orderId":"c09d3537-4342-455b-9e6b-c5f42fa7d931","productName":"3颗钻石","tokens":3}
-                console.log(JSON.stringify(order));
+                //console.log(JSON.stringify(order));
                 self.lobbyView.addBalance(order.tokens);
             });
 
@@ -355,10 +416,9 @@ var Application = (function (_super) {
     Application.iOSPurchase = function(product) {
         var self = this;
 
-        var dlg = new ConnectDialog();
         var orderId = "";
-
-        dlg.popup();
+        var dlg = this.uiManager.addUiLayer(ConnectDialog, {}, false);
+        //dlg.popup();
         async.series([
             // 申请订单号
             function (callback) {
@@ -430,19 +490,28 @@ var Application = (function (_super) {
     };
 
     Application.wxPurchase = function(product) {
-        var dlg = new MessageDialog({
+        //var dlg = new MessageDialog({
+        //    msg: "请关注微信公众号或联系推广员！"
+        //});
+
+        this.uiManager.addUiLayer(MessageDialog, {
             msg: "请关注微信公众号或联系推广员！"
         });
-
-        dlg.popup();
+        //this.uiManager.addUiLayer(dlg);
+        //dlg.popup();
     };
 
     Application.h5Purchase = function(product) {
-        var dlg = new MessageDialog({
+        //var dlg = new MessageDialog({
+        //    msg: "请关注微信公众号或联系推广员！"
+        //});
+
+        this.uiManager.addUiLayer(MessageDialog, {
             msg: "请关注微信公众号或联系推广员！"
         });
 
-        dlg.popup();
+        //this.uiManager.addUiLayer(dlg);
+        //dlg.popup();
         // var self = this;
         // var dlg = new ConnectDialog();
         //
@@ -554,18 +623,18 @@ var Application = (function (_super) {
                 Laya.loader.load(soundResource, Laya.Handler.create(null, onComplete), Laya.Handler.create(null, onProgress, null, false));
             },
 
-            //function(callback) {
-            //    self.loaderView.setText("正在加载字体......");
-            //
-            //    var onComplete = function () {
-            //        callback(null);
-            //    };
-            //    var onProgress = function (e) {
-            //        self.loaderView.changeValue(e);
-            //    };
-            //
-            //    Laya.loader.load(resources.fonts, Laya.Handler.create(null, onComplete), Laya.Handler.create(null, onProgress, null, false));
-            //},
+            function(callback) {
+                self.loaderView.setText("正在加载字体......");
+
+                var onComplete = function () {
+                    callback(null);
+                };
+                var onProgress = function (e) {
+                    self.loaderView.changeValue(e);
+                };
+                console.log(resources.fonts);
+                Laya.loader.load(resources.fonts, Laya.Handler.create(null, onComplete), Laya.Handler.create(null, onProgress, null, false));
+            },
 
             //function(callback) {
             //    self.loaderView.setText("正在加载光效资源......");
@@ -735,8 +804,10 @@ var Application = (function (_super) {
             self.reConnectTimes ++;
             self.state = Application.STATE_RECONNECTING;
             self.launch(function(err) {
-                self._dlgReconnect.close();
-                self._dlgReconnect = null;
+                if (self._dlgReconnect != null) {
+                    self._dlgReconnect.close();
+                    self._dlgReconnect = null;
+                }
                 if (err != null) {
                     console.log("app-reconnect error: ", err);
                     self.state = Application.STATE_SOCKET_CLOSED;
@@ -748,19 +819,20 @@ var Application = (function (_super) {
             })
         };
 
-        if (self._dlgReconnect == null) {
-            var msg = "网络已经断开！点击确定尝试重新连接网络......";
-            self._dlgReconnect = new MessageDialog({msg:msg, cb:confirm});
-        }
-
-        console.log("App state changed " + self.state + " -> " + Application.STATE_RUNNING_RECONNECT);
-
         self.state = Application.STATE_RUNNING_RECONNECT;
+        console.log("App state changed " + self.state + " -> " + Application.STATE_RUNNING_RECONNECT);
 
         //*自动重连3次，3次之后就手动
         if (this.reConnectTimes >= Application.RECONNECT_TIMES) {
+            // 创建手动重连的确定窗口
+            if (self._dlgReconnect == null) {
+                var msg = "网络已经断开！点击确定尝试重新连接网络......";
+                self._dlgReconnect = new MessageDialog({msg:msg, cb:confirm});
+            }
+
             self._dlgReconnect.popup(true);
         }
+        // 3次以内就直接自己重连
         else {
             confirm();
         }
@@ -783,9 +855,9 @@ var Application = (function (_super) {
 
     Application.visibilityChanged = function() {
         if (Laya.stage.isVisibility) {
-            console.log("前台显示......");
+            //console.log("前台显示......");
         }  else {
-            console.log("后台显示......");
+            //console.log("后台显示......");
         }
     };
 
@@ -867,6 +939,7 @@ var Application = (function (_super) {
         }
 
         this._runningView.update && this._runningView.update(dt);
+        this.uiManager.update();
     };
 
     Application.STATE_INITED           = 1;

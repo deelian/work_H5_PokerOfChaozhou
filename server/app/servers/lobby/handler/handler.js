@@ -138,21 +138,35 @@ Handler.prototype.get_logs = function(msg, session, next) {
         return;
     }
 
-    this.service.getUserInfo(uid, function(err, player) {
-        if (err) {
-            next(null, Game.wrapMsg(err));
-            return;
+    msg = msg || {};
+    var page = msg.page || 0;
+    
+    self.service.getLogs(uid, page, function(err, data) {
+        if (err != null) {
+            next(null, Game.wrapMsg(Code.SYSTEM.RPC_ERROR));
         }
 
-        var logs = player.data == null ? [] : (player.data.logs || []);
+        next(null, Game.wrapMsg(null, data));
+    });
+};
 
-        self.service.getLogs(logs, function(err, data) {
-            if (err != null) {
-                next(null, Game.wrapMsg(Code.SYSTEM.RPC_ERROR));
-            }
-            
-            next(null, Game.wrapMsg(null, data));
-        });
+Handler.prototype.get_record = function(msg, session, next) {
+    var self = this;
+    var uid = session.uid;
+    if (!uid) {
+        next(null, Game.wrapMsg(Code.ROUTE.UNAUTHORIZED));
+        return;
+    }
+
+    msg = msg || {};
+    var id = msg.id || 0;
+
+    self.service.getRecord(uid, id, function(err, data) {
+        if (err != null) {
+            next(null, Game.wrapMsg(Code.SYSTEM.RPC_ERROR));
+        }
+
+        next(null, Game.wrapMsg(null, data));
     });
 };
 

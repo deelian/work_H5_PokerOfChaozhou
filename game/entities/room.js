@@ -61,7 +61,7 @@
     Room.STATE_DRAW        = 4;             //下注完闲家要牌
     Room.STATE_BANKER      = 5;             //闲家要完牌庄家处理阶段
     Room.STATE_PAY         = 6;             //结算
-    Room.STATE_END         = 7;             //牌局结束 请求下一局
+    
     Room.STATE_CLOSED      = 8;             //所有牌局完成房间解散
     Room.STATE_DISMISS     = 9;             //申请解散房间
 
@@ -145,7 +145,8 @@
                 this.roomLog.info = {
                     createTime: Number(root.moment().format('x')),
                     id: this.id,
-                    type: this.type
+                    type: this.type,
+                    maxRound: this.maxRound
                 };
 
                 this.roomLog.users = {};
@@ -153,9 +154,11 @@
             }
 
             // start timer 一段时间检查一下房间游戏进程
-            this._timerID = setInterval(function() {
-                self.update();
-            }, 100);
+            if (this._service) {
+                this._timerID = setInterval(function () {
+                    self.update();
+                }, 100);
+            }
         },
 
         getMember: function(userID) {
@@ -229,8 +232,8 @@
         },
 
         standUp: function(userID) {
-            //牌局期间不能操作
-            if (this.state != Room.STATE_READY) {
+            // 牌局开始不能操作
+            if (this.state >= Room.STATE_START) {
                 return false;
             }
 
@@ -240,9 +243,9 @@
             }
 
             // 已经点击了准备 就不给换位置
-            if (this.table.isClientReady(userID) == true) {
-                return false;
-            }
+            // if (this.table.isClientReady(userID) == true) {
+            //     return false;
+            // }
 
             for (var i = 0, size = this.chairs.length; i < size; i++) {
                 if (this.chairs[i] === userID) {
@@ -283,14 +286,24 @@
             if (this.getMember(userID) === false) {
                 this.members.push(userID);
             }
+            
+            var roomResults = {
+                table: {
+                    clients: {}
+                }
+            };
+            roomResults.members = Utils.object_clone(this.members);
+            roomResults.roomLog = Utils.object_clone(this.roomLog);
 
             if (this.table.getClient(userID) == null) {
                 var pos = this.sitDown(userID);
-                this.sendInfoToEveryOne(ROUTE.ROOM.ENTER, {userID: userID, pos: pos});
+                roomResults.table.clients[userID] = this.table.getClient(userID) || null;
+                this.sendInfoExcept(ROUTE.ROOM.ENTER, {userID: userID, pos: pos, room: roomResults}, userID);
             }
             else {
                 this.table.setAwk(userID, false);
-                this.sendInfoToEveryOne(ROUTE.ROOM.AFK, {userID: userID, isAwk: false});
+                roomResults.table.clients[userID] = this.table.getClient(userID) || null;
+                this.sendInfoExcept(ROUTE.ROOM.AFK, {userID: userID, isAwk: false, room: roomResults}, userID);
             }
         },
 
@@ -315,8 +328,16 @@
             if (index != -1) {
                 this.members.splice(index, 1);
             }
+            
+            var roomResults = {
+                table: {
+                    deleteClient: [userID]
+                }
+            };
+            roomResults.members = Utils.object_clone(this.members);
+            roomResults.chairs = Utils.object_clone(this.chairs);
 
-            this.sendInfoToEveryOne(ROUTE.ROOM.LEAVE, {userID: userID});
+            this.sendInfoExcept(ROUTE.ROOM.LEAVE, {userID: userID, room: roomResults}, userID);
         },
 
         kick: function(userID, targetID) {
@@ -330,7 +351,14 @@
 
         afk: function(userID) {
             this.table.setAwk(userID, true);
-            this.sendInfoToEveryOne(ROUTE.ROOM.AFK, {userID: userID, isAwk: true});
+            var roomResults = {
+                table: {
+                    clients: {}
+                }
+            };
+            roomResults.table.clients[userID] = this.table.getClient(userID);
+
+            this.sendInfoExcept(ROUTE.ROOM.AFK, {userID: userID, isAwk: true, room: roomResults}, userID);
         },
 
         ready: function() {
@@ -375,37 +403,27 @@
             this._service && this._service.broadcast(this.id, route, msg, opts, cb);
         },
 
-        sendEachMsg: function(route, opts) {
-            if (!this._service) {
-                return;
-            }
-
-            //转换状态的时候存盘
-            this.save();
-
+        sendInfoExcept: function(route, sendInfo, uid) {
             for (var i in this.members) {
                 var userID = this.members[i];
-                this._service && this._service.send(this.id, userID, route, this.infoToPlayer(userID), opts, null);
-            }
-        },
+                if (userID == uid) {
+                    continue;
+                }
 
-        sendInfoToEveryOne: function(route, sendInfo) {
-            for (var i in this.members) {
-                var userID = this.members[i];
-                sendInfo = sendInfo || {};
-                // 添加每个人不同的room信息
-                sendInfo.room = this.infoToPlayer(userID);
                 this._service && this._service.send(this.id, userID, route, sendInfo, null, null);
             }
         },
 
         process: function() {
             var results = [];
+            var tableChange = {};
+            var i;
+            var userID;
 
             while (this._queue.length) {
                 // 从操作队列中获取第一个操作
                 var command = this._queue.shift();
-                var userID = command.id;
+                userID = command.id;
                 if (userID == null) {
                     continue;
                 }
@@ -414,9 +432,11 @@
                 var fn = command.msg.fn;
                 if (fn && typeof this.table[fn] === "function") {
                     var result = this.table[fn](userID, command.msg.data);
-                    if (result != null) {
-                        result.fn = fn;
-                        results.push(result);
+                    if (result != null && result.result != null) {
+                        result.result.fn = fn;
+                        results.push(result.result);
+
+                        Utils.updateObject(tableChange, result.table);
                     }
                 }
             }
@@ -426,7 +446,11 @@
                     return;
                 }
 
-                this.sendInfoToEveryOne(ROUTE.ROOM.COMMAND, {queue: results});
+                var sendInfo = {queue: results};
+                sendInfo.room = {};
+                sendInfo.room.table = tableChange;
+
+                this.broadcast(ROUTE.ROOM.COMMAND, sendInfo, null, null);
             }
         },
 
@@ -478,8 +502,6 @@
                     }
                     break;
                 case Room.STATE_PAY:
-                    break;
-                case Room.STATE_END:
                     break;
                 case Room.STATE_CLOSED:
                     break;
@@ -574,6 +596,12 @@
             //更新前完成积压的所有工作
             this.process();
 
+            var sendInfo = {
+                room: {}
+            };
+            var userID;
+            var client;
+
             switch (this.state) {
                 case Room.STATE_READY:
                     if (this.table.getClientReady()) {
@@ -585,7 +613,11 @@
                             this.dismissNeedConfirm = true;
                         }
 
-                        this.sendEachMsg(ROUTE.ROOM.READY, null);
+                        sendInfo.room.state = this.state;
+                        sendInfo.room.locked = this.locked;
+                        sendInfo.room.dismissNeedConfirm = this.dismissNeedConfirm;
+
+                        this.broadcast(ROUTE.ROOM.READY, sendInfo, null, null);
                     }
                     break;
                 case Room.STATE_ROB:
@@ -598,11 +630,16 @@
                         if (this.table.banker != 0) {
                             this.banker = this.table.banker;
                             this.state++;
-                            this.sendEachMsg(ROUTE.ROOM.ROB, null);
+
+                            sendInfo.room.state = this.state;
+                            this.broadcast(ROUTE.ROOM.ROB, sendInfo, null, null);
                         }
                     }
                     break;
                 case Room.STATE_START:
+                    var clients = {};
+                    sendInfo.room.table = {};
+
                     // 开始-洗牌-发牌
                     this.table.start(this.type);
                     this.table.shuffle();
@@ -610,7 +647,7 @@
                     this.table.clearDraw();
                     this.table.genDealSequence();
                     for (i = 0; i < this.table.dealSequence.length; i++) {
-                        var userID = this.table.dealSequence[i];
+                        userID = this.table.dealSequence[i];
                         if (userID && this.table.getClient(userID)) {
                             //要牌行列
                             // 长庄模式 经典模式 庄家不进入行列
@@ -623,27 +660,51 @@
                             this.table.insertDraw(userID);
                         }
                     }
+                    sendInfo.room.table.dealSequence = Utils.object_clone(this.table.dealSequence);
+                    sendInfo.room.table.drawList = Utils.object_clone(this.table.drawList);
+
                     this.table.deal();
                     // 翻鬼牌
                     // 非定制模式才需要翻鬼牌
                     if (this.type != Game.ROOM_TYPE.CUSTOMIZED) {
                         this.table.ghost();
+                        sendInfo.room.table.ghostPokers = Utils.object_clone(this.table.ghostPokers);
                     }
+
+                    // 翻完鬼牌 投注设置
+                    this.table.genBidList();
 
                     this.state++;
 
-                    this.sendEachMsg(ROUTE.ROOM.DEAL, null);
+                    sendInfo.room.state = this.state;
+                    for (userID in this.table.clients) {
+                        client = this.table.getClient(userID);
+                        if (client) {
+                            clients[userID] = {};
+                            clients[userID].handPokers = Utils.object_clone(client.handPokers);
+                            clients[userID].bid = client.bid;
+                            clients[userID].bidRate = client.bidRate;
+                        }
+                    }
+                    sendInfo.room.table.clients = clients;
+                    sendInfo.room.table.bidList = Utils.object_clone(this.table.bidList);
+
+                    this.broadcast(ROUTE.ROOM.DEAL, sendInfo, null, null);
                     break;
                 case Room.STATE_BID:
                     if (this.table.getClientBid()) {
                         this.state++;
-                        this.sendEachMsg(ROUTE.ROOM.BID, null);
+                        sendInfo.room.state = this.state;
+
+                        this.broadcast(ROUTE.ROOM.BID, sendInfo, null, null);
                     }
                     break;
                 case Room.STATE_DRAW:
                     if (this.table.getClientDraw()) {
                         this.state++;
-                        this.sendEachMsg(ROUTE.ROOM.DRAW, null);
+                        sendInfo.room.state = this.state;
+
+                        this.broadcast(ROUTE.ROOM.DRAW, sendInfo, null, null);
                     }
                     break;
                 case Room.STATE_BANKER:
@@ -651,14 +712,18 @@
                     if (this.type == Game.ROOM_TYPE.CHAOS || this.type == Game.ROOM_TYPE.CUSTOMIZED) {
                         if (this.table.whosRubbing == 0) {
                             this.state++;
-                            this.sendEachMsg(ROUTE.ROOM.BANKER_DRAW, null);
+                            sendInfo.room.state = this.state;
+
+                            this.broadcast(ROUTE.ROOM.BANKER_DRAW, sendInfo, null, null);
                         }
                     }
                     // 非混战模式 需要庄家操作
                     else {
                         if (this.table.bankerDraw == 2 && this.table.whosRubbing == 0) {
                             this.state++;
-                            this.sendEachMsg(ROUTE.ROOM.BANKER_DRAW, null);
+                            sendInfo.room.state = this.state;
+
+                            this.broadcast(ROUTE.ROOM.BANKER_DRAW, sendInfo, null, null);
                         }
                     }
                     break;
@@ -691,17 +756,33 @@
                             if (log.type == Game.POKER_MODELS.DOUBLE_GHOST) {
                                 user.ghostTimes++;
                             }
+                            
+                            var clientHandPokers = log.handPokers;
+                            if (clientHandPokers) {
+                                for (i in clientHandPokers) {
+                                    var p = clientHandPokers[i];
+                                    if (p) {
+                                        delete p.showTarget;
+                                    }
+                                }
+                            }
                         }
+
+                        sendInfo.room.roomLog = Utils.object_clone(this.roomLog);
 
                         //记录是否有进行过第一次结算
                         if (this.firstPay == false) {
                             this.firstPay = true;
+                            sendInfo.room.firstPay = this.firstPay;
                         }
                         this.round++;
+                        sendInfo.room.round = this.round;
 
                         //重整牌局 更换庄家等
                         this.table.reset();
+                        
                         this.banker = this.table.banker;
+                        sendInfo.room.banker = this.banker;
 
                         if (this.round >= this.settings.times) {
                             this.state = Room.STATE_CLOSED;
@@ -710,30 +791,20 @@
                             // 房间自身的准备工作
                             this.ready();
                         }
-                        
-                        this.sendEachMsg(ROUTE.ROOM.PAY, null);
-                    }
-                    break;
-                case Room.STATE_END:
-                    if (this.table.getClientEnd()) {
-                        this.round++;
+                        sendInfo.room.state = this.state;
 
-                        //重整牌局 更换庄家等
-                        this.table.reset();
-                        this.banker = this.table.banker;
+                        sendInfo.room.table = Utils.object_clone(this.table);
+                        var sendTable = sendInfo.room.table;
+                        delete sendTable.settings;
+                        delete sendTable.uuid;
+                        delete sendTable.createTime;
+                        delete sendTable.deck;
                         
-                        if (this.round >= this.settings.times) {
-                            this.state = Room.STATE_CLOSED;
-                        } else {
-                            this.state = Room.STATE_READY;
-                            // 房间自身的准备工作
-                            this.ready();
-                        }
-                        this.sendEachMsg(ROUTE.ROOM.END, null);
+                        this.broadcast(ROUTE.ROOM.PAY, sendInfo, null, null);
                     }
                     break;
                 case Room.STATE_CLOSED:
-                    this.sendEachMsg(ROUTE.ROOM.CLOSE, null);
+                    this.broadcast(ROUTE.ROOM.CLOSE, sendInfo, null, null);
                     this.destroy();
                     break;
                 case Room.STATE_DISMISS:
@@ -753,8 +824,15 @@
 
                 this.dismissStamp = Number(root.moment().format('X'));
                 this.dismissConfirmList[userID] = true;
-                var name = this.roomLog[userID] == null ? "游客" : this.roomLog[userID].name;
-                this.broadcast(ROUTE.ROOM.DISMISS_APPLY, {userID: userID, name: name}, null, null);
+                var roomLogUsers = this.roomLog.users || {};
+                var name = roomLogUsers[userID] == null ? "游客" : roomLogUsers.name;
+                this.broadcast(ROUTE.ROOM.DISMISS_APPLY,
+                    {
+                        userID: userID,
+                        name: name,
+                        room: {dismissStamp: this.dismissStamp, dismissConfirmList: Utils.object_clone(this.dismissConfirmList)}
+                    },
+                    null, null);
             }
             else {
                 if (userID != this.host) {
@@ -772,7 +850,6 @@
 
             confirm = confirm || false;
             this.dismissConfirmList[userID] = confirm;
-            this.sendEachMsg(ROUTE.ROOM.DISMISS_CONFIRM, null);
             this.broadcast(ROUTE.ROOM.DISMISS_CONFIRM, {userID: userID, confirm: confirm}, null, null);
         },
 
@@ -850,6 +927,71 @@
             info.table = this.table.infoToPlayer(userID);
 
             return info;
+        },
+
+        syncRoom: function(opts) {
+            var array;
+            var i;
+            var val;
+
+            val = opts.state;
+            if (val != null) {
+                this.state = val;
+            }
+
+            val = opts.banker;
+            if (val != null) {
+                this.banker = val;
+            }
+
+            val = opts.locked;
+            if (val != null) {
+                this.locked = val;
+            }
+
+            val = opts.firstPay;
+            if (val != null) {
+                this.firstPay = val;
+            }
+
+            val = opts.dismissStamp;
+            if (val != null) {
+                this.dismissStamp = val;
+            }
+
+            if (typeof opts.dismissNeedConfirm == "boolean") {
+                this.dismissNeedConfirm = opts.dismissNeedConfirm;
+            }
+
+            val = opts.round;
+            if (val != null) {
+                this.round = val;
+            }
+
+            array = opts.dismissConfirmList;
+            if (array != null) {
+                this.dismissConfirmList = Utils.object_clone(array);
+            }
+
+            array = opts.members;
+            if (array != null) {
+                this.members = Utils.object_clone(array);
+            }
+
+            array = opts.chairs;
+            if (array != null) {
+                this.chairs = Utils.object_clone(array);
+            }
+
+            array = opts.roomLog;
+            if (array != null) {
+                this.roomLog = Utils.object_clone(array);
+            }
+
+            array = opts.table;
+            if (array != null) {
+                this.table.syncTable(array);
+            }
         }
     });
 }(DejuPoker));

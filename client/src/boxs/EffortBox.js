@@ -12,8 +12,7 @@ var EffortBox = (function(_super) {
 
     EffortBox.prototype.touchRound = function () {
         App.soundManager.playSound("btnSound");
-        var recordOfPokerDialog = new RecordOfPokerDialog(this._data);
-        App.uiManager.addUiLayer(recordOfPokerDialog);
+        App.uiManager.addUiLayer(RecordOfPokerDialog, this._data);
     };
 
     EffortBox.prototype.onRender = function(data){

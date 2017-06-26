@@ -1,22 +1,15 @@
 {
     "x":0,
     "type":"Dialog",
-    "selectedBox":1,
-    "selecteID":1,
-    "props":{"width":1136,"sceneColor":"#000000","mouseThrough":false,"mouseEnabled":true,"height":640},
+    "selectedBox":10,
+    "selecteID":13,
+    "props":{"width":1136,"sceneColor":"#000000","name":"close","mouseThrough":false,"mouseEnabled":true,"height":640},
     "nodeParent":-1,
-    "label":"Dialog",
+    "label":"Dialog(close)",
     "isOpen":true,
     "isDirectory":true,
     "isAniNode":true,
     "hasChild":true,
-    "frames":[
-        {
-            "type":1,
-            "props":{"width":1136,"sceneColor":"#000000","height":640},
-            "frame":0,
-            "__InPool":false
-        }],
     "compId":1,
     "child":[
         {
@@ -29,13 +22,6 @@
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{},
-                    "frame":0,
-                    "__InPool":false
-                }],
             "compId":2,
             "child":[
                 {
@@ -47,13 +33,6 @@
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"skin":"assets/ui.room/chat/bg.png"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":3,
                     "child":[
                         ]
@@ -68,13 +47,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"skin":"assets/ui.room/chat/btn_0002.png","label":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":4,
                     "child":[
                         {
@@ -85,13 +57,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"skin":"assets/ui.room/chat/img_Common.png"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":5,
                             "child":[
                                 ]
@@ -107,13 +72,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"skin":"assets/ui.room/chat/btn_0003.png","label":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":6,
                     "child":[
                         {
@@ -124,13 +82,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"skin":"assets/ui.room/chat/img_expressio.png"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":7,
                             "child":[
                                 ]
@@ -146,13 +97,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{"skin":"assets/ui.room/chat/btn_0004.png","label":"label"},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":8,
                     "child":[
                         {
@@ -163,13 +107,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"skin":"assets/ui.room/chat/img_chat.png"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":9,
                             "child":[
                                 ]
@@ -185,54 +122,8 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":10,
                     "child":[
-                        {
-                            "x":45,
-                            "type":"Image",
-                            "props":{"y":442,"x":6,"skin":"assets/ui.room/chat/OutputFrame.png"},
-                            "nodeParent":10,
-                            "label":"Image",
-                            "isOpen":false,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"skin":"assets/ui.room/chat/OutputFrame.png"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
-                            "compId":11,
-                            "child":[
-                                {
-                                    "type":"TextInput",
-                                    "props":{"y":0,"x":0,"width":168,"var":"chatInputLab","type":"text","prompt":"输入聊天内容","overflow":"hidden","maxChars":200,"height":41,"fontSize":16,"font":"Microsoft YaHei","color":"#000000","align":"left"},
-                                    "nodeParent":11,
-                                    "label":"TextInput(chatInputLab)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "frames":[
-                                        {
-                                            "type":1,
-                                            "props":{"text":"TextInput"},
-                                            "frame":0,
-                                            "__InPool":false
-                                        }],
-                                    "compId":12,
-                                    "child":[
-                                        ]
-                                }]
-                        },
                         {
                             "x":45,
                             "type":"Button",
@@ -243,13 +134,6 @@
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"skin":"assets/ui.room/chat/btn_0001.png","label":"label"},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":13,
                             "child":[
                                 {
@@ -260,13 +144,6 @@
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "frames":[
-                                        {
-                                            "type":1,
-                                            "props":{"skin":"assets/ui.room/chat/SendOut.png"},
-                                            "frame":0,
-                                            "__InPool":false
-                                        }],
                                     "compId":14,
                                     "child":[
                                         ]
@@ -281,13 +158,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":15,
                             "child":[
                                 ]
@@ -301,16 +171,23 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":16,
                             "child":[
                                 ]
+                        },
+                        {
+                            "x":45,
+                            "type":"TextInput",
+                            "props":{"y":442,"x":6,"width":248,"var":"chatInputLab","valign":"middle","type":"text","skin":"assets/ui.room/chat/OutputFrame.png","prompt":"输入聊天内容","overflow":"hidden","multiline":false,"maxChars":200,"height":60,"fontSize":16,"font":"Microsoft YaHei","editable":true,"color":"#000000","align":"left"},
+                            "nodeParent":10,
+                            "label":"TextInput(chatInputLab)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":12,
+                            "child":[
+                                ],
+                            "$HIDDEN":false
                         }],
                     "$HIDDEN":false
                 },
@@ -324,13 +201,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":17,
                     "child":[
                         {
@@ -342,13 +212,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"width":100,"height":100},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":18,
                             "child":[
                                 ]
@@ -365,13 +228,6 @@
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "frames":[
-                        {
-                            "type":1,
-                            "props":{},
-                            "frame":0,
-                            "__InPool":false
-                        }],
                     "compId":19,
                     "child":[
                         {
@@ -383,13 +239,6 @@
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "frames":[
-                                {
-                                    "type":1,
-                                    "props":{"width":100,"height":100},
-                                    "frame":0,
-                                    "__InPool":false
-                                }],
                             "compId":20,
                             "child":[
                                 ]
